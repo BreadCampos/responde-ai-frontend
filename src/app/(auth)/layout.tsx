@@ -1,4 +1,4 @@
-import { ThemeToggleButton } from "@/application/shared/components/theme-toggle-button";
+import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
 import type { ReactNode } from "react";
 interface Props {
   children: ReactNode;

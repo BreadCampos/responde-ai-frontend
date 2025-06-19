@@ -1,6 +1,6 @@
 "use client";
 
-import { DetailsCompany } from "@/application/feature/company/screen/details-company";
+import { DetailsCompany } from "@/feature/company/screen/details-company";
 
 export default function DetailsCompanyPage({
   params,

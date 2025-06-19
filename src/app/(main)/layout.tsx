@@ -1,8 +1,8 @@
 "use client";
 
-import { useGetUserAndCompany } from "@/application/shared/hooks/user-get-user-and-company";
-import { Header } from "@/application/shared/layout/default-layout/layout/header";
-import { Sidebar } from "@/application/shared/layout/default-layout/layout/sidebar";
+import { useGetUserAndCompany } from "@/shared/hooks/user-get-user-and-company";
+import { Header } from "@/shared/layout/default-layout/layout/header";
+import { Sidebar } from "@/shared/layout/default-layout/layout/sidebar";
 
 export default function LayoutClient({
   children,

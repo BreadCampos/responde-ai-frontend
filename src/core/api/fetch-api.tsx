@@ -5,7 +5,7 @@ import {
   type HttpRequest,
   type HttpResponse,
 } from "./types";
-import { useAuthStore } from "@/application/feature/authentication/store/use-auth.store";
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { toast } from "sonner";
 
 class HttpClient {
