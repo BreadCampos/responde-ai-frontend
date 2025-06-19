@@ -8,12 +8,14 @@ import {
   type QuestionValidatorsType,
   type SurveyQuestionInputType,
 } from "@/feature/survey/model/survey.model";
+import { useMemo } from "react";
+import { SelectOption } from "@/shared/types/select-options.type";
 
 interface ValidationRuleRowProps {
   index: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: any;
-  validationOptions: { value: string; label: string }[];
+  validationOptions: SelectOption[];
   remove: (index: number) => void;
 }
 
@@ -32,6 +34,9 @@ const ValidationRuleRow = ({
     return ["min", "max", "min_length", "max_length", "custom"].includes(type);
   };
 
+  const showInputNumber = useMemo(() => {
+    return validationHasValue(selectedType);
+  }, [selectedType]);
   return (
     <div className="flex items-center gap-2 p-2 border rounded-md">
       <div className="flex flex-col items-center gap-2 w-full">
@@ -41,7 +46,7 @@ const ValidationRuleRow = ({
           placeholder="Selecione uma regra"
           containerClassName="w-full flex-1"
         />
-        {selectedType && validationHasValue(selectedType) && (
+        {selectedType && showInputNumber && (
           <TextInput
             name={`validations.${index}.options.value`}
             placeholder={selectedType === "custom" ? "Regex" : "Valor"}
@@ -86,13 +91,16 @@ export const ValidationRules = () => {
   const availableValidations = questionType
     ? validationMap[questionType] || []
     : [];
-  const validationOptions = availableValidations.map((v) => ({
-    value: v,
+
+  const validationOptions: SelectOption[] = availableValidations.map((v) => ({
+    value: v as string,
     label: v.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase()),
+    disabled: fields.some((field) => (field as { type?: string }).type === v),
   }));
 
+  const maxValidations = validationOptions.length === fields?.length;
   return (
-    <div className="space-y-3 pt-4 border-t">
+    <div className="p-4 bg-card rounded-md space-y-4 border">
       <h4 className="font-medium text-card-foreground">Regras de Validação</h4>
       {fields.map((field, index) => (
         <ValidationRuleRow
@@ -109,7 +117,7 @@ export const ValidationRules = () => {
         onClick={() =>
           append({ type: "", options: { value: "" }, errorMessage: "" })
         }
-        disabled={!questionType}
+        disabled={!questionType || maxValidations}
       >
         Adicionar Validação +
       </Button>

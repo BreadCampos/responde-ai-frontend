@@ -92,7 +92,6 @@ export function isValidCNPJ(cnpj: string | null | undefined): boolean {
 
   return true;
 }
-// Função auxiliar// Em /helper/getValidationRules.ts (ou onde a função estiver)
 
 export const getValidationRules = (
   validations: Array<QuestionValidators>

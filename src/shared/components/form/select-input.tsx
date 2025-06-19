@@ -30,7 +30,6 @@ export interface SelectInputProps
   description?: string;
   options: SelectOption[];
   loading?: boolean;
-  isRequired?: boolean | string; // Alterado aqui para corresponder ao TextInput
   rules?: Omit<RegisterOptions, "valueAsNumber" | "valueAsDate" | "setValueAs">;
   triggerClassName?: string;
   contentClassName?: string;

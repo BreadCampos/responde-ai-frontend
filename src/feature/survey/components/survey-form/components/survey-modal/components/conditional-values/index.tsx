@@ -71,7 +71,7 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
   if (existingQuestions.length === 1) return null;
 
   return (
-    <div className="space-y-3 pt-4 border-t">
+    <div className="p-4 bg-card rounded-md space-y-4 border">
       <CheckboxInput
         name="enableConditional"
         label="Adicionar lógica condicional?"

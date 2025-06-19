@@ -69,11 +69,11 @@ export const QuestionsFormPreview = ({
     <form
       onSubmit={handleSubmit(onPreviewSubmit)}
       className={cn(
-        "min-h-[500px]  h-[calc(100vh-250px)]  overflow-y-auto flex-1 flex flex-col gap-4 border p-4 rounded-lg bg-card shadow-md",
+        "min-h-[500px]  h-[calc(100vh-250px)]   flex-1 flex flex-col gap-4 border p-4 rounded-lg bg-card shadow-md",
         className
       )}
     >
-      <div className="flex-1">
+      <div className="flex-1 overflow-y-auto">
         <h4 className="text-card-foreground text-xl"> {title}</h4>
 
         <div className="flex flex-col gap-4 bg-background p-4 rounded-lg mt-4">
@@ -82,12 +82,12 @@ export const QuestionsFormPreview = ({
               return null;
             }
 
-            return <InputPreview question={q} />;
+            return <InputPreview question={q} key={q.id} />;
           })}
         </div>
       </div>
       {questions.length > 0 && (
-        <div className="flex items-center bg-transparent justify-between sticky bottom-0  pt-2 border-t-2 mt-4">
+        <div className="flex items-center bg-card justify-between sticky bottom-0  pt-2 border-t-2 mt-4">
           <Button
             type="button"
             variant="outline"

@@ -1,20 +1,40 @@
-import type { SurveyQuestion } from "@/feature/survey/model/survey.model";
-
 import { InputPreview } from "../../../input-preview";
-export const QuestionPreview = (options: SurveyQuestion) => {
+import { useFormContext } from "react-hook-form";
+import { IForm } from "../..";
+import { SurveyQuestion } from "@/feature/survey/model/survey.model";
+export const QuestionPreview = () => {
+  const {
+    watch,
+    formState: { errors },
+  } = useFormContext<IForm>();
+  const formValues = watch();
+
+  console.log("QuestionPreview formValues", errors);
+
+  if (!formValues?.type) return null;
+
+  const questionPreview: SurveyQuestion = {
+    id: crypto.randomUUID(),
+
+    orderIndex: 0,
+    ...formValues,
+    mask:
+      formValues?.mask === undefined
+        ? undefined
+        : Array.isArray(formValues.mask)
+        ? formValues.mask
+        : formValues.mask === null
+        ? null
+        : [formValues.mask],
+    validations: [],
+  };
+
   return (
-    <div className="py-4 ml-2 mb-4">
+    <div className="p-4 mx-5 bg-card rounded-md space-y-4 border max-h-[180px]">
       <h3 className="text-lg font-semibold mb-2 text-card-foreground">
         Pré vizualização
       </h3>
-      <InputPreview
-        question={{
-          ...options,
-          validations: options.validations?.filter(
-            (validation) => validation.type !== "required"
-          ),
-        }}
-      />
+      <InputPreview question={questionPreview} />
     </div>
   );
 };

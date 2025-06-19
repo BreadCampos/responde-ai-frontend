@@ -26,11 +26,13 @@ export type QuestionValidatorsType =
   | "max_length"
   | "custom";
 
-type RatingStyle = "stars" | "slider";
+type RatingStyle = "stars" | "slider" | "nps";
 
 type RatingOptions = {
   min: number;
   max: number;
+  minLabel?: string;
+  maxLabel?: string;
   style: RatingStyle;
 };
 

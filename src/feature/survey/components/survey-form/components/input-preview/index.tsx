@@ -14,10 +14,10 @@ import { CheckboxGroupInput } from "@/shared/components/form/checkbox-group-inpu
 import { MaskedInput } from "@/shared/components/form/mask-input";
 import { getValidationRules } from "../../helper/get-validation-rules";
 import type { SurveyQuestion } from "@/feature/survey/model/survey.model";
+import { NpsInput } from "@/shared/components/form/nps-input";
 
 interface Props {
   question: SurveyQuestion;
-  dontRequired?: boolean;
 }
 
 export const InputPreview = ({ question }: Props) => {
@@ -46,12 +46,10 @@ export const InputPreview = ({ question }: Props) => {
             type={question.type}
           />
         );
-
       case "textarea":
         return (
           <TextareaInput name={name} label={question?.label} rules={rules} />
         );
-
       case "number":
         return (
           <TextInput
@@ -62,7 +60,6 @@ export const InputPreview = ({ question }: Props) => {
             rules={rules}
           />
         );
-
       case "select":
         return (
           <SelectInput
@@ -73,7 +70,6 @@ export const InputPreview = ({ question }: Props) => {
             rules={rules}
           />
         );
-        break;
       case "date":
         return (
           <TextInput
@@ -84,12 +80,10 @@ export const InputPreview = ({ question }: Props) => {
             type="date"
           />
         );
-        break;
       case "checkbox":
         return (
           <CheckboxInput name={name} rules={rules} label={question?.label} />
         );
-
       case "radio":
         return (
           <RadioGroupInput
@@ -100,21 +94,24 @@ export const InputPreview = ({ question }: Props) => {
             className="flex flex-col"
           />
         );
-
       case "rating":
         if (question.ratingOptions?.style === "slider") {
-          return <SlideInput name={name} question={question} />;
+          return <SlideInput name={name} question={question} rules={rules} />;
+        }
+        if (question.ratingOptions?.style === "nps") {
+          return <NpsInput name={name} question={question} rules={rules} />;
         }
         return (
-          <RatingStarsInput
-            name={name}
-            label={question?.label}
-            rules={rules}
-            min={question.ratingOptions?.min}
-            max={question.ratingOptions?.max}
-          />
+          <div className="flex w-full items-center justify-center ">
+            <RatingStarsInput
+              name={name}
+              label={question?.label}
+              rules={rules}
+              min={question.ratingOptions?.min}
+              max={question.ratingOptions?.max}
+            />
+          </div>
         );
-
       case "checkbox_group":
         return (
           <CheckboxGroupInput

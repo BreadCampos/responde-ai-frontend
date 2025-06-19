@@ -2,7 +2,6 @@ import { SelectInput } from "@/shared/components/form/select-input";
 import { TextInput } from "@/shared/components/form/text-input";
 import Modal from "@/shared/components/modal";
 import { Form } from "@/shared/components/ui/form";
-import { Separator } from "@/shared/components/ui/separator";
 import { useForm } from "react-hook-form";
 import { useEffect, useMemo } from "react";
 import { QuestionPreview } from "./components/question-preview";
@@ -13,8 +12,12 @@ import type {
   QuestionValidators,
   SurveyQuestionInputType,
 } from "@/feature/survey/model/survey.model";
-import { typesWithOptions } from "./components/controlled-options";
+import {
+  ControlledOptions,
+  typesWithOptions,
+} from "./components/controlled-options";
 import { SelectOption } from "@/shared/types/select-options.type";
+import { RattingType } from "./components/ratting-type";
 
 interface Props {
   onAddQuestion: (question: SurveyQuestion) => void;
@@ -30,7 +33,6 @@ export interface IForm {
   placeholder?: string;
   hint?: string;
   type: SurveyQuestionInputType;
-  isRequired: true;
   mask?: string;
   selectOptions: SelectOption[];
   enableConditional: boolean;
@@ -51,7 +53,9 @@ export interface IForm {
   ratingOptions?: {
     min: number;
     max: number;
-    style: "stars" | "slider";
+    minLabel?: string;
+    maxLabel?: string;
+    style: "stars" | "slider" | "nps";
   };
 }
 export const ServeyModal = ({
@@ -198,57 +202,51 @@ export const ServeyModal = ({
             title: "Salvar",
             onClick: handleSubmit(onSubmit),
           }}
-          className="max-h-[85vh] max-w-4xl"
+          className=""
         >
           <div className="flex flex-col w-[600px] gap-4 max-w-full">
             <div className="flex-1 space-y-4  overflow-y-auto max-h-[50vh] px-5">
               <h3 className="text-lg font-semibold mb-2 text-accent-foreground">
                 Especificação
               </h3>
-              <TextInput name={"label"} label={"Titulo da questão"} required />
-              <SelectInput
-                required
-                name={"type"}
-                label={"Tipo de questão"}
-                options={typeOptions}
-              />
-              <TextInput name={"placeholder"} label={"Placeholder"} />
-              <TextInput name={"hint"} label={"Dica"} />
-              <TextInput
-                name={"pageIndex"}
-                label={"Número da Página"}
-                type="number"
-                min={1}
-                max={maxPossibilitPage}
-                required
-              />
-              {formValues?.type === "text" && (
+              <div className="p-4 bg-card rounded-md space-y-4 border">
                 <TextInput
-                  name="mask"
-                  label="Máscara de Input (Opcional)"
-                  placeholder="exp: (00) 00000-0000"
-                  helperText="Use '0' para números, 'a' para letras e '*' para qualquer caractere. Para múltiplas máscaras, separe com vírgula."
+                  name={"label"}
+                  label={"Titulo da questão"}
+                  required
                 />
-              )}
-
+                <SelectInput
+                  required
+                  name={"type"}
+                  label={"Tipo de questão"}
+                  options={typeOptions}
+                />
+                <TextInput name={"placeholder"} label={"Placeholder"} />
+                <TextInput name={"hint"} label={"Dica"} />
+                <TextInput
+                  name={"pageIndex"}
+                  label={"Número da Página"}
+                  type="number"
+                  min={1}
+                  max={maxPossibilitPage}
+                  required
+                />
+                {formValues?.type === "text" && (
+                  <TextInput
+                    name="mask"
+                    label="Máscara de Input (Opcional)"
+                    placeholder="exp: (00) 00000-0000"
+                    helperText="Use '0' para números, 'a' para letras e '*' para qualquer caractere. Para múltiplas máscaras, separe com vírgula."
+                  />
+                )}
+              </div>
+              <RattingType />
+              <ControlledOptions />
               <ConditionalValues existingQuestions={existingQuestions} />
               <ValidationRules />
             </div>
-            {formValues?.type && (
-              <div className=" flex flex-col flex-1 p-5">
-                <Separator orientation="horizontal" />
-                <QuestionPreview
-                  {...formValues}
-                  mask={
-                    formValues?.mask
-                      ? formValues.mask.split(",").map((m) => m.trim())
-                      : undefined
-                  }
-                  orderIndex={0}
-                  id="test"
-                />
-              </div>
-            )}
+
+            <QuestionPreview />
           </div>
         </Modal>
       </Form>
