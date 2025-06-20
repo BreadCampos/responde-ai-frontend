@@ -56,7 +56,7 @@ export const EditableTitle = ({
         onBlur={handleSave}
         onKeyDown={handleKeyDown}
         className={cn(
-          "p-2 -m-2 bg-background border border-primary rounded-md outline-none",
+          "p-2 -m-2 bg-background border border-primary rounded-lg outline-none",
           className
         )}
       />
@@ -67,7 +67,7 @@ export const EditableTitle = ({
     <h1
       onClick={() => setIsEditing(true)}
       className={cn(
-        "p-2 -m-2 cursor-pointer hover:bg-muted/50 rounded-md transition-colors",
+        "p-2 -m-2 cursor-pointer hover:bg-muted/50 rounded-lg transition-colors",
         className
       )}
       title="Clique para editar o título"

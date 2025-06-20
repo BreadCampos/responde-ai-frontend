@@ -47,7 +47,7 @@ export const NpsInput = ({ name, question, rules }: NpsInputProps) => {
               }
             }}
             className={cn(
-              "w-8 h-8 rounded-md flex items-center justify-center text-white font-bold transition-transform duration-200 flex-shrink-0",
+              "w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold transition-transform duration-200 flex-shrink-0",
               field.value === score
                 ? "ring-2 ring-offset-2 ring-primary scale-110"
                 : "scale-100",

@@ -82,8 +82,8 @@
   --scrollbar-track: hsl(var(--secondary));
   --scrollbar-thumb: hsl(var(--primary));
 
-  --success: 142.1 76.2% 36.3%;
-  --success-foreground: 210 40% 98%;
+  --success: 145 63.4% 59.2%; /* Corresponde exatamente a #4ade80 */
+  --success-foreground: 145 80% 15%;
 
   --warning: 47.9 95.8% 53.1%;
   --warning-foreground: 210 40% 98%;
@@ -138,8 +138,8 @@
   --scrollbar-track: hsl(var(--secondary));
   --scrollbar-thumb: hsl(var(--primary));
 
-  --success: 142.1 76.2% 46.3%;
-  --success-foreground: 142.1 76.2% 10%;
+  --success: 145 63.4% 59.2%;
+  --success-foreground: 145 80% 15%;
 
   --warning: 47.9 95.8% 63.1%;
   --warning-foreground: 47.9 95.8% 15%;

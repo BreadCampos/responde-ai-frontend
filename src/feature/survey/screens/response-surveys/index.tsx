@@ -41,7 +41,7 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
     <FormProvider {...methods}>
       <div className="flex flex-col items-center justify-center h-full">
         {survey?.questions?.[0] && (
-          <div className="w-full max-w-[800px] h-[calc(100vh-100px)]  flex-1 p-4 bg-card rounded-md space-y-4 border">
+          <div className="w-full max-w-[800px] h-[calc(100vh-100px)]  flex-1 p-4 bg-card rounded-lg space-y-4 border">
             <QuestionsFormPreview
               questions={survey?.questions}
               title={survey?.title}

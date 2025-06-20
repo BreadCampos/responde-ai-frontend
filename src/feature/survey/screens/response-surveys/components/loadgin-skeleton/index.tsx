@@ -3,7 +3,7 @@ import { Skeleton } from "@/shared/components/ui/skeleton";
 export const LoadingSkeleton = () => {
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      <div className="p-4 bg-card rounded-md space-y-4 border h-full w-full max-w-3xl">
+      <div className="p-4 bg-card rounded-lg space-y-4 border h-full w-full max-w-3xl">
         <div className="flex items-center justify-between">
           <Skeleton className="h-5 w-1/2 mr-auto" />
           <Skeleton className="h-15 w-15" />

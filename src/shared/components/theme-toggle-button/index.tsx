@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react"; // 1. Importe useState e useEffect
+import { useState, useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "../../hooks/use-theme";
 

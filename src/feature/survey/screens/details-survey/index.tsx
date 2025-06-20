@@ -29,7 +29,7 @@ export const DetailsSurvey = ({ surveyId }: Props) => {
   });
 
   return (
-    <main className="flex-1 space-y-4 p-4 md:p-8 pt-6 bg-muted/40">
+    <main className="flex-1 space-y-4 p-4 md:p-8 pt-6 bg-muted/40 rounded-lg">
       <div className="flex items-start space-y-2">
         <BackButton className="w-full flex items-start gap-2">
           <h2 className="text-3xl flex-1 font-bold tracking-tight text-card-foreground">

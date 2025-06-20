@@ -38,7 +38,7 @@ const ValidationRuleRow = ({
     return validationHasValue(selectedType);
   }, [selectedType]);
   return (
-    <div className="flex items-center gap-2 p-2 border rounded-md">
+    <div className="flex items-center gap-2 p-2 border rounded-lg">
       <div className="flex flex-col items-center gap-2 w-full">
         <SelectInput
           name={`validations.${index}.type`}
@@ -100,7 +100,7 @@ export const ValidationRules = () => {
 
   const maxValidations = validationOptions.length === fields?.length;
   return (
-    <div className="p-4 bg-card rounded-md space-y-4 border">
+    <div className="p-4 bg-card rounded-lg space-y-4 border">
       <h4 className="font-medium text-card-foreground">Regras de Validação</h4>
       {fields.map((field, index) => (
         <ValidationRuleRow

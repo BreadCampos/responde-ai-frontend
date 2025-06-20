@@ -23,7 +23,7 @@ export function SortableQuestionItem({ onDelete, question, onEdit }: Props) {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      className="p-2 border rounded-md bg-card shadow-sm"
+      className="p-2 border rounded-lg bg-card shadow-sm"
     >
       <div className="flex items-center justify-between gap-2 ">
         <div className="flex items-center gap-2 flex-1 ">

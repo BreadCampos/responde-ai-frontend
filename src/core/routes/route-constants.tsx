@@ -11,6 +11,7 @@ export const ROUTES = {
   COMPANY_EDIT: "/companies/edit/:id",
   COMPANY_DETAILS: "/companies/details/:id",
   WEBHOOKS_LIST: "/webhooks",
+  WEBHOOKS_DETAILS: "/webhooks/details/:id",
   LOGOUT: "/logout",
 } as const;
 

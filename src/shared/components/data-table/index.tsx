@@ -131,7 +131,7 @@ export function DataTable<TData, TValue>({
           />
         )}
       </div>
-      <div className="flex-1 overflow-auto rounded-md border max-h-[calc(100vh-300px)]">
+      <div className="flex-1 overflow-auto rounded-lg border max-h-[calc(100vh-300px)]">
         <Table data-slot="table">
           <TableHeader
             className="sticky top-0 z-10 bg-primary"

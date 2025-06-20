@@ -33,7 +33,7 @@ export const SurveyCustomLinks = () => {
           {customLinks.map((link) => (
             <li
               key={link.id}
-              className="flex justify-between items-center p-2 rounded-md border"
+              className="flex justify-between items-center p-2 rounded-lg border"
             >
               <span className="font-mono text-sm">{link.url}</span>
               <Badge>{link.clicks} cliques</Badge>

@@ -30,7 +30,7 @@ export const QuestionPreview = () => {
   };
 
   return (
-    <div className="p-4 mx-5 bg-card rounded-md space-y-4 border max-h-[180px]">
+    <div className="p-4 mx-5 bg-card rounded-lg space-y-4 border max-h-[180px]">
       <h3 className="text-lg font-semibold mb-2 text-card-foreground">
         Pré vizualização
       </h3>

@@ -209,7 +209,7 @@ export const ServeyModal = ({
               <h3 className="text-lg font-semibold mb-2 text-accent-foreground">
                 Especificação
               </h3>
-              <div className="p-4 bg-card rounded-md space-y-4 border">
+              <div className="p-4 bg-card rounded-lg space-y-4 border">
                 <TextInput
                   name={"label"}
                   label={"Titulo da questão"}

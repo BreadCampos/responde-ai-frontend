@@ -39,7 +39,7 @@ export const RattingType = () => {
   return (
     <div>
       {formValues?.type === "rating" && (
-        <div className="p-4 bg-card rounded-md space-y-4 border">
+        <div className="p-4 bg-card rounded-lg space-y-4 border">
           <h4 className="font-medium text-card-foreground">
             Opções de Avaliação
           </h4>
