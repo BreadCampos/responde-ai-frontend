@@ -35,7 +35,7 @@ export const DetailsSurvey = ({ id }: Props) => {
           <h2 className="text-3xl flex-1 font-bold tracking-tight text-card-foreground">
             {survey?.title}
           </h2>
-          <SurveyPreviewDrawer questions={survey?.questions} />{" "}
+          <SurveyPreviewDrawer survey={survey} />{" "}
         </BackButton>
       </div>
 

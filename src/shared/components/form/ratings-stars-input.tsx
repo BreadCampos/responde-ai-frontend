@@ -63,7 +63,7 @@ export const RatingStarsInput = ({
             </FormLabel>
           )}
           <FormControl>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 justify-center">
               {Array.from({ length: max - min + 1 }, (_, i) => i + min).map(
                 (starValue) => (
                   <Star
@@ -81,7 +81,6 @@ export const RatingStarsInput = ({
                     }
                     onMouseEnter={() => setHoverValue(starValue)}
                     onMouseLeave={() => setHoverValue(null)}
-                    // Aqui usamos o field.onChange diretamente
                     onClick={() => field.onChange(starValue)}
                   />
                 )

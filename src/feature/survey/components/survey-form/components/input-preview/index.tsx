@@ -102,15 +102,13 @@ export const InputPreview = ({ question }: Props) => {
           return <NpsInput name={name} question={question} rules={rules} />;
         }
         return (
-          <div className="flex w-full items-center justify-center ">
-            <RatingStarsInput
-              name={name}
-              label={question?.label}
-              rules={rules}
-              min={question.ratingOptions?.min}
-              max={question.ratingOptions?.max}
-            />
-          </div>
+          <RatingStarsInput
+            name={name}
+            label={question?.label}
+            rules={rules}
+            min={question.ratingOptions?.min}
+            max={question.ratingOptions?.max}
+          />
         );
       case "checkbox_group":
         return (

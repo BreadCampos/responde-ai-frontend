@@ -425,12 +425,12 @@ export const SurveyForm = () => {
             Adicione uma pergunta para começar.
           </p>
         )}
-        <div className="w-full max-w-4xl flex gap-4 items-start">
+        <div className="w-full max-w-[90%] flex gap-4 items-center justify-center">
           <DndContext
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
           >
-            <div className="min-h-[500px]  h-[calc(100vh-250px)]  overflow-y-auto flex-1 flex flex-col gap-4 border p-4 rounded-lg bg-card shadow-md">
+            <div className="w-full max-w-[600px] flex-1 min-h-[500px]  h-[calc(100vh-150px)]  overflow-y-auto flex flex-col gap-4 border p-4 rounded-lg bg-card shadow-md">
               <div className="flex items-center justify-between mb-4">
                 {" "}
                 <h4 className="text-card-foreground text-xl">Perguntas</h4>
@@ -470,7 +470,9 @@ export const SurveyForm = () => {
             </div>
           </DndContext>
           {survey?.questions && (
-            <QuestionsFormPreview questions={survey?.questions} />
+            <div className="w-full max-w-[600px] flex-1 h-[calc(100vh-150px)]">
+              <QuestionsFormPreview questions={survey?.questions} />
+            </div>
           )}{" "}
         </div>
       </div>

@@ -12,14 +12,14 @@ import {
 import { Form } from "@/shared/components/ui/form";
 
 import { Eye } from "lucide-react";
-import type { SurveyQuestion } from "@/feature/survey/model/survey.model";
+import type { SurveyModel } from "@/feature/survey/model/survey.model";
 import { QuestionsFormPreview } from "@/feature/survey/components/questions-form-preview";
 
 interface Props {
-  questions?: SurveyQuestion[];
+  survey?: SurveyModel;
 }
 
-export const SurveyPreviewDrawer = ({ questions }: Props) => {
+export const SurveyPreviewDrawer = ({ survey }: Props) => {
   const form = useForm({
     defaultValues: {
       fullName: "",
@@ -45,12 +45,13 @@ export const SurveyPreviewDrawer = ({ questions }: Props) => {
               para os usuários.
             </DrawerDescription>
           </DrawerHeader>
+
           <Form {...form}>
-            {questions && (
+            {survey && (
               <QuestionsFormPreview
-                questions={questions}
-                title=""
-                className="h-[calc(100vh-100px)] rounded-lg border-0 p-4 bg-transparent shadow-none"
+                questions={survey.questions}
+                title={survey?.title || "Preview"}
+                className="m-2"
               />
             )}
           </Form>

@@ -69,7 +69,7 @@ export const QuestionsFormPreview = ({
     <form
       onSubmit={handleSubmit(onPreviewSubmit)}
       className={cn(
-        "min-h-[500px]  h-[calc(100vh-250px)]   flex-1 flex flex-col gap-4 border p-4 rounded-lg bg-card shadow-md",
+        "max-w-[600px] min-h-[500px]  h-[calc(100vh-150px)] flex-1 flex flex-col gap-4 border p-4 rounded-lg bg-card shadow-md",
         className
       )}
     >
