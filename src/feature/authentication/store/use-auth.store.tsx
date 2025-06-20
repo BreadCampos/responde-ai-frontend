@@ -4,6 +4,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import type { CompanyModel } from "../../company/model/company.mode";
 import type { UserModel } from "../../users/model/user.model";
 import { ROUTES } from "@/core/routes/route-constants";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 interface AuthState {
   user: UserModel | null;
@@ -16,7 +17,7 @@ interface AuthState {
 interface AuthActions {
   setUser: (data: { user: UserModel }) => void;
   setCompany: (data: { company: CompanyModel }) => void;
-  logout: () => void;
+  logout: (navigate: AppRouterInstance) => void;
   setTokens: (tokens: { accessToken: string; refreshToken?: string }) => void;
 }
 
@@ -41,7 +42,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         });
       },
 
-      logout: async () => {
+      logout: async (navigate) => {
         await fetch("/api/auth/logout", { method: "POST" });
 
         set({
@@ -52,7 +53,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           isAuthenticated: false,
         });
 
-        window.location.href = ROUTES.LOGIN;
+        navigate.push(ROUTES.LOGIN);
       },
 
       setTokens: (tokens) => {

@@ -10,7 +10,9 @@ export const Header = () => {
         <span className="text-card-foreground font-medium flex gap-2">
           {user?.firstName}
         </span>
-        <span className="text-card-foreground font-medium ">{company?.id}</span>
+        <span className="text-card-foreground font-medium ">
+          {company?.fantasyName}
+        </span>
         <ThemeToggleButton />
       </div>
     </header>

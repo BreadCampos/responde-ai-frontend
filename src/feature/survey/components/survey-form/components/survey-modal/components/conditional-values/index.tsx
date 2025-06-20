@@ -24,7 +24,7 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
 
   const formValues = watch();
 
-  const questionOptionsForSelect: SelectOption[] = existingQuestions.map(
+  const questionOptionsForSelect: SelectOption[] = existingQuestions?.map(
     (q) => ({
       label: q.label,
       value: q.id,
@@ -68,7 +68,7 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
     setValue("conditionalOperator", undefined);
   }, [formValues.conditionalFieldId, setValue]);
 
-  if (existingQuestions.length === 1) return null;
+  if (existingQuestions?.length === 1) return null;
 
   return (
     <div className="p-4 bg-card rounded-md space-y-4 border">

@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/shared/components/ui/button";
 import {
   Drawer,
   DrawerContent,
@@ -11,9 +10,12 @@ import {
 } from "@/shared/components/ui/drawer";
 import { Form } from "@/shared/components/ui/form";
 
-import { Eye } from "lucide-react";
+import { ExternalLink, Eye, Link } from "lucide-react";
 import type { SurveyModel } from "@/feature/survey/model/survey.model";
 import { QuestionsFormPreview } from "@/feature/survey/components/questions-form-preview";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/core/routes/route-constants";
+import { Button } from "@/shared/components/button";
 
 interface Props {
   survey?: SurveyModel;
@@ -26,6 +28,13 @@ export const SurveyPreviewDrawer = ({ survey }: Props) => {
       email: "",
     },
   });
+
+  const navigate = useRouter();
+
+  const redirectToForm = () => {
+    if (!survey?.id) return;
+    return navigate.push(ROUTES.SURVEY_RESPONSE.replace(":id", survey?.id));
+  };
 
   return (
     <Drawer direction="right">
@@ -44,6 +53,14 @@ export const SurveyPreviewDrawer = ({ survey }: Props) => {
               Esta é uma pré-visualização de como seu formulário está aparecendo
               para os usuários.
             </DrawerDescription>
+            <Button
+              onClick={redirectToForm}
+              variant={"link"}
+              className="text-card-foreground w-fit text-start flex justify-start "
+            >
+              <ExternalLink />
+              ver pagina
+            </Button>
           </DrawerHeader>
 
           <Form {...form}>

@@ -1,6 +1,9 @@
+"use client";
+
 import { useFormContext } from "react-hook-form";
+import Image from "next/image";
 import type { SurveyQuestion } from "../../model/survey.model";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { InputPreview } from "../survey-form/components/input-preview";
 import { shouldShowQuestion } from "../survey-form/helper/shouled-show-question";
@@ -11,11 +14,13 @@ interface Props {
   questions: SurveyQuestion[];
   title?: string;
   className?: string;
+  logoUrl?: string;
 }
 export const QuestionsFormPreview = ({
   questions,
   title = "Preview",
   className,
+  logoUrl,
 }: Props) => {
   const { trigger, getValues, handleSubmit, formState, watch } =
     useFormContext();
@@ -26,10 +31,7 @@ export const QuestionsFormPreview = ({
   const verifyShowQuestion = (question: SurveyQuestion) => {
     return !shouldShowQuestion(question, formValues);
   };
-  const totalPages = useMemo(() => {
-    if (questions.length === 0) return 1;
-    return Math.max(...questions.map((q) => q.pageIndex), 1);
-  }, [questions]);
+  const totalPages = Math.max(...questions?.map((q) => q?.pageIndex), 1);
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -64,7 +66,6 @@ export const QuestionsFormPreview = ({
     }
   };
 
-  useEffect(() => {}, [questions]);
   return (
     <form
       onSubmit={handleSubmit(onPreviewSubmit)}
@@ -74,9 +75,24 @@ export const QuestionsFormPreview = ({
       )}
     >
       <div className="flex-1 overflow-y-auto">
-        <h4 className="text-card-foreground text-xl"> {title}</h4>
-
-        <div className="flex flex-col gap-4 bg-background p-4 rounded-lg mt-4">
+        <div className="flex w-full items-center justify-between mb-4">
+          {title && (
+            <h4 className="text-card-foreground text-xl mb-4"> {title}</h4>
+          )}
+          {logoUrl && (
+            <div className="mb-4">
+              <Image
+                src={logoUrl}
+                alt="Logo"
+                width={64}
+                height={64}
+                className="object-cover rounded-lg"
+                loading="lazy"
+              />
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col gap-4 bg-background p-4 rounded-lg">
           {questionsOnCurrentPage.map((q) => {
             if (verifyShowQuestion(q)) {
               return null;
@@ -86,7 +102,7 @@ export const QuestionsFormPreview = ({
           })}
         </div>
       </div>
-      {questions.length > 0 && (
+      {questions?.length > 0 && (
         <div className="flex items-center bg-card justify-between sticky bottom-0  pt-2 border-t-2 mt-4">
           <Button
             type="button"

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useMemo } from "react";
 import { EditableTitle } from "./components/editable-title";
 import type {
@@ -238,7 +240,7 @@ export const SurveyForm = () => {
   const updateQuestion = (updatedQuestion: SurveyQuestion) => {
     setSurvey((prevSurvey) => ({
       ...prevSurvey,
-      questions: prevSurvey.questions.map((q) =>
+      questions: prevSurvey.questions?.map((q) =>
         q.id === updatedQuestion.id ? updatedQuestion : q
       ),
     }));
@@ -295,12 +297,12 @@ export const SurveyForm = () => {
   };
 
   const renumberPages = (questions: SurveyQuestion[]): SurveyQuestion[] => {
-    if (questions.length === 0) {
+    if (questions?.length === 0) {
       return [];
     }
 
     const uniquePageIndexes = [
-      ...new Set(questions.map((q) => q.pageIndex)),
+      ...new Set(questions?.map((q) => q.pageIndex)),
     ].sort((a, b) => a - b);
 
     const pageMap = uniquePageIndexes.reduce((acc, oldIndex, newIndex) => {
@@ -308,7 +310,7 @@ export const SurveyForm = () => {
       return acc;
     }, {} as Record<number, number>);
 
-    return questions.map((q) => ({
+    return questions?.map((q) => ({
       ...q,
       pageIndex: pageMap[q.pageIndex],
     }));
@@ -338,7 +340,7 @@ export const SurveyForm = () => {
 
     updatedQuestions = arrayMove(updatedQuestions, activeIndex, overIndex);
 
-    let finalQuestions = updatedQuestions.map((question) => {
+    let finalQuestions = updatedQuestions?.map((question) => {
       const questionsOnSamePage = updatedQuestions.filter(
         (q) => q.pageIndex === question.pageIndex
       );
@@ -398,7 +400,7 @@ export const SurveyForm = () => {
     });
   };
   const disabledCreateButton =
-    surveyMutation.isPending || survey.questions.length === 0;
+    surveyMutation.isPending || survey.questions?.length === 0;
 
   return (
     <Form {...methods}>
@@ -420,7 +422,7 @@ export const SurveyForm = () => {
           </Button>
         </div>
 
-        {survey.questions.length === 0 && (
+        {survey.questions?.length === 0 && (
           <p className="text-gray-500 text-center py-8">
             Adicione uma pergunta para começar.
           </p>

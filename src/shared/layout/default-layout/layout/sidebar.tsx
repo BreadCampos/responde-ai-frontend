@@ -1,7 +1,7 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { Button } from "@/shared/components/button";
-import usePersistentState from "@/shared/hooks/use-persist";
-import { cn } from "@/shared/lib/utils";
+import { Button } from "@//shared/components/button";
+import usePersistentState from "@//shared/hooks/use-persist";
+import { cn } from "@//shared/lib/utils";
 import { ROUTES } from "@/core/routes/route-constants";
 import {
   ChevronsLeft,
@@ -41,7 +41,7 @@ const NavItem = ({
 
   const handleClick = () => {
     if (isLogout) {
-      logout();
+      logout(navigate);
       return;
     }
     navigate.push(href);

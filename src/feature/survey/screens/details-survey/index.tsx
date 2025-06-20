@@ -18,14 +18,14 @@ import { SurveyCustomLinks } from "./components/survey-custom-link";
 import { SurveyPreviewDrawer } from "./components/questions-drawer";
 
 interface Props {
-  id: string;
+  surveyId: string;
 }
-export const DetailsSurvey = ({ id }: Props) => {
+export const DetailsSurvey = ({ surveyId }: Props) => {
   const { company } = useAuthStore();
 
   const { data: survey } = GetSurveyQuery({
     companyId: company?.id || "",
-    surveyId: id || "",
+    surveyId: surveyId || "",
   });
 
   return (

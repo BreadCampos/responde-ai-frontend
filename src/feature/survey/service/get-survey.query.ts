@@ -14,6 +14,7 @@ export const GetSurveyQuery = ({
 
   return useQuery({
     queryKey,
+    enabled: !!companyId && !!surveyId,
     queryFn: async () => {
       const url = surveyApi.GET_SURVEY.replace(":companyId", companyId).replace(
         ":surveyId",
