@@ -23,7 +23,7 @@ import { useToggle } from "@/shared/hooks/use-toggle";
 import { BackButton } from "@/shared/components/back-button";
 import { Check, Plus } from "lucide-react";
 import { CreateSurveyMutation } from "../../service/create-survey.mutation";
-import { QuestionsFormPreview } from "../questions-form-preview";
+import { QuestionsForm } from "../questions-form-preview";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 
 export const SurveyForm = () => {
@@ -402,6 +402,11 @@ export const SurveyForm = () => {
   const disabledCreateButton =
     surveyMutation.isPending || survey.questions?.length === 0;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onPreviewSubmit = (data: any) => {
+    console.log("Preview data:", data);
+    toast.success("Dados do questionário enviados com sucesso!");
+  };
   return (
     <Form {...methods}>
       <div className="flex flex-col items-center justify-center p-2 ">
@@ -473,7 +478,10 @@ export const SurveyForm = () => {
           </DndContext>
           {survey?.questions && (
             <div className="w-full max-w-[600px] flex-1 h-[calc(100vh-150px)]">
-              <QuestionsFormPreview questions={survey?.questions} />
+              <QuestionsForm
+                questions={survey?.questions}
+                onSubmit={onPreviewSubmit}
+              />
             </div>
           )}{" "}
         </div>

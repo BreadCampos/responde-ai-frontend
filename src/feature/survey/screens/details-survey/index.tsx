@@ -55,7 +55,7 @@ export const DetailsSurvey = ({ surveyId }: Props) => {
       </div>
 
       <Card>
-        <SurveyResponses />
+        <SurveyResponses surveyId={surveyId} />
       </Card>
 
       <Card>

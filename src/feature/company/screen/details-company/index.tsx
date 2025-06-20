@@ -46,7 +46,7 @@ export const DetailsCompany = ({ id }: Props) => {
 
   const company = companies;
   return (
-    <div className="p-4 md:p-8 bg-muted/40 min-h-screen">
+    <div className="p-4 md:p-8 bg-muted/40 min-h-screen rounded-lg">
       <div className="max-w-4xl mx-auto space-y-6">
         <Card>
           <CardHeader className="flex flex-row items-center gap-4">

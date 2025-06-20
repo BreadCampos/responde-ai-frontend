@@ -11,14 +11,17 @@ import {
   FileText,
   Webhook,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
 type NavItemProps = {
   name: string;
   href: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
   isCollapsed: boolean;
+  isActive: boolean;
   isLogout?: boolean;
 };
+
 const mainLinks = [
   { name: "Formulários", href: ROUTES.SURVEY_LIST, icon: FileText },
   { name: "Webhooks", href: ROUTES.WEBHOOKS_LIST, icon: Webhook },
@@ -35,6 +38,7 @@ const NavItem = ({
   icon: Icon,
   isLogout,
   isCollapsed,
+  isActive,
 }: NavItemProps) => {
   const navigate = useRouter();
   const { logout } = useAuthStore();
@@ -49,7 +53,7 @@ const NavItem = ({
   return (
     <Button
       onClick={handleClick}
-      variant={isLogout ? "destructive" : "outline"}
+      variant={isLogout ? "destructive" : isActive ? "secondary" : "outline"}
       className={isCollapsed ? "justify-center" : "justify-start"}
     >
       <Icon size={isCollapsed ? 24 : 18} className={cn("flex-shrink-0")} />
@@ -67,6 +71,7 @@ export const Sidebar = () => {
     "sidebar-collapsed",
     false
   );
+  const pathname = usePathname();
 
   const toggleSidebar = () => setIsCollapsed(!isCollapsed);
   return (
@@ -104,7 +109,12 @@ export const Sidebar = () => {
 
         <nav className="flex flex-col space-y-2 mt-10">
           {mainLinks.map((link) => (
-            <NavItem {...link} key={link.href} isCollapsed={isCollapsed} />
+            <NavItem
+              {...link}
+              key={link.href}
+              isCollapsed={isCollapsed}
+              isActive={pathname.startsWith(link.href)}
+            />
           ))}
         </nav>
       </div>
@@ -116,6 +126,7 @@ export const Sidebar = () => {
           isLogout={true}
           icon={LogOut}
           isCollapsed={isCollapsed}
+          isActive={false}
         />
       </div>
     </aside>

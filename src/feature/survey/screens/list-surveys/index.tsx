@@ -16,7 +16,6 @@ export const ListSurveys = () => {
   const { pagination, fetchTable } = usePagination();
   const { company } = useAuthStore();
 
-  console.log({ company });
   const { data, isFetching, refetch } = GetListSurveysQuery({
     companyId: company?.id || "",
     pagination: pagination,

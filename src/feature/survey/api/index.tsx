@@ -1,7 +1,8 @@
-import type { ApiUrl } from "@/core/api/types";
-
-export const surveyApi: ApiUrl = {
+export const surveyApi = {
   CREATE_SURVEY: "/companies/:companyId/surveys",
   LIST_SURVEYS: "/companies/:companyId/surveys",
   GET_SURVEY: "/companies/:companyId/surveys/:surveyId",
+  GET_PUBLIC_SURVEY_INFO: "/public/surveys/:surveyId",
+  CREATE_PUBLIC_SURVEY_RESPONSE: "/public/surveys/:surveyId/responses",
+  GET_SURVEY_RESPONSES: "/companies/:companyId/surveys/:surveyId/responses",
 };

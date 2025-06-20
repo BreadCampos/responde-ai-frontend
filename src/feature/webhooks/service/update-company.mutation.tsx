@@ -23,7 +23,7 @@ export const useUpdateWebhookMutation = () => {
         companyId
       ).replace(":webhookId", webhookId);
       const response = await httpClient.request<WebhooksModel>({
-        method: "PUT",
+        method: "PATCH",
         url,
         body: webhook,
       });

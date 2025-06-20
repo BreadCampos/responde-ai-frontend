@@ -60,7 +60,7 @@ export const UpdateWebhooksModal = ({ webhook }: Props) => {
         title={"Create Webhook"}
         className="w-full max-w-xl"
         primaryButton={{
-          title: "Criar",
+          title: "Atualizar Webhook",
           type: "submit",
           loading: isPending,
           onClick: methods.handleSubmit(onCreateWebhook),

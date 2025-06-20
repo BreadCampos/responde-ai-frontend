@@ -48,7 +48,7 @@ export const useGetUserAndCompany = () => {
       );
 
       const handleLogout = async () => {
-        logout();
+        logout(navigate);
       };
 
       handleLogout();

@@ -53,7 +53,7 @@ export function usePagination(
       goToPage(page);
     }
     if (search) {
-      setPagination((prev) => ({ ...prev, search }));
+      setPagination((prev) => ({ ...prev, search, page: 1 }));
     }
   };
 

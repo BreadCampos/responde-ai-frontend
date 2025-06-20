@@ -12,7 +12,7 @@ export class UnauthorizedError extends Error {
 
 export interface HttpRequest {
   url: string;
-  method: "GET" | "POST" | "PUT" | "DELETE";
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   headers?: Record<string, string>;
   body?: any;
 }

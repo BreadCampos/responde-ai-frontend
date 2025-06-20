@@ -10,12 +10,13 @@ import {
 } from "@/shared/components/ui/drawer";
 import { Form } from "@/shared/components/ui/form";
 
-import { ExternalLink, Eye, Link } from "lucide-react";
+import { ExternalLink, Eye } from "lucide-react";
 import type { SurveyModel } from "@/feature/survey/model/survey.model";
-import { QuestionsFormPreview } from "@/feature/survey/components/questions-form-preview";
+import { QuestionsForm } from "@/feature/survey/components/questions-form-preview";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/core/routes/route-constants";
 import { Button } from "@/shared/components/button";
+import { toast } from "sonner";
 
 interface Props {
   survey?: SurveyModel;
@@ -36,6 +37,11 @@ export const SurveyPreviewDrawer = ({ survey }: Props) => {
     return navigate.push(ROUTES.SURVEY_RESPONSE.replace(":id", survey?.id));
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onPreviewSubmit = (data: any) => {
+    console.log("Preview data:", data);
+    toast.success("Dados do questionário enviados com sucesso!");
+  };
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
@@ -65,9 +71,10 @@ export const SurveyPreviewDrawer = ({ survey }: Props) => {
 
           <Form {...form}>
             {survey && (
-              <QuestionsFormPreview
+              <QuestionsForm
                 questions={survey.questions}
                 title={survey?.title || "Preview"}
+                onSubmit={onPreviewSubmit}
                 className="m-2"
               />
             )}

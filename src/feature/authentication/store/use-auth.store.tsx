@@ -12,6 +12,7 @@ interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
   isAuthenticated: boolean;
+  publicCompany: CompanyModel | null;
 }
 
 interface AuthActions {
@@ -19,6 +20,7 @@ interface AuthActions {
   setCompany: (data: { company: CompanyModel }) => void;
   logout: (navigate: AppRouterInstance) => void;
   setTokens: (tokens: { accessToken: string; refreshToken?: string }) => void;
+  setPublicCompany: (data: { company: CompanyModel }) => void;
 }
 
 export const useAuthStore = create<AuthState & AuthActions>()(
@@ -29,6 +31,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
       accessToken: null,
       refreshToken: null,
       isAuthenticated: false,
+      publicCompany: null,
 
       setUser: (data) => {
         set({
@@ -61,6 +64,12 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           accessToken: tokens.accessToken,
           // refreshToken: tokens.refreshToken,
           isAuthenticated: !!tokens.accessToken,
+        });
+      },
+
+      setPublicCompany: (data) => {
+        set({
+          publicCompany: data.company,
         });
       },
     }),

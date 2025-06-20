@@ -4,7 +4,6 @@ import { useFormContext } from "react-hook-form";
 import Image from "next/image";
 import type { SurveyQuestion } from "../../model/survey.model";
 import { useMemo, useState } from "react";
-import { toast } from "sonner";
 import { InputPreview } from "../survey-form/components/input-preview";
 import { shouldShowQuestion } from "../survey-form/helper/shouled-show-question";
 import { Button } from "@/shared/components/button";
@@ -15,12 +14,15 @@ interface Props {
   title?: string;
   className?: string;
   logoUrl?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSubmit?: (data: any) => void;
 }
-export const QuestionsFormPreview = ({
+export const QuestionsForm = ({
   questions,
   title = "Preview",
   className,
   logoUrl,
+  onSubmit,
 }: Props) => {
   const { trigger, getValues, handleSubmit, formState, watch } =
     useFormContext();
@@ -41,9 +43,15 @@ export const QuestionsFormPreview = ({
   const questionsOnCurrentPage = useMemo(() => {
     return questions.filter((q) => q.pageIndex === currentPage);
   }, [currentPage, questions]);
-  const onPreviewSubmit = () => {
-    toast.success("Simulação de envio do formulário completo.");
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onPreviewSubmit = (data: any) => {
+    if (onSubmit) {
+      onSubmit(data);
+    }
   };
+
+  const logoSrc = logoUrl || "/favicon.svg";
 
   const handleNextPage = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isNavigating) return;
@@ -79,10 +87,10 @@ export const QuestionsFormPreview = ({
           {title && (
             <h4 className="text-card-foreground text-xl mb-4"> {title}</h4>
           )}
-          {logoUrl && (
+          {logoSrc && (
             <div className="mb-4">
               <Image
-                src={logoUrl}
+                src={logoSrc}
                 alt="Logo"
                 width={64}
                 height={64}

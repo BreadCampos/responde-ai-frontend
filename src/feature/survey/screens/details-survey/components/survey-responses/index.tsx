@@ -1,3 +1,5 @@
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { GetSurveyResponses } from "@/feature/survey/service/get-survey-responses";
 import { DataTable } from "@/shared/components/data-table";
 import {
   CardContent,
@@ -5,44 +7,38 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import type { ColumnDef } from "@tanstack/react-table";
+import { usePagination } from "@/shared/hooks/use-pagination";
+import { responseColumns } from "./columns";
 
-type SurveyResponse = {
-  id: string;
-  submittedAt: string;
-  content: string;
-};
+interface Props {
+  surveyId: string;
+}
 
-const mockResponses: SurveyResponse[] = [
-  {
-    id: "resp1",
-    submittedAt: "2025-06-16T10:00:00Z",
-    content: "O atendimento foi excelente!",
-  },
-  {
-    id: "resp2",
-    submittedAt: "2025-06-16T11:30:00Z",
-    content: "Achei o produto um pouco caro.",
-  },
-  {
-    id: "resp3",
-    submittedAt: "2025-06-16T14:15:00Z",
-    content: "Tudo perfeito, recomendo.",
-  },
-];
+export const SurveyResponses = ({ surveyId }: Props) => {
+  const { company } = useAuthStore();
+  const { pagination, fetchTable } = usePagination();
+  const { data, refetch } = GetSurveyResponses({
+    companyId: company?.id,
+    surveyId,
+    pagination,
+  });
 
-export const SurveyResponses = () => {
-  const responses = mockResponses;
-
-  const responseColumns: ColumnDef<SurveyResponse>[] = [
-    { accessorKey: "content", header: "Resposta" },
-    {
-      accessorKey: "submittedAt",
-      header: "Data de Envio",
-      cell: ({ row }) =>
-        new Date(row.original.submittedAt).toLocaleString("pt-BR"),
-    },
-  ];
+  const fetch = ({
+    page,
+    search,
+    isRefetch = false,
+  }: {
+    page?: number;
+    search?: string;
+    isRefetch?: boolean;
+  }) => {
+    fetchTable({
+      page,
+      search,
+      isRefetch,
+      refetch,
+    });
+  };
   return (
     <>
       <CardHeader>
@@ -52,7 +48,12 @@ export const SurveyResponses = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <DataTable columns={responseColumns} data={responses} />
+        <DataTable
+          columns={responseColumns}
+          onFetchData={fetch}
+          data={data?.data || []}
+          pagination={pagination}
+        />
       </CardContent>
     </>
   );

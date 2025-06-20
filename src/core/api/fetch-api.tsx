@@ -16,9 +16,6 @@ class HttpClient {
 
   async request<T>(data: HttpRequest): Promise<HttpResponse<T>> {
     const token = useAuthStore.getState().accessToken;
-    console.log({
-      baseUrl: this.baseUrl,
-    });
 
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
@@ -29,6 +26,7 @@ class HttpClient {
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
+
     const response = await fetch(`${this.baseUrl}${data.url}`, {
       method: data.method,
       headers,
