@@ -10,13 +10,14 @@ import ErrorAnimation from "@/shared/components/lotties/error.lotties";
 import SuccessAnimation from "@/shared/components/lotties/success.lotties";
 import { CreatePublicSurveyResponseMutation } from "../../service/create-public-survey-response";
 import { CreateSurveyResponse } from "../../model/create-survey-response";
+import { toast } from "sonner";
 
 interface Props {
   surveyId: string;
 }
 
 export const ResponseSurvey = ({ surveyId }: Props) => {
-  const { publicCompany, setPublicCompany } = useAuthStore();
+  const { publicCompany, setPublicCompany, company } = useAuthStore();
 
   const methods = useForm();
 
@@ -29,6 +30,11 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
+    if (company?.id) {
+      return toast.success(
+        "Este formulário está no modo de vizualização, não é possível enviar respostas."
+      );
+    }
     console.log("Submitted Data:", data);
     const formattedData: CreateSurveyResponse = {
       answers: Object.keys(data).map((key) => ({
@@ -38,18 +44,19 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
     };
 
     console.log({ formattedData });
+
     createReponse({
       surveyId: surveyId || "",
       responses: formattedData,
     });
   };
   useEffect(() => {
-    if (isSuccess && data?.company) {
+    if (isSuccess && data?.company && !company) {
       setPublicCompany({
         company: data?.company,
       });
     }
-  }, [data?.company, isSuccess, setPublicCompany]);
+  }, [data?.company, isSuccess, setPublicCompany, company]);
 
   if (isLoading) {
     return <LoadingSkeleton />;

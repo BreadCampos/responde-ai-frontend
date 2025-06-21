@@ -1,6 +1,6 @@
 type FormatOptoins = {
   dateStyle?: "long" | "short" | "full" | "medium";
-  timeStyle?: "long" | "short" | "full" | "medium";
+  timeStyle?: "long" | "short" | "full" | "medium" | null;
 };
 
 export const formatDate = ({
@@ -23,7 +23,7 @@ export const formatDate = ({
 
   return new Intl.DateTimeFormat(currentLang, {
     dateStyle,
-    timeStyle,
+    ...(timeStyle === null ? {} : { timeStyle: timeStyle }),
     ...restOfOptions,
     timeZone: userTimeZone,
   })?.format(new Date(date));

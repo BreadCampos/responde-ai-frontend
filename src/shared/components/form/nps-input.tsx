@@ -35,7 +35,15 @@ export const NpsInput = ({ name, question, rules }: NpsInputProps) => {
   return (
     <div className="flex flex-col gap-3">
       <Label htmlFor={name}>{question.label}</Label>
-      <div className="flex items-center gap-2 overflow-x-auto py-2">
+      <div
+        className={cn(
+          "flex items-center py-2",
+          // Em telas pequenas (padrão): mantém a rolagem e um gap seguro
+          "gap-2 flex-wrap justify-center",
+          // A partir de telas sm (640px): ocupa a largura total e distribui os itens
+          "sm:w-full sm:justify-between sm:gap-0 sm:overflow-x-visible"
+        )}
+      >
         {scores.map((score) => (
           <button
             key={score}

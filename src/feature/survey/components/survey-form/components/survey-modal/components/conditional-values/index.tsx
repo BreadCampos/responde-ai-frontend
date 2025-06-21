@@ -16,6 +16,7 @@ import {
   type SurveyQuestion,
 } from "@/feature/survey/model/survey.model";
 import { SelectOption } from "@/shared/types/select-options.type";
+// import { typesWithOptions } from "../controlled-options";
 interface Props {
   existingQuestions: SurveyQuestion[];
 }
@@ -43,7 +44,7 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
   ];
 
   const dependentFieldType = existingQuestions.find(
-    (q) => q.id === formValues.conditionalFieldId
+    (q) => q.id === formValues.conditional?.fieldId
   )?.type;
 
   const {
@@ -62,13 +63,42 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
     return allOperationOptions.filter((opt) =>
       allowedOperators.includes(opt.value as QuestionConditionOperators)
     );
-  }, [dependentFieldType]);
+  }, [allOperationOptions, dependentFieldType]);
 
   useEffect(() => {
-    setValue("conditionalOperator", undefined);
-  }, [formValues.conditionalFieldId, setValue]);
+    console.log({});
+  }, [formValues.conditional?.fieldId, setValue]);
 
-  if (existingQuestions?.length === 1) return null;
+  // const needsOptions = typesWithOptions.includes(dependentFieldType || "");
+
+  // const conditionalOptions = useMemo(() => {
+  //   const options = existingQuestions.find(
+  //     (q) => q.id === formValues.conditional?.fieldId
+  //   )?.selectOptions;
+
+  //   console.log({
+  //     asd:
+  //       options?.map((item) => ({
+  //         ...item,
+  //         disabled: formValues?.conditional?.value?.some(
+  //           (v) => v?.text === item.value
+  //         ),
+  //       })) || [],
+  //   });
+  //   if (Array.isArray(formValues?.conditional?.value)) {
+  //     return (
+  //       options?.map((item) => ({
+  //         ...item,
+  //         disabled: formValues?.conditional?.value?.some(
+  //           (v) => v?.text === item.value
+  //         ),
+  //       })) || []
+  //     );
+  //   }
+  //   return options;
+  // }, [existingQuestions, formValues.conditional?.fieldId]);
+
+  if (existingQuestions?.length < 1) return null;
 
   return (
     <div className="p-4 bg-card rounded-lg space-y-4 border">
@@ -78,34 +108,41 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
       />
 
       {formValues?.enableConditional && (
-        <div className="p-4 bg-card rounded-lg space-y-4">
+        <div className="p-4 bg-card rounded-lg space-y-4  flex flex-col gap-4 border justify-center ">
           <SelectInput
             required={formValues?.enableConditional}
-            name="conditionalFieldId"
+            name="conditional.fieldId"
             label="Aparecer somente se a pergunta..."
             options={questionOptionsForSelect}
             placeholder="Selecione uma pergunta"
+            onChange={() => {
+              setValue("conditional.value", "");
+              setValue("conditional.operator", null);
+            }}
+            triggerClassName="max-w-[450px]"
           />
           <SelectInput
-            name="conditionalOperator"
+            name="conditional.operator"
             required={formValues?.enableConditional}
             label="...a condição for..."
             placeholder="Selecione uma condição"
             options={filteredOperationOptions}
+            triggerClassName="max-w-[450px]"
             disabled={!dependentFieldType}
           />
 
-          {formValues?.conditionalOperator === "is_one_of" ? (
+          {formValues?.conditional?.operator === "is_one_of" ? (
             <div className="space-y-2">
               <Label>...um dos seguintes valores:</Label>
               {valueFields.map((field, index) => (
                 <div key={field.id} className="flex items-center gap-2">
                   <TextInput
                     required={formValues?.enableConditional}
-                    name={`conditionalValues.${index}.text`}
+                    name={`conditional.value.${index}.text`}
                     placeholder={`Valor ${index + 1}`}
-                    containerClassName="flex-grow"
+                    containerClassName="flex-grow max-w-[450px]"
                   />
+
                   <Button
                     variant="destructive"
                     size="icon"
@@ -132,8 +169,9 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
               {dependentFieldType === "date" && (
                 <TextInput
                   required={formValues?.enableConditional}
-                  name="conditionalValue"
+                  name="conditional.value"
                   type="date"
+                  containerClassName="flex-grow max-w-[450px] mt-2"
                 />
               )}
               {["text", "select", "radio", "textarea", undefined].includes(
@@ -141,14 +179,16 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
               ) && (
                 <TextInput
                   required={formValues?.enableConditional}
-                  name="conditionalValue"
+                  name="conditional.value"
                   placeholder="Coloque o valor"
+                  containerClassName="flex-grow max-w-[450px] mt-2"
                 />
               )}
               {dependentFieldType === "number" && (
                 <TextInput
+                  containerClassName="flex-grow max-w-[450px] mt-2"
                   required={formValues?.enableConditional}
-                  name="conditionalValue"
+                  name="conditional.value"
                   type="number"
                 />
               )}

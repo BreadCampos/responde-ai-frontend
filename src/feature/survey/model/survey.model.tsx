@@ -56,7 +56,7 @@ export type QuestionConditionOperators =
   | "is_one_of";
 
 export type QuestionConditionOptions = {
-  operator: QuestionConditionOperators;
+  operator: QuestionConditionOperators | null;
   fieldId: string;
   value: string | string[];
 };
@@ -147,9 +147,27 @@ export const operatorMap: Record<
   select_multiple: ["contains", "is_one_of"],
 };
 
+export type SurveyResponsesOverTime = {
+  count: number;
+  date: Date;
+};
+
+export interface NpsData {
+  questionText: string;
+  nps: number;
+  promoters: number;
+  passives: number;
+  detractors: number;
+  totalResponses: number;
+  questionId: string;
+}
+
 export type SurveyModel = {
   id?: string;
   title: string;
   questions: Array<SurveyQuestion>;
   genericLinkSlug?: string;
+  createdAt?: string;
+  responsesOverTime?: SurveyResponsesOverTime[];
+  npsInfo?: NpsData[];
 };

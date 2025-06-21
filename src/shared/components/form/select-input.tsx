@@ -18,6 +18,12 @@ import {
   SelectValue,
 } from "@/shared/components/ui/select";
 import { SelectOption } from "@/shared/types/select-options.type";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@radix-ui/react-tooltip";
 
 export interface SelectInputProps
   extends Omit<
@@ -34,6 +40,7 @@ export interface SelectInputProps
   triggerClassName?: string;
   contentClassName?: string;
   containerClassName?: string;
+  onChange?: (value: string) => void;
 }
 
 export const SelectInput = ({
@@ -48,6 +55,7 @@ export const SelectInput = ({
   disabled,
   triggerClassName,
   contentClassName,
+  onChange,
   containerClassName,
   ...props
 }: SelectInputProps) => {
@@ -77,25 +85,43 @@ export const SelectInput = ({
               {required && <span className="ml-0.5 text-destructive">*</span>}
             </FormLabel>
           )}
+
           <Select
-            onValueChange={field.onChange}
+            onValueChange={(e) => {
+              if (onChange) {
+                onChange(e);
+              }
+              field.onChange(e);
+            }}
             value={field.value}
             defaultValue={field.value}
             disabled={disabled || loading}
             {...props}
           >
-            <FormControl>
-              <SelectTrigger
-                ref={field.ref}
-                className={cn(
-                  "w-full",
-                  triggerClassName,
-                  fieldState.error && "border-destructive"
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <FormControl>
+                    <SelectTrigger
+                      ref={field.ref}
+                      className={cn(
+                        "w-full",
+                        triggerClassName,
+                        fieldState.error && "border-destructive"
+                      )}
+                    >
+                      <SelectValue placeholder={placeholder} />
+                    </SelectTrigger>
+                  </FormControl>
+                </TooltipTrigger>
+                {/* O Tooltip só aparece se houver um texto selecionado */}
+                {field?.value && (
+                  <TooltipContent>
+                    <p>{field?.value.label}</p>
+                  </TooltipContent>
                 )}
-              >
-                <SelectValue placeholder={placeholder} />
-              </SelectTrigger>
-            </FormControl>
+              </Tooltip>
+            </TooltipProvider>
             <SelectContent className={cn(contentClassName)}>
               {loading ? (
                 <div className="flex items-center justify-center p-2 text-sm text-muted-foreground">

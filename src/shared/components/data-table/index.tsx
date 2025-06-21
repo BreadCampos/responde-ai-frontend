@@ -26,9 +26,10 @@ import { Input } from "@/shared/components/ui/input";
 import { useDebounce } from "../../hooks/use-debounce";
 import type { PaginationMeta } from "../../model/pagination.model";
 import { Button } from "../button";
-import { RefreshCcw } from "lucide-react";
+import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { useScreenSize } from "@/shared/hooks/use-screen-size";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -112,6 +113,8 @@ export function DataTable<TData, TValue>({
         search: debouncedSearch,
       });
   }, [debouncedSearch]);
+
+  const { isMobile } = useScreenSize();
 
   return (
     <div className="space-y-4 w-full flex flex-col h-full">
@@ -223,19 +226,20 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-between space-x-2">
+      <div className="flex items-center justify-between space-x-2 flex-wrap gap-2 flex-col-reverse md:flex-row">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} de{" "}
           {table.getFilteredRowModel().rows.length} linha(s) selecionada(s).
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 flex-wrap gap-2 justify-center w-full md:w-fit">
           <Button
             variant="outline"
             size="sm"
             onClick={onPreviusPage}
             disabled={!table.getCanPreviousPage()}
           >
-            Anterior
+            {<ChevronLeft />}
+            {!isMobile && <span>Anterior</span>}
           </Button>
           <span className="text-sm">
             Página {table.getState().pagination.pageIndex + 1} de{" "}
@@ -247,7 +251,8 @@ export function DataTable<TData, TValue>({
             onClick={onNextPage}
             disabled={!table.getCanNextPage()}
           >
-            Próxima
+            {!isMobile && <span>Próxima</span>}
+            <ChevronRight />
           </Button>
         </div>
       </div>

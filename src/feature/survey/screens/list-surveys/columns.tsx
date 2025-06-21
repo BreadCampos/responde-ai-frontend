@@ -1,5 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { SurveyModel } from "../../model/survey.model";
+import { formatDate } from "@/shared/ultils/format-date";
 
 export const columns: ColumnDef<SurveyModel>[] = [
   {
@@ -24,5 +25,16 @@ export const columns: ColumnDef<SurveyModel>[] = [
     size: 250,
     enableResizing: true,
     header: () => <div className="text-left">Link</div>,
+  },
+  {
+    accessorKey: "createdAt",
+    size: 150,
+    enableResizing: true,
+    header: () => <div className="text-left">Criado em</div>,
+    cell: ({ row }) => {
+      return formatDate({
+        date: row.getValue("createdAt"),
+      });
+    },
   },
 ];

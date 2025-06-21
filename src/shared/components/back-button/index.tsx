@@ -1,4 +1,4 @@
-import { MoveLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { Button } from "../button";
 import { cn } from "../../lib/utils";
 import { useRouter } from "next/navigation";
@@ -12,16 +12,35 @@ export const BackButton = ({ children, className }: Props) => {
     navigate.back();
   };
   return (
-    <div className={cn("flex items-center justify-center gap-2", className)}>
+    <div
+      className={cn(
+        "relative flex h-14 w-full items-center justify-center ",
+        "md:h-auto md:w-fit md:justify-start md:gap-1",
+        className
+      )}
+    >
       <Button
         onClick={handleBack}
         variant="ghost"
-        className={"text-card-foreground  flex-shrink-0"}
-        size={"icon"}
+        size="icon"
+        className={cn(
+          "text-card-foreground",
+          "absolute left-2 top-1/2 -translate-y-1/2",
+          "md:static md:translate-y-0"
+        )}
       >
-        <MoveLeft size={24} />
+        <ChevronLeft />
       </Button>
-      {children}
+
+      <div
+        className={cn(
+          "w-full text-center font-semibold",
+          "px-12",
+          "md:w-auto md:text-left md:px-0"
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 };

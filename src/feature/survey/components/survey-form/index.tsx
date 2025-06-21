@@ -30,198 +30,196 @@ export const SurveyForm = () => {
   const [survey, setSurvey] = useState<SurveyModel>({
     title: "Feedback de Produto e Experiência do Usuário",
     questions: [
-      // --- PÁGINA 1: DADOS BÁSICOS ---
-      {
-        id: "3ccd1506-de25-453a-b7ec-8a2b1aa349a5",
-        label: "Primeiro, qual o seu nome?",
-        type: "text",
-        placeholder: "Digite seu nome completo",
-        pageIndex: 1,
-        orderIndex: 0,
-        validations: [
-          {
-            type: "required",
-            errorMessage: "O nome é obrigatório.",
-          },
-          {
-            type: "min_length",
-            options: { value: 3 },
-            errorMessage: "Por favor, insira um nome com pelo menos 3 letras.",
-          },
-        ],
-      },
-      {
-        id: "43abd582-b8b9-4672-94f6-a2ccdc3508cb",
-        label: "E o seu melhor e-mail?",
-        type: "text",
-        placeholder: "exemplo@dominio.com",
-        hint: "Usado apenas para comunicação sobre a pesquisa.",
-        pageIndex: 1,
-        orderIndex: 1,
-        validations: [
-          { type: "required" },
-          {
-            type: "email",
-            errorMessage: "Por favor, insira um formato de e-mail válido.",
-          },
-        ],
-      },
-      {
-        id: "89f7e8b7-3f3c-4cc3-b56b-aa45091fcff3",
-        label:
-          "Você aceita receber um contato por telefone para falarmos sobre sua experiência?",
-        type: "radio",
-        pageIndex: 1,
-        orderIndex: 2,
-        selectOptions: [
-          { label: "Sim, aceito", value: "yes" },
-          {
-            label: "Não, prefiro não ser contatado",
-            value: "no",
-          },
-        ],
-        validations: [{ type: "required" }],
-      },
-      {
-        id: "feefe4e7-f64b-42dc-9d8a-9453051a0ee5",
-        label: "Ótimo! Qual o seu telefone com DDD?",
-        type: "text",
-        placeholder: "(00) 00000-0000",
-        pageIndex: 1,
-        orderIndex: 3,
-        mask: ["(00) 0000-0000", "(00) 00000-0000"],
-        validations: [
-          {
-            type: "required",
-            errorMessage:
-              "Estou com problema de input com mask, coloque 'não' na anterior",
-          },
-        ],
-        conditional: {
-          fieldId: "89f7e8b7-3f3c-4cc3-b56b-aa45091fcff3",
-          operator: "equals",
-          value: "yes",
-        },
-      },
-
-      // --- PÁGINA 2: USO DO PRODUTO ---
-      {
-        id: "85be1757-8a5b-4ba7-ba0c-839ea48af757",
-        label: "Qual de nossos produtos você mais utiliza?",
-        type: "select",
-        placeholder: "Selecione o produto principal",
-        pageIndex: 2,
-        orderIndex: 0,
-        validations: [{ type: "required" }],
-        selectOptions: [
-          { label: "Produto Alpha", value: "alpha" },
-          { label: "Produto Beta", value: "beta" },
-          { label: "Produto Gamma", value: "gamma" },
-        ],
-      },
-      {
-        id: "d5b752ee-1d48-41e7-adad-dd614cef1dfc",
-        label:
-          "Numa escala de 1 a 5, como você avalia a facilidade de uso do produto?",
-        type: "rating",
-        pageIndex: 2,
-        orderIndex: 1,
-        validations: [{ type: "required" }],
-        ratingOptions: {
-          min: 1,
-          max: 5,
-          style: "stars",
-        },
-      },
-      {
-        id: "436b8053-5c75-4067-ba83-71a638fd6a76",
-        label: "Quais destas funcionalidades você já utilizou?",
-        type: "checkbox_group",
-        hint: "Marque todas as opções aplicáveis.",
-        pageIndex: 2,
-        orderIndex: 2,
-        validations: [
-          {
-            type: "required",
-            errorMessage: "Por favor, selecione ao menos uma opção.",
-          },
-        ],
-        selectOptions: [
-          {
-            label: "Dashboard de Análises",
-            value: "dashboard",
-          },
-          {
-            label: "Relatórios Customizados",
-            value: "reports",
-          },
-          {
-            label: "Suporte via Chat",
-            value: "chat_support",
-          },
-        ],
-      },
-      {
-        id: "053bcd41-b3bf-4e47-a6bc-143d9f36ed50",
-        label: "Quando você começou a usar nosso produto?",
-        type: "date",
-        hint: "Pode ser uma data aproximada.",
-        pageIndex: 2,
-        orderIndex: 3,
-        validations: [
-          {
-            type: "max",
-            options: { value: new Date().toISOString().split("T")[0] }, // Define a data máxima como hoje
-            errorMessage: "A data não pode ser no futuro.",
-          },
-        ],
-      },
-
-      // --- PÁGINA 3: FEEDBACK DETALHADO ---
-      {
-        id: "19e9bd23-a1ce-4d55-a41a-18592bbc722c",
-        label:
-          "De 0 a 10, o quão provável você é de nos recomendar a um amigo ou colega?",
-        type: "rating",
-        hint: "0 = Nada provável, 10 = Com certeza!",
-        pageIndex: 3,
-        orderIndex: 0,
-        validations: [{ type: "required" }],
-        ratingOptions: {
-          min: 0,
-          max: 10,
-          style: "slider",
-        },
-      },
-      {
-        id: "4b512b66-4a04-44d2-8597-a16245e83f05",
-        label: "Ficamos felizes com a sua nota! O que mais te agradou?",
-        type: "textarea",
-        placeholder: "Nos conte o que te fez dar essa nota...",
-        pageIndex: 3,
-        orderIndex: 1,
-        conditional: {
-          fieldId: "b00b06c5-96d3-455b-9d31-80aa6aa42a68",
-          operator: "greater_than_equal",
-          value: "9",
-        },
-        validations: [{ type: "required" }],
-      },
-      {
-        id: "3040a020-c389-4b4f-8277-c9d9e9eea0b6",
-        label:
-          "Lamentamos por não atender suas expectativas. O que podemos fazer para melhorar?",
-        type: "textarea",
-        placeholder: "Seu feedback é muito importante para nós...",
-        pageIndex: 3,
-        orderIndex: 2,
-        conditional: {
-          fieldId: "14611a6b-df35-427b-9b8c-e42cc6ee1277",
-          operator: "less_than_equal",
-          value: "6",
-        },
-        validations: [{ type: "required" }],
-      },
+      // // --- PÁGINA 1: DADOS BÁSICOS ---
+      // {
+      //   id: "3ccd1506-de25-453a-b7ec-8a2b1aa349a5",
+      //   label: "Primeiro, qual o seu nome?",
+      //   type: "text",
+      //   placeholder: "Digite seu nome completo",
+      //   pageIndex: 1,
+      //   orderIndex: 0,
+      //   validations: [
+      //     {
+      //       type: "required",
+      //       errorMessage: "O nome é obrigatório.",
+      //     },
+      //     {
+      //       type: "min_length",
+      //       options: { value: 3 },
+      //       errorMessage: "Por favor, insira um nome com pelo menos 3 letras.",
+      //     },
+      //   ],
+      // },
+      // {
+      //   id: "43abd582-b8b9-4672-94f6-a2ccdc3508cb",
+      //   label: "E o seu melhor e-mail?",
+      //   type: "text",
+      //   placeholder: "exemplo@dominio.com",
+      //   hint: "Usado apenas para comunicação sobre a pesquisa.",
+      //   pageIndex: 1,
+      //   orderIndex: 1,
+      //   validations: [
+      //     { type: "required" },
+      //     {
+      //       type: "email",
+      //       errorMessage: "Por favor, insira um formato de e-mail válido.",
+      //     },
+      //   ],
+      // },
+      // {
+      //   id: "89f7e8b7-3f3c-4cc3-b56b-aa45091fcff3",
+      //   label:
+      //     "Você aceita receber um contato por telefone para falarmos sobre sua experiência?",
+      //   type: "radio",
+      //   pageIndex: 1,
+      //   orderIndex: 2,
+      //   selectOptions: [
+      //     { label: "Sim, aceito", value: "yes" },
+      //     {
+      //       label: "Não, prefiro não ser contatado",
+      //       value: "no",
+      //     },
+      //   ],
+      //   validations: [{ type: "required" }],
+      // },
+      // {
+      //   id: "feefe4e7-f64b-42dc-9d8a-9453051a0ee5",
+      //   label: "Ótimo! Qual o seu telefone com DDD?",
+      //   type: "text",
+      //   placeholder: "(00) 00000-0000",
+      //   pageIndex: 1,
+      //   orderIndex: 3,
+      //   mask: ["(00) 0000-0000", "(00) 00000-0000"],
+      //   validations: [
+      //     {
+      //       type: "required",
+      //       errorMessage:
+      //         "Estou com problema de input com mask, coloque 'não' na anterior",
+      //     },
+      //   ],
+      //   conditional: {
+      //     fieldId: "89f7e8b7-3f3c-4cc3-b56b-aa45091fcff3",
+      //     operator: "equals",
+      //     value: "yes",
+      //   },
+      // },
+      // // --- PÁGINA 2: USO DO PRODUTO ---
+      // {
+      //   id: "85be1757-8a5b-4ba7-ba0c-839ea48af757",
+      //   label: "Qual de nossos produtos você mais utiliza?",
+      //   type: "select",
+      //   placeholder: "Selecione o produto principal",
+      //   pageIndex: 2,
+      //   orderIndex: 0,
+      //   validations: [{ type: "required" }],
+      //   selectOptions: [
+      //     { label: "Produto Alpha", value: "alpha" },
+      //     { label: "Produto Beta", value: "beta" },
+      //     { label: "Produto Gamma", value: "gamma" },
+      //   ],
+      // },
+      // {
+      //   id: "d5b752ee-1d48-41e7-adad-dd614cef1dfc",
+      //   label:
+      //     "Numa escala de 1 a 5, como você avalia a facilidade de uso do produto?",
+      //   type: "rating",
+      //   pageIndex: 2,
+      //   orderIndex: 1,
+      //   validations: [{ type: "required" }],
+      //   ratingOptions: {
+      //     min: 1,
+      //     max: 5,
+      //     style: "stars",
+      //   },
+      // },
+      // {
+      //   id: "436b8053-5c75-4067-ba83-71a638fd6a76",
+      //   label: "Quais destas funcionalidades você já utilizou?",
+      //   type: "checkbox_group",
+      //   hint: "Marque todas as opções aplicáveis.",
+      //   pageIndex: 2,
+      //   orderIndex: 2,
+      //   validations: [
+      //     {
+      //       type: "required",
+      //       errorMessage: "Por favor, selecione ao menos uma opção.",
+      //     },
+      //   ],
+      //   selectOptions: [
+      //     {
+      //       label: "Dashboard de Análises",
+      //       value: "dashboard",
+      //     },
+      //     {
+      //       label: "Relatórios Customizados",
+      //       value: "reports",
+      //     },
+      //     {
+      //       label: "Suporte via Chat",
+      //       value: "chat_support",
+      //     },
+      //   ],
+      // },
+      // {
+      //   id: "053bcd41-b3bf-4e47-a6bc-143d9f36ed50",
+      //   label: "Quando você começou a usar nosso produto?",
+      //   type: "date",
+      //   hint: "Pode ser uma data aproximada.",
+      //   pageIndex: 2,
+      //   orderIndex: 3,
+      //   validations: [
+      //     {
+      //       type: "max",
+      //       options: { value: new Date().toISOString().split("T")[0] }, // Define a data máxima como hoje
+      //       errorMessage: "A data não pode ser no futuro.",
+      //     },
+      //   ],
+      // },
+      // // --- PÁGINA 3: FEEDBACK DETALHADO ---
+      // {
+      //   id: "19e9bd23-a1ce-4d55-a41a-18592bbc722c",
+      //   label:
+      //     "De 0 a 10, o quão provável você é de nos recomendar a um amigo ou colega?",
+      //   type: "rating",
+      //   hint: "0 = Nada provável, 10 = Com certeza!",
+      //   pageIndex: 3,
+      //   orderIndex: 0,
+      //   validations: [{ type: "required" }],
+      //   ratingOptions: {
+      //     min: 0,
+      //     max: 10,
+      //     style: "slider",
+      //   },
+      // },
+      // {
+      //   id: "4b512b66-4a04-44d2-8597-a16245e83f05",
+      //   label: "Ficamos felizes com a sua nota! O que mais te agradou?",
+      //   type: "textarea",
+      //   placeholder: "Nos conte o que te fez dar essa nota...",
+      //   pageIndex: 3,
+      //   orderIndex: 1,
+      //   conditional: {
+      //     fieldId: "19e9bd23-a1ce-4d55-a41a-18592bbc722c",
+      //     operator: "greater_than_equal",
+      //     value: "9",
+      //   },
+      //   validations: [{ type: "required" }],
+      // },
+      // {
+      //   id: "3040a020-c389-4b4f-8277-c9d9e9eea0b6",
+      //   label:
+      //     "Lamentamos por não atender suas expectativas. O que podemos fazer para melhorar?",
+      //   type: "textarea",
+      //   placeholder: "Seu feedback é muito importante para nós...",
+      //   pageIndex: 3,
+      //   orderIndex: 2,
+      //   conditional: {
+      //     fieldId: "3040a020-c389-4b4f-8277-c9d9e9eea0b6",
+      //     operator: "less_than_equal",
+      //     value: "6",
+      //   },
+      //   validations: [{ type: "required" }],
+      // },
     ],
   });
 
@@ -292,6 +290,7 @@ export const SurveyForm = () => {
   };
 
   const handleOpenToEdit = (question: SurveyQuestion) => {
+    console.log({ question });
     setQuestionToEdit(question);
     toggleModal();
   };
@@ -390,10 +389,13 @@ export const SurveyForm = () => {
 
   const { company } = useAuthStore();
   const surveyMutation = CreateSurveyMutation();
+
   const onCreateSurvey = () => {
     if (!company?.id) {
       return;
     }
+
+    console.log(survey);
     surveyMutation.mutate({
       companyId: company?.id,
       survey,
@@ -410,12 +412,12 @@ export const SurveyForm = () => {
   return (
     <Form {...methods}>
       <div className="flex flex-col items-center justify-center p-2 ">
-        <div className="mb-4 text-left flex justify-between items-center w-full">
-          <BackButton>
+        <div className="mb-5 w-full flex flex-col md:flex-row md:justify-between items-center gap-3">
+          <BackButton className="mb-2 md:mb-0">
             <EditableTitle
               initialTitle={survey.title}
               onSave={handleTitleChange}
-              className="text-2xl font-bold text-card-foreground"
+              className="text-xl font-bold text-card-foreground"
             />
           </BackButton>
           <Button
@@ -427,17 +429,12 @@ export const SurveyForm = () => {
           </Button>
         </div>
 
-        {survey.questions?.length === 0 && (
-          <p className="text-gray-500 text-center py-8">
-            Adicione uma pergunta para começar.
-          </p>
-        )}
-        <div className="w-full max-w-[90%] flex gap-4 items-center justify-center">
+        <div className="w-full flex flex-col md:flex-row md:max-w-[90%]  gap-4 items-center justify-center ">
           <DndContext
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
           >
-            <div className="w-full max-w-[600px] flex-1 min-h-[500px]  h-[calc(100vh-150px)]  overflow-y-auto flex flex-col gap-4 border p-4 rounded-lg bg-card shadow-md">
+            <div className="w-full max-w-[600px] flex-1 min-h-[500px]  h-[calc(100vh-160px)]  overflow-y-auto flex flex-col gap-4 border p-4 rounded-lg bg-card shadow-md">
               <div className="flex items-center justify-between mb-4">
                 {" "}
                 <h4 className="text-card-foreground text-xl">Perguntas</h4>
@@ -445,6 +442,11 @@ export const SurveyForm = () => {
                   Adicionar <Plus className="ml-1 h-5 w-5" />
                 </Button>
               </div>
+              {survey.questions?.length === 0 && (
+                <p className="text-gray-500 text-center py-8">
+                  Adicione uma pergunta para começar.
+                </p>
+              )}
               {Object.entries(groupedQuestions).map(
                 ([pageIndex, questionsInPage]) => (
                   <div
@@ -477,7 +479,7 @@ export const SurveyForm = () => {
             </div>
           </DndContext>
           {survey?.questions && (
-            <div className="w-full max-w-[600px] flex-1 h-[calc(100vh-150px)]">
+            <div className="w-full max-w-[600px] flex-1 h-[calc(100vh-160px)]">
               <QuestionsForm
                 questions={survey?.questions}
                 onSubmit={onPreviewSubmit}
@@ -491,7 +493,7 @@ export const SurveyForm = () => {
         onClose={toggleModal}
         onAddQuestion={addNewQuestion}
         onUpdateQuestion={updateQuestion}
-        existingQuestions={survey.questions}
+        existingQuestions={survey.questions || []}
         questionToEdit={questionToEdit}
       />
     </Form>

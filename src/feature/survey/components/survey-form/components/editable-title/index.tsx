@@ -67,7 +67,7 @@ export const EditableTitle = ({
     <h1
       onClick={() => setIsEditing(true)}
       className={cn(
-        "p-2 -m-2 cursor-pointer hover:bg-muted/50 rounded-lg transition-colors",
+        "p-2 text-md cursor-pointer hover:bg-muted/50 rounded-lg transition-colors",
         className
       )}
       title="Clique para editar o título"

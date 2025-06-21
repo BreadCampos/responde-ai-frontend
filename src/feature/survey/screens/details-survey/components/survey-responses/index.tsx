@@ -2,6 +2,7 @@ import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { GetSurveyResponses } from "@/feature/survey/service/get-survey-responses";
 import { DataTable } from "@/shared/components/data-table";
 import {
+  Card,
   CardContent,
   CardDescription,
   CardHeader,
@@ -16,8 +17,10 @@ interface Props {
 
 export const SurveyResponses = ({ surveyId }: Props) => {
   const { company } = useAuthStore();
-  const { pagination, fetchTable } = usePagination();
-  const { data, refetch } = GetSurveyResponses({
+  const { pagination, fetchTable } = usePagination({
+    limit: 5,
+  });
+  const { data, isFetching, refetch } = GetSurveyResponses({
     companyId: company?.id,
     surveyId,
     pagination,
@@ -40,7 +43,7 @@ export const SurveyResponses = ({ surveyId }: Props) => {
     });
   };
   return (
-    <>
+    <Card>
       <CardHeader>
         <CardTitle>Todas as Respostas</CardTitle>
         <CardDescription>
@@ -51,10 +54,11 @@ export const SurveyResponses = ({ surveyId }: Props) => {
         <DataTable
           columns={responseColumns}
           onFetchData={fetch}
+          loading={isFetching}
           data={data?.data || []}
-          pagination={pagination}
+          pagination={data?.meta}
         />
       </CardContent>
-    </>
+    </Card>
   );
 };

@@ -44,7 +44,7 @@ export const ListSurveys = () => {
 
   return (
     <div className="flex h-full flex-col gap-2 p-2 md:p-4">
-      <div className="mb-2 w-full flex justify-between items-center ">
+      <div className="mb-2 w-full flex flex-col md:flex-row md:justify-between items-center">
         <h1 className="text-2xl text-card-foreground font-bold mb-4">
           Questionários
         </h1>

@@ -75,7 +75,7 @@ export const SurveyPreviewDrawer = ({ survey }: Props) => {
                 questions={survey.questions}
                 title={survey?.title || "Preview"}
                 onSubmit={onPreviewSubmit}
-                className="m-2"
+                className="m-2 mb-5  h-[calc(100vh-190px)]"
               />
             )}
           </Form>

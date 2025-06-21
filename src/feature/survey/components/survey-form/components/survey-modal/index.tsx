@@ -11,6 +11,7 @@ import type {
   SurveyQuestion,
   QuestionValidators,
   SurveyQuestionInputType,
+  QuestionConditionOptions,
 } from "@/feature/survey/model/survey.model";
 import {
   ControlledOptions,
@@ -36,15 +37,15 @@ export interface IForm {
   mask?: string;
   selectOptions: SelectOption[];
   enableConditional: boolean;
-  conditionalFieldId?: string;
-  conditionalValue?: string;
-  conditionalOperator?:
-    | "equals"
-    | "not_equals"
-    | "greater_than"
-    | "less_than"
-    | "contains"
-    | "is_one_of";
+  // conditionalFieldId?: string;
+  // conditionalValue?: string;
+  // conditionalOperator?:
+  //   | "equals"
+  //   | "not_equals"
+  //   | "greater_than"
+  //   | "less_than"
+  //   | "contains"
+  //   | "is_one_of";
   conditionalValues?: {
     text: string;
   }[];
@@ -57,6 +58,7 @@ export interface IForm {
     maxLabel?: string;
     style: "stars" | "slider" | "nps";
   };
+  conditional?: QuestionConditionOptions;
 }
 export const ServeyModal = ({
   onAddQuestion,
@@ -116,20 +118,23 @@ export const ServeyModal = ({
 
     if (
       data.enableConditional &&
-      data.conditionalFieldId &&
-      data.conditionalOperator
+      data?.conditional?.fieldId &&
+      data?.conditional.operator
     ) {
-      if (data.conditionalOperator === "is_one_of" && data.conditionalValues) {
+      if (
+        data?.conditional.operator === "is_one_of" &&
+        data.conditionalValues
+      ) {
         transformedQuestionData.conditional = {
-          fieldId: data.conditionalFieldId,
+          fieldId: data?.conditional.fieldId,
           operator: "is_one_of",
           value: data.conditionalValues.map((item) => item.text),
         };
-      } else if (data.conditionalValue != null) {
+      } else if (data?.conditional.value != null) {
         transformedQuestionData.conditional = {
-          fieldId: data.conditionalFieldId,
-          operator: data.conditionalOperator,
-          value: data.conditionalValue,
+          fieldId: data?.conditional.fieldId,
+          operator: data?.conditional.operator,
+          value: data?.conditional.value,
         };
       }
     }
@@ -163,17 +168,16 @@ export const ServeyModal = ({
   ];
 
   useEffect(() => {
-    methods.setValue("validations", []);
-  }, [formValues.type, methods]);
-
-  useEffect(() => {
+    console.log({ questionToEdit });
     if (isOpen) {
+      console.log(questionToEdit?.conditional);
       if (questionToEdit) {
         const editionValues = {
           ...questionToEdit,
           mask: Array.isArray(questionToEdit.mask)
             ? questionToEdit.mask.join(",")
             : undefined,
+          enableConditional: !!questionToEdit.conditional,
         };
         reset(editionValues);
       } else {
@@ -205,7 +209,7 @@ export const ServeyModal = ({
           className=""
         >
           <div className="flex flex-col w-[600px] gap-4 max-w-full">
-            <div className="flex-1 space-y-4  overflow-y-auto max-h-[50vh] px-5">
+            <div className="flex-1 space-y-4  overflow-y-auto max-h-[50vh] p-1 md:px-5 ">
               <h3 className="text-lg font-semibold mb-2 text-accent-foreground">
                 Especificação
               </h3>
@@ -220,6 +224,15 @@ export const ServeyModal = ({
                   name={"type"}
                   label={"Tipo de questão"}
                   options={typeOptions}
+                  onChange={() => {
+                    if (formValues.validations) {
+                      methods.setValue("validations", []);
+                    }
+                    if (formValues.conditional) {
+                      methods.setValue("conditional", undefined);
+                      methods.setValue("enableConditional", false);
+                    }
+                  }}
                 />
                 <TextInput name={"placeholder"} label={"Placeholder"} />
                 <TextInput name={"hint"} label={"Dica"} />

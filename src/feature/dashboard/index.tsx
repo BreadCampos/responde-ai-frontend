@@ -1,10 +1,16 @@
 "use client";
+import { ROUTES } from "@/core/routes/route-constants";
 import { Button } from "@/shared/components/button";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { toast } from "sonner";
 
 export const Dashboard = () => {
   const navigate = useRouter();
+
+  useEffect(() => {
+    navigate.push(ROUTES.SURVEY_LIST);
+  });
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
