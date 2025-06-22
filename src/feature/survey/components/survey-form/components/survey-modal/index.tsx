@@ -119,7 +119,8 @@ export const ServeyModal = ({
     if (
       data.enableConditional &&
       data?.conditional?.fieldId &&
-      data?.conditional.operator
+      data?.conditional.operator &&
+      data.conditionalValues
     ) {
       if (
         data?.conditional.operator === "is_one_of" &&
@@ -172,12 +173,19 @@ export const ServeyModal = ({
     if (isOpen) {
       console.log(questionToEdit?.conditional);
       if (questionToEdit) {
+        const value = questionToEdit.conditional?.value;
+        const conditionalValues = Array.isArray(value)
+          ? value.map((v) => ({ text: v }))
+          : typeof value === "string"
+          ? [{ text: value }]
+          : undefined;
         const editionValues = {
           ...questionToEdit,
           mask: Array.isArray(questionToEdit.mask)
             ? questionToEdit.mask.join(",")
             : undefined,
           enableConditional: !!questionToEdit.conditional,
+          conditionalValues,
         };
         reset(editionValues);
       } else {

@@ -58,7 +58,7 @@ export type QuestionConditionOperators =
 export type QuestionConditionOptions = {
   operator: QuestionConditionOperators | null;
   fieldId: string;
-  value: string | string[];
+  value: string | string[] | undefined;
 };
 
 export type SurveyQuestion = {
