@@ -95,12 +95,17 @@ export function isValidCNPJ(cnpj: string | null | undefined): boolean {
 
 export const getValidationRules = (
   validations: Array<QuestionValidators>
-): RegisterOptions => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): { rules: RegisterOptions; inputProps: Record<string, any> } => {
+  // <--- MUDANÇA AQUI
+
   if (!validations || validations.length === 0) {
-    return {};
+    return { rules: {}, inputProps: {} }; // <--- MUDANÇA AQUI
   }
 
   const rules: RegisterOptions = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const inputProps: Record<string, any> = {};
 
   for (const validator of validations) {
     switch (validator.type) {
@@ -114,6 +119,8 @@ export const getValidationRules = (
             validator.errorMessage ||
             `O tamanho mínimo é ${validator.options?.value}`,
         };
+        inputProps.min = validator.options?.value;
+
         break;
       case "max_length":
         rules.maxLength = {
@@ -122,6 +129,8 @@ export const getValidationRules = (
             validator.errorMessage ||
             `O tamanho máximo é ${validator.options?.value}`,
         };
+        inputProps.max = validator.options?.value;
+
         break;
       case "min":
         rules.min = {
@@ -165,5 +174,5 @@ export const getValidationRules = (
     }
   }
 
-  return rules;
+  return { rules, inputProps };
 };

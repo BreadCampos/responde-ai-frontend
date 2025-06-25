@@ -17,6 +17,7 @@ interface ValidationRuleRowProps {
   control: any;
   validationOptions: SelectOption[];
   remove: (index: number) => void;
+  questionType: SurveyQuestionInputType; // NOVO: Prop para receber o tipo da pergunta
 }
 
 const ValidationRuleRow = ({
@@ -24,19 +25,47 @@ const ValidationRuleRow = ({
   control,
   validationOptions,
   remove,
+  questionType,
 }: ValidationRuleRowProps) => {
   const selectedType = useWatch({
     control,
     name: `validations.${index}.type`,
   }) as QuestionValidatorsType;
 
-  const validationHasValue = (type: QuestionValidatorsType) => {
-    return ["min", "max", "min_length", "max_length", "custom"].includes(type);
-  };
+  const valueInputType = useMemo(() => {
+    const rulesThatNeedValue = [
+      "min",
+      "max",
+      "min_length",
+      "max_length",
+      "custom",
+    ];
+    if (!rulesThatNeedValue.includes(selectedType)) {
+      return null;
+    }
 
-  const showInputNumber = useMemo(() => {
-    return validationHasValue(selectedType);
-  }, [selectedType]);
+    // Se a pergunta principal for do tipo 'date' e a regra for 'min' ou 'max'...
+    if (questionType === "date" && ["min", "max"].includes(selectedType)) {
+      // ... o input deve ser do tipo 'date'.
+      return "date";
+    }
+
+    // Se a regra for sobre tamanho/valor numérico...
+    if (["min", "max", "min_length", "max_length"].includes(selectedType)) {
+      // ... o input deve ser do tipo 'number'.
+      return "number";
+    }
+
+    // Se a regra for 'custom' (regex)...
+    if (selectedType === "custom") {
+      // ... o input deve ser do tipo 'text'.
+      return "text";
+    }
+
+    // Caso padrão, não mostra input.
+    return null;
+  }, [questionType, selectedType]);
+
   return (
     <div className="flex items-center gap-2 p-2 border rounded-lg">
       <div className="flex flex-col items-center gap-2 w-full">
@@ -46,16 +75,25 @@ const ValidationRuleRow = ({
           placeholder="Selecione uma regra"
           containerClassName="w-full flex-1"
         />
-        {selectedType && showInputNumber && (
+        {valueInputType === "date" && (
           <TextInput
             name={`validations.${index}.options.value`}
-            placeholder={selectedType === "custom" ? "Regex" : "Valor"}
-            containerClassName="flex-1"
-            type={
-              ["min", "max", "min_length", "max_length"].includes(selectedType)
-                ? "number"
-                : "text"
-            }
+            type="date"
+            placeholder="Selecione a data"
+          />
+        )}
+        {valueInputType === "number" && (
+          <TextInput
+            name={`validations.${index}.options.value`}
+            type="number"
+            placeholder="Valor"
+          />
+        )}
+        {valueInputType === "text" && (
+          <TextInput
+            name={`validations.${index}.options.value`}
+            type="text"
+            placeholder="Regex"
           />
         )}
         <TextInput
@@ -109,6 +147,7 @@ export const ValidationRules = () => {
           control={control}
           validationOptions={validationOptions}
           remove={remove}
+          questionType={questionType}
         />
       ))}
       <Button

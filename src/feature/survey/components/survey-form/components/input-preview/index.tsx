@@ -21,8 +21,9 @@ interface Props {
 }
 
 export const InputPreview = ({ question }: Props) => {
-  const rules: Record<string, any> = getValidationRules(question.validations);
+  const { rules, inputProps } = getValidationRules(question.validations);
 
+  console.log(inputProps);
   const renderInput = (name: any, rules: any) => {
     switch (question.type) {
       case "text":
@@ -34,6 +35,7 @@ export const InputPreview = ({ question }: Props) => {
               label={question?.label}
               rules={rules}
               mask={question.mask}
+              {...inputProps}
             />
           );
         }
@@ -44,6 +46,7 @@ export const InputPreview = ({ question }: Props) => {
             label={question?.label}
             rules={rules}
             type={question.type}
+            {...inputProps}
           />
         );
       case "textarea":
@@ -58,6 +61,7 @@ export const InputPreview = ({ question }: Props) => {
             type="number"
             label={question?.label}
             rules={rules}
+            {...inputProps}
           />
         );
       case "select":
@@ -78,6 +82,7 @@ export const InputPreview = ({ question }: Props) => {
             label={question?.label}
             rules={rules}
             type="date"
+            {...inputProps}
           />
         );
       case "checkbox":
@@ -127,6 +132,7 @@ export const InputPreview = ({ question }: Props) => {
             options={question.selectOptions || []}
             rules={rules}
             placeholder="Selecione uma ou mais opções"
+            {...inputProps}
           />
         );
       default:
@@ -134,6 +140,7 @@ export const InputPreview = ({ question }: Props) => {
     }
   };
 
+  console.log("rules", rules);
   return (
     <div>
       {renderInput(question.id, rules)}

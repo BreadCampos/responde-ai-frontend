@@ -116,6 +116,7 @@ export const ServeyModal = ({
         .map((v) => v as QuestionValidators),
     };
 
+    console.log(data.validations, transformedQuestionData.validations);
     if (
       data.enableConditional &&
       data?.conditional?.fieldId &&
