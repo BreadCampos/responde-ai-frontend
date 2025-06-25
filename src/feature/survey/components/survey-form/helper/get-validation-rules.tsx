@@ -129,7 +129,7 @@ export const getValidationRules = (
             validator.errorMessage ||
             `O tamanho máximo é ${validator.options?.value}`,
         };
-        inputProps.max = validator.options?.value;
+        inputProps.maxLength = validator.options?.value;
 
         break;
       case "min":
@@ -139,6 +139,8 @@ export const getValidationRules = (
             validator.errorMessage ||
             `O valor mínimo é ${validator.options?.value}`,
         };
+        inputProps.min = validator.options?.value;
+
         break;
       case "max":
         rules.max = {
@@ -147,7 +149,9 @@ export const getValidationRules = (
             validator.errorMessage ||
             `O valor máximo é ${validator.options?.value}`,
         };
+        inputProps.max = validator.options?.value;
         break;
+
       case "email":
         rules.pattern = {
           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
