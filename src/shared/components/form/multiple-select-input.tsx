@@ -16,6 +16,7 @@ export interface SelectMultipleInputProps {
   options: SelectOption[];
   placeholder?: string;
   required?: boolean;
+  disabled?: boolean;
   rules?: Omit<RegisterOptions, "valueAsNumber" | "valueAsDate" | "setValueAs">;
 }
 
@@ -25,6 +26,7 @@ export const SelectMultipleInput = ({
   options,
   placeholder,
   required,
+  disabled,
   rules,
 }: SelectMultipleInputProps) => {
   const { control } = useFormContext();
@@ -42,6 +44,7 @@ export const SelectMultipleInput = ({
       name={name}
       defaultValue={[]}
       rules={validationRules}
+      disabled={disabled}
       render={({ field, fieldState }) => (
         <FormItem className={cn("w-full text-card-foreground")}>
           {label && (
@@ -57,6 +60,7 @@ export const SelectMultipleInput = ({
               options={options}
               value={field.value}
               onValueChange={field.onChange}
+              disabled={field.disabled}
             />
           </FormControl>
           <FormMessage />

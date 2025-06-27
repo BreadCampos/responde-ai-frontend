@@ -58,7 +58,7 @@ export type QuestionConditionOperators =
 export type QuestionConditionOptions = {
   operator: QuestionConditionOperators | null;
   fieldId: string;
-  value: string | string[] | undefined;
+  value: string | string[] | undefined | boolean;
 };
 
 export type SurveyQuestion = {
@@ -75,6 +75,18 @@ export type SurveyQuestion = {
   selectOptions?: Array<SelectOption>;
   ratingOptions?: RatingOptions;
   conditional?: QuestionConditionOptions;
+};
+
+export const validationLabelMap: Record<string, string> = {
+  required: "Obrigatório",
+  email: "E-mail válido",
+  min_length: "Tamanho mínimo (caracteres)",
+  max_length: "Tamanho máximo (caracteres)",
+  cnpj: "CNPJ válido",
+  cpf: "CPF válido",
+  min: "Valor mínimo",
+  max: "Valor máximo",
+  custom: "Regra personalizada",
 };
 
 export const validationMap: Record<

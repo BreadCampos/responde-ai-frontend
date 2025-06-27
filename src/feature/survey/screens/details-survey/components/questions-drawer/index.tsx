@@ -72,6 +72,7 @@ export const SurveyPreviewDrawer = ({ survey }: Props) => {
           <Form {...form}>
             {survey && (
               <QuestionsForm
+                isPreview
                 questions={survey.questions}
                 title={survey?.title || "Preview"}
                 onSubmit={onPreviewSubmit}

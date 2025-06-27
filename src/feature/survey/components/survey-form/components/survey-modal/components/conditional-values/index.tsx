@@ -9,7 +9,7 @@ import { Label } from "@/shared/components/ui/label";
 import type { IForm } from "../../index";
 import { XIcon } from "lucide-react";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import {
   operatorMap,
   type QuestionConditionOperators,
@@ -80,13 +80,6 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
       allowedOperators.includes(opt.value as QuestionConditionOperators)
     );
   }, [allOperationOptions, dependentFieldType]);
-
-  useEffect(() => {
-    console.log({
-      oi: formValues.conditional,
-      OI: formValues.conditionalValues,
-    });
-  }, [formValues.conditional?.fieldId, setValue]);
 
   const shouldShowSelect = useMemo(
     () => typesWithOptions.includes(dependentFieldType || ""),

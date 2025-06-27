@@ -21,24 +21,20 @@ export const shouldShowQuestion = (
   const { fieldId, operator, value: requiredValue } = question.conditional;
   const dependentFieldValue = formValues[fieldId];
 
-  if (dependentFieldValue === undefined || dependentFieldValue === null) {
-    if (
-      operator === "not_equals" &&
-      requiredValue !== null &&
-      requiredValue !== undefined
-    ) {
-      return true;
-    }
-    return false;
-  }
-
   switch (operator) {
     case "equals":
       return dependentFieldValue == requiredValue;
 
     case "not_equals":
+      if (requiredValue === "") {
+        console.log({ dependentFieldValue });
+        return (
+          dependentFieldValue !== undefined &&
+          dependentFieldValue !== null &&
+          dependentFieldValue !== ""
+        );
+      }
       return dependentFieldValue != requiredValue;
-
     case "contains":
       return String(dependentFieldValue)
         .toLowerCase()

@@ -19,6 +19,7 @@ export interface CheckboxGroupInputProps {
   required?: boolean;
   rules?: Omit<RegisterOptions, "valueAsNumber" | "valueAsDate" | "setValueAs">;
   containerClassName?: string;
+  disabled?: boolean;
 }
 
 export const CheckboxGroupInput = ({
@@ -29,6 +30,7 @@ export const CheckboxGroupInput = ({
   required,
   rules,
   containerClassName,
+  disabled,
 }: CheckboxGroupInputProps) => {
   const { control } = useFormContext();
 
@@ -45,6 +47,7 @@ export const CheckboxGroupInput = ({
       control={control}
       name={name}
       rules={validationRules}
+      disabled={disabled}
       render={() => (
         <FormItem
           className={cn("space-y-3 text-card-foreground", containerClassName)}
@@ -79,6 +82,7 @@ export const CheckboxGroupInput = ({
                   >
                     <FormControl>
                       <Checkbox
+                        disabled={disabled}
                         checked={field.value?.includes(option.value)}
                         onCheckedChange={(checked) => {
                           const currentValues = Array.isArray(field.value)

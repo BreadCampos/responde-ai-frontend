@@ -14,6 +14,7 @@ interface Props {
   title?: string;
   className?: string;
   logoUrl?: string;
+  isPreview?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit?: (data: any) => void;
 }
@@ -22,6 +23,7 @@ export const QuestionsForm = ({
   title = "Preview",
   className,
   logoUrl,
+  isPreview,
   onSubmit,
 }: Props) => {
   const { trigger, getValues, handleSubmit, formState, watch } =
@@ -101,8 +103,33 @@ export const QuestionsForm = ({
           )}
         </div>
         <div className="flex flex-col gap-4 bg-background p-4 rounded-lg">
-          {questionsOnCurrentPage.map((q) => {
-            if (verifyShowQuestion(q)) {
+          {questionsOnCurrentPage.map((q, index) => {
+            const isDisabled = verifyShowQuestion(q);
+
+            if (q.label === "O projeto está atualmente em produção?") {
+              console.log(
+                "Question:",
+                verifyShowQuestion(q),
+                questionsOnCurrentPage[index - 1],
+                q?.conditional?.operator
+                // formValues,
+                // formValues[questionsOnCurrentPage[index - 1]?.id]
+              );
+            }
+            if (isPreview) {
+              return (
+                <div
+                  key={q.id}
+                  className={cn(
+                    "transition-opacity duration-300 ease-in-out",
+                    isDisabled && "opacity-20 pointer-events-none"
+                  )}
+                >
+                  <InputPreview question={q} disabled={isDisabled} />
+                </div>
+              );
+            }
+            if (isDisabled) {
               return null;
             }
 

@@ -2,30 +2,29 @@ import { InputPreview } from "../../../input-preview";
 import { useFormContext } from "react-hook-form";
 import { IForm } from "../..";
 import { SurveyQuestion } from "@/feature/survey/model/survey.model";
+import { useDebounce } from "@/shared/hooks/use-debounce";
 export const QuestionPreview = () => {
-  const {
-    watch,
-    formState: { errors },
-  } = useFormContext<IForm>();
+  const { watch } = useFormContext<IForm>();
   const formValues = watch();
+  const debouncedValues = useDebounce(formValues, 500);
 
-  console.log("QuestionPreview formValues", errors);
-
-  if (!formValues?.type) return null;
+  if (!debouncedValues?.type) return null;
 
   const questionPreview: SurveyQuestion = {
-    id: crypto.randomUUID(),
+    // ✅ SOLUÇÃO: Use um ID estático e previsível para o preview.
+    // Isso garante que o componente filho não será destruído e recriado a cada render.
+    id: "static-preview-id",
 
     orderIndex: 0,
-    ...formValues,
+    ...debouncedValues,
     mask:
-      formValues?.mask === undefined
+      debouncedValues?.inputMask === undefined
         ? undefined
-        : Array.isArray(formValues.mask)
-        ? formValues.mask
-        : formValues.mask === null
+        : Array.isArray(debouncedValues.inputMask)
+        ? debouncedValues.inputMask
+        : debouncedValues.inputMask === null
         ? null
-        : [formValues.mask],
+        : [debouncedValues.inputMask],
     validations: [],
   };
 

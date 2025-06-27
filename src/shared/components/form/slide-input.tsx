@@ -7,8 +7,14 @@ interface Props {
   name: string;
   rules?: Record<string, unknown>;
   question: SurveyQuestion;
+  disabled?: boolean;
 }
-export const SlideInput = ({ name, question, rules }: Props) => {
+export const SlideInput = ({
+  name,
+  question,
+  rules,
+  disabled = false,
+}: Props) => {
   const { control } = useFormContext();
   return (
     <Controller
@@ -16,8 +22,9 @@ export const SlideInput = ({ name, question, rules }: Props) => {
       control={control}
       rules={rules}
       defaultValue={question?.ratingOptions?.min}
+      disabled={disabled}
       render={({ field, fieldState: { error } }) => (
-        <div className="form-control w-full ">
+        <div className={`form-control w-full ${disabled ? "opacity-50" : ""}`}>
           {question.label && (
             <Label className={error ? "text-destructive" : ""}>
               {question.label}
@@ -26,7 +33,7 @@ export const SlideInput = ({ name, question, rules }: Props) => {
           <div className="flex items-center gap-4 mt-2 ">
             <span>{question.ratingOptions?.min}</span>
             <input
-              className="w-full"
+              className={`w-full ${disabled ? "cursor-not-allowed" : ""}`}
               type="range"
               min={question.ratingOptions?.min || 0}
               max={question.ratingOptions?.max || 10}
@@ -35,6 +42,7 @@ export const SlideInput = ({ name, question, rules }: Props) => {
               value={field.value}
               onChange={field.onChange}
               onBlur={field.onBlur}
+              disabled={disabled}
             />
             <span>{question.ratingOptions?.max}</span>
             <span className="font-bold text-primary w-8 text-center">

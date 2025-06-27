@@ -12,9 +12,15 @@ interface NpsInputProps {
   name: string;
   question: SurveyQuestion;
   rules?: Omit<RegisterOptions, "valueAsNumber" | "valueAsDate" | "setValueAs">;
+  disabled?: boolean;
 }
 
-export const NpsInput = ({ name, question, rules }: NpsInputProps) => {
+export const NpsInput = ({
+  name,
+  question,
+  rules,
+  disabled = false,
+}: NpsInputProps) => {
   const { control, clearErrors } = useFormContext();
   const { field, fieldState } = useController({
     name,
@@ -30,17 +36,13 @@ export const NpsInput = ({ name, question, rules }: NpsInputProps) => {
     return "bg-green-500 hover:bg-green-600";
   };
 
-  console.log({ name, field: fieldState?.error?.message || "Sem erro" });
-
   return (
     <div className="flex flex-col gap-3">
       <Label htmlFor={name}>{question.label}</Label>
       <div
         className={cn(
           "flex items-center py-2",
-          // Em telas pequenas (padrão): mantém a rolagem e um gap seguro
           "gap-2 flex-wrap justify-center",
-          // A partir de telas sm (640px): ocupa a largura total e distribui os itens
           "sm:w-full sm:justify-between sm:gap-0 sm:overflow-x-visible"
         )}
       >
@@ -48,6 +50,7 @@ export const NpsInput = ({ name, question, rules }: NpsInputProps) => {
           <button
             key={score}
             type="button"
+            disabled={disabled}
             onClick={() => {
               field.onChange(score);
               if (fieldState.error) {
@@ -59,7 +62,8 @@ export const NpsInput = ({ name, question, rules }: NpsInputProps) => {
               field.value === score
                 ? "ring-2 ring-offset-2 ring-primary scale-110"
                 : "scale-100",
-              getColorClass(score)
+              getColorClass(score),
+              disabled && "opacity-50 cursor-not-allowed pointer-events-none"
             )}
           >
             {score}

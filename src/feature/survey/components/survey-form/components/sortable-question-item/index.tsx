@@ -27,7 +27,7 @@ export function SortableQuestionItem({ onDelete, question, onEdit }: Props) {
     >
       <div className="flex items-center justify-between gap-2 ">
         <div className="flex items-center gap-2 flex-1 ">
-          <p className="text-primary">{question.orderIndex} -</p>
+          <p className="text-primary">{question.orderIndex + 1} -</p>
           <p className="flex-1 text-card-foreground">{question.label}</p>
         </div>
 

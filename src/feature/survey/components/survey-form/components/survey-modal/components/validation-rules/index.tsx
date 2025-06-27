@@ -4,6 +4,7 @@ import { SelectInput } from "@/shared/components/form/select-input";
 import { TextInput } from "@/shared/components/form/text-input";
 import { XIcon } from "lucide-react";
 import {
+  validationLabelMap,
   validationMap,
   type QuestionValidatorsType,
   type SurveyQuestionInputType,
@@ -131,8 +132,8 @@ export const ValidationRules = () => {
     : [];
 
   const validationOptions: SelectOption[] = availableValidations.map((v) => ({
-    value: v as string,
-    label: v.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase()),
+    value: v,
+    label: validationLabelMap[v] || v,
     disabled: fields.some((field) => (field as { type?: string }).type === v),
   }));
 

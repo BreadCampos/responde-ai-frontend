@@ -15,21 +15,24 @@ import { MaskedInput } from "@/shared/components/form/mask-input";
 import { getValidationRules } from "../../helper/get-validation-rules";
 import type { SurveyQuestion } from "@/feature/survey/model/survey.model";
 import { NpsInput } from "@/shared/components/form/nps-input";
+import { memo } from "react";
 
 interface Props {
   question: SurveyQuestion;
+  disabled?: boolean;
 }
 
-export const InputPreview = ({ question }: Props) => {
+export const InputPreview = memo(({ question, disabled }: Props) => {
   const { rules, inputProps } = getValidationRules(question.validations);
 
-  console.log(inputProps);
+  console.log("entrando muito aqui", question);
   const renderInput = (name: any, rules: any) => {
     switch (question.type) {
       case "text":
         if (question.mask) {
           return (
             <MaskedInput
+              disabled={disabled}
               name={name}
               placeholder={question?.placeholder}
               label={question?.label}
@@ -42,6 +45,7 @@ export const InputPreview = ({ question }: Props) => {
         return (
           <TextInput
             name={name}
+            disabled={disabled}
             placeholder={question?.placeholder}
             label={question?.label}
             rules={rules}
@@ -51,7 +55,12 @@ export const InputPreview = ({ question }: Props) => {
         );
       case "textarea":
         return (
-          <TextareaInput name={name} label={question?.label} rules={rules} />
+          <TextareaInput
+            name={name}
+            label={question?.label}
+            rules={rules}
+            disabled={disabled}
+          />
         );
       case "number":
         return (
@@ -61,6 +70,7 @@ export const InputPreview = ({ question }: Props) => {
             type="number"
             label={question?.label}
             rules={rules}
+            disabled={disabled}
             {...inputProps}
           />
         );
@@ -72,6 +82,7 @@ export const InputPreview = ({ question }: Props) => {
             label={question?.label}
             options={question.selectOptions || []}
             rules={rules}
+            disabled={disabled}
           />
         );
       case "date":
@@ -82,12 +93,18 @@ export const InputPreview = ({ question }: Props) => {
             label={question?.label}
             rules={rules}
             type="date"
+            disabled={disabled}
             {...inputProps}
           />
         );
       case "checkbox":
         return (
-          <CheckboxInput name={name} rules={rules} label={question?.label} />
+          <CheckboxInput
+            name={name}
+            rules={rules}
+            label={question?.label}
+            disabled={disabled}
+          />
         );
       case "radio":
         return (
@@ -96,19 +113,35 @@ export const InputPreview = ({ question }: Props) => {
             name={name}
             label={question?.label}
             rules={rules}
+            disabled={disabled}
             className="flex flex-col"
           />
         );
       case "rating":
         if (question.ratingOptions?.style === "slider") {
-          return <SlideInput name={name} question={question} rules={rules} />;
+          return (
+            <SlideInput
+              name={name}
+              question={question}
+              rules={rules}
+              disabled={disabled}
+            />
+          );
         }
         if (question.ratingOptions?.style === "nps") {
-          return <NpsInput name={name} question={question} rules={rules} />;
+          return (
+            <NpsInput
+              name={name}
+              question={question}
+              rules={rules}
+              disabled={disabled}
+            />
+          );
         }
         return (
           <RatingStarsInput
             name={name}
+            disabled={disabled}
             label={question?.label}
             rules={rules}
             min={question.ratingOptions?.min}
@@ -118,6 +151,7 @@ export const InputPreview = ({ question }: Props) => {
       case "checkbox_group":
         return (
           <CheckboxGroupInput
+            disabled={disabled}
             name={question.id}
             label={question.label}
             options={question.selectOptions || []}
@@ -127,6 +161,7 @@ export const InputPreview = ({ question }: Props) => {
       case "select_multiple":
         return (
           <SelectMultipleInput
+            disabled={disabled}
             name={question.id}
             label={question.label}
             options={question.selectOptions || []}
@@ -140,11 +175,12 @@ export const InputPreview = ({ question }: Props) => {
     }
   };
 
-  console.log("rules", rules);
   return (
     <div>
       {renderInput(question.id, rules)}
-      <p className="text-gray-600 text-sm m-2">{question?.hint}</p>
+      <p className="text-gray-400 text-sm m-1">{question?.hint}</p>
     </div>
   );
-};
+});
+
+InputPreview.displayName = "InputPreview";

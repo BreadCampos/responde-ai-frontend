@@ -3,7 +3,7 @@ import { TextInput } from "@/shared/components/form/text-input";
 import Modal from "@/shared/components/modal";
 import { Form } from "@/shared/components/ui/form";
 import { useForm } from "react-hook-form";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { QuestionPreview } from "./components/question-preview";
 import { ConditionalValues } from "./components/conditional-values";
 import { ValidationRules } from "./components/validation-rules";
@@ -29,23 +29,27 @@ interface Props {
   existingQuestions: SurveyQuestion[];
 }
 
+const typeOptions: SelectOption[] = [
+  { value: "text", label: "Texto" },
+  { value: "number", label: "Número" },
+  { value: "date", label: "Data" },
+  { value: "select", label: "Seleção" },
+  { value: "checkbox", label: "Checkbox" },
+  { value: "radio", label: "Radio" },
+  { value: "textarea", label: "Textarea" },
+  { value: "rating", label: "Avaliação" },
+  { value: "checkbox_group", label: "Grupo de Checkboxes" },
+  { value: "select_multiple", label: "Seleção Múltipla" },
+];
 export interface IForm {
   label: string;
   placeholder?: string;
   hint?: string;
   type: SurveyQuestionInputType;
-  mask?: string;
+  inputMask?: string;
   selectOptions: SelectOption[];
   enableConditional: boolean;
-  // conditionalFieldId?: string;
-  // conditionalValue?: string;
-  // conditionalOperator?:
-  //   | "equals"
-  //   | "not_equals"
-  //   | "greater_than"
-  //   | "less_than"
-  //   | "contains"
-  //   | "is_one_of";
+
   conditionalValues?: {
     text: string;
   }[];
@@ -58,7 +62,7 @@ export interface IForm {
     maxLabel?: string;
     style: "stars" | "slider" | "nps";
   };
-  conditional?: QuestionConditionOptions;
+  conditional?: QuestionConditionOptions | undefined;
 }
 export const ServeyModal = ({
   onAddQuestion,
@@ -71,19 +75,21 @@ export const ServeyModal = ({
   const methods = useForm<IForm>({
     defaultValues: {
       pageIndex: 1,
+      // mask: "",
     },
   });
-  const { handleSubmit, reset, watch } = methods;
+  const { handleSubmit, reset, watch, setValue } = methods;
 
   const handleInternalClose = () => {
     onClose();
     reset();
   };
 
-  const formValues = watch();
+  const watchedType = watch("type");
 
   const onSubmit = (data: IForm) => {
-    const needsOptions = typesWithOptions.includes(formValues?.type);
+    console.log("onSubmit data", data);
+    const needsOptions = typesWithOptions.includes(data?.type);
     if (needsOptions && data.selectOptions.length === 0) {
       methods.setError("selectOptions", {
         type: "manual",
@@ -106,7 +112,9 @@ export const ServeyModal = ({
       ratingOptions: data.ratingOptions,
       placeholder: data.placeholder,
       hint: data.hint,
-      mask: data.mask ? data.mask.split(",").map((m) => m.trim()) : null,
+      mask: data.inputMask
+        ? data.inputMask.split(",").map((m) => m.trim())
+        : null,
       orderIndex: questionToEdit
         ? questionToEdit.orderIndex
         : questionByPage(data.pageIndex).length + 1,
@@ -116,7 +124,6 @@ export const ServeyModal = ({
         .map((v) => v as QuestionValidators),
     };
 
-    console.log(data.validations, transformedQuestionData.validations);
     if (
       data.enableConditional &&
       data?.conditional?.fieldId &&
@@ -150,29 +157,23 @@ export const ServeyModal = ({
     onClose();
   };
 
+  const handleTypeChange = useCallback(() => {
+    // A função `setValue` do RHF é estável e não precisa ser listada como dependência
+    // se você a desestruturou do `useForm`
+    setValue("validations", []);
+    setValue("conditional", undefined);
+    setValue("enableConditional", false);
+  }, [setValue]);
   const maxPossibilitPage = useMemo(() => {
     const pages = existingQuestions.map((question) => question.pageIndex);
 
     return Math.max(...pages) + 1;
   }, [existingQuestions]);
 
-  const typeOptions: SelectOption[] = [
-    { value: "text", label: "Texto" },
-    { value: "number", label: "Número" },
-    { value: "date", label: "Data" },
-    { value: "select", label: "Seleção" },
-    { value: "checkbox", label: "Checkbox" },
-    { value: "radio", label: "Radio" },
-    { value: "textarea", label: "Textarea" },
-    { value: "rating", label: "Avaliação" },
-    { value: "checkbox_group", label: "Grupo de Checkboxes" },
-    { value: "select_multiple", label: "Seleção Múltipla" },
-  ];
+  const questionId = questionToEdit?.id;
 
   useEffect(() => {
-    console.log({ questionToEdit });
     if (isOpen) {
-      console.log(questionToEdit?.conditional);
       if (questionToEdit) {
         const value = questionToEdit.conditional?.value;
         const conditionalValues = Array.isArray(value)
@@ -182,7 +183,7 @@ export const ServeyModal = ({
           : undefined;
         const editionValues = {
           ...questionToEdit,
-          mask: Array.isArray(questionToEdit.mask)
+          inputMask: Array.isArray(questionToEdit.mask)
             ? questionToEdit.mask.join(",")
             : undefined,
           enableConditional: !!questionToEdit.conditional,
@@ -197,7 +198,7 @@ export const ServeyModal = ({
         });
       }
     }
-  }, [isOpen, questionToEdit, reset]);
+  }, [isOpen, questionId, reset]);
 
   return (
     <div>
@@ -232,16 +233,8 @@ export const ServeyModal = ({
                   required
                   name={"type"}
                   label={"Tipo de questão"}
-                  options={typeOptions}
-                  onChange={() => {
-                    if (formValues.validations) {
-                      methods.setValue("validations", []);
-                    }
-                    if (formValues.conditional) {
-                      methods.setValue("conditional", undefined);
-                      methods.setValue("enableConditional", false);
-                    }
-                  }}
+                  options={typeOptions} // Usa a constante estável
+                  onChange={handleTypeChange}
                 />
                 <TextInput name={"placeholder"} label={"Placeholder"} />
                 <TextInput name={"hint"} label={"Dica"} />
@@ -253,14 +246,13 @@ export const ServeyModal = ({
                   max={maxPossibilitPage}
                   required
                 />
-                {formValues?.type === "text" && (
-                  <TextInput
-                    name="mask"
-                    label="Máscara de Input (Opcional)"
-                    placeholder="exp: (00) 00000-0000"
-                    helperText="Use '0' para números, 'a' para letras e '*' para qualquer caractere. Para múltiplas máscaras, separe com vírgula."
-                  />
-                )}
+                <TextInput
+                  disabled={watchedType !== "text"}
+                  name="inputMask"
+                  label="Máscara de Input (Opcional)"
+                  placeholder="exp: (00) 00000-0000"
+                  helperText="Use '0' para números, 'a' para letras e '*' para qualquer caractere. Para múltiplas máscaras, separe com vírgula."
+                />
               </div>
               <RattingType />
               <ControlledOptions />
