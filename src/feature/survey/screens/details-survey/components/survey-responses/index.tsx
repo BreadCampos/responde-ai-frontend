@@ -10,12 +10,10 @@ import {
 } from "@/shared/components/ui/card";
 import { usePagination } from "@/shared/hooks/use-pagination";
 import { responseColumns } from "./columns";
+import { useParams } from "next/navigation";
 
-interface Props {
-  surveyId: string;
-}
-
-export const SurveyResponses = ({ surveyId }: Props) => {
+export const SurveyResponses = () => {
+  const { surveyId } = useParams<{ surveyId: string }>();
   const { company } = useAuthStore();
   const { pagination, fetchTable } = usePagination({
     limit: 5,

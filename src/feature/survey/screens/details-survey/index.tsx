@@ -11,6 +11,7 @@ import { SurveyResponses } from "./components/survey-responses";
 import { SurveyPreviewDrawer } from "./components/questions-drawer";
 import { cn } from "@/shared/lib/utils";
 import { NpsSection } from "./components/nps-section";
+import { SurveyCustomLinks } from "./components/survey-custom-link";
 
 interface Props {
   surveyId: string;
@@ -43,8 +44,10 @@ const DetailsSurvey = ({ surveyId }: Props) => {
         <SurveyGraphic chartData={survey?.responsesOverTime} />
         <SurveyLinks genericLinkSlug={survey?.genericLinkSlug} />
       </div>
-      <SurveyResponses surveyId={surveyId} />
+      <SurveyResponses />
       {survey?.npsInfo && <NpsSection npsInfo={survey?.npsInfo} />}
+
+      <SurveyCustomLinks />
     </main>
   );
 };

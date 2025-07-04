@@ -141,6 +141,16 @@ export const TextInput = memo(
                       if (onChange) {
                         onChange(e);
                       }
+
+                      if (inputProps?.type === "number") {
+                        // If the input type is number, parse the value to a number
+                        const value = e.target.value
+                          ? parseInt(e.target.value)
+                          : NaN;
+                        field.onChange(isNaN(value) ? "" : value);
+                        return;
+                      }
+                      console.log("e", e);
                       field.onChange(e);
                     }}
                   />

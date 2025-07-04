@@ -1,10 +1,12 @@
 import { Badge } from "@/shared/components/ui/badge";
 import {
+  Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
+import { ModalAddCustomLink } from "./modal-add-custom-link";
 
 type CustomLink = {
   id: string;
@@ -21,9 +23,12 @@ export const SurveyCustomLinks = () => {
   const customLinks = mockCustomLinks;
 
   return (
-    <>
+    <Card>
       <CardHeader>
-        <CardTitle>Links Customizados</CardTitle>
+        <CardTitle className="flex items-center justify-between">
+          Links Customizados
+          <ModalAddCustomLink />
+        </CardTitle>
         <CardDescription>
           Acompanhe a performance de diferentes canais.
         </CardDescription>
@@ -41,6 +46,6 @@ export const SurveyCustomLinks = () => {
           ))}
         </ul>
       </CardContent>
-    </>
+    </Card>
   );
 };

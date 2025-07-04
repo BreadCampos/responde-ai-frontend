@@ -11,10 +11,7 @@ export const QuestionPreview = () => {
   if (!debouncedValues?.type) return null;
 
   const questionPreview: SurveyQuestion = {
-    // ✅ SOLUÇÃO: Use um ID estático e previsível para o preview.
-    // Isso garante que o componente filho não será destruído e recriado a cada render.
     id: "static-preview-id",
-
     orderIndex: 0,
     ...debouncedValues,
     mask:
