@@ -8,7 +8,7 @@ export const GetPublicSurveyInfoQuery = ({
 }: {
   surveyId: string;
 }) => {
-  const queryKey = ["survey-public", surveyId];
+  const queryKey = ["survey-public-info", surveyId];
 
   return useQuery({
     queryKey,

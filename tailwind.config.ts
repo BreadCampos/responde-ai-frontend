@@ -55,6 +55,10 @@ module.exports = {
         accent: "var(--color-accent)",
         "accent-foreground": "var(--color-accent-foreground)",
         destructive: "var(--color-destructive)",
+        success: "var(--success)",
+        warning: "var(--warning)",
+        info: "var(--info)",
+
         chart: {
           "1": "var(--color-chart-1)",
           "2": "var(--color-chart-2)",

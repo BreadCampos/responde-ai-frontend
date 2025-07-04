@@ -1,4 +1,3 @@
-import { Badge } from "@/shared/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -6,46 +5,103 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import { ModalAddCustomLink } from "./modal-add-custom-link";
-
-type CustomLink = {
-  id: string;
-  url: string;
-  clicks: number;
-};
-
-const mockCustomLinks: CustomLink[] = [
-  { id: "link1", url: "responde.ai/f/campanha-insta", clicks: 102 },
-  { id: "link2", url: "responde.ai/f/newsletter-jun", clicks: 88 },
-];
+import { GetSurveyCustomLinkQuery } from "@/feature/survey/service/get-survey-custom-link.query";
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { useParams } from "next/navigation";
+import { usePagination } from "@/shared/hooks/use-pagination";
+import { DataTable } from "@/shared/components/data-table";
+import { generateCustomLinkColumns } from "./columns";
+import { ModalCreateCustomLink } from "./create-custom-link ";
+import { useState } from "react";
+import { SurveyCustomLink } from "@/feature/survey/model/survey-custom-link";
+import { ModalUpdateCustomLink } from "./update-custom-link";
 
 export const SurveyCustomLinks = () => {
-  const customLinks = mockCustomLinks;
+  const { company } = useAuthStore();
+
+  const { surveyId } = useParams<{ surveyId: string }>();
+
+  const { pagination, fetchTable } = usePagination({
+    limit: 5,
+    page: 1,
+  });
+  const {
+    data: customLinks,
+    isFetching,
+    refetch,
+  } = GetSurveyCustomLinkQuery({
+    companyId: company?.id || "",
+    surveyId: surveyId || "",
+    pagination,
+  });
+
+  const fetch = ({
+    page,
+    search,
+    isRefetch = false,
+  }: {
+    page?: number;
+    search?: string;
+    isRefetch?: boolean;
+  }) => {
+    fetchTable({
+      page,
+      search,
+      isRefetch,
+      refetch,
+    });
+  };
+
+  const [modalUpdate, setModalUpdate] = useState<{
+    open: boolean;
+    customLink: SurveyCustomLink | null;
+  }>({
+    open: false,
+    customLink: null,
+  });
+
+  const setCustomLinkToEdit = (customLink: SurveyCustomLink) => {
+    setModalUpdate({
+      open: true,
+      customLink,
+    });
+  };
+
+  const handleCloseModal = () => {
+    setModalUpdate({
+      open: false,
+      customLink: null,
+    });
+  };
+  const customLinkColumns = generateCustomLinkColumns({
+    setCustomLinkToEdit,
+  });
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center justify-between">
+      <CardHeader className="text-success-foreground">
+        <CardTitle className="flex items-center justify-between ">
           Links Customizados
-          <ModalAddCustomLink />
+          <ModalCreateCustomLink />
         </CardTitle>
         <CardDescription>
           Acompanhe a performance de diferentes canais.
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ul className="space-y-2">
-          {customLinks.map((link) => (
-            <li
-              key={link.id}
-              className="flex justify-between items-center p-2 rounded-lg border"
-            >
-              <span className="font-mono text-sm">{link.url}</span>
-              <Badge>{link.clicks} cliques</Badge>
-            </li>
-          ))}
-        </ul>
+        <DataTable
+          columns={customLinkColumns}
+          onFetchData={fetch}
+          loading={isFetching}
+          data={customLinks?.data || []}
+          pagination={customLinks?.meta}
+        />
       </CardContent>
+      <ModalUpdateCustomLink
+        open={modalUpdate.open}
+        onClose={handleCloseModal}
+        customLink={modalUpdate.customLink}
+      />
     </Card>
   );
 };

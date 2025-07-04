@@ -1,6 +1,8 @@
+export type Ansewers = Array<{
+  questionId: string;
+  value: string | number | boolean | string[] | number[] | boolean[];
+}>;
+
 export type CreateSurveyResponse = {
-  answers: Array<{
-    questionId: string;
-    value: string | number | boolean | string[] | number[] | boolean[];
-  }>;
+  answers: Ansewers;
 };

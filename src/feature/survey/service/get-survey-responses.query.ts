@@ -8,7 +8,7 @@ import {
 import { mountQuery } from "@/shared/ultils/mount-query";
 import { SurveyReponseModel } from "../model/survey-response";
 
-export const GetSurveyResponses = ({
+export const GetSurveyResponsesQuery = ({
   surveyId,
   companyId,
   pagination,
@@ -17,7 +17,7 @@ export const GetSurveyResponses = ({
   surveyId: string;
   companyId?: string;
 }) => {
-  const queryKey = ["survey-public", surveyId];
+  const queryKey = ["survey-details", surveyId];
 
   return useQuery({
     queryKey,

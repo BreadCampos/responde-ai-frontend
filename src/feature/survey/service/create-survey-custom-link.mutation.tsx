@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { SurveyModel } from "../model/survey.model";
 import { httpClient } from "@/core/api/fetch-api";
 import { surveyApi } from "../api";
-import { CustomLinkModal } from "../model/create-survey-custom-link";
+import { CreateCustomLinkModel } from "../model/create-survey-custom-link";
 import { toast } from "sonner";
 
 export const CreateSurveyCustomLinkMutation = () => {
@@ -13,7 +13,7 @@ export const CreateSurveyCustomLinkMutation = () => {
       surveyId,
       companyId,
       customLinkPayload,
-    }: CustomLinkModal) => {
+    }: CreateCustomLinkModel) => {
       const response = await httpClient.request<SurveyModel>({
         method: "POST",
         url: surveyApi.GET_SURVEY_CUSTOM_LINK.replace(

@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { GetSurveyResponses } from "@/feature/survey/service/get-survey-responses";
+import { GetSurveyResponsesQuery } from "@/feature/survey/service/get-survey-responses.query";
 import { DataTable } from "@/shared/components/data-table";
 import {
   Card,
@@ -18,7 +18,7 @@ export const SurveyResponses = () => {
   const { pagination, fetchTable } = usePagination({
     limit: 5,
   });
-  const { data, isFetching, refetch } = GetSurveyResponses({
+  const { data, isFetching, refetch } = GetSurveyResponsesQuery({
     companyId: company?.id,
     surveyId,
     pagination,

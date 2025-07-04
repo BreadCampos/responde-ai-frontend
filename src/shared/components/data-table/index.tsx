@@ -79,7 +79,6 @@ export function DataTable<TData, TValue>({
     [pagination]
   );
 
-  console.log(pagination);
   const table = useReactTable({
     data,
     columns,
@@ -99,6 +98,7 @@ export function DataTable<TData, TValue>({
   });
 
   const onNextPage = () => {
+    console.log(table.getState().pagination.pageIndex);
     const paginaAtual = table.getState().pagination.pageIndex + 1;
     if (onFetchData) onFetchData({ page: paginaAtual + 1 });
   };
@@ -163,7 +163,7 @@ export function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {loading ? (
-              [...Array(50)].map((_, i) => (
+              Array(pagination?.limit)?.map((_, i) => (
                 <TableRow key={`skeleton-row-${i}`}>
                   {columns.map((_, j) => (
                     <TableCell key={`skeleton-cell-${j}`}>
@@ -226,11 +226,13 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-between space-x-2 flex-wrap gap-2 flex-col-reverse md:flex-row">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} de{" "}
-          {table.getFilteredRowModel().rows.length} linha(s) selecionada(s).
-        </div>
+      <div className="flex items-center  justify-between space-x-2 flex-wrap gap-2 flex-col-reverse md:flex-row md: justify-">
+        {table.getFilteredSelectedRowModel().rows.length > 0 && (
+          <div className="flex-1 text-sm text-muted-foreground">
+            {table.getFilteredSelectedRowModel().rows.length} de{" "}
+            {table.getFilteredRowModel().rows.length} linha(s) selecionada(s).
+          </div>
+        )}
         <div className="flex items-center space-x-2 flex-wrap gap-2 justify-center w-full md:w-fit">
           <Button
             variant="outline"

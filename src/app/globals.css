@@ -22,6 +22,11 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -42,18 +47,14 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.35 0.005 260);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.35 0.005 260);
+  --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.35 0.005 260);
+  --popover-foreground: oklch(0.145 0 0);
 
   /* [ALTERADO] Tema Primário Azul para o modo claro */
-  --primary: oklch(0.6 0.18 260); /* Azul principal */
-  --primary-foreground: oklch(
-    0.98 0.02 260
-  ); /* Texto claro para usar sobre o azul */
+  --primary: oklch(54.687% 0.20742 277.994); /* Azul principal */
+  --primary-foreground: oklch(0.985 0 0); /* Texto claro para usar sobre o azul */
 
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -62,6 +63,7 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -71,7 +73,7 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.35 0.005 260);
+  --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
@@ -82,43 +84,46 @@
   --scrollbar-track: hsl(var(--secondary));
   --scrollbar-thumb: hsl(var(--primary));
 
-  --success: 145 63.4% 59.2%; /* Corresponde exatamente a #4ade80 */
-  --success-foreground: 145 80% 15%;
+  --success: hsl(145 63.4% 59.2%) /* Corresponde exatamente a #4ade80 */
+  --success-foreground: hsl(145 80% 15%);;
 
-  --warning: 47.9 95.8% 53.1%;
-  --warning-foreground: 210 40% 98%;
+  --warning: hsl(47.9 95.8% 53.1%) ;
+  --warning-foreground: hsl(47.9 95.8% 15%);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
 }
 
 .dark {
   /* Fundo um pouco mais claro e menos "preto puro" */
-  --background: oklch(0.17 0.01 240);
+  --background: oklch(0.145 0 0);
   /* Card visivelmente mais claro que o fundo para criar profundidade */
-  --card: oklch(0.22 0.02 240);
+  --card: oklch(0.205 0 0);
 
-  --card-foreground: oklch(0.95 0.01 240);
+  --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
 
   /* [ALTERADO] Azul primário menos vibrante e mais elegante */
-  --primary: oklch(0.65 0.18 265);
+  --primary: oklch(54.687% 0.20742 277.994);
   /* Foreground do primário um pouco mais escuro para combinar */
-  --primary-foreground: oklch(0.2 0.03 265);
+  --primary-foreground: oklch(0.205 0 0);
 
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
 
   /* [ALTERADO] Cor "muted" mais suave para textos secundários */
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.65 0.02 240);
+  --muted-foreground: oklch(0.708 0 0);
 
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
 
   /* [ALTERADO] Bordas e Inputs um pouco mais visíveis */
-  --border: oklch(0.3 0.02 240);
-  --input: oklch(0.3 0.02 240);
-  --ring: oklch(0.65 0.18 265); /* Anel de foco com a cor primária */
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0); /* Anel de foco com a cor primária */
 
   /* O resto das variáveis pode permanecer o mesmo */
   --chart-1: oklch(0.488 0.243 264.376);
@@ -138,11 +143,12 @@
   --scrollbar-track: hsl(var(--secondary));
   --scrollbar-thumb: hsl(var(--primary));
 
-  --success: 145 63.4% 59.2%;
-  --success-foreground: 145 80% 15%;
+  --success: hsl(145 63.4% 59.2%);
+  --success-foreground: hsl(145 80% 15%);
 
-  --warning: 47.9 95.8% 63.1%;
-  --warning-foreground: 47.9 95.8% 15%;
+  --warning: hsl(47.9 95.8% 63.1%);
+  --warning-foreground: hsl(47.9 95.8% 15%);
+  --foreground: oklch(0.985 0 0);
 }
 
 @layer base {
