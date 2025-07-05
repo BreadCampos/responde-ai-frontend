@@ -43,7 +43,9 @@ export const SurveyResponses = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Todas as Respostas</CardTitle>
+        <CardTitle className="flex flex-col gap-2 items-center justify-between md:flex-row">
+          Todas as Respostas
+        </CardTitle>
         <CardDescription>
           Visualize as respostas individuais recebidas.
         </CardDescription>

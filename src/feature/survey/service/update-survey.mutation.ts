@@ -3,7 +3,6 @@ import type { SurveyModel } from "../model/survey.model";
 import { httpClient } from "@/core/api/fetch-api";
 import { surveyApi } from "../api";
 import { useRouter } from "next/navigation";
-import { ROUTES } from "@/core/routes/route-constants";
 
 export const UpdateSurveyMutation = () => {
   const queryClient = useQueryClient();
@@ -37,13 +36,11 @@ export const UpdateSurveyMutation = () => {
       }
       return response.data;
     },
-    onSuccess: (response) => {
-      if (response.id) {
-        navigate.push(ROUTES.SURVEY_DETAILS.replace(":id", response.id));
-        queryClient.invalidateQueries({
-          queryKey: ["survey-details"],
-        });
-      }
+    onSuccess: () => {
+      navigate.back();
+      queryClient.invalidateQueries({
+        queryKey: ["survey-details"],
+      });
     },
   });
 };

@@ -26,7 +26,7 @@ export const NpsSection = ({ npsInfo }: Props) => {
   return (
     <Card className="p-4">
       <CardHeader>
-        <CardTitle className="flex items-center justify-between">
+        <CardTitle className="flex flex-col gap-2 items-center justify-between md:flex-row">
           Resultados NPS{" "}
           <Button
             variant="ghost"
