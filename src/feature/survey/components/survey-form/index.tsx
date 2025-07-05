@@ -1,35 +1,41 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { EditableTitle } from "./components/editable-title";
 import type {
   SurveyModel,
   SurveyQuestion,
 } from "@/feature/survey/model/survey.model";
+import { useMemo, useState } from "react";
+import { EditableTitle } from "./components/editable-title";
 
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { BackButton } from "@/shared/components/back-button";
+import { Button } from "@/shared/components/button";
 import { Form } from "@/shared/components/ui/form";
-import { ServeyModal } from "./components/survey-modal";
-import { useFieldArray, useForm, useFormContext } from "react-hook-form";
-import { DndContext, closestCenter, type DragEndEvent } from "@dnd-kit/core";
+import { useToggle } from "@/shared/hooks/use-toggle";
+import { closestCenter, DndContext, type DragEndEvent } from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { SortableQuestionItem } from "./components/sortable-question-item";
-import { toast } from "sonner";
-import { Button } from "@/shared/components/button";
-import { useToggle } from "@/shared/hooks/use-toggle";
-import { BackButton } from "@/shared/components/back-button";
 import { Check, Plus } from "lucide-react";
+import { useFieldArray, useForm, useFormContext } from "react-hook-form";
+import { toast } from "sonner";
 import { QuestionsForm } from "../questions-form-preview";
-import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { SortableQuestionItem } from "./components/sortable-question-item";
+import { ServeyModal } from "./components/survey-modal";
 
 interface Props {
-  onSubmit?: (survey: SurveyModel) => void;
+  onSubmit?: (
+    survey: SurveyModel & {
+      deletedQuestionIds: string[];
+      newQuestionIds: string[];
+    }
+  ) => void;
   loading?: boolean;
   buttonSubmitText: string;
 }
+
 export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   const { control, watch, handleSubmit, getValues, setValue } =
     useFormContext<SurveyModel>();
@@ -43,6 +49,9 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   // Use 'watch' para obter os valores atuais do formulário
   const surveyTitle = watch("title");
   const surveyQuestions = watch("questions");
+
+  const [deletedQuestionIds, setDeletesQuestionIds] = useState<string[]>([]);
+  const [newQuestionIds, setNewQuestionIds] = useState<string[]>([]);
 
   // const [survey, setSurvey] = useState<SurveyModel>({
   //   title: "Feedback de Produto e Experiência do Usuário",
@@ -557,6 +566,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
 
     setValue("questions", renumberedQuestions, { shouldDirty: true });
     toast.success("Pergunta adicionada com sucesso.");
+    setNewQuestionIds((state) => [...state, newQuestion.id]);
   };
 
   const updateQuestion = (updatedQuestion: SurveyQuestion) => {
@@ -590,6 +600,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       setValue("questions", renumberedQuestions);
       toast.success("Pergunta deletada com sucesso.");
     }
+    setDeletesQuestionIds((state) => [...state, questionId]);
   };
 
   const handleTitleChange = (newTitle: string) => {
@@ -694,7 +705,11 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       return;
     }
 
-    return onSubmit(values);
+    return onSubmit({
+      ...values,
+      deletedQuestionIds,
+      newQuestionIds,
+    });
   };
   const disabledCreateButton = loading || surveyQuestions?.length === 0;
 

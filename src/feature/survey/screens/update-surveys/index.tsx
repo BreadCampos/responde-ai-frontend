@@ -1,14 +1,14 @@
 "use client";
 
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { Form } from "@/shared/components/ui/form";
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { SurveyForm } from "../../components/survey-form";
-import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { SurveyModel } from "../../model/survey.model";
-import { UpdateSurveyMutation } from "../../service/update-survey.mutation";
-import { useParams } from "next/navigation";
 import { GetSurveyQuery } from "../../service/get-survey.query";
-import { useEffect } from "react";
-import { Form } from "@/shared/components/ui/form";
+import { UpdateSurveyMutation } from "../../service/update-survey.mutation";
 
 export const UpdateSurvey = () => {
   const { company } = useAuthStore();
@@ -20,7 +20,12 @@ export const UpdateSurvey = () => {
     surveyId: surveyId || "",
   });
 
-  const methods = useForm<SurveyModel>({
+  const methods = useForm<
+    SurveyModel & {
+      deletedQuestionIds: string[];
+      newQuestionIds: string[];
+    }
+  >({
     defaultValues: {
       title: "Novo questionário",
       questions: [],
