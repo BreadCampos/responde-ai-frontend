@@ -5,16 +5,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import { formatDate } from "@/shared/ultils/format-date";
+import { formatDate } from "@/shared/utils/format-date";
 import {
-  LineChart,
+  CartesianGrid,
+  Legend,
   Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
 } from "recharts";
 
 interface Props {

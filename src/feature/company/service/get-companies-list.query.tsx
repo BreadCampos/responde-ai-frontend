@@ -1,13 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import { httpClient } from "@/core/api/fetch-api";
+import { useQuery } from "@tanstack/react-query";
 import { companyApi } from "../api";
 
-import type { CompanyModel } from "../model/company.mode";
 import type {
-  PaginatedResponse,
   DefaultPagination,
+  PaginatedResponse,
 } from "@/shared/model/pagination.model";
-import { mountQuery } from "@/shared/ultils/mount-query";
+import { mountQuery } from "@/shared/utils/mount-query";
+import type { CompanyModel } from "../model/company.mode";
 
 type ReponseType = PaginatedResponse<CompanyModel> | undefined;
 

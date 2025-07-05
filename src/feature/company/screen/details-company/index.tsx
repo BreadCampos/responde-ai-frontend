@@ -1,10 +1,6 @@
-import { Badge } from "@/shared/components/ui/badge";
-import { Separator } from "@/shared/components/ui/separator";
-import { Checkbox } from "@/shared/components/ui/checkbox";
-import { Label } from "@/shared/components/ui/label";
-import { formatDate } from "@/shared/ultils/format-date";
 import { DefaultAvatar } from "@/shared/components/avatar.index";
-import { GetCompanyQuery } from "../../service/get-company.query";
+import { BackButton } from "@/shared/components/back-button";
+import { Badge } from "@/shared/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -12,8 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import { BackButton } from "@/shared/components/back-button";
-import { emptyValue } from "@/shared/ultils/empty-string";
+import { Checkbox } from "@/shared/components/ui/checkbox";
+import { Label } from "@/shared/components/ui/label";
+import { Separator } from "@/shared/components/ui/separator";
+import { emptyValue } from "@/shared/utils/empty-string";
+import { formatDate } from "@/shared/utils/format-date";
+import { useParams } from "next/navigation";
+import { GetCompanyQuery } from "../../service/get-company.query";
 
 // Modelo de dados que você forneceu
 export type CompanyModel = {
@@ -36,10 +37,8 @@ export type CompanyModel = {
   updatedAt: string;
 };
 
-interface Props {
-  id: string;
-}
-export const DetailsCompany = ({ id }: Props) => {
+export const DetailsCompany = () => {
+  const { id } = useParams<{ id: string }>();
   const { data: companies } = GetCompanyQuery({ id });
 
   console.log({ companies });

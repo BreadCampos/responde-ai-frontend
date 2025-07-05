@@ -1,12 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import { httpClient } from "@/core/api/fetch-api";
-import { surveyApi } from "../api";
 import {
   DefaultPagination,
   PaginatedResponse,
 } from "@/shared/model/pagination.model.jsx";
-import { mountQuery } from "@/shared/ultils/mount-query";
-import { SurveyReponseModel } from "../model/survey-response";
+import { mountQuery } from "@/shared/utils/mount-query";
+import { useQuery } from "@tanstack/react-query";
+import { surveyApi } from "../api";
+import { SurveyResponseModel } from "../model/survey-response";
 
 export const GetSurveyResponsesQuery = ({
   surveyId,
@@ -28,13 +28,13 @@ export const GetSurveyResponsesQuery = ({
         companyId || ""
       ).replace(":surveyId", surveyId);
 
-      const formatedUrl = `${url}?${mountQuery(pagination)}`;
+      const formattedUrl = `${url}?${mountQuery(pagination)}`;
 
       const response = await httpClient.request<
-        PaginatedResponse<SurveyReponseModel>
+        PaginatedResponse<SurveyResponseModel>
       >({
         method: "GET",
-        url: formatedUrl,
+        url: formattedUrl,
       });
       return response.data;
     },

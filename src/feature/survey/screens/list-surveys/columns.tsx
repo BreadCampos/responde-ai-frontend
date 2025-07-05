@@ -1,7 +1,7 @@
+import { CopyBadge } from "@/shared/components/copy.index";
+import { formatDate } from "@/shared/utils/format-date";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { SurveyModel } from "../../model/survey.model";
-import { formatDate } from "@/shared/ultils/format-date";
-import { CopyBadge } from "@/shared/components/copy.index";
 
 export const columns: ColumnDef<SurveyModel>[] = [
   {

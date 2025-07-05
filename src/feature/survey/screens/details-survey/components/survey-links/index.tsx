@@ -1,8 +1,8 @@
-import { ArrowDown } from "lucide-react";
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { CopyBadge } from "@/shared/components/copy.index";
 import { Card, CardDescription, CardTitle } from "@/shared/components/ui/card";
+import { ArrowDown } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
-import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 interface Props {
   genericLinkSlug?: string;
 }
@@ -16,7 +16,7 @@ export const SurveyLinks = ({ genericLinkSlug }: Props) => {
 
   // Tamanho do QR Code e do logo
   const qrCodeSize = 256;
-  const logoSize = qrCodeSize / 3; // Logo ocupa 20% do QR Code
+  const logoSize = qrCodeSize / 4; // Logo ocupa 25% do QR Code
   return (
     <Card className="p-4 flex flex-col items-center justify-center text-center h-full lg:col-span-3 space-y-4">
       <CardTitle className="mb-2">Link e QR Code</CardTitle>

@@ -1,13 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import { httpClient } from "@/core/api/fetch-api";
+import { useQuery } from "@tanstack/react-query";
 import { webhookApi } from "../api";
 
-import type { WebhooksModel } from "../model/webhooks.model";
 import type {
-  PaginatedResponse,
   DefaultPagination,
+  PaginatedResponse,
 } from "@/shared/model/pagination.model";
-import { mountQuery } from "@/shared/ultils/mount-query";
+import { mountQuery } from "@/shared/utils/mount-query";
+import type { WebhooksModel } from "../model/webhooks.model";
 
 type ReponseType = PaginatedResponse<WebhooksModel> | undefined;
 

@@ -1,12 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import type { SurveyModel } from "../model/survey.model";
 import { httpClient } from "@/core/api/fetch-api";
-import { surveyApi } from "../api";
 import type {
   DefaultPagination,
   PaginatedResponse,
 } from "@/shared/model/pagination.model";
-import { mountQuery } from "@/shared/ultils/mount-query";
+import { mountQuery } from "@/shared/utils/mount-query";
+import { useQuery } from "@tanstack/react-query";
+import { surveyApi } from "../api";
+import type { SurveyModel } from "../model/survey.model";
 
 export const GetListSurveysQuery = ({
   companyId,

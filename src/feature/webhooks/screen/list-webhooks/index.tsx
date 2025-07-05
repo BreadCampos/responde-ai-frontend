@@ -1,14 +1,14 @@
-import { DataTable } from "@/shared/components/data-table";
-import { generateWebhookColumns } from "./columns";
-import { usePagination } from "@/shared/hooks/use-pagination";
-import { GetWebhooksQuery } from "../../service/get-webhooks-list.query";
-import { CreateWebhooksModal } from "./components/create-webhooks-modal";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { WebhooksModel } from "../../model/webhooks.model";
+import { DataTable } from "@/shared/components/data-table";
+import { usePagination } from "@/shared/hooks/use-pagination";
 import { useState } from "react";
+import { WebhooksModel } from "../../model/webhooks.model";
+import { GetWebhooksQuery } from "../../service/get-webhooks-list.query";
+import { generateWebhookColumns } from "./columns";
+import { CreateWebhooksModal } from "./components/create-webhooks-modal";
 import { UpdateWebhooksModal } from "./components/update-webhooks-modal";
 
-export const ListHebhooks = () => {
+export const ListWebhooks = () => {
   const { company } = useAuthStore();
   const { pagination, fetchTable } = usePagination();
 
