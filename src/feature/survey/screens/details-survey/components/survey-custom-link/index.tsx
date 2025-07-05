@@ -80,13 +80,8 @@ export const SurveyCustomLinks = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center justify-between">
-          <h3
-            className="text-xl font-bold tracking-tight"
-            id={"survey-custom-links"}
-          >
-            Links Customizados
-          </h3>
+        <CardTitle className="flex flex-col gap-2 items-center justify-between md:flex-row">
+          <h3 id={"survey-custom-links"}>Links Customizados</h3>
 
           <ModalCreateCustomLink />
         </CardTitle>

@@ -1,5 +1,6 @@
 export const surveyApi = {
   CREATE_SURVEY: "/companies/:companyId/surveys",
+  UPDATE_SURVEY: "/companies/:companyId/surveys/:surveyId",
   LIST_SURVEYS: "/companies/:companyId/surveys",
   GET_SURVEY: "/companies/:companyId/surveys/:surveyId",
   GET_PUBLIC_SURVEY_INFO: "/public/surveys/:surveyId",

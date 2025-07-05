@@ -8,6 +8,7 @@ export const ROUTES = {
   SURVEY_RESPONSE_DETAILS:
     "/surveys/details/:surveyId/answers/:surveyResponseId",
   SURVEY_RESPONSE: "/s/:id",
+  SURVEY_UPDATE: "/surveys/update/:id",
   COMPANY_LIST: "/companies",
   COMPANY_CREATE: "/companies/create",
   COMPANY_EDIT: "/companies/edit/:id",

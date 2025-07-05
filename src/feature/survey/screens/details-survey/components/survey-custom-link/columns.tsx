@@ -76,6 +76,7 @@ export const generateCustomLinkColumns: (
     maxSize: 50,
     cell: ({ row }) => {
       const customLink = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

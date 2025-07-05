@@ -34,7 +34,9 @@ export const SurveyGraphic = ({ chartData }: Props) => {
   return (
     <Card className="lg:col-span-4">
       <CardHeader>
-        <CardTitle>Respostas ao longo do tempo</CardTitle>
+        <CardTitle className="flex flex-col gap-2 items-center justify-between md:flex-row">
+          Respostas ao longo do tempo
+        </CardTitle>
       </CardHeader>
       <CardContent className="pl-2 overflow-auto">
         <ResponsiveContainer width="100%" height={300}>

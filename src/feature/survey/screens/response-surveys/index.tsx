@@ -27,10 +27,11 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
   console.log({ customLinkRef });
   const methods = useForm();
 
-  const { data, isLoading, isSuccess, isError } = GetPublicSurveyInfoQuery({
-    surveyId: surveyId || "",
-    customLinkRef: customLinkRef || "",
-  });
+  const { data, isLoading, isSuccess, isError, error } =
+    GetPublicSurveyInfoQuery({
+      surveyId: surveyId || "",
+      customLinkRef: customLinkRef || "",
+    });
 
   const { mutate: createReponse, isSuccess: isCreationSuccess } =
     CreatePublicSurveyResponseMutation();
@@ -87,8 +88,8 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
           Erro ao Carregar Formulário
         </h1>
         <p className="text-accent-foreground">
-          Não foi possível encontrar os dados deste formulário. Tente novamente
-          mais tarde.
+          {error?.message ||
+            "Não foi possível encontrar os dados deste formulário. Tente novamente mais tarde."}
         </p>
       </div>
     );
