@@ -1,8 +1,8 @@
-import * as React from "react";
 import {
   Button as ShadcnButton,
   type ButtonProps as ShadcnButtonProps,
 } from "@/shared/components/ui/button";
+import * as React from "react";
 
 export type ButtonProps = ShadcnButtonProps & {
   children?: React.ReactNode;
