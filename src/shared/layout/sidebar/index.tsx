@@ -1,18 +1,18 @@
-import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { Button } from "@//shared/components/button";
 import usePersistentState from "@//shared/hooks/use-persist";
 import { cn } from "@//shared/lib/utils";
 import { ROUTES } from "@/core/routes/route-constants";
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import {
   ChevronsLeft,
   ChevronsRight,
-  LogOut,
   CompassIcon,
   FileText,
+  LogOut,
   Webhook,
 } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 
 type NavItemProps = {
   name: string;
@@ -23,16 +23,6 @@ type NavItemProps = {
   isLogout?: boolean;
   onSelect?: (href?: string) => void;
 };
-
-const mainLinks = [
-  { name: "Formulários", href: ROUTES.SURVEY_LIST, icon: FileText },
-  { name: "Webhooks", href: ROUTES.WEBHOOKS_LIST, icon: Webhook },
-  {
-    name: "Minhas companhias",
-    href: ROUTES.COMPANY_LIST,
-    icon: CompassIcon,
-  },
-];
 
 const NavItem = ({
   name,
@@ -83,6 +73,16 @@ export const SidebarHeader = ({
 
   const { company } = useAuthStore();
   const logoSrc = company?.logoUrl || "/favicon.svg";
+
+  const mainLinks = [
+    { name: "Formulários", href: ROUTES.SURVEY_LIST, icon: FileText },
+    { name: "Webhooks", href: ROUTES.WEBHOOKS_LIST, icon: Webhook },
+    {
+      name: "Minhas companhias",
+      href: ROUTES.COMPANY_DETAILS.replace(":id", company?.id || ""),
+      icon: CompassIcon,
+    },
+  ];
 
   return (
     <div className="flex flex-col h-full justify-between">
