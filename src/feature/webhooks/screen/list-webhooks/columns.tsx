@@ -2,10 +2,23 @@ import type { ColumnDef } from "@tanstack/react-table";
 import type { WebhooksModel } from "../../model/webhooks.model";
 import { formatDate } from "@/shared/ultils/format-date";
 import { Badge } from "@/shared/components/ui/badge";
-import { cn } from "@/shared/ultils/cn";
-import { UpdateWebhooksModal } from "./components/update-webhooks-modal";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
+import { Button } from "@/shared/components/button";
 
-export const columns: ColumnDef<WebhooksModel>[] = [
+interface CustomWebhookProps {
+  setWebhookToEdit: (value: WebhooksModel) => void;
+}
+export const generateWebhookColumns: (
+  vale: CustomWebhookProps
+) => ColumnDef<WebhooksModel>[] = ({ setWebhookToEdit }) => [
   {
     accessorKey: "id",
     size: 35,
@@ -36,14 +49,7 @@ export const columns: ColumnDef<WebhooksModel>[] = [
     cell: ({ row }) => {
       const isActive = row.getValue("isActive");
       return (
-        <Badge
-          variant={isActive ? "default" : "destructive"}
-          className={cn(
-            "text-sm w-fit",
-            "font-semibold",
-            isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
-          )}
-        >
+        <Badge variant={isActive ? "success" : "destructive"}>
           {isActive ? "Ativo" : "Inativo"}
         </Badge>
       );
@@ -67,13 +73,38 @@ export const columns: ColumnDef<WebhooksModel>[] = [
     },
   },
   {
-    accessorKey: "action",
-    size: 100,
-    enableResizing: false,
-    header: () => <div className="text-left">Ação</div>,
+    id: "actions",
+    enableHiding: false,
+    maxSize: 50,
     cell: ({ row }) => {
-      const webhookCompleto = row.original;
-      return <UpdateWebhooksModal webhook={webhookCompleto} />;
+      const webhook = row.original;
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Ações</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => {
+                if (webhook) setWebhookToEdit(webhook);
+              }}
+            >
+              Editar
+            </DropdownMenuItem>
+
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(webhook.url)}
+            >
+              Copiar URL
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
     },
   },
 ];

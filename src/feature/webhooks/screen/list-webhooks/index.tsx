@@ -1,13 +1,41 @@
 import { DataTable } from "@/shared/components/data-table";
-import { columns } from "./columns";
+import { generateWebhookColumns } from "./columns";
 import { usePagination } from "@/shared/hooks/use-pagination";
 import { GetWebhooksQuery } from "../../service/get-webhooks-list.query";
 import { CreateWebhooksModal } from "./components/create-webhooks-modal";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { WebhooksModel } from "../../model/webhooks.model";
+import { useState } from "react";
+import { UpdateWebhooksModal } from "./components/update-webhooks-modal";
 
 export const ListHebhooks = () => {
   const { company } = useAuthStore();
   const { pagination, fetchTable } = usePagination();
+
+  const [modalUpdate, setModalUpdate] = useState<{
+    open: boolean;
+    webhook: WebhooksModel | null;
+  }>({
+    open: false,
+    webhook: null,
+  });
+
+  const setWebhookToEdit = (webhook: WebhooksModel) => {
+    setModalUpdate({
+      open: true,
+      webhook,
+    });
+  };
+
+  const handleCloseModal = () => {
+    setModalUpdate({
+      open: false,
+      webhook: null,
+    });
+  };
+  const columns = generateWebhookColumns({
+    setWebhookToEdit,
+  });
 
   const { data, isFetching, refetch } = GetWebhooksQuery({
     pagination,
@@ -47,6 +75,12 @@ export const ListHebhooks = () => {
         data={data?.data || []}
         pagination={data?.meta}
         onFetchData={fetch}
+      />
+
+      <UpdateWebhooksModal
+        webhook={modalUpdate.webhook}
+        open={modalUpdate.open}
+        toggleModal={handleCloseModal}
       />
     </div>
   );

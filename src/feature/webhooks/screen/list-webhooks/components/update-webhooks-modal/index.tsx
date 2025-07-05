@@ -1,8 +1,6 @@
 import { WebhookForm } from "@/feature/webhooks/components/webhook-form";
-import { Button } from "@/shared/components/button";
 import Modal from "@/shared/components/modal";
 import { Form } from "@/shared/components/ui/form";
-import { useToggle } from "@/shared/hooks/use-toggle";
 import { useForm } from "react-hook-form";
 import {
   resolverUpdateWebhooksSchema,
@@ -10,23 +8,24 @@ import {
 } from "./update-webhooks.schema";
 import { useUpdateWebhookMutation } from "@/feature/webhooks/service/update-company.mutation";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { Edit } from "lucide-react";
 import { WebhooksModel } from "@/feature/webhooks/model/webhooks.model";
+import { useEffect } from "react";
 
 export interface Props {
-  webhook: WebhooksModel;
+  webhook: WebhooksModel | null;
+  open: boolean;
+  toggleModal: () => void;
 }
-export const UpdateWebhooksModal = ({ webhook }: Props) => {
-  const [openModal, toggleModal] = useToggle();
-
+export const UpdateWebhooksModal = ({ webhook, toggleModal, open }: Props) => {
   const methods = useForm<UpdateWebhooksSchemaType>({
     resolver: resolverUpdateWebhooksSchema,
   });
 
   const { company } = useAuthStore();
   const { mutate, isPending } = useUpdateWebhookMutation();
-  const onCreateWebhook = (data: UpdateWebhooksSchemaType) => {
-    if (company?.id) {
+  const onUpdateWebhook = (data: UpdateWebhooksSchemaType) => {
+    console.log(data);
+    if (company?.id && webhook) {
       mutate({
         webhook: data,
         webhookId: webhook.id,
@@ -40,22 +39,19 @@ export const UpdateWebhooksModal = ({ webhook }: Props) => {
     methods.reset();
   };
 
-  const openUpdateModal = () => {
-    console.log("webhook", webhook);
-    toggleModal();
-    methods.reset({
-      url: webhook.url,
-      subscribedEvents: ["*"],
-    });
-  };
+  useEffect(() => {
+    if (open && webhook) {
+      methods.reset({
+        url: webhook.url,
+        subscribedEvents: webhook.subscribedEvents,
+      });
+    }
+  }, [open, webhook, methods]);
 
   return (
     <Form {...methods}>
-      <Button size="icon" onClick={openUpdateModal}>
-        <Edit className="h-4 w-4" />
-      </Button>
       <Modal
-        open={openModal}
+        open={open}
         onClose={onClose}
         title={"Create Webhook"}
         className="w-full max-w-xl"
@@ -63,11 +59,11 @@ export const UpdateWebhooksModal = ({ webhook }: Props) => {
           title: "Atualizar Webhook",
           type: "submit",
           loading: isPending,
-          onClick: methods.handleSubmit(onCreateWebhook),
+          onClick: methods.handleSubmit(onUpdateWebhook),
           disabled: isPending,
         }}
       >
-        <div className="mb-4">
+        <div className="mb-2">
           <WebhookForm />
         </div>
       </Modal>

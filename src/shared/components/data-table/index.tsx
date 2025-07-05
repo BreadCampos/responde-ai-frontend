@@ -226,7 +226,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex items-center  justify-between space-x-2 flex-wrap gap-2 flex-col-reverse md:flex-row md: justify-">
+      <div className="flex items-center  justify-between space-x-2 flex-wrap gap-2 flex-col-reverse md:flex-row  md:justify-end">
         {table.getFilteredSelectedRowModel().rows.length > 0 && (
           <div className="flex-1 text-sm text-muted-foreground">
             {table.getFilteredSelectedRowModel().rows.length} de{" "}

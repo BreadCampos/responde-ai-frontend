@@ -57,12 +57,12 @@ const NavItem = ({
   return (
     <Button
       onClick={handleClick}
-      variant={isLogout ? "destructive" : isActive ? "secondary" : "outline"}
+      variant={isLogout ? "destructive" : !isActive ? "secondary" : "outline"}
       className={isCollapsed ? "justify-center" : "justify-start"}
     >
       <Icon size={isCollapsed ? 24 : 18} className={cn("flex-shrink-0")} />
       {!isCollapsed && (
-        <p className={cn("text-lg truncate", isLogout && "text-white")}>
+        <p className={cn("text-[12px] truncate", isLogout && "text-white")}>
           {name}
         </p>
       )}

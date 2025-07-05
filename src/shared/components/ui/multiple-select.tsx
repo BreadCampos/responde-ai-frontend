@@ -123,7 +123,7 @@ export const MultiSelect = React.forwardRef<
       options,
       onValueChange,
       variant,
-      placeholder = "Select options",
+      placeholder = "Selecionar opções",
       animation = 0,
       maxCount = 3,
       modalPopover = false,
@@ -185,9 +185,8 @@ export const MultiSelect = React.forwardRef<
         onOpenChange={setIsPopoverOpen}
         modal={modalPopover}
       >
-        <PopoverTrigger asChild>
+        <PopoverTrigger asChild ref={ref}>
           <Button
-            ref={ref}
             {...props}
             onClick={handleTogglePopover}
             className={cn(
@@ -233,7 +232,7 @@ export const MultiSelect = React.forwardRef<
                       )}
                       style={{ animationDuration: `${animation}s` }}
                     >
-                      {`+ ${value.length - maxCount} more`}
+                      {`+ ${value.length - maxCount}`}
                       <XCircle
                         className="ml-2 h-4 w-4 cursor-pointer"
                         onClick={(event) => {
@@ -280,7 +279,7 @@ export const MultiSelect = React.forwardRef<
               onKeyDown={handleInputKeyDown}
             />
             <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty>Nenhum resultado encontrado.</CommandEmpty>
               <CommandGroup>
                 <CommandItem
                   key="all"
@@ -297,7 +296,7 @@ export const MultiSelect = React.forwardRef<
                   >
                     <CheckIcon className="h-4 w-4" />
                   </div>
-                  <span>(Select All)</span>
+                  <span>(Selecionar tudo)</span>
                 </CommandItem>
                 {options.map((option) => {
                   const isSelected = value.includes(String(option?.value));
@@ -334,7 +333,7 @@ export const MultiSelect = React.forwardRef<
                         onSelect={handleClear}
                         className="flex-1 justify-center cursor-pointer"
                       >
-                        Clear
+                        Limpar
                       </CommandItem>
                       <Separator
                         orientation="vertical"
@@ -346,7 +345,7 @@ export const MultiSelect = React.forwardRef<
                     onSelect={() => setIsPopoverOpen(false)}
                     className="flex-1 justify-center cursor-pointer max-w-full"
                   >
-                    Close
+                    Fechar
                   </CommandItem>
                 </div>
               </CommandGroup>
