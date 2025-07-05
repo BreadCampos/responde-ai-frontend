@@ -9,8 +9,10 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { usePagination } from "@/shared/hooks/use-pagination";
+import { useParams, useRouter } from "next/navigation";
+import { ROUTES } from "../../../../../../core/routes/route-constants";
+import { SurveyResponseModel } from "../../../../model/survey-response";
 import { responseColumns } from "./columns";
-import { useParams } from "next/navigation";
 
 export const SurveyResponses = () => {
   const { surveyId } = useParams<{ surveyId: string }>();
@@ -18,6 +20,7 @@ export const SurveyResponses = () => {
   const { pagination, fetchTable } = usePagination({
     limit: 5,
   });
+  const navigate = useRouter();
   const { data, isFetching, refetch } = GetSurveyResponsesQuery({
     companyId: company?.id,
     surveyId,
@@ -40,6 +43,16 @@ export const SurveyResponses = () => {
       refetch,
     });
   };
+
+  const redirectToDetails = (row: SurveyResponseModel) => {
+    navigate.push(
+      ROUTES.SURVEY_RESPONSE_DETAILS.replace(":surveyId", row.surveyId).replace(
+        ":surveyResponseId",
+        row.id
+      )
+    );
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -57,6 +70,7 @@ export const SurveyResponses = () => {
           loading={isFetching}
           data={data?.data || []}
           pagination={data?.meta}
+          onClickRow={redirectToDetails}
         />
       </CardContent>
     </Card>

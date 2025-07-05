@@ -1,7 +1,3 @@
-import type { ColumnDef } from "@tanstack/react-table";
-import type { WebhooksModel } from "../../model/webhooks.model";
-import { formatDate } from "@/shared/ultils/format-date";
-import { Badge } from "@/shared/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,9 +6,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/shared/components/button";
 import { CopyBadge } from "@/shared/components/copy.index";
+import { Badge } from "@/shared/components/ui/badge";
+import { formatDate } from "@/shared/utils/format-date";
+import type { ColumnDef } from "@tanstack/react-table";
+import { MoreHorizontal } from "lucide-react";
+import type { WebhooksModel } from "../../model/webhooks.model";
 
 interface CustomWebhookProps {
   setWebhookToEdit: (value: WebhooksModel) => void;

@@ -1,28 +1,28 @@
-/* eslint-disable no-useless-escape */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { SurveyQuestion } from "@/feature/survey/model/survey.model";
 import {
-  TextInput,
-  SelectInput,
   CheckboxInput,
   RadioGroupInput,
-  TextareaInput,
   RatingStarsInput,
-  SlideInput,
+  SelectInput,
   SelectMultipleInput,
+  SlideInput,
+  TextareaInput,
+  TextInput,
 } from "@/shared/components/form";
 import { CheckboxGroupInput } from "@/shared/components/form/checkbox-group-input";
 import { MaskedInput } from "@/shared/components/form/mask-input";
-import { getValidationRules } from "../../helper/get-validation-rules";
-import type { SurveyQuestion } from "@/feature/survey/model/survey.model";
 import { NpsInput } from "@/shared/components/form/nps-input";
 import { memo } from "react";
+import { getValidationRules } from "../../helper/get-validation-rules";
 
 interface Props {
   question: SurveyQuestion;
   disabled?: boolean;
+  answer?: string[] | number | string;
 }
 
-export const InputPreview = memo(({ question, disabled }: Props) => {
+export const InputPreview = memo(({ question, disabled, answer }: Props) => {
   const { rules, inputProps } = getValidationRules(question.validations);
 
   const renderInput = (name: any, rules: any) => {
@@ -38,6 +38,7 @@ export const InputPreview = memo(({ question, disabled }: Props) => {
               rules={rules}
               mask={question.mask}
               {...inputProps}
+              value={answer}
             />
           );
         }
@@ -50,6 +51,7 @@ export const InputPreview = memo(({ question, disabled }: Props) => {
             rules={rules}
             type={question.type}
             {...inputProps}
+            value={answer}
           />
         );
       case "textarea":

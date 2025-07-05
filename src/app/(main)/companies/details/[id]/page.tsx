@@ -7,5 +7,5 @@ export default function DetailsCompanyPage({
 }: {
   params: { id: string };
 }) {
-  return <DetailsCompany id={params?.id} />;
+  return <DetailsCompany />;
 }

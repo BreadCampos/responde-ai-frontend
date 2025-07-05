@@ -12,4 +12,6 @@ export const surveyApi = {
     "/companies/:companyId/surveys/:surveyId/custom-links",
   UPDATE_SURVEY_CUSTOM_LINK:
     "/companies/:companyId/surveys/:surveyId/custom-links/:customLinkId",
+  GET_SURVEY_RESPONSE_DETAILS:
+    "/companies/:companyId/surveys/:surveyId/responses/:surveyResponseId",
 };
