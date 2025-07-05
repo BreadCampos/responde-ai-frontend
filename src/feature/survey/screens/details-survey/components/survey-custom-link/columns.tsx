@@ -19,7 +19,7 @@ export const generateCustomLinkColumns: (
   vale: CustomLinkColumnProps
 ) => ColumnDef<SurveyCustomLink>[] = ({ setCustomLinkToEdit }) => [
   { accessorKey: "name", header: "Nome" },
-  { accessorKey: "token", header: "Link" },
+  { accessorKey: "customLink", header: "Link", maxSize: 50 },
   {
     accessorKey: "usageCount",
     header: "Respostas",
@@ -35,7 +35,7 @@ export const generateCustomLinkColumns: (
   {
     accessorKey: "usageLimit",
     header: "Limite",
-
+    maxSize: 60,
     cell: ({ row }) => {
       return <Badge variant={"primary"}>{row.original.usageLimit}</Badge>;
     },

@@ -8,8 +8,6 @@ import { UpdateSurveyCustomLinkMutation } from "@/feature/survey/service/update-
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { useParams } from "next/navigation";
 import { FormCustomLink } from "../form-custom-link ";
-import { useToggle } from "@/shared/hooks/use-toggle";
-import { Button } from "@/shared/components/button";
 import { SurveyCustomLink } from "@/feature/survey/model/survey-custom-link";
 import { useEffect } from "react";
 
@@ -32,7 +30,7 @@ export const ModalUpdateCustomLink = ({ customLink, onClose, open }: Props) => {
 
   const { reset } = methods;
   const { company } = useAuthStore();
-  const { mutate, isPending } = UpdateSurveyCustomLinkMutation();
+  const { mutate, isPending, isSuccess } = UpdateSurveyCustomLinkMutation();
 
   const handleClose = () => {
     reset();
@@ -52,8 +50,6 @@ export const ModalUpdateCustomLink = ({ customLink, onClose, open }: Props) => {
         usageLimit: data.usageLimit || 1,
       },
     });
-
-    handleClose();
   };
 
   useEffect(() => {
@@ -66,9 +62,15 @@ export const ModalUpdateCustomLink = ({ customLink, onClose, open }: Props) => {
     }
   }, [customLink, reset, open]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      handleClose();
+    }
+  }, [isSuccess]);
   return (
     <Form {...methods}>
       <FormCustomLink
+        title="Editar link customizado"
         submit={onSubmit}
         loading={isPending}
         open={open}

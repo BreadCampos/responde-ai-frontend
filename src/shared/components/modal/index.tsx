@@ -72,7 +72,7 @@ export const Modal = ({
               <Button
                 onClick={primaryButton?.onClick}
                 disabled={primaryButton?.disabled || loading}
-                loading={loading}
+                loading={primaryButton?.loading || loading}
               >
                 {primaryButton?.title}
               </Button>

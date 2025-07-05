@@ -1,6 +1,4 @@
-import type { ApiUrl } from "@/core/api/types";
-
-export const authenticationApi: ApiUrl = {
+export const authenticationApi = {
   REGISTER: "/users",
-  LOGIN: "/auth",
+  LOGIN: "/auth/sign-in",
 };

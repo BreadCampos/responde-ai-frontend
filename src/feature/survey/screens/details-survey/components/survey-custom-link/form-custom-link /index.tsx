@@ -9,9 +9,16 @@ type Props = {
   loading: boolean;
   open: boolean;
   onClose: () => void;
+  title: string;
 };
 
-export const FormCustomLink = ({ loading, submit, onClose, open }: Props) => {
+export const FormCustomLink = ({
+  loading,
+  submit,
+  onClose,
+  title,
+  open,
+}: Props) => {
   const methods = useFormContext<AddCustomLinkValues>();
 
   const { handleFormatMinMaxValue } = useFormatValues();
@@ -29,9 +36,9 @@ export const FormCustomLink = ({ loading, submit, onClose, open }: Props) => {
         primaryButton={{
           onClick: methods.handleSubmit(onSubmit),
           title: "Salvar",
-          loading: loading,
         }}
-        title={"Adicionar Link Customizados"}
+        loading={loading}
+        title={title}
       >
         <div className="flex flex-col gap-4 p-1">
           <TextInput name="name" placeholder="Nome do link" />
