@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SurveyCustomLink } from "@/feature/survey/model/survey-custom-link";
 import { Button } from "@/shared/components/button";
+import { CopyBadge } from "@/shared/components/copy.index";
 import { Badge } from "@/shared/components/ui/badge";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
@@ -19,7 +20,16 @@ export const generateCustomLinkColumns: (
   vale: CustomLinkColumnProps
 ) => ColumnDef<SurveyCustomLink>[] = ({ setCustomLinkToEdit }) => [
   { accessorKey: "name", header: "Nome" },
-  { accessorKey: "customLink", header: "Link", maxSize: 50 },
+  {
+    accessorKey: "customLink",
+    header: "Link",
+    maxSize: 50,
+
+    cell: ({ row }) => {
+      const customLink = row.original.customLink;
+      return <CopyBadge textToCopy={customLink} className={"max-w-[200px]"} />;
+    },
+  },
   {
     accessorKey: "usageCount",
     header: "Respostas",

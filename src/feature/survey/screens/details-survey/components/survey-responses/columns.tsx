@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 export const responseColumns: ColumnDef<SurveyReponseModel>[] = [
   { accessorKey: "id", header: "Id" },
   { accessorKey: "sourceLinkId", header: "Link" },
-  { accessorKey: "timeToSubmitSeconds", header: "Tempo de Resposta (s)" },
+  { accessorKey: "responsesOverTime.count", header: "Tempo de Resposta (s)" },
   {
     accessorKey: "submittedAt",
     header: "Data de Envio",

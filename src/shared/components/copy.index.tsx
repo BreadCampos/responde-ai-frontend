@@ -12,7 +12,7 @@ import {
 } from "@/shared/components/ui/tooltip";
 
 interface CopyBadgeProps extends BadgeProps {
-  textToCopy: string;
+  textToCopy?: string;
   startText?: string;
   className?: string;
 }
@@ -36,8 +36,10 @@ export const CopyBadge = ({
   }, [hasCopied]);
 
   const copyToClipboard = React.useCallback(() => {
-    navigator.clipboard.writeText(textToCopy);
-    setHasCopied(true);
+    if (textToCopy) {
+      navigator.clipboard.writeText(textToCopy);
+      setHasCopied(true);
+    }
   }, [textToCopy]);
 
   return (

@@ -1,6 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { SurveyModel } from "../../model/survey.model";
 import { formatDate } from "@/shared/ultils/format-date";
+import { CopyBadge } from "@/shared/components/copy.index";
 
 export const columns: ColumnDef<SurveyModel>[] = [
   {
@@ -22,9 +23,15 @@ export const columns: ColumnDef<SurveyModel>[] = [
   },
   {
     accessorKey: "genericLinkSlug",
-    size: 250,
+    size: 200,
     enableResizing: true,
     header: () => <div className="text-left">Link</div>,
+    cell: ({ row }) => {
+      const genericLinkSlug = row.original.genericLinkSlug;
+      return (
+        <CopyBadge textToCopy={genericLinkSlug} className={"max-w-[200px]"} />
+      );
+    },
   },
   {
     accessorKey: "createdAt",

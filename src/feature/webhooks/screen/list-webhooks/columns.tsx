@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/shared/components/button";
+import { CopyBadge } from "@/shared/components/copy.index";
 
 interface CustomWebhookProps {
   setWebhookToEdit: (value: WebhooksModel) => void;
@@ -21,8 +22,8 @@ export const generateWebhookColumns: (
 ) => ColumnDef<WebhooksModel>[] = ({ setWebhookToEdit }) => [
   {
     accessorKey: "id",
-    size: 35,
-    maxSize: 35,
+    size: 100,
+    maxSize: 100,
     enableResizing: false,
     header: () => <div className="text-left">ID</div>,
     cell: ({ row }) => {
@@ -34,6 +35,10 @@ export const generateWebhookColumns: (
     size: 250,
     enableResizing: true,
     header: () => <div className="text-left">Url</div>,
+    cell: ({ row }) => {
+      const url = row.original.url;
+      return <CopyBadge textToCopy={url} className={"max-w-[200px]"} />;
+    },
   },
   {
     accessorKey: "maxRetries",

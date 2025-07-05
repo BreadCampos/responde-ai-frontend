@@ -19,6 +19,7 @@ export type SurveyReponseModel = {
   sourceLinkId: string | null;
   submittedAt: string;
   metrics: Metrics;
+  genericLinkSlug: string | null;
   timeToSubmitSeconds: number | null;
   answers: unknown[];
 };
