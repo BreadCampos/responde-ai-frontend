@@ -42,8 +42,6 @@ interface Props {
 export const DetailsCompany = ({ id }: Props) => {
   const { data: companies } = GetCompanyQuery({ id });
 
-  console.log({ companies });
-
   const company = companies;
   return (
     <div className="p-4 md:p-8 bg-muted/40 min-h-screen rounded-lg">

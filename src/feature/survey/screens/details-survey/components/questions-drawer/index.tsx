@@ -46,7 +46,7 @@ export const SurveyPreviewDrawer = ({ survey }: Props) => {
     <Drawer direction="right">
       <DrawerTrigger asChild>
         <Button variant="outline">
-          <Eye className="mr-2 h-4 w-4" /> Perguntas
+          <Eye className="mr-2 h-4 w-4" /> Pré-visualizar
         </Button>
       </DrawerTrigger>
       <DrawerContent className="">

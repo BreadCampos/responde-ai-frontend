@@ -25,7 +25,6 @@ interface Props {
 export const InputPreview = memo(({ question, disabled }: Props) => {
   const { rules, inputProps } = getValidationRules(question.validations);
 
-  console.log("entrando muito aqui", question);
   const renderInput = (name: any, rules: any) => {
     switch (question.type) {
       case "text":
