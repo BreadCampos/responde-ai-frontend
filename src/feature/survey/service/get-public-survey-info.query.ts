@@ -5,8 +5,10 @@ import { surveyApi } from "../api";
 
 export const GetPublicSurveyInfoQuery = ({
   surveyId,
+  customLinkRef,
 }: {
   surveyId: string;
+  customLinkRef?: string;
 }) => {
   const queryKey = ["survey-public-info", surveyId];
 
@@ -14,11 +16,11 @@ export const GetPublicSurveyInfoQuery = ({
     queryKey,
     enabled: !!surveyId,
     queryFn: async () => {
-      const url = surveyApi.GET_PUBLIC_SURVEY_INFO.replace(
-        ":surveyId",
-        surveyId
-      );
+      let url = surveyApi.GET_PUBLIC_SURVEY_INFO.replace(":surveyId", surveyId);
 
+      if (customLinkRef) {
+        url += `?customLinkRef=${customLinkRef}`;
+      }
       const response = await httpClient.request<SurveyPublicInfoModel>({
         method: "GET",
         url: url,

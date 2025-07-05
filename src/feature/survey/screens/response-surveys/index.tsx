@@ -11,6 +11,7 @@ import SuccessAnimation from "@/shared/components/lotties/success.lotties";
 import { CreatePublicSurveyResponseMutation } from "../../service/create-public-survey-response";
 import { CreateSurveyResponse } from "../../model/create-survey-response";
 import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
 
 interface Props {
   surveyId: string;
@@ -19,15 +20,22 @@ interface Props {
 export const ResponseSurvey = ({ surveyId }: Props) => {
   const { publicCompany, setPublicCompany, company } = useAuthStore();
 
+  const searchParams = useSearchParams();
+
+  const customLinkRef = searchParams.get("customLinkRef");
+
+  console.log({ customLinkRef });
   const methods = useForm();
 
   const { data, isLoading, isSuccess, isError } = GetPublicSurveyInfoQuery({
     surveyId: surveyId || "",
+    customLinkRef: customLinkRef || "",
   });
 
   const { mutate: createReponse, isSuccess: isCreationSuccess } =
     CreatePublicSurveyResponseMutation();
 
+  console.log(company?.id);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     if (company?.id) {
@@ -43,11 +51,10 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
       })),
     };
 
-    console.log({ formattedData });
-
     createReponse({
       surveyId: surveyId || "",
       responses: formattedData,
+      customLinkRef,
     });
   };
   useEffect(() => {

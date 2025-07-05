@@ -10,14 +10,20 @@ export const CreatePublicSurveyResponseMutation = () => {
     mutationFn: async ({
       surveyId,
       responses,
+      customLinkRef,
     }: {
       surveyId: string;
       responses: CreateSurveyResponse;
+      customLinkRef: string | null;
     }) => {
-      const url = surveyApi.CREATE_PUBLIC_SURVEY_RESPONSE.replace(
+      let url = surveyApi.CREATE_PUBLIC_SURVEY_RESPONSE.replace(
         ":surveyId",
         surveyId
       );
+
+      if (customLinkRef) {
+        url += `?customLinkRef=${customLinkRef}`;
+      }
 
       const response = await httpClient.request<SurveyPublicInfoModel>({
         method: "POST",
