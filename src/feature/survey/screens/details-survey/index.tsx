@@ -14,6 +14,7 @@ import { SurveyCustomLinks } from "./components/survey-custom-link";
 import { ActionMenu, MenuOption } from "@/shared/components/action-menu";
 import { ROUTES } from "@/core/routes/route-constants";
 import { useRouter } from "next/navigation";
+import { Card, CardHeader } from "@/shared/components/ui/card";
 
 interface Props {
   surveyId: string;
@@ -44,26 +45,29 @@ const DetailsSurvey = ({ surveyId }: Props) => {
         "md:p-4"
       )}
     >
-      <div className="mb-5 w-full flex flex-col md:flex-row md:justify-between items-center gap-3">
-        <BackButton>
-          <h2 className="text-2xl flex-1 font-bold tracking-tight text-card-foreground">
-            {survey?.title}
-          </h2>
-        </BackButton>
-        <div className="flex items-center gap-2">
-          <SurveyPreviewDrawer survey={survey} />{" "}
-          <ActionMenu options={optionsMenu} />
+      <div className="max-w-4xl mx-auto space-y-6">
+        <Card>
+          <CardHeader className="flex flex-row justify-between  items-center gap-4">
+            <BackButton>
+              <h2 className="text-2xl flex-1 font-bold tracking-tight text-card-foreground">
+                {survey?.title}
+              </h2>
+            </BackButton>
+            <div className="flex items-center gap-2">
+              <SurveyPreviewDrawer survey={survey} />{" "}
+              <ActionMenu options={optionsMenu} />
+            </div>
+          </CardHeader>
+        </Card>
+
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7">
+          <SurveyGraphic chartData={survey?.responsesOverTime} />
+          <SurveyLinks genericLinkSlug={survey?.genericLinkSlug} />
         </div>
+        <SurveyResponses />
+        {survey?.npsInfo && <NpsSection npsInfo={survey?.npsInfo} />}
+        <SurveyCustomLinks />
       </div>
-
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7">
-        <SurveyGraphic chartData={survey?.responsesOverTime} />
-        <SurveyLinks genericLinkSlug={survey?.genericLinkSlug} />
-      </div>
-      <SurveyResponses />
-      {survey?.npsInfo && <NpsSection npsInfo={survey?.npsInfo} />}
-
-      <SurveyCustomLinks />
     </main>
   );
 };

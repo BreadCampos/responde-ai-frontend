@@ -75,7 +75,6 @@ export const ServeyModal = ({
   const methods = useForm<IForm>({
     defaultValues: {
       pageIndex: 1,
-      // mask: "",
     },
   });
   const { handleSubmit, reset, watch, setValue } = methods;
@@ -88,7 +87,6 @@ export const ServeyModal = ({
   const watchedType = watch("type");
 
   const onSubmit = (data: IForm) => {
-    console.log("onSubmit data", data);
     const needsOptions = typesWithOptions.includes(data?.type);
     if (needsOptions && data.selectOptions.length === 0) {
       methods.setError("selectOptions", {

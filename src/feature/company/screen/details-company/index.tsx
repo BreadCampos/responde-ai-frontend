@@ -48,27 +48,29 @@ export const DetailsCompany = ({ id }: Props) => {
       <div className="max-w-4xl mx-auto space-y-6">
         <Card>
           <CardHeader className="flex flex-row items-center gap-4">
-            <BackButton className="w-full ">
-              <div className="flex flex-col items-start  sm:flex-row sm:items-center gap-2 w-full ">
-                <DefaultAvatar
-                  src={company?.logoUrl}
-                  name={company?.fantasyName}
-                />
+            <div className="flex flex-col gap-15 md:flex-row justify-between items-center gap-2 p-4 rounded-lg w-full">
+              <BackButton className="w-full ">
+                <div className="flex flex-col items-center  sm:flex-row sm:items-center gap-2 w-full">
+                  <DefaultAvatar
+                    src={company?.logoUrl}
+                    name={company?.fantasyName}
+                  />
 
-                <div className="flex-1">
-                  <CardTitle className="text-2xl">
-                    {company?.fantasyName}
-                  </CardTitle>
-                  <CardDescription>{company?.legalName}</CardDescription>
+                  <div className="flex-1">
+                    <CardTitle className="text-2xl">
+                      {company?.fantasyName}
+                    </CardTitle>
+                    <CardDescription>{company?.legalName}</CardDescription>
+                  </div>
                 </div>
-                <Badge
-                  variant="default"
-                  className="max-w-[80%] truncate text-white"
-                >
-                  ID: {id}
-                </Badge>
-              </div>
-            </BackButton>
+              </BackButton>
+              <Badge
+                variant="default"
+                className="max-w-[80%] truncate text-white"
+              >
+                ID: {id}
+              </Badge>
+            </div>
           </CardHeader>
         </Card>
 
