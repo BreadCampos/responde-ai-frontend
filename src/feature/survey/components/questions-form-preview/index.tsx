@@ -1,13 +1,14 @@
 "use client";
 
-import { useFormContext } from "react-hook-form";
-import Image from "next/image";
-import type { SurveyQuestion } from "../../model/survey.model";
-import { useMemo, useState } from "react";
-import { InputPreview } from "../survey-form/components/input-preview";
-import { shouldShowQuestion } from "../survey-form/helper/shouled-show-question";
 import { Button } from "@/shared/components/button";
 import { cn } from "@/shared/lib/utils";
+import Image from "next/image";
+import { useMemo, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { StoreSessionMetrics } from "../../../../shared/utils/send-user-metrics";
+import type { SurveyQuestion } from "../../model/survey.model";
+import { InputPreview } from "../survey-form/components/input-preview";
+import { shouldShowQuestion } from "../survey-form/helper/shouled-show-question";
 
 interface Props {
   questions: SurveyQuestion[];
@@ -17,6 +18,7 @@ interface Props {
   isPreview?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit?: (data: any) => void;
+  sessionStart?: Date;
 }
 export const QuestionsForm = ({
   questions,
@@ -25,6 +27,7 @@ export const QuestionsForm = ({
   logoUrl,
   isPreview,
   onSubmit,
+  sessionStart,
 }: Props) => {
   const { trigger, getValues, handleSubmit, formState, watch } =
     useFormContext();
@@ -38,6 +41,10 @@ export const QuestionsForm = ({
   const totalPages = Math.max(...questions?.map((q) => q?.pageIndex), 1);
 
   const handlePrevPage = () => {
+    StoreSessionMetrics("navigate_back", sessionStart, {
+      currentPage,
+      targetPage: currentPage - 1,
+    });
     if (currentPage > 1) {
       setCurrentPage((p) => p - 1);
     }
@@ -68,17 +75,31 @@ export const QuestionsForm = ({
         .map((q) => q.id);
       const isValid = await trigger(visibleFieldsOnPage);
       if (isValid && currentPage < totalPages) {
+        StoreSessionMetrics("navigate_forward", sessionStart, {
+          currentPage,
+          targetPage: currentPage - 1,
+        });
         setCurrentPage((p) => p + 1);
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
+      StoreSessionMetrics("form_validation", sessionStart, {
+        errors: formState.errors,
+      });
     } finally {
       setIsNavigating(false);
     }
   };
 
+  const onInvalid = (errors: object) => {
+    StoreSessionMetrics("form_errors", sessionStart, {
+      errors,
+      currentPage,
+    });
+  };
+
   return (
     <form
-      onSubmit={handleSubmit(onPreviewSubmit)}
+      onSubmit={handleSubmit(onPreviewSubmit, onInvalid)}
       className={cn(
         "max-w-[600px] min-h-[500px]  h-[calc(100vh-160px)] flex-1 flex flex-col gap-4 border p-4 rounded-lg bg-card shadow-md",
         className
@@ -133,7 +154,13 @@ export const QuestionsForm = ({
               return null;
             }
 
-            return <InputPreview question={q} key={q.id} />;
+            return (
+              <InputPreview
+                question={q}
+                key={q.id}
+                sessionStart={sessionStart}
+              />
+            );
           })}
         </div>
       </div>

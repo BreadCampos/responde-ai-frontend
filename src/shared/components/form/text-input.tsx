@@ -1,6 +1,9 @@
-import { memo, type ReactNode } from "react";
-import { useFormContext, type RegisterOptions } from "react-hook-form";
-import { cn } from "@/shared/lib/utils";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/shared/components/ui/form";
 import { Input, type InputProps } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import {
@@ -9,13 +12,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/shared/components/ui/tooltip";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/shared/components/ui/form";
+import { cn } from "@/shared/lib/utils";
 import { Info } from "lucide-react";
+import { memo, type ReactNode } from "react";
+import { useFormContext, type RegisterOptions } from "react-hook-form";
 
 export type TextInputProps = Omit<InputProps, "name"> & {
   name: string;
@@ -150,7 +150,7 @@ export const TextInput = memo(
                         field.onChange(isNaN(value) ? "" : value);
                         return;
                       }
-                      console.log("e", e);
+                      // console.log("e", e);
                       field.onChange(e);
                     }}
                   />

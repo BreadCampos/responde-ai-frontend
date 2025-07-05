@@ -1,17 +1,22 @@
 "use client";
 
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { QuestionsForm } from "../../components/questions-form-preview";
-import { FormProvider, useForm } from "react-hook-form";
-import { LoadingSkeleton } from "./components/loadgin-skeleton";
-import { GetPublicSurveyInfoQuery } from "../../service/get-public-survey-info.query";
-import { useEffect } from "react";
 import ErrorAnimation from "@/shared/components/lotties/error.lotties";
 import SuccessAnimation from "@/shared/components/lotties/success.lotties";
-import { CreatePublicSurveyResponseMutation } from "../../service/create-public-survey-response";
-import { CreateSurveyResponse } from "../../model/create-survey-response";
-import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { v4 as uuidv4 } from "uuid";
+import {
+  ClearSessionMetrics,
+  StoreSessionMetrics,
+} from "../../../../shared/utils/send-user-metrics";
+import { QuestionsForm } from "../../components/questions-form-preview";
+import { CreateSurveyResponse } from "../../model/create-survey-response";
+import { CreatePublicSurveyResponseMutation } from "../../service/create-public-survey-response";
+import { GetPublicSurveyInfoQuery } from "../../service/get-public-survey-info.query";
+import { LoadingSkeleton } from "./components/loadgin-skeleton";
 
 interface Props {
   surveyId: string;
@@ -24,19 +29,20 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
 
   const customLinkRef = searchParams.get("customLinkRef");
 
-  console.log({ customLinkRef });
   const methods = useForm();
+
+  const sessionIdentifier = uuidv4();
 
   const { data, isLoading, isSuccess, isError, error } =
     GetPublicSurveyInfoQuery({
       surveyId: surveyId || "",
       customLinkRef: customLinkRef || "",
+      sessionIdentifier,
     });
 
-  const { mutate: createReponse, isSuccess: isCreationSuccess } =
+  const { mutate: createResponse, isSuccess: isCreationSuccess } =
     CreatePublicSurveyResponseMutation();
 
-  console.log(company?.id);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     if (company?.id) {
@@ -52,12 +58,39 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
       })),
     };
 
-    createReponse({
+    createResponse({
       surveyId: surveyId || "",
       responses: formattedData,
       customLinkRef,
+      sessionIdentifier,
     });
   };
+
+  // Eventos disparados para o backend para informar metricas
+  const sessionStart = new Date();
+  useEffect(() => {
+    document.addEventListener("visibilitychange", async () => {
+      if (document.hidden) {
+        StoreSessionMetrics("visibilitychange_hidden", sessionStart);
+      } else {
+        StoreSessionMetrics("visibilitychange_visible", sessionStart);
+      }
+    });
+    window.addEventListener("beforeunload", (e) => {
+      e.preventDefault();
+      StoreSessionMetrics("beforeunload", sessionStart);
+    });
+    window.addEventListener("mousedown", (e) => {
+      StoreSessionMetrics("mousedown", sessionStart, {
+        offsetX: e.offsetX,
+        offsetY: e.offsetY,
+        innerWidth: window.innerWidth,
+        innerHeight: window.innerHeight,
+      });
+    });
+    ClearSessionMetrics();
+  }, []);
+
   useEffect(() => {
     if (isSuccess && data?.company && !company) {
       setPublicCompany({
@@ -106,6 +139,7 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
               className="max-w-full border-none h-[calc(100vh-110px)] max-h-[calc(100vh - 200px)] min-h-auto shadow-none rounded-none overflow-y-auto p-0"
               logoUrl={publicCompany?.logoUrl || ""}
               onSubmit={onSubmit}
+              sessionStart={sessionStart}
             />
           </div>
         )}{" "}
