@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import { httpClient } from "@/core/api/fetch-api";
+import { useQuery } from "@tanstack/react-query";
 import { companyApi } from "../api";
 
-import type { CompanyModel } from "../model/company.mode";
+import type { CompanyModel } from "../model/company.model";
 
 type ReponseType = CompanyModel | undefined;
 

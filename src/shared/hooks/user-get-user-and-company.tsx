@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import type { CompanyModel } from "@/feature/company/model/company.mode";
+import type { CompanyModel } from "@/feature/company/model/company.model";
 import { GetCompaniesListQuery } from "@/feature/company/service/get-companies-list.query";
 import { GetUserMeServiceQuery } from "@/feature/users/service/get-user-me.query";
 import { oklch } from "culori";

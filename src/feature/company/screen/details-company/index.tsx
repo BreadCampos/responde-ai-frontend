@@ -1,6 +1,8 @@
+import { ROUTES } from "@/core/routes/route-constants";
 import { DefaultAvatar } from "@/shared/components/avatar.index";
 import { BackButton } from "@/shared/components/back-button";
-import { Badge } from "@/shared/components/ui/badge";
+import { Button } from "@/shared/components/button";
+import { CopyBadge } from "@/shared/components/copy.index";
 import {
   Card,
   CardContent,
@@ -12,36 +14,24 @@ import { Checkbox } from "@/shared/components/ui/checkbox";
 import { Label } from "@/shared/components/ui/label";
 import { Separator } from "@/shared/components/ui/separator";
 import { emptyValue } from "@/shared/utils/empty-string";
+import { formatDocument } from "@/shared/utils/format-cpf";
 import { formatDate } from "@/shared/utils/format-date";
-import { useParams } from "next/navigation";
+import { Edit } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
 import { GetCompanyQuery } from "../../service/get-company.query";
-
-// Modelo de dados que você forneceu
-export type CompanyModel = {
-  addressLine: string;
-  addressLineComplement: string | null;
-  billingAddressLine: string | null;
-  createdAt: string;
-  document: string;
-  fantasyName: string;
-  id: string;
-  legalName: string;
-  logoUrl: string;
-  ownerId: string;
-  settings: {
-    always_display_logo: boolean;
-  };
-  theme: {
-    primary: string;
-  };
-  updatedAt: string;
-};
 
 export const DetailsCompany = () => {
   const { id } = useParams<{ id: string }>();
   const { data: companies } = GetCompanyQuery({ id });
 
   const company = companies;
+
+  const navigate = useRouter();
+
+  const goToEditCompany = () => {
+    navigate.push(ROUTES.COMPANY_EDIT.replace(":id", id));
+  };
+
   return (
     <div className="p-4 md:p-8 bg-muted/40 min-h-screen rounded-lg">
       <div className="max-w-4xl mx-auto space-y-6">
@@ -63,12 +53,17 @@ export const DetailsCompany = () => {
                   </div>
                 </div>
               </BackButton>
-              <Badge
-                variant="default"
-                className="max-w-[80%] truncate text-white"
-              >
-                ID: {id}
-              </Badge>
+              <div className="flex items-center justify-between w-full md:w-auto">
+                <CopyBadge textToCopy={id} className="max-w-[80%] truncate " />
+                <Button
+                  variant="ghost"
+                  className="ml-2"
+                  size="icon"
+                  onClick={goToEditCompany}
+                >
+                  <Edit />
+                </Button>
+              </div>
             </div>
           </CardHeader>
         </Card>
@@ -80,7 +75,7 @@ export const DetailsCompany = () => {
               <div className="space-y-1 text-sm text-muted-foreground">
                 <p>
                   <strong className="text-card-foreground">Documento:</strong>{" "}
-                  {emptyValue(company?.document)}
+                  {company?.document ? formatDocument(company?.document) : "-"}
                 </p>
               </div>
             </div>

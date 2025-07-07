@@ -1,3 +1,5 @@
+import { formatDocument } from "../utils/format-cpf";
+
 export const useFormatValues = () => {
   const handleFormatMinMaxValue = (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,19 +37,20 @@ export const useFormatValues = () => {
       return event.preventDefault();
   };
 
-  // const CPF_LENGTH = 11;
+  const CPF_LENGTH = 14;
 
-  // const handleCpfMask = (event) => {
-  //   const inputSize = event?.target?.value.replace(/\D/g, "");
+  const handleDocumentMask = (event: any) => {
+    const inputSize = event?.target?.value.replace(/\D/g, "");
 
-  //   if (inputSize?.length >= CPF_LENGTH) {
-  //     return event?.preventDefault();
-  //   }
-  //   const formattedValue = formatCpf(inputSize);
-  //   event.target.value = formattedValue;
-  // };
+    if (inputSize?.length >= CPF_LENGTH) {
+      return event?.preventDefault();
+    }
+    const formattedValue = formatDocument(inputSize);
+    event.target.value = formattedValue;
+  };
 
   return {
     handleFormatMinMaxValue,
+    handleDocumentMask,
   };
 };

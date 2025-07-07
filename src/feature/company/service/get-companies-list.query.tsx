@@ -7,7 +7,7 @@ import type {
   PaginatedResponse,
 } from "@/shared/model/pagination.model";
 import { mountQuery } from "@/shared/utils/mount-query";
-import type { CompanyModel } from "../model/company.mode";
+import type { CompanyModel } from "../model/company.model";
 
 type ReponseType = PaginatedResponse<CompanyModel> | undefined;
 

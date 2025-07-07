@@ -78,7 +78,7 @@ export const SidebarHeader = ({
     { name: "Formulários", href: ROUTES.SURVEY_LIST, icon: FileText },
     { name: "Webhooks", href: ROUTES.WEBHOOKS_LIST, icon: Webhook },
     {
-      name: "Minhas companhias",
+      name: "Minha companhia",
       href: ROUTES.COMPANY_DETAILS.replace(":id", company?.id || ""),
       icon: CompassIcon,
     },

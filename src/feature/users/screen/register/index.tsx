@@ -7,15 +7,15 @@ import {
   type SignupWithCompanyFormValues,
 } from "./register.schama";
 
-import { RegisterUser } from "./components/register-user";
-import { RegisterCompany } from "./components/register-company";
-import { Form } from "@/shared/components/ui/form";
-import { Stepper } from "@/shared/components/stepper";
+import { RegisterCompanyForm } from "@/feature/company/components/register-company-form";
 import { useCreateCompanyMutation } from "@/feature/company/service/create-company.mutation";
-import { toast } from "sonner";
-import React from "react";
-import { CreateUserMutation } from "../../service/create-user.mutation";
+import { Stepper } from "@/shared/components/stepper";
+import { Form } from "@/shared/components/ui/form";
 import { useRouter } from "next/navigation";
+import React from "react";
+import { toast } from "sonner";
+import { RegisterUser } from "../../components/register-user";
+import { CreateUserMutation } from "../../service/create-user.mutation";
 const stepFields = [
   [
     "user.firstName",
@@ -145,7 +145,10 @@ export const Register = () => {
 
   const stepperSteps = [
     <RegisterUser key={"RegisterUser"} />,
-    <RegisterCompany key={"RegisterCompany"} />,
+    <RegisterCompanyForm
+      key={"RegisterCompany"}
+      title={"2. Dados da Empresa"}
+    />,
   ];
 
   return (

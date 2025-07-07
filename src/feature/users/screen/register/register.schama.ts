@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 export const signupWithCompanySchema = z
   .object({
@@ -20,8 +20,21 @@ export const signupWithCompanySchema = z
       legalName: z.string({ message: "A razão social é obrigatória." }),
       fantasyName: z.string({ message: "O nome fantasia é obrigatório." }),
       document: z
-        .string({ message: "O documento é obrigatório." })
-        .min(18, "O CNPJ deve conter 14 dígitos."),
+        .string({
+          required_error: "CPF/CNPJ é obrigatório.",
+        })
+        .refine((doc) => {
+          const replacedDoc = doc.replace(/\D/g, "");
+          return replacedDoc.length >= 11;
+        }, "CPF/CNPJ deve conter no mínimo 11 caracteres.")
+        .refine((doc) => {
+          const replacedDoc = doc.replace(/\D/g, "");
+          return replacedDoc.length <= 14;
+        }, "CPF/CNPJ deve conter no máximo 14 caracteres.")
+        .refine((doc) => {
+          const replacedDoc = doc.replace(/\D/g, "");
+          return !!Number(replacedDoc);
+        }, "CPF/CNPJ deve conter apenas números."),
       logoUrl: z
         .string({ message: "A URL do logo é obrigatória." })
         .url({ message: "Insira uma URL válida para o logo." })

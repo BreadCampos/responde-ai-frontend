@@ -2,32 +2,34 @@ import { useMutation } from "@tanstack/react-query";
 
 import { httpClient } from "@/core/api/fetch-api";
 import { ROUTES } from "@/core/routes/route-constants";
+import { toast } from "sonner";
 import { companyApi } from "../api";
 import type { CompanyModel } from "../model/company.model";
-import type { CreateCompanyModel } from "../model/create-company.model";
+import type { UpdateCompanyModel } from "../model/update-company.model";
 
-export const useCreateCompanyMutation = () => {
+export const useUpdateCompanyMutation = () => {
   return useMutation({
     mutationFn: async ({
-      accessToken,
       company,
+      id,
     }: {
-      company: CreateCompanyModel;
-      accessToken: string;
+      id: string;
+      company: UpdateCompanyModel;
     }) => {
+      const url = companyApi.UPDATE_COMPANY.replace(":id", id);
       const response = await httpClient.request<CompanyModel>({
-        method: "POST",
-        url: companyApi.CREATE_COMPANY,
+        method: "PATCH",
+        url,
         body: company,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       });
       return response.data;
     },
     onSuccess: async (response) => {
       if (response) {
-        window.location.replace(ROUTES.DASHBOARD);
+        toast.success("Empresa atualizada com sucesso!");
+        window.location.replace(
+          ROUTES.COMPANY_DETAILS.replace(":id", response.id)
+        );
       }
     },
   });

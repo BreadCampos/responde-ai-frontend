@@ -1,10 +1,10 @@
 // src/application/stores/use-auth-store.ts
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
-import type { CompanyModel } from "../../company/model/company.mode";
-import type { UserModel } from "../../users/model/user.model";
 import { ROUTES } from "@/core/routes/route-constants";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
+import type { CompanyModel } from "../../company/model/company.model";
+import type { UserModel } from "../../users/model/user.model";
 
 interface AuthState {
   user: UserModel | null;

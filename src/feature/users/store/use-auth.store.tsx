@@ -1,8 +1,8 @@
 // src/application/stores/use-auth-store.ts
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import type { CompanyModel } from "../../company/model/company.model";
 import type { UserModel } from "../model/user.model";
-import type { CompanyModel } from "../../company/model/company.mode";
 
 interface AuthState {
   user: UserModel | null;
