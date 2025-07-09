@@ -9,28 +9,27 @@ import { Button } from "../button";
 // Componente auxiliar para a imagem da bandeira (sem alterações)
 const FlagImage = ({ lang, alt }: { lang: string; alt: string }) => {
   return (
-    <Image
-      className="rounded-full" // Usei rounded-full para um visual melhor
-      src={`https://flagcdn.com/16x12/${lang}.png`}
-      width={16}
-      height={12}
-      alt={alt}
-    />
+    <div className="relative w-6 h-6">
+      {" "}
+      {/* Definindo tamanho fixo para a imagem */}
+      <Image
+        className="rounded-full" // Usei rounded-full para um visual melhor
+        src={`https://flagcdn.com/w1280/${lang}.png`}
+        alt={alt}
+        layout="fill"
+        objectFit="cover"
+      />
+    </div>
   );
 };
 
 export function LanguageSwitcher() {
-  // 2. Pega o idioma atual e a função para alterá-lo diretamente da store
-  // 3. A função de troca de idioma agora simplesmente chama a ação da store
-  // Não precisamos mais manipular o router ou o pathname.
   const pathname = usePathname();
   const router = useRouter();
 
   const handleLanguageChange = (newLocale: string) => {
     if (!pathname) return;
-    // Remove o locale antigo do caminho
     const newPath = pathname.split("/").slice(2).join("/");
-    // Navega para a nova rota com o novo locale
     router.push(`/${newLocale}/${newPath}`);
   };
 
@@ -43,14 +42,11 @@ export function LanguageSwitcher() {
     supportedLanguages.find((lang) => pathname.includes(lang.code)) ||
     supportedLanguages[0];
 
-  console.log(language, "language");
-
-  // A lógica do menu agora é baseada no estado da store
   const options: MenuOption[] = supportedLanguages.map((lang) => ({
     label: (
       <div className="flex items-center gap-2">
-        <span>{lang.name}</span> {/* Corrigido para mostrar o nome dinâmico */}
         <FlagImage lang={lang.flag} alt={`Bandeira de ${lang.name}`} />
+        <span>{lang.name}</span> {/* Corrigido para mostrar o nome dinâmico */}
       </div>
     ),
     onSelect: () => handleLanguageChange(lang.code),

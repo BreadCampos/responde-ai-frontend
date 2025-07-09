@@ -1,21 +1,23 @@
-// app/[lang]/page.tsx
+"use client";
 
-import { getTranslation } from "@/core/i18n/get-translations";
-import { Locale } from "@/core/i18n/type/locale";
+import { ROUTES } from "@/core/routes/route-constants";
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { redirect } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
-export default async function HomeTranslation({
+export default function HomePage({
   params: { lang },
 }: {
-  params: { lang: Locale };
+  params: { lang: string };
 }) {
-  const i18n = await getTranslation(lang, "common");
+  const { isAuthenticated } = useAuthStore();
+  const { ready } = useTranslation();
 
-  return (
-    <main>
-      <h1>{i18n.t("welcome")}</h1>
-      <p>{i18n.t("description")}</p>
+  console.log({ isAuthenticated });
 
-      {/* Exemplo de componente cliente na mesma página */}
-    </main>
-  );
+  if (!ready) {
+    return <>carregando.</>;
+  }
+
+  redirect(`/${lang}${isAuthenticated ? ROUTES.DASHBOARD : ROUTES.LOGIN}`);
 }
