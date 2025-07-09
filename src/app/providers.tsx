@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/shared/components/theme-provider";
+import I18nProvider from "@/shared/providers/i18n.provider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 import { Toaster } from "sonner";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
@@ -10,11 +11,13 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <Toaster richColors closeButton={true} />
+      <I18nProvider>
+        <ThemeProvider>
+          <Toaster richColors closeButton={true} />
 
-        {children}
-      </ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </I18nProvider>
     </QueryClientProvider>
   );
 }

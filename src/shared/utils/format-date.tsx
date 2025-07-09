@@ -13,7 +13,7 @@ export const formatDate = ({
   if (!date) {
     return "-";
   }
-  const currentLang = "pt-br";
+  const currentLang = "pt-BR";
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const {
     dateStyle = "short",

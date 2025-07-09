@@ -1,0 +1,9 @@
+{
+  "welcome": "Welcome to our application!",
+  "sidebar": {
+    "survey": "Survey",
+    "webhooks": "Webhooks",
+    "company": "Company",
+    "logout": "Logout"
+  }
+}

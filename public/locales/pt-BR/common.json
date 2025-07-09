@@ -1,0 +1,9 @@
+{
+  "wellcome": "Bem-vindo ao nosso aplicativo!",
+  "sidebar": {
+    "survey": "Formulário",
+    "webhooks": "Webhooks",
+    "company": "Empresa",
+    "logout": "Sair"
+  }
+}

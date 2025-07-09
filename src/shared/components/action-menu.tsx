@@ -1,9 +1,8 @@
 // components/ui/action-menu.tsx
 
-import * as React from "react";
 import { MoreHorizontal } from "lucide-react";
+import * as React from "react";
 
-import { Button } from "@/shared/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,9 +11,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/shared/components/ui/button";
+import { Fragment } from "react";
 
 export type MenuOption = {
-  label: string;
+  label: string | React.ReactNode;
   onSelect: () => void;
   className?: string;
   disabled?: boolean;
@@ -56,7 +57,7 @@ export function ActionMenu({
 
           // Renderiza um item de menu padrão
           return (
-            <>
+            <Fragment key={index}>
               <DropdownMenuItem
                 key={index}
                 onSelect={option.onSelect}
@@ -66,7 +67,7 @@ export function ActionMenu({
                 {option.label}
               </DropdownMenuItem>
               {option.withSeparator && <DropdownMenuSeparator key={index} />}
-            </>
+            </Fragment>
           );
         })}
       </DropdownMenuContent>
