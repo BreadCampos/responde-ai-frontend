@@ -3,15 +3,15 @@ import { Button } from "@/shared/components/button";
 import { TextInput } from "@/shared/components/form";
 import { Form } from "@/shared/components/ui/form";
 import { useToggle } from "@/shared/hooks/use-toggle";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { Eye, EyeClosed } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { useLoginMutation } from "../../service/login.mutation";
 import { loginResolver, type LoginFormValues } from "./login.schema";
 
 export const LoginScreen = () => {
-  const { t } = useTranslation("login");
+  const t = useTranslation("login");
   const methods = useForm<LoginFormValues>({
     resolver: loginResolver,
   });

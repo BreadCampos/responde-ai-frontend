@@ -11,7 +11,7 @@ export default function I18nProvider({
   children: ReactNode;
   lang: string;
 }) {
-  console.log(lang);
+  console.log({ lang });
   useEffect(() => {
     // Este efeito agora vai rodar sempre que o 'lang' da URL mudar.
 

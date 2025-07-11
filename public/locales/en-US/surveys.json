@@ -1,0 +1,12 @@
+{
+  "surveys": {
+    "title": "Surveys",
+    "addNew": "Add new survey",
+    "columns": {
+      "id": "ID",
+      "title": "Title",
+      "link": "Link",
+      "createdAt": "Created at"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "surveys": {
+    "title": "Questionários",
+    "addNew": "Adicionar nova enquete",
+    "columns": {
+      "id": "ID",
+      "title": "Título",
+      "link": "Link",
+      "createdAt": "Criado em"
+    }
+  }
+}

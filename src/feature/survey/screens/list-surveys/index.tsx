@@ -3,12 +3,16 @@ import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { Button } from "@/shared/components/button";
 import { DataTable } from "@/shared/components/data-table";
 import { usePagination } from "@/shared/hooks/use-pagination";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { useRouter } from "next/navigation";
 import { GetListSurveysQuery } from "../../service/get-survey-list.query";
-import { columns } from "./columns";
+import { useColumns } from "./columns";
 
 export const ListSurveys = () => {
   const navigate = useRouter();
+  const t = useTranslation("surveys");
+
+  const { columns } = useColumns();
 
   const redirectionToCreate = () => {
     navigate.push(ROUTES.SURVEY_CREATE);
@@ -47,10 +51,10 @@ export const ListSurveys = () => {
     <div className="flex h-full flex-col gap-2 p-2 md:p-4">
       <div className="mb-2 w-full flex flex-col md:flex-row md:justify-between items-center">
         <h1 className="text-2xl text-card-foreground font-bold mb-4">
-          Questionários
+          {t("surveys.title")}
         </h1>
         <Button variant="default" onClick={redirectionToCreate}>
-          Adicionar nova enquete
+          {t("surveys.addNew")}
         </Button>
       </div>
 
