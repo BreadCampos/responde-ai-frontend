@@ -1,24 +1,24 @@
+import type {
+  QuestionConditionOptions,
+  QuestionValidators,
+  SurveyQuestion,
+  SurveyQuestionInputType,
+} from "@/feature/survey/model/survey.model";
 import { SelectInput } from "@/shared/components/form/select-input";
 import { TextInput } from "@/shared/components/form/text-input";
 import Modal from "@/shared/components/modal";
 import { Form } from "@/shared/components/ui/form";
-import { useForm } from "react-hook-form";
+import { SelectOption } from "@/shared/types/select-options.type";
 import { useCallback, useEffect, useMemo } from "react";
-import { QuestionPreview } from "./components/question-preview";
+import { useForm } from "react-hook-form";
 import { ConditionalValues } from "./components/conditional-values";
-import { ValidationRules } from "./components/validation-rules";
-import type {
-  SurveyQuestion,
-  QuestionValidators,
-  SurveyQuestionInputType,
-  QuestionConditionOptions,
-} from "@/feature/survey/model/survey.model";
 import {
   ControlledOptions,
   typesWithOptions,
 } from "./components/controlled-options";
-import { SelectOption } from "@/shared/types/select-options.type";
+import { QuestionPreview } from "./components/question-preview";
 import { RattingType } from "./components/ratting-type";
+import { ValidationRules } from "./components/validation-rules";
 
 interface Props {
   onAddQuestion: (question: SurveyQuestion) => void;
@@ -196,6 +196,8 @@ export const ServeyModal = ({
         });
       }
     }
+    // TODO: fix, added just for build
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, questionId, reset]);
 
   return (

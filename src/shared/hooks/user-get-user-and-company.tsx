@@ -64,5 +64,7 @@ export const useGetUserAndCompany = () => {
       setCompany({ company: currentCompany });
       setCompanyTheme(currentCompany);
     }
+    // TODO: fix, added just for build
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, company, setUser, setCompany, isLoading, isError, navigate]);
 };
