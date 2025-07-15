@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "interface": "i18next-resources-for-ts interface -i ./public/locales/pt-BR -o ./src/@types/resources.d.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

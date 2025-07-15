@@ -5,7 +5,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import type { SurveyModel } from "../../model/survey.model";
 
 export const useColumns = () => {
-  const t = useTranslation("surveys");
+  const { t } = useTranslation("surveys");
   const columns: ColumnDef<SurveyModel>[] = [
     {
       accessorKey: "id",

@@ -12,6 +12,7 @@ import { BackButton } from "@/shared/components/back-button";
 import { Button } from "@/shared/components/button";
 import { Form } from "@/shared/components/ui/form";
 import { useToggle } from "@/shared/hooks/use-toggle";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { closestCenter, DndContext, type DragEndEvent } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -46,6 +47,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     keyName: "key", // Define um nome para a chave única, default é 'id'
   });
 
+  const { t } = useTranslation("surveys");
   // Use 'watch' para obter os valores atuais do formulário
   const surveyTitle = watch("title");
   const surveyQuestions = watch("questions");
@@ -565,7 +567,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     const renumberedQuestions = renumberPages(updatedQuestions);
 
     setValue("questions", renumberedQuestions, { shouldDirty: true });
-    toast.success("Pergunta adicionada com sucesso.");
+    toast.success(t("createSurvey.toasts.addQuestionSuccess"));
     setNewQuestionIds((state) => [...state, newQuestion.id]);
   };
 
@@ -573,22 +575,26 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     const index = fields.findIndex((field) => field.id === updatedQuestion.id);
     if (index > -1) {
       update(index, updatedQuestion);
-      toast.success("Pergunta atualizada com sucesso.");
+      toast.success(t("createSurvey.toasts.updateQuestionSuccess"));
     }
   };
 
   const deleteQuestion = (questionId: string) => {
     const currentQuestions = getValues("questions");
-    const isDependency = currentQuestions.some(
+    const dependencyQuestion = currentQuestions.find(
       (q) => q.conditional?.fieldId === questionId
     );
-    if (
-      isDependency &&
-      !confirm(
-        "Atenção: Outra pergunta depende desta. Deseja realmente deletá-la?"
-      )
-    ) {
-      return;
+    if (dependencyQuestion?.label) {
+      if (
+        !confirm(
+          t("createSurvey.toasts.confirm", {
+            dependencyQuestion: dependencyQuestion.label,
+          })
+        )
+      ) {
+        return;
+      }
+      deleteQuestion(dependencyQuestion.id);
     }
 
     const index = fields.findIndex((field) => field.id === questionId);
@@ -598,7 +604,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       const remainingQuestions = getValues("questions");
       const renumberedQuestions = renumberPages(remainingQuestions);
       setValue("questions", renumberedQuestions);
-      toast.success("Pergunta deletada com sucesso.");
+      toast.success(t("createSurvey.toasts.deleteQuestion"));
     }
     setDeletesQuestionIds((state) => [...state, questionId]);
   };
@@ -672,9 +678,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
         const dependencyPosition =
           dependencyItem.pageIndex + dependencyItem.orderIndex / 100;
         if (movedPosition < dependencyPosition) {
-          toast.error(
-            "Movimento inválido: A pergunta não pode vir antes de sua dependência."
-          );
+          toast.error(t("createSurvey.toast.dragError"));
           return;
         }
       }
@@ -716,7 +720,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onPreviewSubmit = (data: any) => {
     console.log("Preview data:", data);
-    toast.success("Dados do questionário enviados com sucesso!");
+    toast.success(t("createSurvey.toasts.previewSuccess"));
   };
   return (
     <div className="flex flex-col items-center justify-center p-2 ">

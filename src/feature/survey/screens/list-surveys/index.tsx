@@ -10,7 +10,7 @@ import { useColumns } from "./columns";
 
 export const ListSurveys = () => {
   const navigate = useRouter();
-  const t = useTranslation("surveys");
+  const { t } = useTranslation("surveys");
 
   const { columns } = useColumns();
 

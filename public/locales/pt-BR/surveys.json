@@ -8,5 +8,23 @@
       "link": "Link",
       "createdAt": "Criado em"
     }
+  },
+  "createSurvey": {
+    "defaultTitle": "Título da Enquete",
+    "toasts": {
+      "addQuestionSuccess": "Pergunta adicionada com sucesso!",
+      "updateQuestionSuccess": "Pergunta atualizada com sucesso!",
+      "previewSubmit": "Dados do questionário enviados com sucesso!",
+      "dragError": "Erro ao arrastar a pergunta. Por favor, tente novamente.",
+      "deleteQuestion": "Pergunta deletada com sucesso",
+      "confirm": "Essa pergunta tem '{{ dependencyQuestion }}' como dependente. Se você deletar, a pergunta dependente também será deletada. Você tem certeza que deseja continuar?"
+    },
+    "editController": {
+      "page": "Page {{ page }}",
+      "addQuestion": "Adicionar pergunta",
+      "editQuestion": "Editar pergunta",
+      "deleteQuestion": "Deletar pergunta",
+      "questionType": "Tipo de pergunta"
+    }
   }
 }
