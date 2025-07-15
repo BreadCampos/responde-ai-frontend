@@ -1,20 +1,20 @@
 "use client";
 
-import { BackButton } from "@/shared/components/back-button";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { BackButton } from "@/shared/components/back-button";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { GetSurveyQuery } from "../../service/get-survey.query";
 
-import { SurveyGraphic } from "./components/suvery-graphic";
-import { SurveyLinks } from "./components/survey-links";
-import { SurveyResponses } from "./components/survey-responses";
-import { SurveyPreviewDrawer } from "./components/questions-drawer";
+import { ROUTES } from "@/core/routes/route-constants";
+import { ActionMenu, MenuOption } from "@/shared/components/action-menu";
+import { Card, CardHeader } from "@/shared/components/ui/card";
 import { cn } from "@/shared/lib/utils";
 import { NpsSection } from "./components/nps-section";
+import { SurveyPreviewDrawer } from "./components/questions-drawer";
 import { SurveyCustomLinks } from "./components/survey-custom-link";
-import { ActionMenu, MenuOption } from "@/shared/components/action-menu";
-import { ROUTES } from "@/core/routes/route-constants";
-import { useRouter } from "next/navigation";
-import { Card, CardHeader } from "@/shared/components/ui/card";
+import { SurveyLinks } from "./components/survey-links";
+import { SurveyResponses } from "./components/survey-responses";
+import { SurveyGraphic } from "./components/suvery-graphic";
 
 interface Props {
   surveyId: string;
@@ -27,7 +27,7 @@ const DetailsSurvey = ({ surveyId }: Props) => {
     surveyId: surveyId || "",
   });
 
-  const navigate = useRouter();
+  const navigate = useNavigation();
 
   const optionsMenu: MenuOption[] = [
     {

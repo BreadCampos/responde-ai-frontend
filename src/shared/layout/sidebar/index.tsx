@@ -4,6 +4,8 @@ import usePersistentState from "@//shared/hooks/use-persist";
 import { cn } from "@//shared/lib/utils";
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
+
 import {
   ChevronsLeft,
   ChevronsRight,
@@ -13,7 +15,7 @@ import {
   Webhook,
 } from "lucide-react";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 type NavItemProps = {
@@ -35,7 +37,7 @@ const NavItem = ({
   isActive,
   onSelect,
 }: NavItemProps) => {
-  const navigate = useRouter();
+  const navigate = useNavigation();
   const { logout } = useAuthStore();
 
   const { t } = useTranslation("common");

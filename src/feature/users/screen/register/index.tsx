@@ -11,11 +11,12 @@ import { RegisterCompanyForm } from "@/feature/company/components/register-compa
 import { useCreateCompanyMutation } from "@/feature/company/service/create-company.mutation";
 import { Stepper } from "@/shared/components/stepper";
 import { Form } from "@/shared/components/ui/form";
-import { useRouter } from "next/navigation";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
 import React from "react";
 import { toast } from "sonner";
 import { RegisterUser } from "../../components/register-user";
 import { CreateUserMutation } from "../../service/create-user.mutation";
+
 const stepFields = [
   [
     "user.firstName",
@@ -38,7 +39,7 @@ export const Register = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const registerMutation = CreateUserMutation();
   const createCompanyMutation = useCreateCompanyMutation();
-  const navigate = useRouter();
+  const navigate = useNavigation();
 
   const onBack = () => {
     navigate.back();

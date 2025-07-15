@@ -1,13 +1,13 @@
+import { ROUTES } from "@/core/routes/route-constants";
 import { Button } from "@/shared/components/button";
 import { DataTable } from "@/shared/components/data-table";
-import { ROUTES } from "@/core/routes/route-constants";
-import { useRouter } from "next/navigation";
-import { columns } from "./columns";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { usePagination } from "@/shared/hooks/use-pagination";
 import { GetCompaniesListQuery } from "../../service/get-companies-list.query";
+import { columns } from "./columns";
 
 export const ListCompanies = () => {
-  const navigate = useRouter();
+  const navigate = useNavigation();
 
   const redirectionToCreate = () => {
     navigate.push(ROUTES.COMPANY_CREATE);

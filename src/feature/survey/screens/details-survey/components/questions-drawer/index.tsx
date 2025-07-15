@@ -10,12 +10,12 @@ import {
 } from "@/shared/components/ui/drawer";
 import { Form } from "@/shared/components/ui/form";
 
-import { ExternalLink, Eye } from "lucide-react";
-import type { SurveyModel } from "@/feature/survey/model/survey.model";
-import { QuestionsForm } from "@/feature/survey/components/questions-form-preview";
-import { useRouter } from "next/navigation";
 import { ROUTES } from "@/core/routes/route-constants";
+import { QuestionsForm } from "@/feature/survey/components/questions-form-preview";
+import type { SurveyModel } from "@/feature/survey/model/survey.model";
 import { Button } from "@/shared/components/button";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { ExternalLink, Eye } from "lucide-react";
 import { toast } from "sonner";
 
 interface Props {
@@ -30,7 +30,7 @@ export const SurveyPreviewDrawer = ({ survey }: Props) => {
     },
   });
 
-  const navigate = useRouter();
+  const navigate = useNavigation();
 
   const redirectToForm = () => {
     if (!survey?.id) return;

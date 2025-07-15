@@ -1,12 +1,12 @@
 "use client";
 import { ROUTES } from "@/core/routes/route-constants";
 import { Button } from "@/shared/components/button";
-import { useRouter } from "next/navigation";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
 export const Dashboard = () => {
-  const navigate = useRouter();
+  const navigate = useNavigation();
 
   useEffect(() => {
     navigate.push(ROUTES.SURVEY_LIST);

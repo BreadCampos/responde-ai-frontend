@@ -1,6 +1,6 @@
 import { useParams, useRouter } from "next/navigation";
 
-export const useLocalizedRouter = () => {
+export const useNavigation = () => {
   const router = useRouter();
   const params = useParams();
   const lang = params.lang as string;

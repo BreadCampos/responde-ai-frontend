@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { authenticationApi } from "../api";
 import { httpClient } from "@/core/api/fetch-api";
-import { useAuthStore } from "../store/use-auth.store";
-import type { LoginEntity } from "../entities/login.entities";
 import { ROUTES } from "@/core/routes/route-constants";
-import type { UserModel } from "../../users/model/user.model";
-import { useRouter } from "next/navigation";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { toast } from "sonner";
+import type { UserModel } from "../../users/model/user.model";
+import { authenticationApi } from "../api";
+import type { LoginEntity } from "../entities/login.entities";
+import { useAuthStore } from "../store/use-auth.store";
 
 type ResponseType =
   | {
@@ -19,7 +19,7 @@ type ResponseType =
 export const useLoginMutation = () => {
   const queryClient = useQueryClient();
 
-  const navigate = useRouter();
+  const navigate = useNavigation();
   const { setTokens, setUser } = useAuthStore();
 
   return useMutation({
