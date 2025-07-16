@@ -2,12 +2,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { httpClient } from "@/core/api/fetch-api";
 import { ROUTES } from "@/core/routes/route-constants";
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { toast } from "sonner";
 import type { UserModel } from "../../users/model/user.model";
 import { authenticationApi } from "../api";
 import type { LoginEntity } from "../entities/login.entities";
-import { useAuthStore } from "../store/use-auth.store";
 
 type ResponseType =
   | {

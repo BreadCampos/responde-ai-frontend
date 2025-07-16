@@ -61,7 +61,7 @@ export const useGetUserAndCompany = () => {
       return;
     }
 
-    if (user && user.id !== userFromStore?.id) {
+    if (user && JSON.stringify(user) !== JSON.stringify(userFromStore)) {
       setUser({ user });
     }
 

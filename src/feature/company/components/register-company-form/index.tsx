@@ -1,6 +1,7 @@
 import { DefaultAvatar } from "@/shared/components/avatar.index";
 import { CheckboxInput, TextInput } from "@/shared/components/form";
 import { useFormatValues } from "@/shared/hooks/use-formatter-form";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { useFormContext } from "react-hook-form";
 
 interface Props {
@@ -8,20 +9,26 @@ interface Props {
 }
 export const RegisterCompanyForm = ({ title }: Props) => {
   const { watch } = useFormContext();
-
+  const { t } = useTranslation("login");
   const company = watch("company");
   const { handleDocumentMask } = useFormatValues();
   return (
     <div className="space-y-4">
       {title && <h3 className="text-xl font-semibold">{title}</h3>}
-      <TextInput name="company.legalName" label="Razão Social" />
-      <TextInput name="company.fantasyName" label="Nome Fantasia" />
+      <TextInput
+        name="company.legalName"
+        label={t("register.company.fields.legalName")}
+      />
+      <TextInput
+        name="company.fantasyName"
+        label={t("register.company.fields.fantasyName")}
+      />
       <TextInput
         name="company.document"
-        label="Documento (CPF ou CNPJ)"
         onKeyPress={(e) => {
           handleDocumentMask(e);
         }}
+        label={t("register.company.fields.document")}
       />
       <TextInput name="company.addressLine" label="Endereço" />
 
@@ -35,17 +42,20 @@ export const RegisterCompanyForm = ({ title }: Props) => {
               className="size-14"
             />
           )}
-          <TextInput name="company.logoUrl" />
+          <TextInput
+            name="company.logoUrl"
+            label={t("register.company.fields.logoUrl")}
+          />
         </div>
       </div>
       <TextInput
         name="company.theme.primary"
-        label="Cor Primária do Tema"
+        label={t("register.company.fields.theme.primary")}
         type="color"
       />
       <CheckboxInput
+        label={t("register.company.fields.settings.always_display_logo")}
         name="company.settings.always_display_logo"
-        label="Sempre Mostrar logo "
       />
     </div>
   );

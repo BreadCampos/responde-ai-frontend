@@ -1,9 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
-import type { RegisterModel } from "../model/register.model";
 import { httpClient } from "@/core/api/fetch-api";
-import { useAuthStore } from "../store/use-auth.store";
-import { usersApi } from "../api";
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { useMutation } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { usersApi } from "../api";
+import type { RegisterModel } from "../model/register.model";
 import type { UserModel } from "../model/user.model";
 
 type ReponseType =
@@ -15,7 +16,7 @@ type ReponseType =
 
 export const CreateUserMutation = () => {
   const { setTokens, setUser } = useAuthStore();
-
+  const { t } = useTranslation("login");
   return useMutation({
     mutationFn: async (data: RegisterModel): Promise<ReponseType> => {
       const res = await httpClient.request<ReponseType>({
@@ -30,7 +31,7 @@ export const CreateUserMutation = () => {
         await setTokens({ accessToken: response.token, refreshToken: "" });
         await setUser({ user: response.user });
 
-        toast.success("Cadastro realizado com sucesso");
+        toast.success(t("register.toast.success"));
       }
     },
   });

@@ -8,7 +8,7 @@ export default function AuthFormLayout({
 }>) {
   return (
     <div className="flex bg-reg-500 items-center justify-center min-h-screen bg-background">
-      <div className="relative w-full max-w-md p-6 bg-card text-card-foreground rounded-lg border border-border">
+      <div className="relative min-w-md p-6 bg-card text-card-foreground rounded-lg border border-border">
         <div className="absolute top-4 right-4 flex items-center gap-2">
           <ThemeToggleButton />
           <LanguageSwitcher />

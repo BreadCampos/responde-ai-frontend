@@ -1,15 +1,57 @@
 {
   "title": "Login!",
-  "subtitle": "Please enter your credentials to log in.",
+  "subtitle": "Please enter your credentials to login.",
   "form": {
-    "emailLabel": "Email",
-    "emailPlaceholder": "john.doe@address.com",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "john.doe@addres.com",
     "passwordLabel": "Password",
     "passwordPlaceholder": "********"
   },
   "actions": {
-    "forgotPassword": "Forgot my Password",
-    "submit": "Sign In",
+    "forgotPassword": "I forgot my password",
+    "submit": "To enter",
     "createAccount": "Create Account"
+  },
+  "plans": {
+    "header": {
+      "title": "3. Choose your plan",
+      "description": "Start with a test or choose the ideal plan for your business."
+    },
+    "free": {
+      "title": "Free Evaluation",
+      "description": "Complete access for 15 days.",
+      "price": "R $ 0",
+      "feature1_strong": "All resources",
+      "feature1_rest": "Available for 15 days",
+      "cta": "Start Free Test"
+    },
+    "month": {
+      "title": "month",
+      "badge": "Most popular",
+      "description": "Total flexibility to grow.",
+      "price": "R $ 120",
+      "perMonth": "/month",
+      "feature1_strong": "All",
+      "feature1_rest": "of the evaluation, and more:",
+      "feature2_start": "Forms and Answers",
+      "feature2_strong": "unlimited",
+      "feature3_strong": "Webhooks",
+      "feature3_rest": "for integration with any API",
+      "feature4_strong": "Custom links",
+      "feature4_rest": "for your research",
+      "feature5": "Priority Support by Email and Chat",
+      "cta": "Select month Plan"
+    },
+    "year": {
+      "title": "year",
+      "badge": "Save 2 months",
+      "description": "For those who have decided to accelerate.",
+      "price": "R $ 100",
+      "perMonth": "/month",
+      "feature1": "All benefits of the month plan",
+      "feature2_start": "The best price:",
+      "feature2_strong": "17% discount",
+      "cta": "Select year Plan"
+    }
   }
 }

@@ -1,21 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   signupWithCompanyResolver,
-  signupWithCompanySchema,
   type SignupWithCompanyFormValues,
 } from "./register.schama";
 
 import { RegisterCompanyForm } from "@/feature/company/components/register-company-form";
-import { useCreateCompanyMutation } from "@/feature/company/service/create-company.mutation";
 import { Stepper } from "@/shared/components/stepper";
 import { Form } from "@/shared/components/ui/form";
 import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useRegister } from "@/shared/hooks/use-register";
 import React from "react";
-import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
+import { SelectPlanStep } from "../../components//select-plan";
 import { RegisterUser } from "../../components/register-user";
-import { CreateUserMutation } from "../../service/create-user.mutation";
 
 const stepFields = [
   [
@@ -37,8 +35,6 @@ const stepFields = [
 
 export const Register = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const registerMutation = CreateUserMutation();
-  const createCompanyMutation = useCreateCompanyMutation();
   const navigate = useNavigation();
 
   const onBack = () => {
@@ -103,53 +99,19 @@ export const Register = () => {
     }
   };
 
+  const { onRegister } = useRegister();
   const onSubmit = async (data: SignupWithCompanyFormValues) => {
-    const finalValidation = signupWithCompanySchema.safeParse(data);
-    if (!finalValidation.success) {
-      finalValidation.error.errors.forEach((error) => {
-        methods.setError(error.path.join(".") as any, {
-          type: "manual",
-
-          message: error.message,
-        });
-      });
-
-      return;
-    }
-
-    const { user: userPayload, company: companyPayload } = finalValidation.data;
-
-    try {
-      const registerResponse = await registerMutation.mutateAsync(userPayload);
-
-      const accessToken = registerResponse?.token;
-
-      if (!accessToken) {
-        toast.error("Não foi possível obter o token de autenticação.");
-        return;
-      }
-
-      const formatDocument = {
-        ...companyPayload,
-        document: companyPayload.document.replace(/\D/g, ""),
-      };
-
-      await createCompanyMutation.mutateAsync({
-        company: formatDocument,
-        accessToken,
-      });
-    } catch (error: any) {
-      console.error("Falha no processo de cadastro:", error);
-      toast.error(error.message || "Não foi possível concluir o cadastro.");
-    }
+    onRegister(data, methods.setError);
   };
 
+  const { t } = useTranslation("login");
   const stepperSteps = [
     <RegisterUser key={"RegisterUser"} />,
     <RegisterCompanyForm
       key={"RegisterCompany"}
-      title={"2. Dados da Empresa"}
+      title={t("register.company.title")}
     />,
+    <SelectPlanStep key={"SelectPlan"} />,
   ];
 
   return (
@@ -160,7 +122,9 @@ export const Register = () => {
         className="space-y-6"
       >
         <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-card-foreground">Registrar</h1>
+          <h1 className="text-2xl font-bold text-card-foreground">
+            {t("register.title")}
+          </h1>
         </div>
 
         <Stepper

@@ -6,6 +6,9 @@
     "company": "Empresa",
     "logout": "Sair"
   },
+  "header": {
+    "freePlan": "Faltam {{time}} para o fim do seu plano gratuito"
+  },
   "button": {
     "add": "Adicionar",
     "edit": "Editar",

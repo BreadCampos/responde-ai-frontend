@@ -7,6 +7,9 @@ interface Resources {
       "company": "Empresa",
       "logout": "Sair"
     },
+    "header": {
+      "freePlan": "Faltam {{time}} para o fim do seu plano gratuito"
+    },
     "button": {
       "add": "Adicionar",
       "edit": "Editar",
@@ -40,6 +43,88 @@ interface Resources {
       "forgotPassword": "Esqueci minha Senha",
       "submit": "Entrar",
       "createAccount": "Criar Conta"
+    },
+    "register": {
+      "title": "Register",
+      "toast": {
+        "success": "Cadastro realizado com sucesso."
+      },
+      "user": {
+        "title": "1. Seus Dados",
+        "fields": {
+          "firstName": "Nome",
+          "lastName": "Sobrenome",
+          "email": "E-mail",
+          "password": "Senha",
+          "passwordConfirmation": "Confirme a Senha"
+        }
+      },
+      "company": {
+        "title": "2. Dados da Empresa",
+        "fields": {
+          "legalName": "Razão Social",
+          "fantasyName": "Nome Fantasia",
+          "document": "Documento (CPF ou CNPJ)",
+          "addressLine": "Endereço",
+          "logoUrl": "URL do Logo",
+          "theme": {
+            "primary": "Cor Primária do Tema"
+          },
+          "settings": {
+            "always_display_logo": "Sempre Mostrar logo"
+          }
+        }
+      },
+      "plans": {
+        "header": {
+          "title": "3. Escolha seu Plano",
+          "description": "Comece com um teste ou escolha o plano ideal para sua empresa."
+        },
+        "free": {
+          "title": "Avaliação Gratuita",
+          "description": "Acesso completo por 15 dias.",
+          "price": "R$ 0",
+          "feature1_strong": "Todos os recursos",
+          "feature1_rest": "disponíveis por 15 dias",
+          "cta": "Começar teste gratuito"
+        },
+        "month": {
+          "title": "Mensal",
+          "badge": "MAIS POPULAR",
+          "description": "Flexibilidade total para crescer.",
+          "price": "R$ 120",
+          "perMonth": "/mês",
+          "feature1_strong": "Tudo",
+          "feature1_rest": "da avaliação, e mais:",
+          "feature2_start": "Formulários e respostas",
+          "feature2_strong": "ilimitados",
+          "feature3_strong": "Webhooks",
+          "feature3_rest": "para integração com qualquer API",
+          "feature4_strong": "Links customizados",
+          "feature4_rest": "para suas pesquisas",
+          "feature5": "Suporte prioritário por e-mail e chat",
+          "cta": "Selecionar Plano Mensal"
+        },
+        "year": {
+          "title": "Anual",
+          "badge": "ECONOMIZE 2 MESES",
+          "description": "Para quem já decidiu acelerar.",
+          "price": "R$ 100",
+          "perMonth": "/mês",
+          "feature1": "Todos os benefícios do plano Mensal",
+          "feature2_start": "O melhor preço:",
+          "feature2_strong": "17% de desconto",
+          "cta": "Selecionar Plano Anual"
+        }
+      }
+    },
+    "selectPlanModal": {
+      "title": "Selecione um Plano",
+      "description": "Escolha o plano que melhor se adapta às suas necessidades.",
+      "buttons": {
+        "cancel": "Cancelar",
+        "confirm": "Confirmar"
+      }
     }
   },
   "surveys": {

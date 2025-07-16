@@ -54,6 +54,9 @@ export const signupWithCompanySchema = z
         })
         .optional(),
     }),
+    planId: z
+      .string({ message: "O plano é obrigatório." })
+      .min(1, { message: "Selecione um plano." }),
   })
   .refine((data) => data.user.password === data.user.passwordConfirmation, {
     message: "As senhas não coincidem.",

@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { httpClient } from "@/core/api/fetch-api";
-import { ROUTES } from "@/core/routes/route-constants";
 import { companyApi } from "../api";
 import type { CompanyModel } from "../model/company.model";
 import type { CreateCompanyModel } from "../model/create-company.model";
@@ -24,11 +23,6 @@ export const useCreateCompanyMutation = () => {
         },
       });
       return response.data;
-    },
-    onSuccess: async (response) => {
-      if (response) {
-        window.location.replace(ROUTES.DASHBOARD);
-      }
     },
   });
 };
