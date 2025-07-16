@@ -2,6 +2,7 @@
 
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { Form } from "@/shared/components/ui/form";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -14,6 +15,7 @@ export const UpdateSurvey = () => {
   const { company } = useAuthStore();
   const surveyMutation = UpdateSurveyMutation();
 
+  const { t } = useTranslation("surveys");
   const { surveyId } = useParams<{ surveyId: string }>();
   const { data: survey } = GetSurveyQuery({
     companyId: company?.id || "",
@@ -27,7 +29,6 @@ export const UpdateSurvey = () => {
     }
   >({
     defaultValues: {
-      title: "Novo questionário",
       questions: [],
     },
   });
@@ -52,7 +53,7 @@ export const UpdateSurvey = () => {
   return (
     <Form {...methods}>
       <SurveyForm
-        buttonSubmitText="Atualizar"
+        buttonSubmitText={t("createSurvey.buttons.update")}
         onSubmit={onUpdateSurvey}
         loading={surveyMutation?.isPending}
       />

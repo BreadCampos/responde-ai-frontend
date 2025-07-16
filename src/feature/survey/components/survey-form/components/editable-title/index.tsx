@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef, type KeyboardEvent } from "react";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { cn } from "@/shared/lib/utils";
 import { Edit } from "lucide-react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 
 interface EditableTitleProps {
   initialTitle: string;
@@ -13,6 +14,7 @@ export const EditableTitle = ({
   onSave,
   className,
 }: EditableTitleProps) => {
+  const { t } = useTranslation("surveys");
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(initialTitle);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -70,7 +72,7 @@ export const EditableTitle = ({
         "p-2 text-md cursor-pointer hover:bg-muted/50 rounded-lg transition-colors",
         className
       )}
-      title="Clique para editar o título"
+      title={t("createSurvey.clickToEdit")}
     >
       {initialTitle} <Edit className="inline h-4 w-4 ml-1 text-primary" />
     </h1>

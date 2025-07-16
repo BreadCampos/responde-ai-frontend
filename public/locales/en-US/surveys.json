@@ -1,12 +1,206 @@
 {
+  "questionTypes": {
+    "text": "Text",
+    "number": "Number",
+    "date": "Date",
+    "select": "Selection",
+    "checkbox": "Checkbox",
+    "radio": "Radio",
+    "textarea": "Text area",
+    "rating": "Assessment",
+    "checkbox_group": "Checkboxes group",
+    "select_multiple": "Multiple selection"
+  },
   "surveys": {
-    "title": "Surveys",
-    "addNew": "Add new survey",
+    "title": "Questionnaires",
+    "addNew": "Add new questionnaire",
     "columns": {
       "id": "ID",
       "title": "Title",
       "link": "Link",
-      "createdAt": "Created at"
+      "createdAt": "Created in"
+    }
+  },
+  "createSurvey": {
+    "defaultTitle": "Questionnaire title",
+    "clickToEdit": "Click to edit",
+    "toasts": {
+      "addQuestionSuccess": "Question successfully added!",
+      "updateQuestionSuccess": "Successful updated question!",
+      "previewSubmit": "Questionnaire data sent successfully!",
+      "dragError": "Error by dragging the question. ",
+      "deleteQuestion": "Successful deleted question",
+      "confirm": "This question has'{{dependencyQuestion}}'As a dependent. "
+    },
+    "editController": {
+      "title": "Questions",
+      "page": "Page {{page}}",
+      "editQuestion": "Edit question",
+      "deleteQuestion": "Delete",
+      "questionType": "Question type",
+      "defaultMessage": "Add a question to start."
+    },
+    "buttons": {
+      "create": "Create questionnaire",
+      "update": "Update questionnaire",
+      "addQuestion": "Add question"
+    }
+  },
+  "surveyPreview": {
+    "title": "Viewing of the questionnaire",
+    "description": "Visualize how the questionnaire will be displayed to users.",
+    "submit": "Submit",
+    "toasts": {
+      "submitSuccess": "Questionnaire sent successfully!"
+    }
+  },
+  "surveyModal": {
+    "title": {
+      "edit": "Edit question",
+      "add": "Add question",
+      "preview": "Pre -life"
+    },
+    "description": {
+      "edit": "Is in the editing mode of an existing question",
+      "add": "Add a new question to the questionnaire"
+    },
+    "buttons": {
+      "save": "Save"
+    },
+    "form": {
+      "title": "Specification",
+      "fields": {
+        "label": {
+          "label": "Title of the question"
+        },
+        "type": {
+          "label": "Type of question"
+        },
+        "placeholder": {
+          "label": "PlaceHolder"
+        },
+        "hint": {
+          "label": "Tip"
+        },
+        "pageIndex": {
+          "label": "Page number"
+        },
+        "inputMask": {
+          "label": "Input Mask (Optional)",
+          "placeholder": "Exp: (00) 00000-0000",
+          "helperText": "Use '0' for numbers, 'a' for letters and '*' for any character. "
+        }
+      }
+    },
+    "rating": {
+      "title": "Evaluation Options",
+      "styles": {
+        "stars": "Stars",
+        "slider": "Slide bar",
+        "nps": "NPS (0-10 scale)"
+      },
+      "nps": {
+        "minLabelDefault": "I do not recommend",
+        "maxLabelDefault": "Fully recommend"
+      },
+      "fields": {
+        "style": {
+          "label": "Display style"
+        },
+        "minLabel": {
+          "label": "LABEL OF THE MINIMUM VALUE"
+        },
+        "maxLabel": {
+          "label": "Maximum value label"
+        },
+        "min": {
+          "label": "Minimum value"
+        },
+        "max": {
+          "label": "Maximum value"
+        }
+      }
+    },
+    "options": {
+      "title": "Question options",
+      "fields": {
+        "label": {
+          "placeholder": "Label {{index}}"
+        },
+        "value": {
+          "placeholder": "Value {{index}}"
+        }
+      },
+      "buttons": {
+        "add": "Add option +"
+      }
+    },
+    "conditionals": {
+      "enable": {
+        "label": "Add conditional logic?"
+      },
+      "fields": {
+        "fieldId": {
+          "label": "Appear only if the question ...",
+          "placeholder": "Select a question"
+        },
+        "operator": {
+          "label": "... the condition is ...",
+          "placeholder": "Select a condition"
+        }
+      },
+      "operators": {
+        "equals": "Equal to",
+        "not_equals": "Unlike",
+        "greater_than": "More than",
+        "greater_than_equal": "Greater than or equal to",
+        "less_than": "Less than",
+        "less_than_equal": "Less than or equal to",
+        "contains": "Contain",
+        "is_one_of": "It is one of (or)"
+      },
+      "multiValue": {
+        "label": "... one of the following values:",
+        "optionPlaceholder": "Option {{index}}",
+        "valuePlaceholder": "Value {{index}}"
+      },
+      "singleValue": {
+        "label": "... the value:",
+        "selectPlaceholder": "Select an option",
+        "textPlaceholder": "Put the value"
+      },
+      "buttons": {
+        "addValue": "Add value"
+      }
+    },
+    "validations": {
+      "title": "Validation rules",
+      "fields": {
+        "type": {
+          "placeholder": "Select a rule"
+        },
+        "value": {
+          "datePlaceholder": "Select the date",
+          "numberPlaceholder": "Value",
+          "textPlaceholder": "Regex"
+        },
+        "errorMessage": {
+          "placeholder": "Error message (opcional)"
+        }
+      },
+      "labels": {
+        "required": "Mandatory",
+        "email": "Valid email",
+        "url": "Valid URL",
+        "min": "Minimum value",
+        "max": "Maximum value",
+        "min_length": "Minimum",
+        "max_length": "Maximum length",
+        "custom": "CUSTOMIZED REGEX"
+      },
+      "buttons": {
+        "add": "Add Validation +"
+      }
     }
   }
 }

@@ -44,21 +44,15 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   const { fields, update, remove } = useFieldArray({
     control,
     name: "questions",
-    keyName: "key", // Define um nome para a chave única, default é 'id'
+    keyName: "key",
   });
 
   const { t } = useTranslation("surveys");
-  // Use 'watch' para obter os valores atuais do formulário
   const surveyTitle = watch("title");
   const surveyQuestions = watch("questions");
 
   const [deletedQuestionIds, setDeletesQuestionIds] = useState<string[]>([]);
   const [newQuestionIds, setNewQuestionIds] = useState<string[]>([]);
-
-  // const [survey, setSurvey] = useState<SurveyModel>({
-  //   title: "Feedback de Produto e Experiência do Usuário",
-  //   questions: [],
-  // });
 
   const addSequentialForm = () => {
     const sequential: SurveyQuestion[] = [
@@ -584,23 +578,19 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     const dependencyQuestion = currentQuestions.find(
       (q) => q.conditional?.fieldId === questionId
     );
+
     if (dependencyQuestion?.label) {
-      if (
-        !confirm(
-          t("createSurvey.toasts.confirm", {
-            dependencyQuestion: dependencyQuestion.label,
-          })
-        )
-      ) {
-        return;
+      const label = t("createSurvey.toasts.confirm", {
+        dependencyQuestion: dependencyQuestion.label,
+      });
+      if (confirm(label)) {
+        deleteQuestion(dependencyQuestion.id);
       }
-      deleteQuestion(dependencyQuestion.id);
     }
 
     const index = fields.findIndex((field) => field.id === questionId);
     if (index > -1) {
       remove(index);
-      // Após remover, renumere as páginas
       const remainingQuestions = getValues("questions");
       const renumberedQuestions = renumberPages(remainingQuestions);
       setValue("questions", renumberedQuestions);
@@ -678,7 +668,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
         const dependencyPosition =
           dependencyItem.pageIndex + dependencyItem.orderIndex / 100;
         if (movedPosition < dependencyPosition) {
-          toast.error(t("createSurvey.toast.dragError"));
+          toast.error(t("createSurvey.toasts.dragError"));
           return;
         }
       }
@@ -720,8 +710,9 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onPreviewSubmit = (data: any) => {
     console.log("Preview data:", data);
-    toast.success(t("createSurvey.toasts.previewSuccess"));
+    toast.success(t("createSurvey.toasts.previewSubmit"));
   };
+
   return (
     <div className="flex flex-col items-center justify-center p-2 ">
       <div className="mb-5 w-full flex flex-col md:flex-row md:justify-between items-center gap-3">
@@ -765,45 +756,54 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
         >
           <div className="w-full max-w-[600px] flex-1 min-h-[500px]  h-[calc(100vh-160px)]  overflow-y-auto flex flex-col gap-4 border p-4 rounded-lg bg-card shadow-md">
             <div className="flex items-center justify-between mb-4">
-              {" "}
-              <h4 className="text-card-foreground text-xl">Perguntas</h4>
+              <h4 className="text-card-foreground text-xl">
+                {t("createSurvey.editController.title")}
+              </h4>
               <Button onClick={handleOpenToAdd} size={"sm"}>
-                Adicionar <Plus className="ml-1 h-5 w-5" />
+                {t("createSurvey.buttons.addQuestion")}
+                <Plus className="ml-1 h-5 w-5" />
               </Button>
             </div>
             {surveyQuestions?.length === 0 && (
               <p className="text-gray-500 text-center py-8">
-                Adicione uma pergunta para começar.
+                {t("createSurvey.editController.defaultMessage")}
               </p>
             )}
             {Object.entries(groupedQuestions).map(
-              ([pageIndex, questionsInPage]) => (
-                <div
-                  key={`page-${pageIndex}`}
-                  className="p-2 border rounded-lg bg-background"
-                >
-                  <h3 className="font-bold mb-2 text-center text-sm text-muted-foreground">
-                    Página {pageIndex}
-                  </h3>
-
-                  <SortableContext
-                    items={questionsInPage.map((q) => q.id)}
-                    strategy={verticalListSortingStrategy}
-                    id={`page-${pageIndex}`}
+              ([pageIndex, questionsInPage]) => {
+                const page = t("createSurvey.editController.page", {
+                  page: String(pageIndex),
+                });
+                return (
+                  <div
+                    key={`page-${pageIndex}`}
+                    className="p-2 border rounded-lg bg-background"
                   >
-                    <div className="flex flex-col gap-2">
-                      {questionsInPage.map((q) => (
-                        <SortableQuestionItem
-                          key={q.id}
-                          question={q}
-                          onDelete={deleteQuestion}
-                          onEdit={handleOpenToEdit}
-                        />
-                      ))}
-                    </div>
-                  </SortableContext>
-                </div>
-              )
+                    {pageIndex && (
+                      <h3 className="font-bold mb-2 text-center text-sm text-muted-foreground">
+                        {page}
+                      </h3>
+                    )}
+
+                    <SortableContext
+                      items={questionsInPage.map((q) => q.id)}
+                      strategy={verticalListSortingStrategy}
+                      id={`page-${pageIndex}`}
+                    >
+                      <div className="flex flex-col gap-2">
+                        {questionsInPage.map((q) => (
+                          <SortableQuestionItem
+                            key={q.id}
+                            question={q}
+                            onDelete={deleteQuestion}
+                            onEdit={handleOpenToEdit}
+                          />
+                        ))}
+                      </div>
+                    </SortableContext>
+                  </div>
+                );
+              }
             )}
           </div>
         </DndContext>
@@ -812,6 +812,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
             <div className="w-full max-w-[600px] flex-1 h-[calc(100vh-160px)]">
               <QuestionsForm
                 isPreview
+                logoUrl={company?.logoUrl}
                 questions={surveyQuestions}
                 onSubmit={onPreviewSubmit}
               />

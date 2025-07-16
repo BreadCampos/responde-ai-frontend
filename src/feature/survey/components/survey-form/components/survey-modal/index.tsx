@@ -1,24 +1,25 @@
+import type {
+  QuestionConditionOptions,
+  QuestionValidators,
+  SurveyQuestion,
+  SurveyQuestionInputType,
+} from "@/feature/survey/model/survey.model";
 import { SelectInput } from "@/shared/components/form/select-input";
 import { TextInput } from "@/shared/components/form/text-input";
 import Modal from "@/shared/components/modal";
 import { Form } from "@/shared/components/ui/form";
-import { useForm } from "react-hook-form";
+import { SelectOption } from "@/shared/types/select-options.type";
 import { useCallback, useEffect, useMemo } from "react";
-import { QuestionPreview } from "./components/question-preview";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { ConditionalValues } from "./components/conditional-values";
-import { ValidationRules } from "./components/validation-rules";
-import type {
-  SurveyQuestion,
-  QuestionValidators,
-  SurveyQuestionInputType,
-  QuestionConditionOptions,
-} from "@/feature/survey/model/survey.model";
 import {
   ControlledOptions,
   typesWithOptions,
 } from "./components/controlled-options";
-import { SelectOption } from "@/shared/types/select-options.type";
+import { QuestionPreview } from "./components/question-preview";
 import { RattingType } from "./components/ratting-type";
+import { ValidationRules } from "./components/validation-rules";
 
 interface Props {
   onAddQuestion: (question: SurveyQuestion) => void;
@@ -29,18 +30,6 @@ interface Props {
   existingQuestions: SurveyQuestion[];
 }
 
-const typeOptions: SelectOption[] = [
-  { value: "text", label: "Texto" },
-  { value: "number", label: "Número" },
-  { value: "date", label: "Data" },
-  { value: "select", label: "Seleção" },
-  { value: "checkbox", label: "Checkbox" },
-  { value: "radio", label: "Radio" },
-  { value: "textarea", label: "Textarea" },
-  { value: "rating", label: "Avaliação" },
-  { value: "checkbox_group", label: "Grupo de Checkboxes" },
-  { value: "select_multiple", label: "Seleção Múltipla" },
-];
 export interface IForm {
   label: string;
   placeholder?: string;
@@ -72,6 +61,7 @@ export const ServeyModal = ({
   questionToEdit,
   existingQuestions,
 }: Props) => {
+  const { t } = useTranslation("surveys");
   const methods = useForm<IForm>({
     defaultValues: {
       pageIndex: 1,
@@ -156,8 +146,6 @@ export const ServeyModal = ({
   };
 
   const handleTypeChange = useCallback(() => {
-    // A função `setValue` do RHF é estável e não precisa ser listada como dependência
-    // se você a desestruturou do `useForm`
     setValue("validations", []);
     setValue("conditional", undefined);
     setValue("enableConditional", false);
@@ -198,20 +186,38 @@ export const ServeyModal = ({
     }
   }, [isOpen, questionId, reset]);
 
+  const typeOptions: SelectOption[] = useMemo(
+    () => [
+      { value: "text", label: t("questionTypes.text") },
+      { value: "number", label: t("questionTypes.number") },
+      { value: "date", label: t("questionTypes.date") },
+      { value: "select", label: t("questionTypes.select") },
+      { value: "checkbox", label: t("questionTypes.checkbox") },
+      { value: "radio", label: t("questionTypes.radio") },
+      { value: "textarea", label: t("questionTypes.textarea") },
+      { value: "rating", label: t("questionTypes.rating") },
+      { value: "checkbox_group", label: t("questionTypes.checkbox_group") },
+      { value: "select_multiple", label: t("questionTypes.select_multiple") },
+    ],
+    [t]
+  );
+
   return (
     <div>
       <Form {...methods}>
         <Modal
           open={isOpen}
           onClose={handleInternalClose}
-          title={questionToEdit ? "Editar Questão" : "Adicionar Questão"}
-          description={
+          title={t(
+            questionToEdit ? "surveyModal.title.edit" : "surveyModal.title.add"
+          )}
+          description={t(
             questionToEdit
-              ? "Está no modo edição de uma questão já existente"
-              : "Adicione uma nova questão ao questionário"
-          }
+              ? "surveyModal.description.edit"
+              : "surveyModal.description.add"
+          )}
           primaryButton={{
-            title: "Salvar",
+            title: t("surveyModal.buttons.save"),
             onClick: handleSubmit(onSubmit),
           }}
           className=""
@@ -219,26 +225,32 @@ export const ServeyModal = ({
           <div className="flex flex-col w-[600px] gap-4 max-w-full">
             <div className="flex-1 space-y-4  overflow-y-auto max-h-[50vh] p-1 md:px-5 ">
               <h3 className="text-lg font-semibold mb-2 text-accent-foreground">
-                Especificação
+                {t("surveyModal.form.title")}
               </h3>
               <div className="p-4 bg-card rounded-lg space-y-4 border">
                 <TextInput
                   name={"label"}
-                  label={"Titulo da questão"}
+                  label={t("surveyModal.form.fields.label.label")}
                   required
                 />
                 <SelectInput
                   required
                   name={"type"}
-                  label={"Tipo de questão"}
-                  options={typeOptions} // Usa a constante estável
+                  label={t("surveyModal.form.fields.type.label")}
+                  options={typeOptions}
                   onChange={handleTypeChange}
                 />
-                <TextInput name={"placeholder"} label={"Placeholder"} />
-                <TextInput name={"hint"} label={"Dica"} />
+                <TextInput
+                  name={"placeholder"}
+                  label={t("surveyModal.form.fields.placeholder.label")}
+                />
+                <TextInput
+                  name={"hint"}
+                  label={t("surveyModal.form.fields.hint.label")}
+                />
                 <TextInput
                   name={"pageIndex"}
-                  label={"Número da Página"}
+                  label={t("surveyModal.form.fields.pageIndex.label")}
                   type="number"
                   min={1}
                   max={maxPossibilitPage}
@@ -247,9 +259,11 @@ export const ServeyModal = ({
                 <TextInput
                   disabled={watchedType !== "text"}
                   name="inputMask"
-                  label="Máscara de Input (Opcional)"
-                  placeholder="exp: (00) 00000-0000"
-                  helperText="Use '0' para números, 'a' para letras e '*' para qualquer caractere. Para múltiplas máscaras, separe com vírgula."
+                  label={t("surveyModal.form.fields.inputMask.label")}
+                  placeholder={t(
+                    "surveyModal.form.fields.inputMask.placeholder"
+                  )}
+                  helperText={t("surveyModal.form.fields.inputMask.helperText")}
                 />
               </div>
               <RattingType />

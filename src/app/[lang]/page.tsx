@@ -3,17 +3,18 @@
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { redirect } from "next/navigation";
+import { use } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function HomePage({
-  params: { lang },
+  params,
 }: {
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
+  const { lang } = use(params);
+
   const { isAuthenticated } = useAuthStore();
   const { ready } = useTranslation();
-
-  console.log({ isAuthenticated });
 
   if (!ready) {
     return <>carregando.</>;
