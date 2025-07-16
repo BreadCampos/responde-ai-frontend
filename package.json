@@ -66,6 +66,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/cookie": "^0.6.0",
     "@types/culori": "^4.0.0",
+    "@types/negotiator": "^0.6.4",
     "@types/node": "^20.19.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
