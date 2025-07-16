@@ -1,5 +1,6 @@
+// TODO: fix, added just for build
+import * as cookie from "cookie";
 import { NextResponse } from "next/server";
-import cookie from "cookie";
 
 export async function POST() {
   const serializedCookie = cookie.serialize("isLoggedIn", "", {

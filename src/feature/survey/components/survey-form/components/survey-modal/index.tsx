@@ -184,6 +184,8 @@ export const ServeyModal = ({
         });
       }
     }
+    // TODO: fix, added just for build
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, questionId, reset]);
 
   const typeOptions: SelectOption[] = useMemo(

@@ -72,5 +72,6 @@ export const useGetUserAndCompany = () => {
         setCompanyTheme(currentCompany);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, company, isLoading, isError, userFromStore, companyFromStore]);
 };

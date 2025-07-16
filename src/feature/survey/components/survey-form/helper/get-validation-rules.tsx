@@ -1,6 +1,5 @@
-/* eslint-disable no-useless-escape */
-import type { RegisterOptions } from "react-hook-form";
 import type { QuestionValidators } from "@/feature/survey/model/survey.model";
+import type { RegisterOptions } from "react-hook-form";
 // Esta função valida um CPF brasileiro.
 export function isValidCPF(cpf: string | null | undefined): boolean {
   if (!cpf) return false;

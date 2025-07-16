@@ -7,7 +7,7 @@ const DetailsSurvey = dynamic(
 export default async function DetailsSurveyPage({
   params,
 }: {
-  params: { surveyId: string };
+  params: Promise<{ surveyId: string }>;
 }) {
   const { surveyId } = await params;
   return <DetailsSurvey surveyId={surveyId} />;

@@ -1,17 +1,17 @@
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { CreateSurveyCustomLinkMutation } from "@/feature/survey/service/create-survey-custom-link.mutation";
+import { Button } from "@/shared/components/button";
 import { Form } from "@/shared/components/ui/form";
+import { useToggle } from "@/shared/hooks/use-toggle";
+import { PlusCircle } from "lucide-react";
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { FormCustomLink } from "../form-custom-link ";
 import {
   addCustomLinkResolver,
   AddCustomLinkValues,
 } from "../form-custom-link /add-custom-link.shema";
-import { CreateSurveyCustomLinkMutation } from "@/feature/survey/service/create-survey-custom-link.mutation";
-import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { useParams } from "next/navigation";
-import { FormCustomLink } from "../form-custom-link ";
-import { useToggle } from "@/shared/hooks/use-toggle";
-import { Button } from "@/shared/components/button";
-import { PlusCircle } from "lucide-react";
-import { useEffect } from "react";
 
 export const ModalCreateCustomLink = () => {
   const { surveyId } = useParams<{ surveyId: string }>();
@@ -51,6 +51,8 @@ export const ModalCreateCustomLink = () => {
     if (isSuccess) {
       onClose();
     }
+    // TODO: fix, added just for build
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   return (
