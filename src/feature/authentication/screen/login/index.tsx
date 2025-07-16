@@ -2,10 +2,10 @@ import { ROUTES } from "@/core/routes/route-constants";
 import { Button } from "@/shared/components/button";
 import { TextInput } from "@/shared/components/form";
 import { Form } from "@/shared/components/ui/form";
-import { useLocalizedRouter } from "@/shared/hooks/use-nagivation";
 import { useToggle } from "@/shared/hooks/use-toggle";
 import { useTranslation } from "@/shared/hooks/use-translation";
 import { Eye, EyeClosed } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useLoginMutation } from "../../service/login.mutation";
 import { loginResolver, type LoginFormValues } from "./login.schema";
@@ -18,7 +18,7 @@ export const LoginScreen = () => {
 
   const [showPassword, setShowPassword] = useToggle();
 
-  const navigate = useLocalizedRouter();
+  const navigate = useRouter();
   const redirectToRegister = () => {
     navigate.push(ROUTES.REGISTER);
   };

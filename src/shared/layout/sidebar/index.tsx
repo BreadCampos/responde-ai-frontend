@@ -60,7 +60,13 @@ const NavItem = ({
       <Icon size={isCollapsed ? 24 : 18} className={cn("flex-shrink-0")} />
       {!isCollapsed && (
         <p className={cn("text-[12px] truncate", isLogout && "text-white")}>
-          {t(name)}
+          {t(
+            name as
+              | "sidebar.survey"
+              | "sidebar.webhooks"
+              | "sidebar.company"
+              | "sidebar.logout"
+          )}
         </p>
       )}
     </Button>

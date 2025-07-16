@@ -1,12 +1,14 @@
-"use client";
 import I18nProvider from "@/shared/providers/i18n.provider";
+import { use } from "react";
 
 export default function LangLayout({
   children,
-  params: { lang },
+  params,
 }: {
   children: React.ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
+  const { lang } = use(params);
+
   return <I18nProvider lang={lang}>{children}</I18nProvider>;
 }

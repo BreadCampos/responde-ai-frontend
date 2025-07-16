@@ -8,7 +8,13 @@ import { useEffect } from "react";
 import { convertToOklchValues } from "../utils/convert-to-oklch-values";
 
 export const useGetUserAndCompany = () => {
-  const { setCompany, setUser, logout } = useAuthStore();
+  const {
+    user: userFromStore,
+    company: companyFromStore,
+    setCompany,
+    setUser,
+    logout,
+  } = useAuthStore();
   const navigate = useNavigation();
 
   const { data: user, isLoading, isError } = GetUserMeServiceQuery();
@@ -55,14 +61,16 @@ export const useGetUserAndCompany = () => {
       return;
     }
 
-    if (user) {
+    if (user && user.id !== userFromStore?.id) {
       setUser({ user });
     }
 
     if (company && company.data?.length > 0) {
       const currentCompany = company.data[0];
-      setCompany({ company: currentCompany });
-      setCompanyTheme(currentCompany);
+      if (currentCompany.id !== companyFromStore?.id) {
+        setCompany({ company: currentCompany });
+        setCompanyTheme(currentCompany);
+      }
     }
-  }, [user, company, setUser, setCompany, isLoading, isError, navigate]);
+  }, [user, company, isLoading, isError, userFromStore, companyFromStore]);
 };

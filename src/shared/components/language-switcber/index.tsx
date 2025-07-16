@@ -3,6 +3,7 @@
 
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useMemo } from "react";
 import { ActionMenu, MenuOption } from "../action-menu";
 import { Button } from "../button";
 
@@ -27,46 +28,59 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleLanguageChange = (newLocale: string) => {
-    if (!pathname) return;
-    const newPath = pathname.split("/").slice(2).join("/");
-    router.push(`/${newLocale}/${newPath}`);
-  };
+  const handleLanguageChange = useCallback(
+    (newLocale: string) => {
+      if (!pathname) return;
 
-  const supportedLanguages = [
-    { code: "pt-BR", name: "Português", flag: "br" },
-    { code: "en-US", name: "English", flag: "us" },
-  ];
+      const pathSegments = pathname.split("/");
+      const newPath = pathSegments.slice(2).join("/");
+
+      router.replace(`/${newLocale}/${newPath}`);
+    },
+    [pathname, router]
+  );
+
+  const supportedLanguages = useMemo(
+    () => [
+      { code: "pt-BR", name: "Português", flag: "br" },
+      { code: "en-US", name: "English", flag: "us" },
+    ],
+    []
+  );
 
   const language =
     supportedLanguages.find((lang) => pathname.includes(lang.code)) ||
     supportedLanguages[0];
 
-  const options: MenuOption[] = supportedLanguages.map((lang) => ({
-    label: (
-      <div className="flex items-center gap-2">
-        <FlagImage lang={lang.flag} alt={`Bandeira de ${lang.name}`} />
-        <span>{lang.name}</span> {/* Corrigido para mostrar o nome dinâmico */}
-      </div>
-    ),
-    onSelect: () => handleLanguageChange(lang.code),
-    // 4. A opção é desabilitada com base no idioma da store
-    disabled: language.code === lang.code,
-  }));
+  const options: MenuOption[] = useMemo(() => {
+    return supportedLanguages.map((lang) => ({
+      label: (
+        <div className="flex items-center gap-2">
+          <FlagImage lang={lang.flag} alt={`Bandeira de ${lang.name}`} />
+          <span>{lang.name}</span>{" "}
+        </div>
+      ),
+      onSelect: () => handleLanguageChange(lang.code),
+      disabled: language.code === lang.code,
+    }));
+  }, [supportedLanguages, language.code, handleLanguageChange]);
 
   // Encontra os dados do idioma atual com base na store
   const currentLanguageData =
     supportedLanguages.find((lang) => lang.code === language.code) ||
     supportedLanguages[0];
 
-  const customTrigger = (
-    <Button variant="ghost" className="h-8 w-8 p-0">
-      <FlagImage
-        lang={currentLanguageData.flag}
-        alt={`Idioma atual: ${currentLanguageData.name}`}
-      />
-    </Button>
-  );
+  const customTrigger = useMemo(
+    () => (
+      <Button variant="ghost" className="h-8 w-8 p-0">
+        <FlagImage
+          lang={currentLanguageData.flag}
+          alt={`Idioma atual: ${currentLanguageData.name}`}
+        />
+      </Button>
+    ),
+    [currentLanguageData]
+  ); // 3. Adicione a dependência
 
   return (
     <ActionMenu
