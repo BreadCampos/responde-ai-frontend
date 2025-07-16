@@ -40,7 +40,6 @@ export const useFormatValues = () => {
   const CPF_LENGTH = 14;
 
   // TODO: fix, added just for build
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleDocumentMask = (event: any) => {
     const inputSize = event?.target?.value.replace(/\D/g, "");
 
