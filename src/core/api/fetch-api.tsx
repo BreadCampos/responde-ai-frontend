@@ -1,12 +1,12 @@
 "use client";
 import { APP_ENV } from "@/env";
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { toast } from "sonner";
 import {
   UnauthorizedError,
   type HttpRequest,
   type HttpResponse,
 } from "./types";
-import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { toast } from "sonner";
 
 class HttpClient {
   private readonly baseUrl?: string = APP_ENV.APP_URL;

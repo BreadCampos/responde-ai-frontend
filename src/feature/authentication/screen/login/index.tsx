@@ -1,15 +1,17 @@
+import { ROUTES } from "@/core/routes/route-constants";
 import { Button } from "@/shared/components/button";
 import { TextInput } from "@/shared/components/form";
 import { Form } from "@/shared/components/ui/form";
 import { useToggle } from "@/shared/hooks/use-toggle";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { Eye, EyeClosed } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { loginResolver, type LoginFormValues } from "./login.schema";
-import { useLoginMutation } from "../../service/login.mutation";
 import { useRouter } from "next/navigation";
-import { ROUTES } from "@/core/routes/route-constants";
+import { useForm } from "react-hook-form";
+import { useLoginMutation } from "../../service/login.mutation";
+import { loginResolver, type LoginFormValues } from "./login.schema";
 
 export const LoginScreen = () => {
+  const { t } = useTranslation("login");
   const methods = useForm<LoginFormValues>({
     resolver: loginResolver,
   });
@@ -31,16 +33,16 @@ export const LoginScreen = () => {
     <Form {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
         <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-card-foreground">Login</h1>
-          <p className="text-sm text-muted-foreground">
-            Por favor, insira suas credenciais para fazer login.
-          </p>
+          <h1 className="text-2xl font-bold text-card-foreground">
+            {t("title")}
+          </h1>
+          <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
         <div className="space-y-4">
           <TextInput
             name={"email"}
-            placeholder="john.doe@addres.com"
-            label={"Email"}
+            placeholder={t("form.emailPlaceholder")}
+            label={t("form.emailLabel")}
             autoFocus
             required
             type="email"
@@ -48,9 +50,9 @@ export const LoginScreen = () => {
 
           <TextInput
             name={"password"}
-            placeholder="********"
+            placeholder={t("form.passwordPlaceholder")}
             autoComplete="current-password"
-            label={"Senha"}
+            label={t("form.passwordLabel")}
             type={showPassword ? "text" : "password"}
             required
             symbol={
@@ -69,16 +71,16 @@ export const LoginScreen = () => {
             }
           />
           <Button type="button" variant={"link"} disabled>
-            Esqueci minha Senha
+            {t("actions.forgotPassword")}
           </Button>
         </div>
         <div className="mt-6 flex flex-col gap-2">
           <Button type="submit" className="w-full">
-            Entrar
+            {t("actions.submit")}
           </Button>
 
           <Button type="button" variant={"link"} onClick={redirectToRegister}>
-            Criar Conta
+            {t("actions.createAccount")}
           </Button>
         </div>
       </form>

@@ -1,0 +1,25 @@
+{
+  "wellcome": "Bem-vindo ao nosso aplicativo!",
+  "sidebar": {
+    "survey": "Formulário",
+    "webhooks": "Webhooks",
+    "company": "Empresa",
+    "logout": "Sair"
+  },
+  "button": {
+    "add": "Adicionar",
+    "edit": "Editar",
+    "delete": "Deletar",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "submit": "Enviar",
+    "close": "Fechar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "submiting": "Enviando...",
+    "validating": "Validando...",
+    "loading": "Carregando...",
+    "confirm": "Confirmar",
+    "send": "Enviar"
+  }
+}

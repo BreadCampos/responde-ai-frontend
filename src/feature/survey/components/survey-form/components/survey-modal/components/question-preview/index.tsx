@@ -1,9 +1,12 @@
-import { InputPreview } from "../../../input-preview";
-import { useFormContext } from "react-hook-form";
-import { IForm } from "../..";
 import { SurveyQuestion } from "@/feature/survey/model/survey.model";
 import { useDebounce } from "@/shared/hooks/use-debounce";
+import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { IForm } from "../..";
+import { InputPreview } from "../../../input-preview";
+
 export const QuestionPreview = () => {
+  const { t } = useTranslation("surveys");
   const { watch } = useFormContext<IForm>();
   const formValues = watch();
   const debouncedValues = useDebounce(formValues, 500);
@@ -28,7 +31,7 @@ export const QuestionPreview = () => {
   return (
     <div className="p-4 mx-5 bg-card rounded-lg space-y-4 border max-h-[180px]">
       <h3 className="text-lg font-semibold mb-2 text-card-foreground">
-        Pré vizualização
+        {t("surveyModal.title.preview")}
       </h3>
       <InputPreview question={questionPreview} />
     </div>

@@ -1,17 +1,17 @@
 "use client";
 
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { QuestionsForm } from "../../components/questions-form-preview";
-import { FormProvider, useForm } from "react-hook-form";
-import { LoadingSkeleton } from "./components/loadgin-skeleton";
-import { GetPublicSurveyInfoQuery } from "../../service/get-public-survey-info.query";
-import { useEffect } from "react";
 import ErrorAnimation from "@/shared/components/lotties/error.lotties";
 import SuccessAnimation from "@/shared/components/lotties/success.lotties";
-import { CreatePublicSurveyResponseMutation } from "../../service/create-public-survey-response";
-import { CreateSurveyResponse } from "../../model/create-survey-response";
-import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { QuestionsForm } from "../../components/questions-form-preview";
+import { CreateSurveyResponse } from "../../model/create-survey-response";
+import { CreatePublicSurveyResponseMutation } from "../../service/create-public-survey-response";
+import { GetPublicSurveyInfoQuery } from "../../service/get-public-survey-info.query";
+import { LoadingSkeleton } from "./components/loadgin-skeleton";
 
 interface Props {
   surveyId: string;
@@ -36,7 +36,6 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
   const { mutate: createReponse, isSuccess: isCreationSuccess } =
     CreatePublicSurveyResponseMutation();
 
-  console.log(company?.id);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     if (company?.id) {
@@ -44,7 +43,6 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
         "Este formulário está no modo de vizualização, não é possível enviar respostas."
       );
     }
-    console.log("Submitted Data:", data);
     const formattedData: CreateSurveyResponse = {
       answers: Object.keys(data).map((key) => ({
         questionId: key,

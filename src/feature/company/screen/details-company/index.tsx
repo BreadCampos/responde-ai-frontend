@@ -13,11 +13,12 @@ import {
 import { Checkbox } from "@/shared/components/ui/checkbox";
 import { Label } from "@/shared/components/ui/label";
 import { Separator } from "@/shared/components/ui/separator";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { emptyValue } from "@/shared/utils/empty-string";
 import { formatDocument } from "@/shared/utils/format-cpf";
 import { formatDate } from "@/shared/utils/format-date";
 import { Edit } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { GetCompanyQuery } from "../../service/get-company.query";
 
 export const DetailsCompany = () => {
@@ -26,7 +27,7 @@ export const DetailsCompany = () => {
 
   const company = companies;
 
-  const navigate = useRouter();
+  const navigate = useNavigation();
 
   const goToEditCompany = () => {
     navigate.push(ROUTES.COMPANY_EDIT.replace(":id", id));

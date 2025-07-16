@@ -4,6 +4,7 @@ import { Label } from "@/shared/components/ui/label";
 import { XIcon } from "lucide-react";
 import { Key } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 export const typesWithOptions = [
   "select",
   "radio",
@@ -12,6 +13,8 @@ export const typesWithOptions = [
 ];
 
 export const ControlledOptions = ({}) => {
+  const { t } = useTranslation("surveys");
+
   const {
     control,
     clearErrors,
@@ -36,12 +39,22 @@ export const ControlledOptions = ({}) => {
               <div key={field.id} className="flex items-center gap-2">
                 <TextInput
                   name={`selectOptions.${index}.label`}
-                  placeholder={`Label ${index + 1}`}
+                  placeholder={t(
+                    "surveyModal.options.fields.label.placeholder",
+                    {
+                      index: index + 1,
+                    }
+                  )}
                   containerClassName="flex-grow"
                 />
                 <TextInput
                   name={`selectOptions.${index}.value`}
-                  placeholder={`Valor ${index + 1}`}
+                  placeholder={t(
+                    "surveyModal.options.fields.value.placeholder",
+                    {
+                      index: index + 1,
+                    }
+                  )}
                   containerClassName="flex-grow"
                   onChange={() => {
                     clearErrors("selectOptions");
@@ -65,7 +78,7 @@ export const ControlledOptions = ({}) => {
               append({ value: null, label: null });
             }}
           >
-            Adicionar Opção +
+            {t("surveyModal.options.buttons.add")}
           </Button>
           {errors.selectOptions && (
             <p className="text-sm font-medium text-destructive">

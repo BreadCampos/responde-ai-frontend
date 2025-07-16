@@ -1,13 +1,14 @@
+import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { ChevronLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { cn } from "../../lib/utils";
 import { Button } from "../button";
+
 interface Props {
   children?: React.ReactNode;
   className?: string;
 }
 export const BackButton = ({ children, className }: Props) => {
-  const navigate = useRouter();
+  const navigate = useNavigation();
   const handleBack = () => {
     navigate.back();
   };

@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { formatDocument } from "../utils/format-cpf";
 
 export const useFormatValues = () => {
   const handleFormatMinMaxValue = (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     event: any,
     minValue: number,
     maxValue?: number

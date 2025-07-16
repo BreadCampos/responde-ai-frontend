@@ -6,18 +6,19 @@ import {
 } from "@/shared/components/form";
 import { Label } from "@/shared/components/ui/label";
 
-import type { IForm } from "../../index";
-import { XIcon } from "lucide-react";
-import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
-import { useMemo } from "react";
 import {
   operatorMap,
   type QuestionConditionOperators,
   type SurveyQuestion,
 } from "@/feature/survey/model/survey.model";
-import { SelectOption } from "@/shared/types/select-options.type";
-import { typesWithOptions } from "../controlled-options";
 import { useFormatValues } from "@/shared/hooks/use-formatter-form";
+import { SelectOption } from "@/shared/types/select-options.type";
+import { XIcon } from "lucide-react";
+import { useMemo } from "react";
+import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import type { IForm } from "../../index";
+import { typesWithOptions } from "../controlled-options";
 // import { typesWithOptions } from "../controlled-options";
 interface Props {
   existingQuestions: SurveyQuestion[];
@@ -43,19 +44,44 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
     [existingQuestions]
   );
   const { handleFormatMinMaxValue } = useFormatValues();
+  const { t } = useTranslation("surveys");
 
   const allOperationOptions: SelectOption[] = useMemo(
     () => [
-      { value: "equals", label: "Igual a" },
-      { value: "not_equals", label: "Diferente de" },
-      { value: "greater_than", label: "Maior que" },
-      { value: "greater_than_equal", label: "Maior ou igual a" },
-      { value: "less_than", label: "Menor que" },
-      { value: "less_than_equal", label: "Menor ou igual a" },
-      { value: "contains", label: "Contém" },
-      { value: "is_one_of", label: "É um de (OU)" },
+      {
+        value: "equals",
+        label: t("surveyModal.conditionals.operators.equals"),
+      },
+      {
+        value: "not_equals",
+        label: t("surveyModal.conditionals.operators.not_equals"),
+      },
+      {
+        value: "greater_than",
+        label: t("surveyModal.conditionals.operators.greater_than"),
+      },
+      {
+        value: "greater_than_equal",
+        label: t("surveyModal.conditionals.operators.greater_than_equal"),
+      },
+      {
+        value: "less_than",
+        label: t("surveyModal.conditionals.operators.less_than"),
+      },
+      {
+        value: "less_than_equal",
+        label: t("surveyModal.conditionals.operators.less_than_equal"),
+      },
+      {
+        value: "contains",
+        label: t("surveyModal.conditionals.operators.contains"),
+      },
+      {
+        value: "is_one_of",
+        label: t("surveyModal.conditionals.operators.is_one_of"),
+      },
     ],
-    []
+    [t]
   );
 
   const dependentField = useMemo(
@@ -112,7 +138,7 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
     <div className="p-4 bg-card rounded-lg space-y-4 border">
       <CheckboxInput
         name="enableConditional"
-        label="Adicionar lógica condicional?"
+        label={t("surveyModal.conditionals.enable.label")}
       />
 
       {enableConditional && (
@@ -120,9 +146,11 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
           <SelectInput
             required={enableConditional}
             name="conditional.fieldId"
-            label="Aparecer somente se a pergunta..."
             options={questionOptionsForSelect}
-            placeholder="Selecione uma pergunta"
+            label={t("surveyModal.conditionals.fields.fieldId.label")}
+            placeholder={t(
+              "surveyModal.conditionals.fields.fieldId.placeholder"
+            )}
             onChange={() => {
               setValue("conditional.value", "");
               setValue("conditional.operator", null);
@@ -132,8 +160,10 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
           <SelectInput
             name="conditional.operator"
             required={enableConditional}
-            label="...a condição for..."
-            placeholder="Selecione uma condição"
+            label={t("surveyModal.conditionals.fields.operator.label")}
+            placeholder={t(
+              "surveyModal.conditionals.fields.operator.placeholder"
+            )}
             options={filteredOperationOptions}
             triggerClassName="max-w-[450px]"
             onChange={(op) => {
@@ -152,14 +182,20 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
                       required
                       name={`conditionalValues.${index}.text`}
                       options={optionsForMultiSelect}
-                      placeholder={`Opção ${index + 1}`}
+                      placeholder={t(
+                        "surveyModal.conditionals.multiValue.optionPlaceholder",
+                        { index: index + 1 }
+                      )}
                       containerClassName="flex-grow max-w-[450px]"
                     />
                   ) : (
                     <TextInput
                       required
                       name={`conditionalValues.${index}.text`}
-                      placeholder={`Valor ${index + 1}`}
+                      placeholder={t(
+                        "surveyModal.conditionals.multiValue.valuePlaceholder",
+                        { index: index + 1 }
+                      )}
                       containerClassName="flex-grow max-w-[450px]"
                     />
                   )}
@@ -180,7 +216,7 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
                 onClick={() => append({ text: "" })}
                 disabled={allOptionsUsed}
               >
-                Adicionar Valor
+                {t("surveyModal.conditionals.buttons.addValue")}{" "}
               </Button>
             </div>
           ) : operator ? (
@@ -191,7 +227,9 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
                   required
                   name="conditional.value"
                   options={dependentField?.selectOptions || []}
-                  placeholder="Selecione uma opção"
+                  placeholder={t(
+                    "surveyModal.conditionals.singleValue.selectPlaceholder"
+                  )}
                   containerClassName="flex-grow max-w-[450px]"
                 />
               ) : (
@@ -218,7 +256,9 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
                     <TextInput
                       required
                       name="conditional.value"
-                      placeholder="Coloque o valor"
+                      placeholder={t(
+                        "surveyModal.conditionals.singleValue.textPlaceholder"
+                      )}
                       type={dependentFieldType === "number" ? "number" : "text"}
                       containerClassName="max-w-[450px]"
                     />
@@ -237,7 +277,9 @@ export const ConditionalValues = ({ existingQuestions }: Props) => {
                           dependentField?.ratingOptions?.max
                         );
                       }}
-                      placeholder="Coloque o valor"
+                      placeholder={t(
+                        "surveyModal.conditionals.singleValue.textPlaceholder"
+                      )}
                       containerClassName="max-w-[450px]"
                     />
                   )}

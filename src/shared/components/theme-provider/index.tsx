@@ -2,8 +2,8 @@
 
 export { useTheme } from "next-themes";
 
-import { createContext, useEffect, useState, type ReactNode } from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 
 type Theme = "light" | "dark";
 

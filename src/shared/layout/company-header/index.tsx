@@ -1,5 +1,6 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { BackButton } from "@/shared/components/back-button";
+import { LanguageSwitcher } from "@/shared/components/language-switcber";
 import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
 import { cn } from "@/shared/lib/utils";
 
@@ -23,6 +24,7 @@ export const CompanyHeader = () => {
 
       <div className="flex items-center justify-end gap-2">
         <ThemeToggleButton />
+        <LanguageSwitcher />
       </div>
     </header>
   );

@@ -2,14 +2,20 @@ import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import type { CompanyModel } from "@/feature/company/model/company.model";
 import { GetCompaniesListQuery } from "@/feature/company/service/get-companies-list.query";
 import { GetUserMeServiceQuery } from "@/feature/users/service/get-user-me.query";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { oklch } from "culori";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { convertToOklchValues } from "../utils/convert-to-oklch-values";
 
 export const useGetUserAndCompany = () => {
-  const { setCompany, setUser, logout } = useAuthStore();
-  const navigate = useRouter();
+  const {
+    user: userFromStore,
+    company: companyFromStore,
+    setCompany,
+    setUser,
+    logout,
+  } = useAuthStore();
+  const navigate = useNavigation();
 
   const { data: user, isLoading, isError } = GetUserMeServiceQuery();
 
@@ -55,16 +61,17 @@ export const useGetUserAndCompany = () => {
       return;
     }
 
-    if (user) {
+    if (user && user.id !== userFromStore?.id) {
       setUser({ user });
     }
 
     if (company && company.data?.length > 0) {
       const currentCompany = company.data[0];
-      setCompany({ company: currentCompany });
-      setCompanyTheme(currentCompany);
+      if (currentCompany.id !== companyFromStore?.id) {
+        setCompany({ company: currentCompany });
+        setCompanyTheme(currentCompany);
+      }
     }
-    // TODO: fix, added just for build
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, company, setUser, setCompany, isLoading, isError, navigate]);
+  }, [user, company, isLoading, isError, userFromStore, companyFromStore]);
 };

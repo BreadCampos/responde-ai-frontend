@@ -1,11 +1,12 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { Button } from "@/shared/components/button";
+import { LanguageSwitcher } from "@/shared/components/language-switcber";
 import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
 import { Drawer, DrawerContent } from "@/shared/components/ui/drawer";
+import usePersistentState from "@/shared/hooks/use-persist";
 import { useScreenSize } from "@/shared/hooks/use-screen-size";
 import { Menu } from "lucide-react";
 import { SidebarHeader } from "../sidebar";
-import usePersistentState from "@/shared/hooks/use-persist";
 
 export const Header = () => {
   const { user, company } = useAuthStore();
@@ -27,6 +28,7 @@ export const Header = () => {
           {company?.fantasyName || company?.legalName || user?.firstName}
         </span>
 
+        <LanguageSwitcher />
         <ThemeToggleButton />
         {isMobile && (
           <Drawer

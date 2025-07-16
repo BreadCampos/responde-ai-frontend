@@ -1,13 +1,14 @@
 "use client";
 
-import { useFormContext } from "react-hook-form";
+import { Button } from "@/shared/components/button";
+import { useTranslation } from "@/shared/hooks/use-translation";
+import { cn } from "@/shared/lib/utils";
 import Image from "next/image";
-import type { SurveyQuestion } from "../../model/survey.model";
 import { useMemo, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import type { SurveyQuestion } from "../../model/survey.model";
 import { InputPreview } from "../survey-form/components/input-preview";
 import { shouldShowQuestion } from "../survey-form/helper/shouled-show-question";
-import { Button } from "@/shared/components/button";
-import { cn } from "@/shared/lib/utils";
 
 interface Props {
   questions: SurveyQuestion[];
@@ -26,6 +27,7 @@ export const QuestionsForm = ({
   isPreview,
   onSubmit,
 }: Props) => {
+  const { t } = useTranslation("common");
   const { trigger, getValues, handleSubmit, formState, watch } =
     useFormContext();
   const [currentPage, setCurrentPage] = useState(1);
@@ -85,7 +87,7 @@ export const QuestionsForm = ({
       )}
     >
       <div className="flex-1 overflow-y-auto">
-        <div className="flex w-full items-center justify-between mb-4">
+        <div className="flex w-full items-start justify-between mb-4">
           {title && (
             <h4 className="text-card-foreground text-xl mb-4"> {title}</h4>
           )}
@@ -103,19 +105,9 @@ export const QuestionsForm = ({
           )}
         </div>
         <div className="flex flex-col gap-4 bg-background p-4 rounded-lg">
-          {questionsOnCurrentPage.map((q, index) => {
+          {questionsOnCurrentPage.map((q) => {
             const isDisabled = verifyShowQuestion(q);
 
-            if (q.label === "O projeto está atualmente em produção?") {
-              console.log(
-                "Question:",
-                verifyShowQuestion(q),
-                questionsOnCurrentPage[index - 1],
-                q?.conditional?.operator
-                // formValues,
-                // formValues[questionsOnCurrentPage[index - 1]?.id]
-              );
-            }
             if (isPreview) {
               return (
                 <div
@@ -145,7 +137,7 @@ export const QuestionsForm = ({
             onClick={handlePrevPage}
             disabled={currentPage === 1}
           >
-            Anterior
+            {t("button.previous")}
           </Button>
 
           <div className="flex items-center gap-2">
@@ -170,11 +162,13 @@ export const QuestionsForm = ({
               disabled={isNavigating}
               className="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
             >
-              {isNavigating ? "Validando..." : "Próxima"}
+              {isNavigating ? t("button.validating") : t("button.next")}
             </Button>
           ) : (
             <Button type="submit" disabled={formState.isSubmitting}>
-              {formState.isSubmitting ? "Enviando..." : "Enviar"}
+              {formState.isSubmitting
+                ? t("button.submiting")
+                : t("button.send")}
             </Button>
           )}
         </div>

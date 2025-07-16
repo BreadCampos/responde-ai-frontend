@@ -8,8 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { usePagination } from "@/shared/hooks/use-pagination";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { ROUTES } from "../../../../../../core/routes/route-constants";
 import { SurveyResponseModel } from "../../../../model/survey-response";
 import { responseColumns } from "./columns";
@@ -20,7 +21,7 @@ export const SurveyResponses = () => {
   const { pagination, fetchTable } = usePagination({
     limit: 5,
   });
-  const navigate = useRouter();
+  const navigate = useNavigation();
   const { data, isFetching, refetch } = GetSurveyResponsesQuery({
     companyId: company?.id,
     surveyId,

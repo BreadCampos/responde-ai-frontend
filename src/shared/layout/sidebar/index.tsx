@@ -1,8 +1,11 @@
+"use client";
 import { Button } from "@//shared/components/button";
 import usePersistentState from "@//shared/hooks/use-persist";
 import { cn } from "@//shared/lib/utils";
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
+
 import {
   ChevronsLeft,
   ChevronsRight,
@@ -12,7 +15,8 @@ import {
   Webhook,
 } from "lucide-react";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 type NavItemProps = {
   name: string;
@@ -33,8 +37,10 @@ const NavItem = ({
   isActive,
   onSelect,
 }: NavItemProps) => {
-  const navigate = useRouter();
+  const navigate = useNavigation();
   const { logout } = useAuthStore();
+
+  const { t } = useTranslation("common");
 
   const handleClick = () => {
     if (onSelect) onSelect(href);
@@ -44,6 +50,7 @@ const NavItem = ({
     }
     navigate.push(href);
   };
+
   return (
     <Button
       onClick={handleClick}
@@ -53,7 +60,13 @@ const NavItem = ({
       <Icon size={isCollapsed ? 24 : 18} className={cn("flex-shrink-0")} />
       {!isCollapsed && (
         <p className={cn("text-[12px] truncate", isLogout && "text-white")}>
-          {name}
+          {t(
+            name as
+              | "sidebar.survey"
+              | "sidebar.webhooks"
+              | "sidebar.company"
+              | "sidebar.logout"
+          )}
         </p>
       )}
     </Button>
@@ -75,10 +88,10 @@ export const SidebarHeader = ({
   const logoSrc = company?.logoUrl || "/favicon.svg";
 
   const mainLinks = [
-    { name: "Formulários", href: ROUTES.SURVEY_LIST, icon: FileText },
-    { name: "Webhooks", href: ROUTES.WEBHOOKS_LIST, icon: Webhook },
+    { name: "sidebar.survey", href: ROUTES.SURVEY_LIST, icon: FileText },
+    { name: "sidebar.webhooks", href: ROUTES.WEBHOOKS_LIST, icon: Webhook },
     {
-      name: "Minha companhia",
+      name: "sidebar.company",
       href: ROUTES.COMPANY_DETAILS.replace(":id", company?.id || ""),
       icon: CompassIcon,
     },
@@ -135,7 +148,7 @@ export const SidebarHeader = ({
       <div className="flex flex-col space-y-2">
         <NavItem
           onSelect={onSelect}
-          name={"Logout"}
+          name={"sidebar.logout"}
           href={"logout"}
           isLogout={true}
           icon={LogOut}

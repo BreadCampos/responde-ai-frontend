@@ -1,0 +1,15 @@
+{
+  "title": "Login!",
+  "subtitle": "Please enter your credentials to log in.",
+  "form": {
+    "emailLabel": "Email",
+    "emailPlaceholder": "john.doe@address.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "********"
+  },
+  "actions": {
+    "forgotPassword": "Forgot my Password",
+    "submit": "Sign In",
+    "createAccount": "Create Account"
+  }
+}

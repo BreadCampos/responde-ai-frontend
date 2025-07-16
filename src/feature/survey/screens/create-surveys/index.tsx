@@ -1,17 +1,20 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { SurveyForm } from "../../components/survey-form";
-import { CreateSurveyMutation } from "../../service/create-survey.mutation";
-import { SurveyModel } from "../../model/survey.model";
-import { useForm } from "react-hook-form";
 import { Form } from "@/shared/components/ui/form";
+import { useTranslation } from "@/shared/hooks/use-translation";
+import { useForm } from "react-hook-form";
+import { SurveyForm } from "../../components/survey-form";
+import { SurveyModel } from "../../model/survey.model";
+import { CreateSurveyMutation } from "../../service/create-survey.mutation";
 
 export const CreateSurveys = () => {
   const { company } = useAuthStore();
   const surveyMutation = CreateSurveyMutation();
 
+  const { t } = useTranslation("surveys");
+
   const methods = useForm<SurveyModel>({
     defaultValues: {
-      title: "Novo questionário",
+      title: t("createSurvey.clickToEdit"),
       questions: [],
     },
   });
@@ -29,7 +32,7 @@ export const CreateSurveys = () => {
   return (
     <Form {...methods}>
       <SurveyForm
-        buttonSubmitText="Criar questionário"
+        buttonSubmitText={t("createSurvey.buttons.create")}
         onSubmit={onCreateSurvey}
         loading={surveyMutation?.isPending}
       />

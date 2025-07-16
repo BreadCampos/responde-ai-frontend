@@ -1,13 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { SurveyModel } from "../model/survey.model";
 import { httpClient } from "@/core/api/fetch-api";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { surveyApi } from "../api";
-import { useRouter } from "next/navigation";
+import type { SurveyModel } from "../model/survey.model";
 
 export const UpdateSurveyMutation = () => {
   const queryClient = useQueryClient();
 
-  const navigate = useRouter();
+  const navigate = useNavigation();
 
   return useMutation<
     SurveyModel,

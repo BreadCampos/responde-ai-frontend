@@ -1,16 +1,17 @@
-import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
-import { Button } from "@/shared/components/button";
-import { SelectInput } from "@/shared/components/form/select-input";
-import { TextInput } from "@/shared/components/form/text-input";
-import { XIcon } from "lucide-react";
 import {
   validationLabelMap,
   validationMap,
   type QuestionValidatorsType,
   type SurveyQuestionInputType,
 } from "@/feature/survey/model/survey.model";
-import { useMemo } from "react";
+import { Button } from "@/shared/components/button";
+import { SelectInput } from "@/shared/components/form/select-input";
+import { TextInput } from "@/shared/components/form/text-input";
 import { SelectOption } from "@/shared/types/select-options.type";
+import { XIcon } from "lucide-react";
+import { useMemo } from "react";
+import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface ValidationRuleRowProps {
   index: number;
@@ -33,6 +34,7 @@ const ValidationRuleRow = ({
     name: `validations.${index}.type`,
   }) as QuestionValidatorsType;
 
+  const { t } = useTranslation("surveys");
   const valueInputType = useMemo(() => {
     const rulesThatNeedValue = [
       "min",
@@ -73,33 +75,41 @@ const ValidationRuleRow = ({
         <SelectInput
           name={`validations.${index}.type`}
           options={validationOptions}
-          placeholder="Selecione uma regra"
+          placeholder={t("surveyModal.validations.fields.type.placeholder")}
           containerClassName="w-full flex-1"
         />
         {valueInputType === "date" && (
           <TextInput
             name={`validations.${index}.options.value`}
             type="date"
-            placeholder="Selecione a data"
+            placeholder={t(
+              "surveyModal.validations.fields.value.datePlaceholder"
+            )}
           />
         )}
         {valueInputType === "number" && (
           <TextInput
             name={`validations.${index}.options.value`}
             type="number"
-            placeholder="Valor"
+            placeholder={t(
+              "surveyModal.validations.fields.value.numberPlaceholder"
+            )}
           />
         )}
         {valueInputType === "text" && (
           <TextInput
             name={`validations.${index}.options.value`}
             type="text"
-            placeholder="Regex"
+            placeholder={t(
+              "surveyModal.validations.fields.value.textPlaceholder"
+            )}
           />
         )}
         <TextInput
           name={`validations.${index}.errorMessage`}
-          placeholder="Mensagem de erro (opcional)"
+          placeholder={t(
+            "surveyModal.validations.fields.errorMessage.placeholder"
+          )}
           containerClassName="flex-1"
         />
       </div>
@@ -117,6 +127,8 @@ const ValidationRuleRow = ({
 
 export const ValidationRules = () => {
   const { control } = useFormContext();
+  const { t } = useTranslation("surveys");
+
   const questionType = useWatch({
     control,
     name: "type",
@@ -140,7 +152,9 @@ export const ValidationRules = () => {
   const maxValidations = validationOptions.length === fields?.length;
   return (
     <div className="p-4 bg-card rounded-lg space-y-4 border">
-      <h4 className="font-medium text-card-foreground">Regras de Validação</h4>
+      <h4 className="font-medium text-card-foreground">
+        {t("surveyModal.validations.title")}
+      </h4>
       {fields.map((field, index) => (
         <ValidationRuleRow
           key={field.id}
@@ -159,7 +173,7 @@ export const ValidationRules = () => {
         }
         disabled={!questionType || maxValidations}
       >
-        Adicionar Validação +
+        {t("surveyModal.validations.buttons.add")}
       </Button>
     </div>
   );
