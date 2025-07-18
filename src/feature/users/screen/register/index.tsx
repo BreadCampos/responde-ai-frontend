@@ -111,7 +111,7 @@ export const Register = () => {
       key={"RegisterCompany"}
       title={t("register.company.title")}
     />,
-    <SelectPlanStep key={"SelectPlan"} />,
+    <SelectPlanStep key={"SelectPlan"} hasTestPlan />,
   ];
 
   return (

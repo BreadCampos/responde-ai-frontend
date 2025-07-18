@@ -33,7 +33,7 @@ export const RegisterCompanyForm = ({ title }: Props) => {
       <TextInput name="company.addressLine" label="Endereço" />
 
       <div className="flex-col space-y-3">
-        <p>URL do Logo</p>
+        <p>{t("register.company.fields.logoUrl")}</p>
         <div className="flex flex-col md:flex-row  gap-2 items-center">
           {company?.logoUrl && (
             <DefaultAvatar
@@ -42,10 +42,7 @@ export const RegisterCompanyForm = ({ title }: Props) => {
               className="size-14"
             />
           )}
-          <TextInput
-            name="company.logoUrl"
-            label={t("register.company.fields.logoUrl")}
-          />
+          <TextInput name="company.logoUrl" />
         </div>
       </div>
       <TextInput

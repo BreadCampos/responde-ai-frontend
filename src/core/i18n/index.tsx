@@ -17,7 +17,7 @@ i18n
       caches: ["cookie"],
     },
     react: {
-      useSuspense: false,
+      useSuspense: true,
     },
   });
 

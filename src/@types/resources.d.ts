@@ -31,18 +31,21 @@ interface Resources {
     "title": "Companhia"
   },
   "login": {
-    "title": "Login!",
-    "subtitle": "Por favor, insira suas credenciais para fazer login.",
-    "form": {
-      "emailLabel": "Email",
-      "emailPlaceholder": "john.doe@addres.com",
-      "passwordLabel": "Senha",
-      "passwordPlaceholder": "********"
-    },
-    "actions": {
-      "forgotPassword": "Esqueci minha Senha",
-      "submit": "Entrar",
-      "createAccount": "Criar Conta"
+    "login": {
+      "title": "Login!",
+      "subtitle": "Por favor, insira suas credenciais para fazer login.",
+      "form": {
+        "emailLabel": "Email",
+        "emailPlaceholder": "john.doe@addres.com",
+        "passwordLabel": "Senha",
+        "passwordPlaceholder": "********"
+      },
+      "actions": {
+        "forgotPassword": "Esqueci minha Senha",
+        "submit": "Entrar",
+        "createAccount": "Criar Conta"
+      },
+      "successPayment": "Pagamento realizado com sucesso."
     },
     "register": {
       "title": "Register",

@@ -23,12 +23,15 @@ function getLocale(request: NextRequest): string {
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const search = request.nextUrl.search;
+
   const firstPathSegment = pathname.split("/")[1] || "";
   const aliasedLocale = localeAliases[firstPathSegment.toLowerCase()];
 
   if (aliasedLocale) {
-    // Se o usuário digitou um apelido (ex: /br), redireciona para a raiz do idioma correto (ex: /pt-BR)
-    return NextResponse.redirect(new URL(`/${aliasedLocale}`, request.url));
+    return NextResponse.redirect(
+      new URL(`/${aliasedLocale}${search}`, request.url)
+    );
   }
 
   const pathnameLocale = i18nConfig.locales.find(
@@ -44,12 +47,14 @@ export function middleware(request: NextRequest) {
     ) {
       const newPath = pathname.substring(pathnameLocale.length + 1);
       return NextResponse.redirect(
-        new URL(`/${pathnameLocale}${newPath}`, request.url)
+        new URL(`/${pathnameLocale}${newPath}${search}`, request.url)
       );
     }
   } else {
     const locale = getLocale(request);
-    return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
+    return NextResponse.redirect(
+      new URL(`/${locale}${pathname}${search}`, request.url)
+    );
   }
 }
 
