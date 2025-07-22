@@ -1,3 +1,36 @@
 {
-  "title": "Webhooks"
+  "webhooks": {
+    "title": "Webhooks",
+    "addWebhook": "Adicionar Webhook",
+    "columns": {
+      "id": "ID",
+      "url": "URL",
+      "maxRetries": "Tentativas Máximas",
+      "isActive": "Status",
+      "retryPolicy": "Política de Retentativa",
+      "createdAt": "Criado em",
+      "actions": {
+        "label": "Ações",
+        "edit": "Editar",
+        "copyUrl": "Copiar URL"
+      }
+    }
+  },
+  "createWebhook": {
+    "title": "Criar Webhook",
+    "fields": {
+      "url": {
+        "label": "URL do Webhook",
+        "placeholder": "Insira a URL do Webhook"
+      },
+      "subscribedEvents": {
+        "label": "Eventos Inscritos",
+        "placeholder": "Selecione os eventos para os quais deseja receber notificações"
+      }
+    },
+    "url": "URL do Webhook",
+    "maxRetries": "Tentativas Máximas",
+    "retryPolicy": "Política de Retentativa",
+    "save": "Salvar"
+  }
 }

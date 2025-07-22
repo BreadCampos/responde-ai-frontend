@@ -1,18 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import * as React from "react";
 import {
-  type ColumnDef,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
+  type ColumnDef,
   type OnChangeFn,
   type PaginationState,
   type SortingState,
 } from "@tanstack/react-table";
+import * as React from "react";
 
+import { Input } from "@/shared/components/ui/input";
+import { Skeleton } from "@/shared/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -21,15 +23,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
-import { Skeleton } from "@/shared/components/ui/skeleton";
-import { Input } from "@/shared/components/ui/input";
+import { useScreenSize } from "@/shared/hooks/use-screen-size";
+import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import { useDebounce } from "../../hooks/use-debounce";
+import { cn } from "../../lib/utils";
 import type { PaginationMeta } from "../../model/pagination.model";
 import { Button } from "../button";
-import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
-import { cn } from "../../lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { useScreenSize } from "@/shared/hooks/use-screen-size";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

@@ -1,4 +1,5 @@
 import { SelectMultipleInput, TextInput } from "@/shared/components/form";
+import { useTranslation } from "react-i18next";
 import { WebhookEvents } from "../../constants";
 
 export const WebhookForm = () => {
@@ -7,13 +8,20 @@ export const WebhookForm = () => {
     label: event as string,
   }));
 
+  const { t } = useTranslation("webhook");
+
   return (
     <div className="flex flex-col gap-2 p-1">
-      <TextInput name={"url"} label={"Url"} placeholder="url do webhook" />
+      <TextInput
+        name={"url"}
+        label={t("createWebhook.fields.url.label")}
+        placeholder={t("createWebhook.fields.url.placeholder")}
+      />
       <SelectMultipleInput
         options={eventOptions}
         name={"subscribedEvents"}
-        label={"Eventos"}
+        label={t("createWebhook.fields.subscribedEvents.label")}
+        placeholder={t("createWebhook.fields.subscribedEvents.placeholder")}
       />
     </div>
   );

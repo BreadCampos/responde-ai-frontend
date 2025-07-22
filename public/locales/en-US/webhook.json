@@ -1,0 +1,36 @@
+{
+  "webhooks": {
+    "title": "Webhooks",
+    "addWebhook": "Add Webhook",
+    "columns": {
+      "id": "ID",
+      "url": "URL",
+      "maxRetries": "Maximum attempts",
+      "isActive": "Status",
+      "retryPolicy": "Retaining policy",
+      "createdAt": "Created in",
+      "actions": {
+        "label": "Actions",
+        "edit": "Edit",
+        "copyUrl": "Copy"
+      }
+    }
+  },
+  "createWebhook": {
+    "title": "Create Webhook",
+    "fields": {
+      "url": {
+        "label": "Webhok Url",
+        "placeholder": "Insert the webhok URL"
+      },
+      "subscribedEvents": {
+        "label": "Registered Events",
+        "placeholder": "Select the events for which you want to receive notifications"
+      }
+    },
+    "url": "Webhok Url",
+    "maxRetries": "Maximum attempts",
+    "retryPolicy": "Retaining policy",
+    "save": "Save"
+  }
+}
