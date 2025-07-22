@@ -13,6 +13,7 @@ interface Resources {
     "button": {
       "add": "Adicionar",
       "edit": "Editar",
+      "back": "Voltar",
       "delete": "Deletar",
       "save": "Salvar",
       "cancel": "Cancelar",
@@ -44,6 +45,14 @@ interface Resources {
       "previous": "Anterior",
       "pageInfo": "Página {{currentPage}} de {{totalPages}}",
       "next": "Próxima"
+    },
+    "multiselect": {
+      "placeholder": "Selecionar opções",
+      "searchPlaceholder": "Pesquisar...",
+      "notFound": "Nenhum resultado encontrado.",
+      "selectAll": "(Selecionar tudo)",
+      "clear": "Limpar",
+      "close": "Fechar"
     }
   },
   "company": {

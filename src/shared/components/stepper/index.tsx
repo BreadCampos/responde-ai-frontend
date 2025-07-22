@@ -1,5 +1,6 @@
-import * as React from "react";
 import { Button } from "@/shared/components/button";
+import { useTranslation } from "@/shared/hooks/use-translation";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 interface StepperDotsProps {
   totalSteps: number;
@@ -35,11 +36,14 @@ export const Stepper = ({
   currentStep,
   onNextStep,
   onPrevStep,
-  finalStepButtonText = "Finalizar",
+  finalStepButtonText,
   isLoading = false,
 }: StepperProps) => {
   const isLastStep = currentStep === steps.length - 1;
 
+  const { t } = useTranslation("common");
+
+  const buttonText = finalStepButtonText || t("button.next");
   return (
     <div className="flex flex-col h-full">
       <div className="flex-grow">{steps[currentStep]}</div>
@@ -51,7 +55,7 @@ export const Stepper = ({
           onClick={onPrevStep}
           disabled={isLoading}
         >
-          {currentStep > 0 ? "Voltar" : "Cancelar"}
+          {currentStep > 0 ? t("button.back") : t("button.cancel")}
         </Button>
 
         <StepperDots totalSteps={steps.length} currentStep={currentStep} />
@@ -65,7 +69,7 @@ export const Stepper = ({
 
           {isLastStep && (
             <Button type="submit" disabled={isLoading}>
-              {isLoading ? "Enviando..." : finalStepButtonText}
+              {isLoading ? t("button.send") : buttonText}
             </Button>
           )}
         </div>

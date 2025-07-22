@@ -13,6 +13,7 @@
     "add": "To add",
     "edit": "Edit",
     "delete": "Delete",
+    "back": "Back",
     "save": "Save",
     "cancel": "Cancel",
     "submit": "To send",
@@ -43,5 +44,13 @@
     "previous": "Previous",
     "pageInfo": "Page {{currentPage}} of {{totalPages}}",
     "next": "Next"
+  },
+  "multiselect": {
+    "placeholder": "Select options",
+    "searchPlaceholder": "Search...",
+    "notFound": "No results found.",
+    "selectAll": "(Select all)",
+    "clear": "Clear",
+    "close": "Close"
   }
 }
