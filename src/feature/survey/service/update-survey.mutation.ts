@@ -1,5 +1,5 @@
 import { httpClient } from "@/core/api/fetch-api";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { surveyApi } from "../api";
 import type { SurveyModel } from "../model/survey.model";

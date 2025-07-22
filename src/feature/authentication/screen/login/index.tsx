@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/button";
 import { TextInput } from "@/shared/components/form";
 import { Form } from "@/shared/components/ui/form";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { useToggle } from "@/shared/hooks/use-toggle";
 import { useTranslation } from "@/shared/hooks/use-translation";
 import { ChevronLeft, Eye, EyeClosed } from "lucide-react";
@@ -63,7 +63,7 @@ export const LoginScreen = () => {
             >
               <ChevronLeft />
             </Button>
-            <h1 className="text-2xl font-bold text-center w-full stext-card-foreground">
+            <h1 className="text-2xl font-bold text-center w-full text-card-foreground">
               {t("login.title")}
             </h1>
           </div>

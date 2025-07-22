@@ -1,4 +1,4 @@
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { ChevronLeft } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { Button } from "../button";

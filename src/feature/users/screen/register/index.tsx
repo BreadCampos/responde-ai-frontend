@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/button";
 import { Stepper } from "@/shared/components/stepper";
 import { Form } from "@/shared/components/ui/form";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { useRegister } from "@/shared/hooks/use-register";
 import { ChevronLeft } from "lucide-react";
 import React from "react";
@@ -125,7 +125,7 @@ export const Register = () => {
           >
             <ChevronLeft />
           </Button>
-          <h1 className="text-2xl font-bold text-center w-full stext-card-foreground">
+          <h1 className="text-2xl font-bold text-center w-full text-card-foreground">
             {t("register.title")}
           </h1>
         </div>

@@ -14,7 +14,7 @@ import { ROUTES } from "@/core/routes/route-constants";
 import { QuestionsForm } from "@/feature/survey/components/questions-form-preview";
 import type { SurveyModel } from "@/feature/survey/model/survey.model";
 import { Button } from "@/shared/components/button";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { ExternalLink, Eye } from "lucide-react";
 import { toast } from "sonner";
 

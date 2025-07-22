@@ -7,7 +7,7 @@ import EmblaCarousel from "@/shared/components/carrousel";
 import { LanguageSwitcher } from "@/shared/components/language-switcber";
 import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
 import { Form } from "@/shared/components/ui/form";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { EmblaOptionsType } from "embla-carousel";
 import { BarChart3, DollarSign, Target } from "lucide-react";
 import Image from "next/image";

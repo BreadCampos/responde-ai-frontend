@@ -4,7 +4,7 @@ import usePersistentState from "@//shared/hooks/use-persist";
 import { cn } from "@//shared/lib/utils";
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 
 import {
   ChevronsLeft,

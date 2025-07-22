@@ -1,7 +1,7 @@
 "use client";
 import { ROUTES } from "@/core/routes/route-constants";
 import { Button } from "@/shared/components/button";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
