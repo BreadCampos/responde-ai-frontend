@@ -14,7 +14,7 @@ import { useFormContext } from "react-hook-form";
 
 export type PlanID = "free" | "month" | "year";
 
-interface Prpos {
+interface Props {
   hasTestPlan?: boolean;
   onClickButton?: () => void;
   withOutTitle?: boolean;
@@ -23,7 +23,7 @@ export const SelectPlanStep = ({
   hasTestPlan,
   onClickButton,
   withOutTitle = false,
-}: Prpos) => {
+}: Props) => {
   const { watch, setValue, formState } = useFormContext();
   const { t } = useTranslation("login");
 
