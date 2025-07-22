@@ -14,6 +14,7 @@ import { Checkbox } from "@/shared/components/ui/checkbox";
 import { Label } from "@/shared/components/ui/label";
 import { Separator } from "@/shared/components/ui/separator";
 import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { emptyValue } from "@/shared/utils/empty-string";
 import { formatDocument } from "@/shared/utils/format-cpf";
 import { formatDate } from "@/shared/utils/format-date";
@@ -24,6 +25,7 @@ import { GetCompanyQuery } from "../../service/get-company.query";
 export const DetailsCompany = () => {
   const { id } = useParams<{ id: string }>();
   const { data: companies } = GetCompanyQuery({ id });
+  const { t } = useTranslation("company");
 
   const company = companies;
 
@@ -72,10 +74,14 @@ export const DetailsCompany = () => {
         <Card>
           <CardContent className="p-6 space-y-6">
             <div>
-              <h3 className="font-semibold text-lg mb-2">Informações Gerais</h3>
+              <h3 className="font-semibold text-lg mb-2">
+                {t("details.generalInfo.title")}
+              </h3>
               <div className="space-y-1 text-sm text-muted-foreground">
                 <p>
-                  <strong className="text-card-foreground">Documento:</strong>{" "}
+                  <strong className="text-card-foreground">
+                    {t("details.generalInfo.document")}
+                  </strong>{" "}
                   {company?.document ? formatDocument(company?.document) : "-"}
                 </p>
               </div>
@@ -84,23 +90,25 @@ export const DetailsCompany = () => {
             <Separator />
 
             <div>
-              <h3 className="font-semibold text-lg mb-2">Endereços</h3>
+              <h3 className="font-semibold text-lg mb-2">
+                {t("details.addresses.title")}
+              </h3>
               <div className="space-y-2 text-sm text-muted-foreground">
                 <div>
                   <strong className="text-card-foreground">
-                    Endereço Principal:
+                    {t("details.addresses.mainAddress")}
                   </strong>
                   <p>{emptyValue(company?.addressLine)}</p>
                   <p className="text-xs">
                     <strong className="text-card-foreground">
-                      Complemento:
+                      {t("details.addresses.complement")}
                     </strong>{" "}
                     {emptyValue(company?.addressLineComplement)}
                   </p>
                 </div>
                 <div>
                   <strong className="text-card-foreground">
-                    Endereço de Cobrança:
+                    {t("details.addresses.billingAddress")}
                   </strong>
                   <p>{emptyValue(company?.billingAddressLine)}</p>
                 </div>
@@ -111,7 +119,9 @@ export const DetailsCompany = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h3 className="font-semibold text-lg mb-2">Configurações</h3>
+                <h3 className="font-semibold text-lg mb-2">
+                  {t("details.settings.title")}
+                </h3>
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="always_display_logo"
@@ -122,12 +132,14 @@ export const DetailsCompany = () => {
                     htmlFor="always_display_logo"
                     className="text-sm text-muted-foreground"
                   >
-                    Sempre exibir logo
+                    {t("details.settings.alwaysDisplayLogo")}
                   </Label>
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-lg mb-2">Tema</h3>
+                <h3 className="font-semibold text-lg mb-2">
+                  {t("details.theme.title")}
+                </h3>
                 <div className="flex items-center gap-3">
                   <div
                     className="h-8 w-8 rounded-full border"
@@ -145,10 +157,14 @@ export const DetailsCompany = () => {
             <Separator />
 
             <div>
-              <h3 className="font-semibold text-lg mb-2">Histórico</h3>
+              <h3 className="font-semibold text-lg mb-2">
+                {t("details.history.title")}
+              </h3>
               <div className="flex-col flex text-sm text-muted-foreground justify-start items-start md:flex-row md:justify-between md:items-center gap-2">
                 <p>
-                  <strong className="text-card-foreground">Criado em:</strong>{" "}
+                  <strong className="text-card-foreground">
+                    {t("details.history.createdAt")}
+                  </strong>{" "}
                   {company?.createdAt
                     ? formatDate({
                         date: company?.createdAt,
@@ -157,7 +173,7 @@ export const DetailsCompany = () => {
                 </p>
                 <p>
                   <strong className="text-card-foreground">
-                    Última atualização:
+                    {t("details.history.lastUpdate")}
                   </strong>{" "}
                   {company?.updatedAt
                     ? formatDate({

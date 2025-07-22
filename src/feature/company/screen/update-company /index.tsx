@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { Form } from "@/shared/components/ui/form";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { formatDocument } from "@/shared/utils/format-cpf";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
@@ -29,10 +30,9 @@ export const UpdateCompany = () => {
   const { id } = useParams<{ id: string }>();
   const { data: company, isLoading } = GetCompanyQuery({ id });
 
+  const { t } = useTranslation("company");
   const { isPending, mutate } = useUpdateCompanyMutation();
   const onSubmit = (data: UpdateCompanyFormValues) => {
-    console.log("Submitted data:", data);
-
     mutate({
       id: id,
       company: {
@@ -68,12 +68,9 @@ export const UpdateCompany = () => {
           <Card className="min-w-full">
             <CardHeader className="space-y-2">
               <CardTitle className="text-1xl flex flex-col gap-2 items-center justify-between md:flex-row">
-                <BackButton>Atualizar Empresa</BackButton>
+                <BackButton>{t("update.title")}</BackButton>
               </CardTitle>
-              <CardDescription>
-                Atualize as informações da sua empresa. Essas informações serão
-                exibidas para os usuários e clientes.
-              </CardDescription>
+              <CardDescription>{}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <RegisterCompanyForm />
@@ -85,7 +82,7 @@ export const UpdateCompany = () => {
               onClick={handleSubmit(onSubmit)}
               loading={loading}
             >
-              Atualizar Empresa
+              {t("update.button")}
             </Button>
           </div>
         </div>

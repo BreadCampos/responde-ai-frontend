@@ -1,9 +1,28 @@
 {
-  "welcome": "Welcome to our application!",
+  "wellcome": "Welcome to our app!",
   "sidebar": {
-    "survey": "Survey",
+    "survey": "Form",
     "webhooks": "Webhooks",
-    "company": "Company",
-    "logout": "Logout"
+    "company": "Enterprise",
+    "logout": "To go out"
+  },
+  "header": {
+    "freePlan": "Missing {{time}} to the end of your free plan"
+  },
+  "button": {
+    "add": "To add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "To send",
+    "close": "To close",
+    "next": "Next",
+    "previous": "Previous",
+    "submiting": "Submitting ...",
+    "validating": "Validating ...",
+    "loading": "Loading...",
+    "confirm": "Confirm",
+    "send": "To send"
   }
 }

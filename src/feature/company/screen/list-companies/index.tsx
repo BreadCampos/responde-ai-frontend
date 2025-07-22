@@ -3,8 +3,9 @@ import { Button } from "@/shared/components/button";
 import { DataTable } from "@/shared/components/data-table";
 import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { usePagination } from "@/shared/hooks/use-pagination";
+import { useTranslation } from "react-i18next";
 import { GetCompaniesListQuery } from "../../service/get-companies-list.query";
-import { columns } from "./columns";
+import { useColumns } from "./columns";
 
 export const ListCompanies = () => {
   const navigate = useNavigation();
@@ -13,6 +14,7 @@ export const ListCompanies = () => {
     navigate.push(ROUTES.COMPANY_CREATE);
   };
 
+  const { columns } = useColumns();
   const { pagination, fetchTable } = usePagination();
 
   const { data, isFetching, refetch } = GetCompaniesListQuery({
@@ -35,6 +37,7 @@ export const ListCompanies = () => {
       refetch,
     });
   };
+  const { t } = useTranslation("company");
 
   const redirectToCompanyDetails = (row: { id: string }) => {
     navigate.push(ROUTES.COMPANY_DETAILS.replace(":id", row?.id));
@@ -43,10 +46,10 @@ export const ListCompanies = () => {
     <div className="flex h-full flex-col gap-2 p-2 md:p-4">
       <div className="mb-2 w-full flex flex-col md:flex-row md:justify-between items-center">
         <h1 className="text-2xl text-card-foreground font-bold mb-4">
-          Companhias
+          {t("companies.title")}
         </h1>
         <Button variant="default" onClick={redirectionToCreate} disabled>
-          Adicionar Companhia
+          {t("companies.addNew")}
         </Button>
       </div>
 

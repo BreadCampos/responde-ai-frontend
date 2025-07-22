@@ -1,0 +1,27 @@
+{
+  "title": "Company",
+  "details": {
+    "generalInfo": {
+      "title": "General Information",
+      "document": "Document:"
+    },
+    "addresses": {
+      "title": "Addresses",
+      "mainAddress": "Main Address:",
+      "complement": "Complement:",
+      "billingAddress": "Billing Address:"
+    },
+    "settings": {
+      "title": "Settings",
+      "alwaysDisplayLogo": "Always display logo"
+    },
+    "theme": {
+      "title": "Theme"
+    },
+    "history": {
+      "title": "History",
+      "createdAt": "Created at:",
+      "lastUpdate": "Last updated:"
+    }
+  }
+}
