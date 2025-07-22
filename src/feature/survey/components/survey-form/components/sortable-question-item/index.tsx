@@ -1,15 +1,22 @@
+import type { SurveyQuestion } from "@/feature/survey/model/survey.model";
+import { Button } from "@/shared/components/button";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ChevronsUpDown, Edit, Trash2 } from "lucide-react";
-import type { SurveyQuestion } from "@/feature/survey/model/survey.model";
 
 interface Props {
   question: SurveyQuestion;
   onDelete: (questionId: string) => void;
   onEdit: (question: SurveyQuestion) => void;
+  index: number;
 }
 
-export function SortableQuestionItem({ onDelete, question, onEdit }: Props) {
+export function SortableQuestionItem({
+  onDelete,
+  index,
+  question,
+  onEdit,
+}: Props) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: question.id });
 
@@ -17,6 +24,8 @@ export function SortableQuestionItem({ onDelete, question, onEdit }: Props) {
     transform: CSS.Transform.toString(transform),
     transition,
   };
+
+  console.log({ question });
 
   return (
     <div
@@ -27,26 +36,30 @@ export function SortableQuestionItem({ onDelete, question, onEdit }: Props) {
     >
       <div className="flex items-center justify-between gap-2 ">
         <div className="flex items-center gap-2 flex-1 ">
-          <p className="text-primary">{question.orderIndex + 1} -</p>
+          <p className="text-primary">{index + 1} -</p>
           <p className="flex-1 text-card-foreground">{question.label}</p>
         </div>
 
         <div className="flex items-center">
-          <button
+          <Button
             type="button"
+            variant={"ghost"}
+            size={"icon"}
             onClick={() => onEdit(question)}
             className="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full transition-colors"
             title="Editar pergunta"
           >
             <Edit className="h-4 w-4" />
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => onDelete(question.id)}
+            variant={"ghost"}
+            size={"icon"}
             className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full"
             aria-label="Deletar pergunta"
           >
             <Trash2 className="h-4 w-4" />
-          </button>
+          </Button>
 
           <div {...listeners} className="p-2 cursor-grab text-card-foreground">
             <ChevronsUpDown />

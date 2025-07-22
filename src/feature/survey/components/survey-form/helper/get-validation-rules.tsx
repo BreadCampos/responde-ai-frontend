@@ -1,181 +1,113 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// src/hooks/useValidationRules.ts
+
 import type { QuestionValidators } from "@/feature/survey/model/survey.model";
+import { useTranslation } from "@/shared/hooks/use-translation";
+import { isValidCNPJ } from "@/shared/utils/valid-cnpj";
+import { isValidCPF } from "@/shared/utils/valid-cpf";
+import { useMemo } from "react";
 import type { RegisterOptions } from "react-hook-form";
-// Esta função valida um CPF brasileiro.
-export function isValidCPF(cpf: string | null | undefined): boolean {
-  if (!cpf) return false;
 
-  // Remove caracteres não numéricos
-  const cpfDigits = cpf.replace(/\D/g, "");
+type ValidationResult = {
+  rules: RegisterOptions;
+  inputProps: Record<string, any>;
+};
 
-  if (cpfDigits.length !== 11 || /^(\d)\1{10}$/.test(cpfDigits)) {
-    return false;
-  }
-
-  let sum = 0;
-  let remainder: number;
-
-  for (let i = 1; i <= 9; i++) {
-    sum += parseInt(cpfDigits.substring(i - 1, i)) * (11 - i);
-  }
-
-  remainder = (sum * 10) % 11;
-  if (remainder === 10 || remainder === 11) {
-    remainder = 0;
-  }
-
-  if (remainder !== parseInt(cpfDigits.substring(9, 10))) {
-    return false;
-  }
-
-  sum = 0;
-  for (let i = 1; i <= 10; i++) {
-    sum += parseInt(cpfDigits.substring(i - 1, i)) * (12 - i);
-  }
-
-  remainder = (sum * 10) % 11;
-  if (remainder === 10 || remainder === 11) {
-    remainder = 0;
-  }
-
-  if (remainder !== parseInt(cpfDigits.substring(10, 11))) {
-    return false;
-  }
-
-  return true;
-}
-
-// Esta função valida um CNPJ brasileiro.
-export function isValidCNPJ(cnpj: string | null | undefined): boolean {
-  if (!cnpj) return false;
-
-  const cnpjDigits = cnpj.replace(/\D/g, "");
-
-  if (cnpjDigits.length !== 14 || /^(\d)\1{13}$/.test(cnpjDigits)) {
-    return false;
-  }
-
-  let size = cnpjDigits.length - 2;
-  let numbers = cnpjDigits.substring(0, size);
-  const digits = cnpjDigits.substring(size);
-  let sum = 0;
-  let pos = size - 7;
-
-  for (let i = size; i >= 1; i--) {
-    sum += parseInt(numbers.charAt(size - i)) * pos--;
-    if (pos < 2) {
-      pos = 9;
-    }
-  }
-
-  let result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
-  if (result !== parseInt(digits.charAt(0))) {
-    return false;
-  }
-
-  size = size + 1;
-  numbers = cnpjDigits.substring(0, size);
-  sum = 0;
-  pos = size - 7;
-
-  for (let i = size; i >= 1; i--) {
-    sum += parseInt(numbers.charAt(size - i)) * pos--;
-    if (pos < 2) {
-      pos = 9;
-    }
-  }
-
-  result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
-  if (result !== parseInt(digits.charAt(1))) {
-    return false;
-  }
-
-  return true;
-}
-
-export const getValidationRules = (
+/**
+ * Hook customizado para gerar regras de validação e props de input
+ * para o react-hook-form, utilizando traduções de i18n.
+ * @param validations - Array de objetos validadores.
+ * @returns Um objeto contendo `rules` para react-hook-form e `inputProps` para o elemento de input.
+ */
+export const useValidationRules = (
   validations: Array<QuestionValidators>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): { rules: RegisterOptions; inputProps: Record<string, any> } => {
-  // <--- MUDANÇA AQUI
+): ValidationResult => {
+  const { t } = useTranslation("common");
 
-  if (!validations || validations.length === 0) {
-    return { rules: {}, inputProps: {} }; // <--- MUDANÇA AQUI
-  }
-
-  const rules: RegisterOptions = {};
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const inputProps: Record<string, any> = {};
-
-  for (const validator of validations) {
-    switch (validator.type) {
-      case "required":
-        rules.required = validator.errorMessage || "Este campo é obrigatório";
-        break;
-      case "min_length":
-        rules.minLength = {
-          value: Number(validator.options?.value),
-          message:
-            validator.errorMessage ||
-            `O tamanho mínimo é ${validator.options?.value}`,
-        };
-        inputProps.min = validator.options?.value;
-
-        break;
-      case "max_length":
-        rules.maxLength = {
-          value: Number(validator.options?.value),
-          message:
-            validator.errorMessage ||
-            `O tamanho máximo é ${validator.options?.value}`,
-        };
-        inputProps.maxLength = validator.options?.value;
-
-        break;
-      case "min":
-        rules.min = {
-          value: Number(validator.options?.value),
-          message:
-            validator.errorMessage ||
-            `O valor mínimo é ${validator.options?.value}`,
-        };
-        inputProps.min = validator.options?.value;
-
-        break;
-      case "max":
-        rules.max = {
-          value: Number(validator.options?.value),
-          message:
-            validator.errorMessage ||
-            `O valor máximo é ${validator.options?.value}`,
-        };
-        inputProps.max = validator.options?.value;
-        break;
-
-      case "email":
-        rules.pattern = {
-          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-          message: validator.errorMessage || "Formato de email inválido",
-        };
-        break;
-      case "cpf":
-        rules.validate = (cpf: string) =>
-          isValidCPF(cpf) || validator.errorMessage;
-        break;
-      case "cnpj":
-        rules.validate = (cnpj: string) =>
-          isValidCNPJ(cnpj) || validator.errorMessage;
-        break;
-      case "custom":
-        if (validator.regex) {
-          rules.pattern = {
-            value: new RegExp(validator.regex),
-            message:
-              validator.errorMessage || "O valor não corresponde ao padrão",
-          };
-        }
-        break;
+  const validationResult = useMemo<ValidationResult>(() => {
+    if (!validations || validations.length === 0) {
+      return { rules: {}, inputProps: {} };
     }
-  }
 
-  return { rules, inputProps };
+    const rules: RegisterOptions = {};
+    const inputProps: Record<string, any> = {};
+
+    for (const validator of validations) {
+      const value = validator.options?.value;
+      const customMessage = validator.errorMessage;
+
+      switch (validator.type) {
+        case "required":
+          rules.required = customMessage || t("validations.required");
+          break;
+
+        case "min_length":
+          rules.minLength = {
+            value: Number(value),
+            message:
+              customMessage || t("validations.min_length", { number: value }),
+          };
+          break;
+
+        case "max_length":
+          rules.maxLength = {
+            value: Number(value),
+            message:
+              customMessage || t("validations.max_length", { number: value }),
+          };
+          inputProps.maxLength = value;
+          break;
+
+        case "min":
+          rules.min = {
+            value: Number(value),
+            message: customMessage || t("validations.min", { number: value }),
+          };
+          inputProps.min = value;
+          break;
+
+        case "max":
+          rules.max = {
+            value: Number(value),
+            message: customMessage || t("validations.max", { number: value }),
+          };
+          inputProps.max = value;
+          break;
+
+        case "email":
+          rules.pattern = {
+            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            message: customMessage || t("validations.email"),
+          };
+          break;
+
+        case "cpf":
+          rules.validate = {
+            isValidCPF: (cpf: string) =>
+              isValidCPF(cpf) || customMessage || t("validations.cpf"),
+          };
+          break;
+
+        case "cnpj":
+          rules.validate = {
+            isValidCNPJ: (cnpj: string) =>
+              isValidCNPJ(cnpj) || customMessage || t("validations.cnpj"),
+          };
+          break;
+
+        case "custom":
+          if (validator.regex) {
+            rules.pattern = {
+              value: new RegExp(validator.regex),
+              message: customMessage || t("validations.custom"),
+            };
+          }
+          break;
+      }
+    }
+
+    return { rules, inputProps };
+  }, [validations, t]);
+
+  return validationResult;
 };

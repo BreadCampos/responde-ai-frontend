@@ -24,5 +24,24 @@
     "loading": "Loading...",
     "confirm": "Confirm",
     "send": "To send"
+  },
+  "validations": {
+    "required": "This field is required.",
+    "email": "Please enter a valid email address.",
+    "min_length": "Must be at least {{number}} characters long.",
+    "max_length": "Cannot be more than {{number}} characters long.",
+    "cnpj": "The provided CNPJ is invalid.",
+    "cpf": "The provided CPF is invalid.",
+    "min": "The minimum value is {{number}}.",
+    "max": "The maximum value is {{number}}.",
+    "custom": "Invalid value."
+  },
+  "datatable": {
+    "notFound": "No results found.",
+    "searchPlaceholder": "Search...",
+    "selectedRows": "{{count}} of {{total}} row(s) selected.",
+    "previous": "Previous",
+    "pageInfo": "Page {{currentPage}} of {{totalPages}}",
+    "next": "Next"
   }
 }

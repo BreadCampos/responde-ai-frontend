@@ -11,7 +11,9 @@ import {
   type PaginationState,
   type SortingState,
 } from "@tanstack/react-table";
+import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 import { Input } from "@/shared/components/ui/input";
 import { Skeleton } from "@/shared/components/ui/skeleton";
@@ -24,7 +26,6 @@ import {
   TableRow,
 } from "@/shared/components/ui/table";
 import { useScreenSize } from "@/shared/hooks/use-screen-size";
-import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import { useDebounce } from "../../hooks/use-debounce";
 import { cn } from "../../lib/utils";
 import type { PaginationMeta } from "../../model/pagination.model";
@@ -58,7 +59,7 @@ export function DataTable<TData, TValue>({
   loading = false,
   onClickRow,
   selectedRowId,
-  notFoundMessage = "Nenhum resultado encontrado.",
+  notFoundMessage,
   pagination,
   onFetchData,
   searchMode = false,
@@ -68,6 +69,7 @@ export function DataTable<TData, TValue>({
 
   setRowSelection,
 }: DataTableProps<TData, TValue>) {
+  const { t } = useTranslation("common");
   const [search, setSearch] = React.useState("");
   const debouncedSearch = useDebounce(search, 500);
 
@@ -128,7 +130,7 @@ export function DataTable<TData, TValue>({
         </Button>
         {searchMode && (
           <Input
-            placeholder="Pesquisar..."
+            placeholder={t("datatable.searchPlaceholder")}
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             className="max-w-sm self-end"
@@ -218,7 +220,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center text-card-foreground"
                 >
-                  {notFoundMessage}
+                  {notFoundMessage ?? t("datatable.notFound")}
                 </TableCell>
               </TableRow>
             )}
@@ -229,8 +231,10 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center  justify-between space-x-2 flex-wrap gap-2 flex-col-reverse md:flex-row  md:justify-end">
         {table.getFilteredSelectedRowModel().rows.length > 0 && (
           <div className="flex-1 text-sm text-muted-foreground">
-            {table.getFilteredSelectedRowModel().rows.length} de{" "}
-            {table.getFilteredRowModel().rows.length} linha(s) selecionada(s).
+            {t("datatable.selectedRows", {
+              count: table.getFilteredSelectedRowModel().rows.length,
+              total: table.getFilteredRowModel().rows.length,
+            })}
           </div>
         )}
         <div className="flex items-center space-x-2 flex-wrap gap-2 justify-center w-full md:w-fit">
@@ -241,11 +245,13 @@ export function DataTable<TData, TValue>({
             disabled={!table.getCanPreviousPage()}
           >
             {<ChevronLeft />}
-            {!isMobile && <span>Anterior</span>}
+            {!isMobile && <span>{t("datatable.previous")}</span>}
           </Button>
           <span className="text-sm">
-            Página {table.getState().pagination.pageIndex + 1} de{" "}
-            {table.getPageCount()}
+            {t("datatable.pageInfo", {
+              currentPage: table.getState().pagination.pageIndex + 1,
+              totalPages: table.getPageCount(),
+            })}
           </span>
           <Button
             variant="outline"
@@ -253,7 +259,7 @@ export function DataTable<TData, TValue>({
             onClick={onNextPage}
             disabled={!table.getCanNextPage()}
           >
-            {!isMobile && <span>Próxima</span>}
+            {!isMobile && <span>{t("datatable.next")}</span>}
             <ChevronRight />
           </Button>
         </div>

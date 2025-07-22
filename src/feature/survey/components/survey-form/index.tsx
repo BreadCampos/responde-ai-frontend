@@ -626,30 +626,34 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     if (!over || active.id === over.id) return;
     const currentQuestions = getValues("questions");
 
-    const activeContainerId = active.data.current?.sortable.containerId;
-    const overContainerId = over.data.current?.sortable.containerId || over.id;
-
     const activeIndex = currentQuestions.findIndex((q) => q.id === active.id);
     const overIndex = currentQuestions.findIndex((q) => q.id === over.id);
 
-    if (activeIndex === -1) return;
+    if (activeIndex === -1 || overIndex === -1) return;
 
-    if (activeContainerId !== overContainerId) {
-      const newPageIndex = Number(String(overContainerId).replace("page-", ""));
-      currentQuestions[activeIndex] = {
-        ...currentQuestions[activeIndex],
-        pageIndex: newPageIndex,
-      };
-    }
-
-    const updatedQuestions = arrayMove(
+    // 1. Mova o item no array para a nova posição
+    const questionsWithMovedItem = arrayMove(
       currentQuestions,
       activeIndex,
       overIndex
     );
 
-    let finalQuestions = updatedQuestions?.map((question) => {
-      const questionsOnSamePage = updatedQuestions.filter(
+    // 2. Atualize o pageIndex se o item mudou de página (Sua lógica aqui está ok)
+    const activeContainerId = active.data.current?.sortable.containerId;
+    const overContainerId = over.data.current?.sortable.containerId || over.id;
+    if (activeContainerId !== overContainerId) {
+      const newPageIndex = Number(String(overContainerId).replace("page-", ""));
+      const questionToUpdate = questionsWithMovedItem.find(
+        (q) => q.id === active.id
+      );
+      if (questionToUpdate) {
+        questionToUpdate.pageIndex = newPageIndex;
+      }
+    }
+
+    // 3. Recalcule o 'orderIndex' para todas as questões com base na nova ordem
+    const questionsWithUpdatedOrder = questionsWithMovedItem.map((question) => {
+      const questionsOnSamePage = questionsWithMovedItem.filter(
         (q) => q.pageIndex === question.pageIndex
       );
       const orderIndex = questionsOnSamePage.findIndex(
@@ -658,9 +662,10 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       return { ...question, orderIndex };
     });
 
-    const movedItem = finalQuestions.find((q) => q.id === active.id);
+    // 4. Verifique a dependência (Sua lógica de validação aqui)
+    const movedItem = questionsWithUpdatedOrder.find((q) => q.id === active.id);
     if (movedItem?.conditional) {
-      const dependencyItem = finalQuestions.find(
+      const dependencyItem = questionsWithUpdatedOrder.find(
         (q) => q.id === movedItem.conditional!.fieldId
       );
       if (dependencyItem) {
@@ -674,8 +679,10 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       }
     }
 
-    finalQuestions = renumberPages(updatedQuestions);
+    // 5. Renumere as páginas usando o array JÁ ATUALIZADO
+    const finalQuestions = renumberPages(questionsWithUpdatedOrder);
 
+    // 6. Atualize o formulário
     setValue("questions", finalQuestions, { shouldDirty: true });
   }
 
@@ -791,9 +798,10 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
                       id={`page-${pageIndex}`}
                     >
                       <div className="flex flex-col gap-2">
-                        {questionsInPage.map((q) => (
+                        {questionsInPage.map((q, index) => (
                           <SortableQuestionItem
                             key={q.id}
+                            index={index}
                             question={q}
                             onDelete={deleteQuestion}
                             onEdit={handleOpenToEdit}

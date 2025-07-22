@@ -189,14 +189,17 @@
         }
       },
       "labels": {
-        "required": "Mandatory",
+        "required": "Required",
         "email": "Valid email",
         "url": "Valid URL",
+        "number_only": "Numbers only",
+        "min_length": "Minimum length (characters)",
+        "max_length": "Maximum length (characters)",
+        "cnpj": "Valid CNPJ",
+        "cpf": "Valid CPF",
         "min": "Minimum value",
         "max": "Maximum value",
-        "min_length": "Minimum",
-        "max_length": "Maximum length",
-        "custom": "CUSTOMIZED REGEX"
+        "custom": "Custom rule"
       },
       "buttons": {
         "add": "Add Validation +"

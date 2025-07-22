@@ -25,6 +25,25 @@ interface Resources {
       "loading": "Carregando...",
       "confirm": "Confirmar",
       "send": "Enviar"
+    },
+    "validations": {
+      "required": "Este campo é obrigatório.",
+      "email": "Por favor, insira um e-mail válido.",
+      "min_length": "O campo deve ter no mínimo {{number}} caracteres.",
+      "max_length": "O campo deve ter no máximo {{number}} caracteres.",
+      "cnpj": "O CNPJ informado é inválido.",
+      "cpf": "O CPF informado é inválido.",
+      "min": "O valor mínimo permitido é {{number}}.",
+      "max": "O valor máximo permitido é {{number}}.",
+      "custom": "O valor informado é inválido."
+    },
+    "datatable": {
+      "notFound": "Nenhum resultado encontrado.",
+      "searchPlaceholder": "Pesquisar...",
+      "selectedRows": "{{count}} de {{total}} linha(s) selecionada(s).",
+      "previous": "Anterior",
+      "pageInfo": "Página {{currentPage}} de {{totalPages}}",
+      "next": "Próxima"
     }
   },
   "company": {
@@ -207,7 +226,7 @@ interface Resources {
       },
       "editController": {
         "title": "Perguntas",
-        "page": "Page {{page}}",
+        "page": "Pagína {{page}}",
         "editQuestion": "Editar pergunta",
         "deleteQuestion": "Deletar pergunta",
         "questionType": "Tipo de pergunta",
@@ -365,11 +384,14 @@ interface Resources {
           "required": "Obrigatório",
           "email": "E-mail válido",
           "url": "URL válida",
+          "number_only": "Apenas números",
+          "min_length": "Tamanho mínimo (caracteres)",
+          "max_length": "Tamanho máximo (caracteres)",
+          "cnpj": "CNPJ válido",
+          "cpf": "CPF válido",
           "min": "Valor mínimo",
           "max": "Valor máximo",
-          "min_length": "Comprimento mínimo",
-          "max_length": "Comprimento máximo",
-          "custom": "Regex customizado"
+          "custom": "Regra personalizada"
         },
         "buttons": {
           "add": "Adicionar Validação +"
