@@ -30,7 +30,10 @@ export const RegisterCompanyForm = ({ title }: Props) => {
         }}
         label={t("register.company.fields.document")}
       />
-      <TextInput name="company.addressLine" label="Endereço" />
+      <TextInput
+        name="company.addressLine"
+        label={t("register.company.fields.addressLine")}
+      />
 
       <div className="flex-col space-y-3">
         <p>{t("register.company.fields.logoUrl")}</p>

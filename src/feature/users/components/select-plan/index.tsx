@@ -174,10 +174,10 @@ export const SelectPlanStep = ({ hasTestPlan }: Prpos) => {
           <CardContent className="flex flex-col flex-1 items-center">
             <div className="flex-1 w-full  rounded-lg p-6 flex flex-col text-white">
               <div className="text-center">
-                <span className="text-5xl font-extrabold">
+                <span className="text-5xl font-extrabold text-card-foreground">
                   {t("register.plans.year.price")}
                 </span>
-                <span className="text-xl font-medium ">
+                <span className="text-xl font-medium text-muted-foreground">
                   {t("register.plans.year.perMonth")}
                 </span>
               </div>
@@ -188,7 +188,7 @@ export const SelectPlanStep = ({ hasTestPlan }: Prpos) => {
                 </Badge>
               </div>
 
-              <ul className="mt-6 space-y-3 text-sm flex-grow">
+              <ul className="mt-8 space-y-3 text-sm text-card-foreground text-left w-full">
                 <li className="flex items-center">
                   <CheckIcon className="mr-2 h-5 w-5 text-green-500" />
                   <span>{t("register.plans.year.feature1")}</span>
