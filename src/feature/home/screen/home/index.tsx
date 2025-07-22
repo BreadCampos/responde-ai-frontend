@@ -2,12 +2,10 @@
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { SelectPlanStep } from "@/feature/users/components/select-plan";
-import { DefaultAvatar } from "@/shared/components/avatar";
 import { Button } from "@/shared/components/button";
 import EmblaCarousel from "@/shared/components/carrousel";
 import { LanguageSwitcher } from "@/shared/components/language-switcber";
 import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
-import { Card, CardContent } from "@/shared/components/ui/card";
 import { Form } from "@/shared/components/ui/form";
 import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { EmblaOptionsType } from "embla-carousel";
@@ -91,12 +89,12 @@ export default function HomePage() {
             >
               {t("header.nav.pricing")}
             </a>
-            <a
+            {/* <a
               href="#testimonials"
               className="text-muted-foreground hover:text-orange-500"
             >
               {t("header.nav.testimonials")}
-            </a>
+            </a> */}
           </nav>
           <div className="flex items-center space-x-4">
             <ThemeToggleButton />
@@ -214,13 +212,17 @@ export default function HomePage() {
               </p>
             </div>
             <Form {...methods}>
-              <SelectPlanStep hasTestPlan onClickButton={navigateToRegister} />
+              <SelectPlanStep
+                hasTestPlan
+                onClickButton={navigateToRegister}
+                withOutTitle
+              />
             </Form>
           </div>
         </section>
 
         {/* Testimonials Section */}
-        <section id="testimonials" className="py-20 bg-background">
+        {/* <section id="testimonials" className="py-20 bg-background">
           <div className="container mx-auto px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground">
@@ -268,7 +270,7 @@ export default function HomePage() {
               </Card>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Final CTA Section */}
         <section className="bg-orange-500">
@@ -324,14 +326,14 @@ export default function HomePage() {
                     {t("header.nav.pricing")}
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href="#"
                     className="text-muted-foreground hover:text-foreground"
                   >
                     {t("footer.product.integrations")}
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div>
@@ -357,7 +359,7 @@ export default function HomePage() {
                     {t("footer.company.contact")}
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     target="_blank"
                     href="https://wa.link/2jc0ug"
@@ -365,7 +367,7 @@ export default function HomePage() {
                   >
                     {t("footer.company.blog")}
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div>

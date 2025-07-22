@@ -38,7 +38,7 @@
     },
     "step2": {
       "title": "Send",
-      "description": "Share your survey with a simple link, send it via email, or embed a webhook on your site."
+      "description": "Share your survey with a simple link, send it via email, or embed a link on your site."
     },
     "step3": {
       "title": "Analyze",

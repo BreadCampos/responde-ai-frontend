@@ -17,8 +17,13 @@ export type PlanID = "free" | "month" | "year";
 interface Prpos {
   hasTestPlan?: boolean;
   onClickButton?: () => void;
+  withOutTitle?: boolean;
 }
-export const SelectPlanStep = ({ hasTestPlan, onClickButton }: Prpos) => {
+export const SelectPlanStep = ({
+  hasTestPlan,
+  onClickButton,
+  withOutTitle = false,
+}: Prpos) => {
   const { watch, setValue, formState } = useFormContext();
   const { t } = useTranslation("login");
 
@@ -50,14 +55,16 @@ export const SelectPlanStep = ({ hasTestPlan, onClickButton }: Prpos) => {
 
   return (
     <div className="space-y-4">
-      <header className="text-center mb-10">
-        <h3 className="text-xl font-semibold">
-          {t("register.plans.header.title")}
-        </h3>
-        <p className="text-muted-foreground mt-1">
-          {t("register.plans.header.description")}
-        </p>
-      </header>
+      {!withOutTitle && (
+        <header className="text-center mb-10">
+          <h3 className="text-xl font-semibold">
+            {t("register.plans.header.title")}
+          </h3>
+          <p className="text-muted-foreground mt-1">
+            {t("register.plans.header.description")}
+          </p>
+        </header>
+      )}
 
       <div
         className={cn(
@@ -83,9 +90,40 @@ export const SelectPlanStep = ({ hasTestPlan, onClickButton }: Prpos) => {
                     {t("register.plans.free.price")}
                   </span>
                 </div>
-                <p className="mt-8 text-sm text-card-foreground">
-                  {t("register.plans.free.feature1_strong")}
-                </p>
+
+                <ul className="mt-8 space-y-3 text-sm text-card-foreground text-left w-full">
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>
+                      Formulários e respostas{" "}
+                      <strong>
+                        {t("register.plans.month.feature2_strong")}
+                      </strong>
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>
+                      <strong>
+                        {t("register.plans.month.feature3_strong")}
+                      </strong>{" "}
+                      para integração com qualquer API
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>
+                      <strong>
+                        {t("register.plans.month.feature4_strong")}
+                      </strong>{" "}
+                      para suas pesquisas
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>{t("register.plans.month.feature5")}</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 type="button"
@@ -123,10 +161,6 @@ export const SelectPlanStep = ({ hasTestPlan, onClickButton }: Prpos) => {
                 </Badge>
               </div>
               <ul className="mt-8 space-y-3 text-sm text-card-foreground text-left w-full">
-                <li className="flex items-center">
-                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
-                  <span>{t("register.plans.month.feature1_strong")}</span>
-                </li>
                 <li className="flex items-center">
                   <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>

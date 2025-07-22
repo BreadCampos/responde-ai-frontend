@@ -47,23 +47,7 @@ export const Register = () => {
   const methods = useForm({
     resolver: signupWithCompanyResolver,
     defaultValues: {
-      user: {
-        email: "joao.campos@respondeai.com",
-        firstName: "João Gabriel",
-        lastName: "Campos",
-        password: "qwe123QWE",
-        passwordConfirmation: "qwe123QWE",
-      },
       company: {
-        addressLine: "Rua Exemplo, 123",
-        document: "70.256.873/1602-32",
-        fantasyName: "Empresa Exemplo",
-        legalName: "Empresa Exemplo LTDA",
-
-        logoUrl: "https://avatars.githubusercontent.com/u/62268075?s=96&v=4",
-        settings: {
-          always_display_logo: true,
-        },
         theme: {
           primary: "#387cec",
         },
