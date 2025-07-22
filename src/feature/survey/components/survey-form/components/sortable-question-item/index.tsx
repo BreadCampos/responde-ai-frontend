@@ -25,8 +25,6 @@ export function SortableQuestionItem({
     transition,
   };
 
-  console.log({ question });
-
   return (
     <div
       ref={setNodeRef}

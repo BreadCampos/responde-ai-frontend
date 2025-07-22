@@ -100,7 +100,6 @@ export function DataTable<TData, TValue>({
   });
 
   const onNextPage = () => {
-    console.log(table.getState().pagination.pageIndex);
     const paginaAtual = table.getState().pagination.pageIndex + 1;
     if (onFetchData) onFetchData({ page: paginaAtual + 1 });
   };

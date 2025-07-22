@@ -92,12 +92,6 @@ export const ServeyModal = ({
       );
     };
 
-    console.log(
-      questionToEdit
-        ? questionToEdit.orderIndex
-        : questionByPage(data.pageIndex).length,
-      questionByPage(data.pageIndex)
-    );
     const transformedQuestionData: SurveyQuestion = {
       id: crypto.randomUUID(),
       label: data.label,

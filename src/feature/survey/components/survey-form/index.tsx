@@ -758,7 +758,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   };
 
   const handleOpenToEdit = (question: SurveyQuestion) => {
-    console.log({ question });
     setQuestionToEdit(question);
     toggleModal();
   };
@@ -844,7 +843,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   const { company } = useAuthStore();
 
   const submitFunction = (values: SurveyModel) => {
-    console.log("values", values);
     if (!company?.id || !onSubmit) {
       return;
     }
@@ -856,10 +854,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     });
   };
   const disabledCreateButton = loading || surveyQuestions?.length === 0;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onPreviewSubmit = (data: any) => {
-    console.log("Preview data:", data);
+  const onPreviewSubmit = () => {
     toast.success(t("createSurvey.toasts.previewSubmit"));
   };
 

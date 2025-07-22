@@ -1,15 +1,15 @@
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { WebhookForm } from "@/feature/webhooks/components/webhook-form";
+import { WebhooksModel } from "@/feature/webhooks/model/webhooks.model";
+import { useUpdateWebhookMutation } from "@/feature/webhooks/service/update-company.mutation";
 import Modal from "@/shared/components/modal";
 import { Form } from "@/shared/components/ui/form";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   resolverUpdateWebhooksSchema,
   UpdateWebhooksSchemaType,
 } from "./update-webhooks.schema";
-import { useUpdateWebhookMutation } from "@/feature/webhooks/service/update-company.mutation";
-import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { WebhooksModel } from "@/feature/webhooks/model/webhooks.model";
-import { useEffect } from "react";
 
 export interface Props {
   webhook: WebhooksModel | null;
@@ -24,7 +24,6 @@ export const UpdateWebhooksModal = ({ webhook, toggleModal, open }: Props) => {
   const { company } = useAuthStore();
   const { mutate, isPending } = useUpdateWebhookMutation();
   const onUpdateWebhook = (data: UpdateWebhooksSchemaType) => {
-    console.log(data);
     if (company?.id && webhook) {
       mutate({
         webhook: data,

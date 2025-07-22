@@ -33,7 +33,6 @@ export function LanguageSwitcher() {
 
   const currentPathname = usePathname();
 
-  console.log(currentLocale);
   const handleLanguageChange = useCallback(
     (newLocale: string) => {
       i18n.changeLanguage(newLocale);

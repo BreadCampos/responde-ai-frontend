@@ -37,9 +37,7 @@ export const SurveyPreviewDrawer = ({ survey }: Props) => {
     return navigate.push(ROUTES.SURVEY_RESPONSE.replace(":id", survey?.id));
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onPreviewSubmit = (data: any) => {
-    console.log("Preview data:", data);
+  const onPreviewSubmit = () => {
     toast.success("Dados do questionário enviados com sucesso!");
   };
   return (
