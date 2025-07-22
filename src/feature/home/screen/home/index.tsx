@@ -46,6 +46,7 @@ export default function HomePage() {
     "/images/examples/custom-link.png",
     "/images/examples/graphic.png",
     "/images/examples/nps-result.png",
+    "/images/examples/survey-response-all.png",
     "/images/examples/survey-response-details.png",
   ];
 
