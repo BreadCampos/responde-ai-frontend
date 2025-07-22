@@ -7,7 +7,6 @@ import {
   TooltipTrigger,
 } from "@/shared/components/ui/tooltip";
 import { cn } from "@/shared/lib/utils";
-import {} from "recharts";
 
 interface Props {
   data: NpsData;
