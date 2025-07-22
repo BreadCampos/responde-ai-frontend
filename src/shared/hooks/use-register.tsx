@@ -12,7 +12,7 @@ import { useSelectPlanMutation } from "@/feature/users/service/select-plan.mutat
 import { useEffect, useState } from "react";
 import { UseFormSetError } from "react-hook-form";
 import { toast } from "sonner";
-import { useNavigation } from "./use-nagivation";
+import { useNavigation } from "./use-navigation";
 
 export const useRegister = () => {
   const registerMutation = CreateUserMutation();

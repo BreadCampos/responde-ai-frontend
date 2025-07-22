@@ -41,7 +41,7 @@ export const LoginScreen = () => {
     if (paymentSuccess === "true" && ready) {
       toast.success(t("login.successPayment"));
     }
-  }, [paymentSuccess, ready]);
+  }, [paymentSuccess, ready, t]);
 
   const handleBack = () => {
     navigate.push(ROUTES.HOME);
