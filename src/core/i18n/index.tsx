@@ -28,6 +28,11 @@ i18n
     interpolation: {
       escapeValue: false,
     },
+
+    detection: {
+      order: ["querystring", "cookie", "localStorage", "navigator", "htmlTag"],
+      caches: [], // Desabilitar o cache para testes
+    },
   });
 
 export default i18n;
