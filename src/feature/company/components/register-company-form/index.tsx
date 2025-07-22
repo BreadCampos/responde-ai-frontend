@@ -1,4 +1,4 @@
-import { DefaultAvatar } from "@/shared/components/avatar.index";
+import { DefaultAvatar } from "@/shared/components/avatar";
 import { CheckboxInput, TextInput } from "@/shared/components/form";
 import { useFormatValues } from "@/shared/hooks/use-formatter-form";
 import { useTranslation } from "@/shared/hooks/use-translation";
@@ -30,10 +30,13 @@ export const RegisterCompanyForm = ({ title }: Props) => {
         }}
         label={t("register.company.fields.document")}
       />
-      <TextInput name="company.addressLine" label="Endereço" />
+      <TextInput
+        name="company.addressLine"
+        label={t("register.company.fields.addressLine")}
+      />
 
       <div className="flex-col space-y-3">
-        <p>URL do Logo</p>
+        <p>{t("register.company.fields.logoUrl")}</p>
         <div className="flex flex-col md:flex-row  gap-2 items-center">
           {company?.logoUrl && (
             <DefaultAvatar
@@ -42,10 +45,7 @@ export const RegisterCompanyForm = ({ title }: Props) => {
               className="size-14"
             />
           )}
-          <TextInput
-            name="company.logoUrl"
-            label={t("register.company.fields.logoUrl")}
-          />
+          <TextInput name="company.logoUrl" />
         </div>
       </div>
       <TextInput

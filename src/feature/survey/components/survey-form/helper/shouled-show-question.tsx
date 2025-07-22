@@ -27,7 +27,6 @@ export const shouldShowQuestion = (
 
     case "not_equals":
       if (requiredValue === "") {
-        console.log({ dependentFieldValue });
         return (
           dependentFieldValue !== undefined &&
           dependentFieldValue !== null &&

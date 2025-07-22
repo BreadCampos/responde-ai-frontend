@@ -91,6 +91,7 @@ export const ServeyModal = ({
         (q) => q.pageIndex === page && q.id !== questionToEdit?.id
       );
     };
+
     const transformedQuestionData: SurveyQuestion = {
       id: crypto.randomUUID(),
       label: data.label,

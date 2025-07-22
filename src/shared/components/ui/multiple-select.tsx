@@ -1,22 +1,15 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import {
   CheckIcon,
-  XCircle,
   ChevronDown,
-  XIcon,
   WandSparkles,
+  XCircle,
+  XIcon,
 } from "lucide-react";
+import * as React from "react";
 
-import { cn } from "@/shared/lib/utils";
-import { Separator } from "@/shared/components/ui/separator";
-import { Button } from "@/shared/components/ui/button";
 import { Badge } from "@/shared/components/ui/badge";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/shared/components/ui/popover";
+import { Button } from "@/shared/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -26,6 +19,14 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/shared/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/shared/components/ui/popover";
+import { Separator } from "@/shared/components/ui/separator";
+import { cn } from "@/shared/lib/utils";
+import { useTranslation } from "react-i18next";
 
 const multiSelectVariants = cva(
   "m-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
@@ -123,7 +124,7 @@ export const MultiSelect = React.forwardRef<
       options,
       onValueChange,
       variant,
-      placeholder = "Selecionar opções",
+      placeholder,
       animation = 0,
       maxCount = 3,
       modalPopover = false,
@@ -133,6 +134,7 @@ export const MultiSelect = React.forwardRef<
     },
     ref
   ) => {
+    const { t } = useTranslation("common");
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     const [isAnimating, setIsAnimating] = React.useState(false);
 
@@ -261,7 +263,7 @@ export const MultiSelect = React.forwardRef<
             ) : (
               <div className="flex items-center justify-between w-full mx-auto">
                 <span className="text-sm text-muted-foreground mx-3">
-                  {placeholder}
+                  {placeholder ?? t("multiselect.placeholder")}
                 </span>
                 <ChevronDown className="h-4 cursor-pointer text-muted-foreground mx-2" />
               </div>
@@ -275,11 +277,11 @@ export const MultiSelect = React.forwardRef<
         >
           <Command>
             <CommandInput
-              placeholder="Search..."
+              placeholder={t("multiselect.searchPlaceholder")}
               onKeyDown={handleInputKeyDown}
             />
             <CommandList>
-              <CommandEmpty>Nenhum resultado encontrado.</CommandEmpty>
+              <CommandEmpty>{t("multiselect.notFound")}</CommandEmpty>
               <CommandGroup>
                 <CommandItem
                   key="all"
@@ -296,7 +298,7 @@ export const MultiSelect = React.forwardRef<
                   >
                     <CheckIcon className="h-4 w-4" />
                   </div>
-                  <span>(Selecionar tudo)</span>
+                  <span>{t("multiselect.selectAll")}</span>
                 </CommandItem>
                 {options.map((option) => {
                   const isSelected = value.includes(String(option?.value));
@@ -333,7 +335,7 @@ export const MultiSelect = React.forwardRef<
                         onSelect={handleClear}
                         className="flex-1 justify-center cursor-pointer"
                       >
-                        Limpar
+                        {t("multiselect.clear")}
                       </CommandItem>
                       <Separator
                         orientation="vertical"
@@ -345,7 +347,7 @@ export const MultiSelect = React.forwardRef<
                     onSelect={() => setIsPopoverOpen(false)}
                     className="flex-1 justify-center cursor-pointer max-w-full"
                   >
-                    Fechar
+                    {t("multiselect.close")}
                   </CommandItem>
                 </div>
               </CommandGroup>

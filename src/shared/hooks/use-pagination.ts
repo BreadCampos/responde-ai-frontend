@@ -17,7 +17,6 @@ export function usePagination(
   const [meta, setMeta] = useState<PaginationMeta | null>(null);
 
   const goToPage = (page: number) => {
-    console.log("goToPage", page);
     setPagination((prev) => ({ ...prev, page }));
   };
 
@@ -51,7 +50,6 @@ export function usePagination(
       refetch();
     }
 
-    console.log(page);
     if (page) {
       goToPage(page);
     }

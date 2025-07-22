@@ -2,7 +2,7 @@ import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import type { CompanyModel } from "@/feature/company/model/company.model";
 import { GetCompaniesListQuery } from "@/feature/company/service/get-companies-list.query";
 import { GetUserMeServiceQuery } from "@/feature/users/service/get-user-me.query";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { oklch } from "culori";
 import { useEffect } from "react";
 import { convertToOklchValues } from "../utils/convert-to-oklch-values";

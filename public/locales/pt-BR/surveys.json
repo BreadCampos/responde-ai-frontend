@@ -34,7 +34,7 @@
     },
     "editController": {
       "title": "Perguntas",
-      "page": "Page {{page}}",
+      "page": "Pagína {{page}}",
       "editQuestion": "Editar pergunta",
       "deleteQuestion": "Deletar pergunta",
       "questionType": "Tipo de pergunta",
@@ -192,11 +192,14 @@
         "required": "Obrigatório",
         "email": "E-mail válido",
         "url": "URL válida",
+        "number_only": "Apenas números",
+        "min_length": "Tamanho mínimo (caracteres)",
+        "max_length": "Tamanho máximo (caracteres)",
+        "cnpj": "CNPJ válido",
+        "cpf": "CPF válido",
         "min": "Valor mínimo",
         "max": "Valor máximo",
-        "min_length": "Comprimento mínimo",
-        "max_length": "Comprimento máximo",
-        "custom": "Regex customizado"
+        "custom": "Regra personalizada"
       },
       "buttons": {
         "add": "Adicionar Validação +"

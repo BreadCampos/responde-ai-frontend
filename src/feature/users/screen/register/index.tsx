@@ -6,10 +6,13 @@ import {
 } from "./register.schama";
 
 import { RegisterCompanyForm } from "@/feature/company/components/register-company-form";
+import { cn } from "@/lib/utils";
+import { Button } from "@/shared/components/button";
 import { Stepper } from "@/shared/components/stepper";
 import { Form } from "@/shared/components/ui/form";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { useRegister } from "@/shared/hooks/use-register";
+import { ChevronLeft } from "lucide-react";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SelectPlanStep } from "../../components//select-plan";
@@ -44,23 +47,7 @@ export const Register = () => {
   const methods = useForm({
     resolver: signupWithCompanyResolver,
     defaultValues: {
-      user: {
-        email: "joao.campos@respondeai.com",
-        firstName: "João Gabriel",
-        lastName: "Campos",
-        password: "qwe123QWE",
-        passwordConfirmation: "qwe123QWE",
-      },
       company: {
-        addressLine: "Rua Exemplo, 123",
-        document: "70.256.873/1602-32",
-        fantasyName: "Empresa Exemplo",
-        legalName: "Empresa Exemplo LTDA",
-
-        logoUrl: "https://avatars.githubusercontent.com/u/62268075?s=96&v=4",
-        settings: {
-          always_display_logo: true,
-        },
         theme: {
           primary: "#387cec",
         },
@@ -111,8 +98,12 @@ export const Register = () => {
       key={"RegisterCompany"}
       title={t("register.company.title")}
     />,
-    <SelectPlanStep key={"SelectPlan"} />,
+    <SelectPlanStep key={"SelectPlan"} hasTestPlan />,
   ];
+
+  const handleBack = () => {
+    navigate.back();
+  };
 
   return (
     <Form {...methods}>
@@ -121,8 +112,20 @@ export const Register = () => {
         onKeyDown={handleKeyDown}
         className="space-y-6"
       >
-        <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-card-foreground">
+        <div className="flex mr-12">
+          <Button
+            onClick={handleBack}
+            variant="ghost"
+            size="icon"
+            className={cn(
+              "text-card-foreground",
+              "absolute left-2 top-1/2 -translate-y-1/2",
+              "md:static md:translate-y-0"
+            )}
+          >
+            <ChevronLeft />
+          </Button>
+          <h1 className="text-2xl font-bold text-center w-full text-card-foreground">
             {t("register.title")}
           </h1>
         </div>

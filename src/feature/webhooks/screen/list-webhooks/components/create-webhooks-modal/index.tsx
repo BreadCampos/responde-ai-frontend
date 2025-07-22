@@ -1,18 +1,20 @@
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { WebhookForm } from "@/feature/webhooks/components/webhook-form";
+import { useCreateWebhookMutation } from "@/feature/webhooks/service/create-company.mutation";
 import { Button } from "@/shared/components/button";
 import Modal from "@/shared/components/modal";
 import { Form } from "@/shared/components/ui/form";
 import { useToggle } from "@/shared/hooks/use-toggle";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import {
-  resolverCreateWebhooksSchema,
   CreateWebhooksSchemaType,
+  resolverCreateWebhooksSchema,
 } from "./create-webhooks.schema";
-import { useCreateWebhookMutation } from "@/feature/webhooks/service/create-company.mutation";
-import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 
 export const CreateWebhooksModal = () => {
   const [openModal, setOpenModal] = useToggle();
+  const { t } = useTranslation("webhook");
 
   const methods = useForm<CreateWebhooksSchemaType>({
     resolver: resolverCreateWebhooksSchema,
@@ -41,15 +43,15 @@ export const CreateWebhooksModal = () => {
   return (
     <Form {...methods}>
       <Button variant="default" onClick={setOpenModal}>
-        Criar Webhook
+        {t("webhooks.addWebhook")}
       </Button>
       <Modal
         open={openModal}
         onClose={onClose}
-        title={"Create Webhook"}
+        title={t("createWebhook.title")}
         className="w-full max-w-xl"
         primaryButton={{
-          title: "Criar",
+          title: t("createWebhook.save"),
           type: "submit",
           loading: isPending,
           onClick: methods.handleSubmit(onCreateWebhook),

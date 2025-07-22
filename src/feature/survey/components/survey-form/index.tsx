@@ -535,6 +535,149 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     setValue("questions", exampleQuestions); // Substitui o array de perguntas
   };
 
+  const createNpsSurvey = () => {
+    const npsSurveyQuestions: SurveyQuestion[] = [
+      // --- PÁGINA 1: A PERGUNTA PRINCIPAL DO NPS ---
+      {
+        id: "31f664b9-a690-4c4c-a0b6-0dc138315faa",
+        label:
+          "Em uma escala de 0 a 10, qual a probabilidade de você recomendar nossa empresa a um amigo ou colega?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 0,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+
+      {
+        id: "3021f2d7-cf68-4a0b-9b5a-6a780c70602d",
+        label:
+          "Considerando seu uso do [Nome do Produto], qual a probabilidade de você recomendá-lo a alguém com necessidades semelhantes?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 1,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "a69013b0-f111-4c5b-9564-f468d0ff9531",
+        label:
+          "Após seu contato com nossa equipe de suporte, qual a probabilidade de você recomendar nossos serviços?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 2,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "804b1cd9-236a-4c2f-b3a1-0d974e5dd294",
+        label:
+          "Com base na sua experiência de compra recente, qual a probabilidade de você nos recomendar?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 3,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "379c4076-800a-4c65-b0c4-e889fe442882",
+        label:
+          "Com base na sua experiência com nosso teste gratuito, qual a probabilidade de você recomendar nossa solução?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 4,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "51806e13-6c74-499c-af42-8bce41bba9cf",
+        label:
+          "Pensando no processo de implementação e onboarding, qual a probabilidade de você nos recomendar a um novo cliente?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 5,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "21973477-e45e-4af3-b5ea-914708d9748d",
+        label:
+          "Avaliando a facilidade de uso da nossa plataforma, qual a probabilidade de você recomendá-la a um colega de trabalho?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 6,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "2df9d915-971c-42c0-ace6-35d6083260a2",
+        label: "NPS para Clientes Antigos (Lealdade a Longo Prazo)",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 7,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+    ];
+
+    setValue("questions", npsSurveyQuestions); // Substitui o array de perguntas
+  };
   const renumberPages = (questions: SurveyQuestion[]): SurveyQuestion[] => {
     if (questions?.length === 0) {
       return [];
@@ -615,7 +758,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   };
 
   const handleOpenToEdit = (question: SurveyQuestion) => {
-    console.log({ question });
     setQuestionToEdit(question);
     toggleModal();
   };
@@ -626,30 +768,34 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     if (!over || active.id === over.id) return;
     const currentQuestions = getValues("questions");
 
-    const activeContainerId = active.data.current?.sortable.containerId;
-    const overContainerId = over.data.current?.sortable.containerId || over.id;
-
     const activeIndex = currentQuestions.findIndex((q) => q.id === active.id);
     const overIndex = currentQuestions.findIndex((q) => q.id === over.id);
 
-    if (activeIndex === -1) return;
+    if (activeIndex === -1 || overIndex === -1) return;
 
-    if (activeContainerId !== overContainerId) {
-      const newPageIndex = Number(String(overContainerId).replace("page-", ""));
-      currentQuestions[activeIndex] = {
-        ...currentQuestions[activeIndex],
-        pageIndex: newPageIndex,
-      };
-    }
-
-    const updatedQuestions = arrayMove(
+    // 1. Mova o item no array para a nova posição
+    const questionsWithMovedItem = arrayMove(
       currentQuestions,
       activeIndex,
       overIndex
     );
 
-    let finalQuestions = updatedQuestions?.map((question) => {
-      const questionsOnSamePage = updatedQuestions.filter(
+    // 2. Atualize o pageIndex se o item mudou de página (Sua lógica aqui está ok)
+    const activeContainerId = active.data.current?.sortable.containerId;
+    const overContainerId = over.data.current?.sortable.containerId || over.id;
+    if (activeContainerId !== overContainerId) {
+      const newPageIndex = Number(String(overContainerId).replace("page-", ""));
+      const questionToUpdate = questionsWithMovedItem.find(
+        (q) => q.id === active.id
+      );
+      if (questionToUpdate) {
+        questionToUpdate.pageIndex = newPageIndex;
+      }
+    }
+
+    // 3. Recalcule o 'orderIndex' para todas as questões com base na nova ordem
+    const questionsWithUpdatedOrder = questionsWithMovedItem.map((question) => {
+      const questionsOnSamePage = questionsWithMovedItem.filter(
         (q) => q.pageIndex === question.pageIndex
       );
       const orderIndex = questionsOnSamePage.findIndex(
@@ -658,9 +804,10 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       return { ...question, orderIndex };
     });
 
-    const movedItem = finalQuestions.find((q) => q.id === active.id);
+    // 4. Verifique a dependência (Sua lógica de validação aqui)
+    const movedItem = questionsWithUpdatedOrder.find((q) => q.id === active.id);
     if (movedItem?.conditional) {
-      const dependencyItem = finalQuestions.find(
+      const dependencyItem = questionsWithUpdatedOrder.find(
         (q) => q.id === movedItem.conditional!.fieldId
       );
       if (dependencyItem) {
@@ -674,8 +821,10 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       }
     }
 
-    finalQuestions = renumberPages(updatedQuestions);
+    // 5. Renumere as páginas usando o array JÁ ATUALIZADO
+    const finalQuestions = renumberPages(questionsWithUpdatedOrder);
 
+    // 6. Atualize o formulário
     setValue("questions", finalQuestions, { shouldDirty: true });
   }
 
@@ -694,7 +843,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   const { company } = useAuthStore();
 
   const submitFunction = (values: SurveyModel) => {
-    console.log("values", values);
     if (!company?.id || !onSubmit) {
       return;
     }
@@ -706,10 +854,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     });
   };
   const disabledCreateButton = loading || surveyQuestions?.length === 0;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onPreviewSubmit = (data: any) => {
-    console.log("Preview data:", data);
+  const onPreviewSubmit = () => {
     toast.success(t("createSurvey.toasts.previewSubmit"));
   };
 
@@ -730,6 +875,14 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
           className="mb-2 md:mb-0"
         >
           Carregar Exemplo
+        </Button>
+        <Button
+          onClick={createNpsSurvey}
+          size={"sm"}
+          variant="secondary"
+          className="mb-2 md:mb-0"
+        >
+          Criar NPS
         </Button>
 
         <Button
@@ -791,9 +944,10 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
                       id={`page-${pageIndex}`}
                     >
                       <div className="flex flex-col gap-2">
-                        {questionsInPage.map((q) => (
+                        {questionsInPage.map((q, index) => (
                           <SortableQuestionItem
                             key={q.id}
+                            index={index}
                             question={q}
                             onDelete={deleteQuestion}
                             onEdit={handleOpenToEdit}

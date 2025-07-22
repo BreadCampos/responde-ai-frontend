@@ -14,7 +14,7 @@ import { CheckboxGroupInput } from "@/shared/components/form/checkbox-group-inpu
 import { MaskedInput } from "@/shared/components/form/mask-input";
 import { NpsInput } from "@/shared/components/form/nps-input";
 import { memo } from "react";
-import { getValidationRules } from "../../helper/get-validation-rules";
+import { useValidationRules } from "../../helper/get-validation-rules";
 
 interface Props {
   question: SurveyQuestion;
@@ -23,7 +23,7 @@ interface Props {
 }
 
 export const InputPreview = memo(({ question, disabled, answer }: Props) => {
-  const { rules, inputProps } = getValidationRules(question.validations);
+  const { rules, inputProps } = useValidationRules(question.validations);
 
   const renderInput = (name: any, rules: any) => {
     switch (question.type) {

@@ -67,22 +67,10 @@ export const useRegister = () => {
       });
     } catch (error: any) {
       console.error("Falha no processo de cadastro:", error);
-      toast.error(error.message || "Não foi possível concluir o cadastro.");
     }
   };
 
   useEffect(() => {
-    console.log("company", { user });
-  }, [user]);
-
-  useEffect(() => {
-    console.log(
-      "entrou",
-      !createCompanyMutation.isSuccess,
-      !plan,
-      !user,
-      !accessToken
-    );
     if (!createCompanyMutation.isSuccess || !plan || !user || !accessToken) {
       return;
     }

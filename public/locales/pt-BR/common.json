@@ -12,6 +12,7 @@
   "button": {
     "add": "Adicionar",
     "edit": "Editar",
+    "back": "Voltar",
     "delete": "Deletar",
     "save": "Salvar",
     "cancel": "Cancelar",
@@ -24,5 +25,32 @@
     "loading": "Carregando...",
     "confirm": "Confirmar",
     "send": "Enviar"
+  },
+  "validations": {
+    "required": "Este campo é obrigatório.",
+    "email": "Por favor, insira um e-mail válido.",
+    "min_length": "O campo deve ter no mínimo {{number}} caracteres.",
+    "max_length": "O campo deve ter no máximo {{number}} caracteres.",
+    "cnpj": "O CNPJ informado é inválido.",
+    "cpf": "O CPF informado é inválido.",
+    "min": "O valor mínimo permitido é {{number}}.",
+    "max": "O valor máximo permitido é {{number}}.",
+    "custom": "O valor informado é inválido."
+  },
+  "datatable": {
+    "notFound": "Nenhum resultado encontrado.",
+    "searchPlaceholder": "Pesquisar...",
+    "selectedRows": "{{count}} de {{total}} linha(s) selecionada(s).",
+    "previous": "Anterior",
+    "pageInfo": "Página {{currentPage}} de {{totalPages}}",
+    "next": "Próxima"
+  },
+  "multiselect": {
+    "placeholder": "Selecionar opções",
+    "searchPlaceholder": "Pesquisar...",
+    "notFound": "Nenhum resultado encontrado.",
+    "selectAll": "(Selecionar tudo)",
+    "clear": "Limpar",
+    "close": "Fechar"
   }
 }

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/button";
+import { Badge } from "@/shared/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -8,33 +9,44 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { useTranslation } from "@/shared/hooks/use-translation";
-import { CheckIcon } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { useFormContext } from "react-hook-form";
-// Supondo o uso de uma biblioteca como 'react-i18next'
 
 export type PlanID = "free" | "month" | "year";
 
-export const SelectPlanStep = () => {
+interface Props {
+  hasTestPlan?: boolean;
+  onClickButton?: () => void;
+  withOutTitle?: boolean;
+}
+export const SelectPlanStep = ({
+  hasTestPlan,
+  onClickButton,
+  withOutTitle = false,
+}: Props) => {
   const { watch, setValue, formState } = useFormContext();
   const { t } = useTranslation("login");
 
   const selectedPlan = watch("planId") as PlanID;
 
   const handleSelectPlan = (plan: PlanID) => {
+    if (onClickButton) {
+      return onClickButton();
+    }
     setValue("planId", plan, { shouldValidate: true });
   };
 
   const getCardClasses = (plan: PlanID) => {
     const baseClasses =
-      "shad-card bg-gray-800/50 p-8 flex flex-col transition-all duration-200 ease-in-out";
+      "shad-card bg-card p-4 flex w-full flex-col transition-all duration-200 ease-in-out h-full";
     if (selectedPlan === plan) {
-      return `${baseClasses} border-2 border-blue-600 transform lg:scale-105 shadow-2xl shadow-blue-800/20`;
+      return `${baseClasses} border-2  transform lg:scale-105 shadow-2xl`;
     }
     return `${baseClasses} hover:-translate-y-1`;
   };
 
   const getButtonClasses = (plan: PlanID) => {
-    const baseClasses = "mt-8 w-full shad-btn px-6 py-3 text-base";
+    const baseClasses = "mt-4 w-full shad-btn px-6 py-3 text-base";
     if (selectedPlan === plan) {
       return `${baseClasses} shad-btn-primary`;
     }
@@ -43,71 +55,99 @@ export const SelectPlanStep = () => {
 
   return (
     <div className="space-y-4">
-      <header className="text-center mb-10">
-        <h3 className="text-xl font-semibold">
-          {t("register.plans.header.title")}
-        </h3>
-        <p className="text-muted-foreground mt-1">
-          {t("register.plans.header.description")}
-        </p>
-      </header>
+      {!withOutTitle && (
+        <header className="text-center mb-10">
+          <h3 className="text-xl font-semibold">
+            {t("register.plans.header.title")}
+          </h3>
+          <p className="text-muted-foreground mt-1">
+            {t("register.plans.header.description")}
+          </p>
+        </header>
+      )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div
+        className={cn(
+          "grid grid-cols-1 lg:grid-cols-2 gap-6",
+          hasTestPlan && "lg:grid-cols-3"
+        )}
+      >
         {/* Card 1: Avaliação Gratuita */}
-        <Card className={getCardClasses("free")}>
-          <CardHeader className="text-center">
-            <CardTitle className="text-center text-xl font-semibold">
-              {t("register.plans.free.title")}
-            </CardTitle>
-            <CardDescription className="text-center text-muted-foreground">
-              {t("register.plans.free.description")}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col items-center h-100">
-            <div className="flex-1">
-              <div className="mt-6">
-                <span className="text-5xl font-extrabold text-card-foreground">
-                  {t("register.plans.free.price")}
-                </span>
-              </div>
-              <ul className="mt-8 flex-1 h-30 space-y-3 text-sm text-card-foreground flex-grow">
-                <li className="flex items-center">
-                  <span>
-                    <strong>{t("register.plans.free.feature1_strong")}</strong>{" "}
-                    {t("register.plans.free.feature1_rest")}
+        {hasTestPlan && (
+          <Card className={cn(getCardClasses("free"))}>
+            <CardHeader className="text-center">
+              <CardTitle className="text-center text-xl font-semibold">
+                {t("register.plans.free.title")}
+              </CardTitle>
+              <CardDescription className="text-center text-muted-foreground">
+                {t("register.plans.free.description")}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col flex-1 text-center">
+              <div className="flex-1">
+                <div className="mt-3">
+                  <span className="text-5xl font-extrabold text-card-foreground">
+                    {t("register.plans.free.price")}
                   </span>
-                </li>
-              </ul>
-            </div>
+                </div>
 
-            <Button
-              type="button"
-              onClick={() => handleSelectPlan("free")}
-              className={getButtonClasses("free")}
-            >
-              {t("register.plans.free.cta")}
-            </Button>
-          </CardContent>
-        </Card>
-
+                <ul className="mt-8 space-y-3 text-sm text-card-foreground text-left w-full">
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>
+                      Formulários e respostas{" "}
+                      <strong>
+                        {t("register.plans.month.feature2_strong")}
+                      </strong>
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>
+                      <strong>
+                        {t("register.plans.month.feature3_strong")}
+                      </strong>{" "}
+                      para integração com qualquer API
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>
+                      <strong>
+                        {t("register.plans.month.feature4_strong")}
+                      </strong>{" "}
+                      para suas pesquisas
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>{t("register.plans.month.feature5")}</span>
+                  </li>
+                </ul>
+              </div>
+              <Button
+                type="button"
+                onClick={() => handleSelectPlan("free")}
+                className={getButtonClasses("free")}
+              >
+                {t("register.plans.free.cta")}
+              </Button>
+            </CardContent>
+          </Card>
+        )}
         {/* Card 2: Mensal */}
-        <Card className={cn(getCardClasses("month"), "relative")}>
-          <CardHeader className="text-center">
+        <Card className={cn(getCardClasses("month"))}>
+          <CardHeader className="text-center items-center">
             <CardTitle className="text-center text-xl font-semibold">
               {t("register.plans.month.title")}
-              <div className="absolute top-0 -translate-y-1/2 w-full flex justify-center">
-                <span className="shad-badge shad-btn-primary text-sm">
-                  {t("register.plans.month.badge")}
-                </span>
-              </div>
             </CardTitle>
             <CardDescription className="text-center text-muted-foreground">
               {t("register.plans.month.description")}
             </CardDescription>
           </CardHeader>
-          <CardContent className="flex flex-col items-center h-100">
-            <div className="flex-1">
-              <div className="mt-6">
+          <CardContent className="flex flex-col flex-1 items-center">
+            <div className="flex-1 w-full">
+              <div className="mt-3 text-center">
                 <span className="text-5xl font-extrabold text-card-foreground">
                   {t("register.plans.month.price")}
                 </span>
@@ -115,41 +155,40 @@ export const SelectPlanStep = () => {
                   {t("register.plans.month.perMonth")}
                 </span>
               </div>
-              <ul className="mt-8 space-y-3 text-sm text-card-foreground flex-grow">
-                <li className="flex items-center pl-7">
-                  <CheckIcon />
+              <div className="flex align-center justify-center mt-2">
+                <Badge className="bg-zinc-700 text-white text-xs font-bold uppercase tracking-wider">
+                  {t("register.plans.month.badge")}
+                </Badge>
+              </div>
+              <ul className="mt-8 space-y-3 text-sm text-card-foreground text-left w-full">
+                <li className="flex items-center">
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>
-                    <strong>{t("register.plans.month.feature1_strong")}</strong>{" "}
-                    {t("register.plans.month.feature1_rest")}
-                  </span>
-                </li>
-                <li className="flex items-center pl-7">
-                  <CheckIcon />
-                  <span>
-                    {t("register.plans.month.feature2_start")}{" "}
+                    Formulários e respostas{" "}
                     <strong>{t("register.plans.month.feature2_strong")}</strong>
                   </span>
                 </li>
-                <li className="flex items-center pl-7">
-                  <CheckIcon />
+                <li className="flex items-center">
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>
                     <strong>{t("register.plans.month.feature3_strong")}</strong>{" "}
-                    {t("register.plans.month.feature3_rest")}
+                    para integração com qualquer API
                   </span>
                 </li>
-                <li className="flex items-center pl-7">
-                  <CheckIcon />
+                <li className="flex items-center">
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>
                     <strong>{t("register.plans.month.feature4_strong")}</strong>{" "}
-                    {t("register.plans.month.feature4_rest")}
+                    para suas pesquisas
                   </span>
                 </li>
-                <li className="flex items-center pl-7">
-                  <CheckIcon />
+                <li className="flex items-center">
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>{t("register.plans.month.feature5")}</span>
                 </li>
               </ul>
             </div>
+
             <Button
               type="button"
               onClick={() => handleSelectPlan("month")}
@@ -161,23 +200,18 @@ export const SelectPlanStep = () => {
         </Card>
 
         {/* Card 3: Anual */}
-        <Card className={cn(getCardClasses("year"), "relative")}>
-          <CardHeader className="text-center">
+        <Card className={cn(getCardClasses("year"))}>
+          <CardHeader className="text-center items-center">
             <CardTitle className="text-center text-xl font-semibold">
               {t("register.plans.year.title")}
-              <div className="absolute top-0 -translate-y-1/2 w-full flex justify-center ">
-                <span className="shad-badge border px-2 rounded-full border-emerald-500/50 bg-emerald-900/50 text-emerald-300 text-xs">
-                  {t("register.plans.year.badge")}
-                </span>
-              </div>
             </CardTitle>
             <CardDescription className="text-center text-muted-foreground">
               {t("register.plans.year.description")}
             </CardDescription>
           </CardHeader>
-          <CardContent className="flex flex-col items-center h-100">
-            <div className="flex-1">
-              <div className="mt-6">
+          <CardContent className="flex flex-col flex-1 items-center">
+            <div className="flex-1 w-full  rounded-lg p-6 flex flex-col text-white">
+              <div className="text-center">
                 <span className="text-5xl font-extrabold text-card-foreground">
                   {t("register.plans.year.price")}
                 </span>
@@ -185,13 +219,20 @@ export const SelectPlanStep = () => {
                   {t("register.plans.year.perMonth")}
                 </span>
               </div>
-              <ul className="mt-8 space-y-3 text-sm text-card-foreground flex-grow">
+
+              <div className="flex align-center justify-center mt-2">
+                <Badge variant={"success"}>
+                  {t("register.plans.year.badge")}
+                </Badge>
+              </div>
+
+              <ul className="mt-8 space-y-3 text-sm text-card-foreground text-left w-full">
                 <li className="flex items-center">
-                  <CheckIcon />
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>{t("register.plans.year.feature1")}</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckIcon />
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>
                     {t("register.plans.year.feature2_start")}{" "}
                     <strong>{t("register.plans.year.feature2_strong")}</strong>
@@ -199,7 +240,6 @@ export const SelectPlanStep = () => {
                 </li>
               </ul>
             </div>
-
             <Button
               type="button"
               onClick={() => handleSelectPlan("year")}

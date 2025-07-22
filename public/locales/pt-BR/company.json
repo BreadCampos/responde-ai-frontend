@@ -1,3 +1,44 @@
 {
-  "title": "Companhia"
+  "companies": {
+    "title": "Companhia",
+    "addNew": "Adicionar nova questionário",
+    "columns": {
+      "id": "ID",
+      "logoUrl": "Título",
+      "document": "Link",
+      "fantasyName": "Criado em",
+      "legalName": "Criado em",
+      "createdAt": "Criado em"
+    }
+  },
+  "details": {
+    "generalInfo": {
+      "title": "Informações Gerais",
+      "document": "Documento:"
+    },
+    "addresses": {
+      "title": "Endereços",
+      "mainAddress": "Endereço Principal:",
+      "complement": "Complemento:",
+      "billingAddress": "Endereço de Cobrança:"
+    },
+    "settings": {
+      "title": "Configurações",
+      "alwaysDisplayLogo": "Sempre exibir logo"
+    },
+    "theme": {
+      "title": "Tema"
+    },
+    "history": {
+      "title": "Histórico",
+      "createdAt": "Criado em:",
+      "lastUpdate": "Última atualização:"
+    }
+  },
+  "update": {
+    "title": "Atualizar Informações da Empresa",
+    "description": "Atualize as informações da sua empresa. Essas informações serão exibidas para os usuários e clientes.",
+    "button": "Atualizar",
+    "successMessage": "Informações da empresa atualizadas com sucesso!"
+  }
 }

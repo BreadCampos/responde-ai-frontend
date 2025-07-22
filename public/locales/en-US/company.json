@@ -1,0 +1,44 @@
+{
+  "companies": {
+    "title": "Company",
+    "addNew": "Add new questionnaire",
+    "columns": {
+      "id": "ID",
+      "logoUrl": "Title",
+      "document": "Link",
+      "fantasyName": "Created in",
+      "legalName": "Created in",
+      "createdAt": "Created in"
+    }
+  },
+  "details": {
+    "generalInfo": {
+      "title": "General information",
+      "document": "Document:"
+    },
+    "addresses": {
+      "title": "Addresses",
+      "mainAddress": "Main Address:",
+      "complement": "Complement:",
+      "billingAddress": "Billing Address:"
+    },
+    "settings": {
+      "title": "Settings",
+      "alwaysDisplayLogo": "Always display soon"
+    },
+    "theme": {
+      "title": "Theme"
+    },
+    "history": {
+      "title": "Historic",
+      "createdAt": "Created in:",
+      "lastUpdate": "Last update:"
+    }
+  },
+  "update": {
+    "title": "Update Company Information",
+    "description": "Update your business information. ",
+    "button": "To update",
+    "successMessage": "Company information successfully updated!"
+  }
+}

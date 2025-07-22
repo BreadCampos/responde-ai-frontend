@@ -1,6 +1,7 @@
 // components/header/language-switcher.tsx
 "use client";
 
+import { useTranslation } from "@/shared/hooks/use-translation";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
@@ -25,19 +26,26 @@ const FlagImage = ({ lang, alt }: { lang: string; alt: string }) => {
 };
 
 export function LanguageSwitcher() {
-  const pathname = usePathname();
   const router = useRouter();
+
+  const { i18n } = useTranslation();
+  const currentLocale = i18n.language;
+
+  const currentPathname = usePathname();
 
   const handleLanguageChange = useCallback(
     (newLocale: string) => {
-      if (!pathname) return;
+      i18n.changeLanguage(newLocale);
 
-      const pathSegments = pathname.split("/");
-      const newPath = pathSegments.slice(2).join("/");
+      const newPath = currentPathname.replace(
+        `/${currentLocale}`,
+        `/${newLocale}`
+      );
+      router.push(newPath);
 
-      router.replace(`/${newLocale}/${newPath}`);
+      router.refresh();
     },
-    [pathname, router]
+    [currentLocale, currentPathname, i18n, router]
   );
 
   const supportedLanguages = useMemo(
@@ -49,7 +57,7 @@ export function LanguageSwitcher() {
   );
 
   const language =
-    supportedLanguages.find((lang) => pathname.includes(lang.code)) ||
+    supportedLanguages.find((lang) => currentLocale == lang.code) ||
     supportedLanguages[0];
 
   const options: MenuOption[] = useMemo(() => {
@@ -65,7 +73,6 @@ export function LanguageSwitcher() {
     }));
   }, [supportedLanguages, language.code, handleLanguageChange]);
 
-  // Encontra os dados do idioma atual com base na store
   const currentLanguageData =
     supportedLanguages.find((lang) => lang.code === language.code) ||
     supportedLanguages[0];
@@ -80,7 +87,7 @@ export function LanguageSwitcher() {
       </Button>
     ),
     [currentLanguageData]
-  ); // 3. Adicione a dependência
+  );
 
   return (
     <ActionMenu

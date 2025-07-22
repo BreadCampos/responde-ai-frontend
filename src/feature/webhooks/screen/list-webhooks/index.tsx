@@ -1,10 +1,11 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { DataTable } from "@/shared/components/data-table";
 import { usePagination } from "@/shared/hooks/use-pagination";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { useState } from "react";
 import { WebhooksModel } from "../../model/webhooks.model";
 import { GetWebhooksQuery } from "../../service/get-webhooks-list.query";
-import { generateWebhookColumns } from "./columns";
+import { useColumns } from "./columns";
 import { CreateWebhooksModal } from "./components/create-webhooks-modal";
 import { UpdateWebhooksModal } from "./components/update-webhooks-modal";
 
@@ -33,7 +34,7 @@ export const ListWebhooks = () => {
       webhook: null,
     });
   };
-  const columns = generateWebhookColumns({
+  const { columns } = useColumns({
     setWebhookToEdit,
   });
 
@@ -59,11 +60,13 @@ export const ListWebhooks = () => {
     });
   };
 
+  const { t } = useTranslation("webhook");
+
   return (
     <div className="flex h-full flex-col gap-2 p-2 md:p-4">
       <div className="mb-2 w-full flex flex-col md:flex-row md:justify-between items-center">
         <h1 className="text-2xl text-card-foreground font-bold mb-4">
-          Webhooks
+          {t("webhooks.title")}
         </h1>
         <CreateWebhooksModal />
       </div>

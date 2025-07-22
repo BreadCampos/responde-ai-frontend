@@ -13,6 +13,7 @@ interface Resources {
     "button": {
       "add": "Adicionar",
       "edit": "Editar",
+      "back": "Voltar",
       "delete": "Deletar",
       "save": "Salvar",
       "cancel": "Cancelar",
@@ -25,24 +26,187 @@ interface Resources {
       "loading": "Carregando...",
       "confirm": "Confirmar",
       "send": "Enviar"
+    },
+    "validations": {
+      "required": "Este campo é obrigatório.",
+      "email": "Por favor, insira um e-mail válido.",
+      "min_length": "O campo deve ter no mínimo {{number}} caracteres.",
+      "max_length": "O campo deve ter no máximo {{number}} caracteres.",
+      "cnpj": "O CNPJ informado é inválido.",
+      "cpf": "O CPF informado é inválido.",
+      "min": "O valor mínimo permitido é {{number}}.",
+      "max": "O valor máximo permitido é {{number}}.",
+      "custom": "O valor informado é inválido."
+    },
+    "datatable": {
+      "notFound": "Nenhum resultado encontrado.",
+      "searchPlaceholder": "Pesquisar...",
+      "selectedRows": "{{count}} de {{total}} linha(s) selecionada(s).",
+      "previous": "Anterior",
+      "pageInfo": "Página {{currentPage}} de {{totalPages}}",
+      "next": "Próxima"
+    },
+    "multiselect": {
+      "placeholder": "Selecionar opções",
+      "searchPlaceholder": "Pesquisar...",
+      "notFound": "Nenhum resultado encontrado.",
+      "selectAll": "(Selecionar tudo)",
+      "clear": "Limpar",
+      "close": "Fechar"
     }
   },
   "company": {
-    "title": "Companhia"
+    "companies": {
+      "title": "Companhia",
+      "addNew": "Adicionar nova questionário",
+      "columns": {
+        "id": "ID",
+        "logoUrl": "Título",
+        "document": "Link",
+        "fantasyName": "Criado em",
+        "legalName": "Criado em",
+        "createdAt": "Criado em"
+      }
+    },
+    "details": {
+      "generalInfo": {
+        "title": "Informações Gerais",
+        "document": "Documento:"
+      },
+      "addresses": {
+        "title": "Endereços",
+        "mainAddress": "Endereço Principal:",
+        "complement": "Complemento:",
+        "billingAddress": "Endereço de Cobrança:"
+      },
+      "settings": {
+        "title": "Configurações",
+        "alwaysDisplayLogo": "Sempre exibir logo"
+      },
+      "theme": {
+        "title": "Tema"
+      },
+      "history": {
+        "title": "Histórico",
+        "createdAt": "Criado em:",
+        "lastUpdate": "Última atualização:"
+      }
+    },
+    "update": {
+      "title": "Atualizar Informações da Empresa",
+      "description": "Atualize as informações da sua empresa. Essas informações serão exibidas para os usuários e clientes.",
+      "button": "Atualizar",
+      "successMessage": "Informações da empresa atualizadas com sucesso!"
+    }
+  },
+  "home": {
+    "header": {
+      "nav": {
+        "features": "Funcionalidades",
+        "pricing": "Preços",
+        "testimonials": "Depoimentos"
+      },
+      "cta": "Começar Gratuitamente"
+    },
+    "hero": {
+      "title": "A forma mais inteligente de medir a <1>lealdade dos seus clientes.</1>",
+      "subtitle": "Crie pesquisas de NPS em minutos e transforme feedback em crescimento. Feito para pequenas empresas e equipes de marketing que precisam de resultados, não de complexidade.",
+      "viewFeatures": "Ver funcionalidades →",
+      "noCreditCard": "Não é necessário cartão de crédito.",
+      "dashboardPlaceholder": "[Visual do seu Dashboard de NPS aqui]"
+    },
+    "features": {
+      "title": "Foco no que realmente importa: seu cliente.",
+      "subtitle": "Plataformas tradicionais são caras e complexas. Nós limpamos a bagunça para você focar nos insights.",
+      "card1": {
+        "title": "Foco Total em NPS",
+        "description": "Construímos nossa plataforma com um único objetivo: tornar a pesquisa de NPS incrivelmente fácil de criar e analisar."
+      },
+      "card2": {
+        "title": "Preço Justo e Transparente",
+        "description": "Nossos planos são até 70% mais baratos que os concorrentes. Comece de graça e pague apenas pelo que precisar."
+      },
+      "card3": {
+        "title": "Análises que Geram Ação",
+        "description": "Entregamos um dashboard visual com seu Net Promoter Score, identificando promotores e detratores de forma clara."
+      }
+    },
+    "howItWorks": {
+      "title": "Entenda seus clientes em 3 passos simples",
+      "step1": {
+        "title": "Crie",
+        "description": "Use nosso modelo de NPS pronto ou personalize perguntas com nosso editor intuitivo."
+      },
+      "step2": {
+        "title": "Envie",
+        "description": "Compartilhe sua pesquisa com um link simples, envie por e-mail ou incorpore um webhook no seu site."
+      },
+      "step3": {
+        "title": "Analise",
+        "description": "Veja seu NPS ser calculado em tempo real em um dashboard limpo e entenda o \"porquê\" por trás das notas."
+      }
+    },
+    "pricing": {
+      "title": "Planos que cabem no seu bolso.",
+      "subtitle": "Comece de graça e evolua conforme sua necessidade. Simples e sem surpresas."
+    },
+    "testimonials": {
+      "title": "Pequenas empresas e agências nos recomendam",
+      "quote1": "\"O Responde.ai simplificou nossa coleta de feedback. É rápido, intuitivo e os insights de NPS são muito mais claros do que no SurveyMonkey. E o melhor: por uma fração do preço.\"",
+      "author1": {
+        "name": "Joana Silva",
+        "role": "Gerente de Marketing, Agência XYZ"
+      },
+      "quote2": "\"Eu não tenho tempo para ferramentas complicadas. Em 10 minutos, configurei e enviei minha primeira pesquisa. Finalmente entendi o que meus clientes realmente pensam.\"",
+      "author2": {
+        "name": "Carlos Pereira",
+        "role": "Fundador, Café Especial ABC"
+      }
+    },
+    "finalCta": {
+      "title": "Pronto para ouvir o que seus clientes têm a dizer?",
+      "subtitle": "Comece a tomar decisões baseadas em dados hoje mesmo. É grátis para começar.",
+      "button": "Crie sua pesquisa NPS grátis"
+    },
+    "footer": {
+      "slogan": "Medindo a lealdade de clientes, de forma simples.",
+      "product": {
+        "title": "Produto",
+        "integrations": "Integrações"
+      },
+      "company": {
+        "title": "Empresa",
+        "about": "Sobre Nós",
+        "contact": "Contato",
+        "blog": "Blog"
+      },
+      "legal": {
+        "title": "Legal",
+        "privacy": "Política de Privacidade",
+        "terms": "Termos de Serviço"
+      },
+      "copyright": "© {{year}} Responde.ai. Todos os direitos reservados."
+    },
+    "cta": {
+      "startFree": "Começar Gratuitamente"
+    }
   },
   "login": {
-    "title": "Login!",
-    "subtitle": "Por favor, insira suas credenciais para fazer login.",
-    "form": {
-      "emailLabel": "Email",
-      "emailPlaceholder": "john.doe@addres.com",
-      "passwordLabel": "Senha",
-      "passwordPlaceholder": "********"
-    },
-    "actions": {
-      "forgotPassword": "Esqueci minha Senha",
-      "submit": "Entrar",
-      "createAccount": "Criar Conta"
+    "login": {
+      "title": "Login!",
+      "subtitle": "Por favor, insira suas credenciais para fazer login.",
+      "form": {
+        "emailLabel": "Email",
+        "emailPlaceholder": "john.doe@addres.com",
+        "passwordLabel": "Senha",
+        "passwordPlaceholder": "********"
+      },
+      "actions": {
+        "forgotPassword": "Esqueci minha Senha",
+        "submit": "Entrar",
+        "createAccount": "Criar Conta"
+      },
+      "successPayment": "Pagamento realizado com sucesso."
     },
     "register": {
       "title": "Register",
@@ -163,7 +327,7 @@ interface Resources {
       },
       "editController": {
         "title": "Perguntas",
-        "page": "Page {{page}}",
+        "page": "Pagína {{page}}",
         "editQuestion": "Editar pergunta",
         "deleteQuestion": "Deletar pergunta",
         "questionType": "Tipo de pergunta",
@@ -321,11 +485,14 @@ interface Resources {
           "required": "Obrigatório",
           "email": "E-mail válido",
           "url": "URL válida",
+          "number_only": "Apenas números",
+          "min_length": "Tamanho mínimo (caracteres)",
+          "max_length": "Tamanho máximo (caracteres)",
+          "cnpj": "CNPJ válido",
+          "cpf": "CPF válido",
           "min": "Valor mínimo",
           "max": "Valor máximo",
-          "min_length": "Comprimento mínimo",
-          "max_length": "Comprimento máximo",
-          "custom": "Regex customizado"
+          "custom": "Regra personalizada"
         },
         "buttons": {
           "add": "Adicionar Validação +"
@@ -333,8 +500,48 @@ interface Resources {
       }
     }
   },
+  "translation": {
+    "title": "Welcome to react using react-i18next",
+    "description": {
+      "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
+      "part2": "Switch language between english and german using buttons above."
+    }
+  },
   "webhook": {
-    "title": "Webhooks"
+    "webhooks": {
+      "title": "Webhooks",
+      "addWebhook": "Adicionar Webhook",
+      "columns": {
+        "id": "ID",
+        "url": "URL",
+        "maxRetries": "Tentativas Máximas",
+        "isActive": "Status",
+        "retryPolicy": "Política de Retentativa",
+        "createdAt": "Criado em",
+        "actions": {
+          "label": "Ações",
+          "edit": "Editar",
+          "copyUrl": "Copiar URL"
+        }
+      }
+    },
+    "createWebhook": {
+      "title": "Criar Webhook",
+      "fields": {
+        "url": {
+          "label": "URL do Webhook",
+          "placeholder": "Insira a URL do Webhook"
+        },
+        "subscribedEvents": {
+          "label": "Eventos Inscritos",
+          "placeholder": "Selecione os eventos para os quais deseja receber notificações"
+        }
+      },
+      "url": "URL do Webhook",
+      "maxRetries": "Tentativas Máximas",
+      "retryPolicy": "Política de Retentativa",
+      "save": "Salvar"
+    }
   }
 }
 

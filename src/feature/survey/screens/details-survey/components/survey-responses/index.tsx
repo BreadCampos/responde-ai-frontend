@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { usePagination } from "@/shared/hooks/use-pagination";
 import { useParams } from "next/navigation";
 import { ROUTES } from "../../../../../../core/routes/route-constants";
