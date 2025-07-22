@@ -1,57 +1,100 @@
 {
-  "title": "Login!",
-  "subtitle": "Please enter your credentials to login.",
-  "form": {
-    "emailLabel": "E-mail",
-    "emailPlaceholder": "john.doe@addres.com",
-    "passwordLabel": "Password",
-    "passwordPlaceholder": "********"
+  "login": {
+    "title": "Login!",
+    "subtitle": "Perase enter your credentiials to log in.",
+    "form": {
+      "emailLabel": "E-mail",
+      "emailPlaceholder": "john.doe@addres.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "********"
+    },
+    "actions": {
+      "forgotPassword": "I forgot my password",
+      "submit": "To enter",
+      "createAccount": "Create Account"
+    },
+    "successPayment": "Payment made successfully."
   },
-  "actions": {
-    "forgotPassword": "I forgot my password",
-    "submit": "To enter",
-    "createAccount": "Create Account"
+  "register": {
+    "title": "Register",
+    "toast": {
+      "success": "Registration made successfully."
+    },
+    "user": {
+      "title": "1. Your data",
+      "fields": {
+        "firstName": "Name",
+        "lastName": "Surname",
+        "email": "E-mail",
+        "password": "Password",
+        "passwordConfirmation": "Confirm the password"
+      }
+    },
+    "company": {
+      "title": "2. Company data",
+      "fields": {
+        "legalName": "Corporate name",
+        "fantasyName": "Fantasy name",
+        "document": "Document (CPF or CNPJ)",
+        "addressLine": "Address",
+        "logoUrl": "Logo",
+        "theme": {
+          "primary": "Primary color"
+        },
+        "settings": {
+          "always_display_logo": "Always show soon"
+        }
+      }
+    },
+    "plans": {
+      "header": {
+        "title": "3. Choose your plan",
+        "description": "Start with a test or choose the ideal plan for your business."
+      },
+      "free": {
+        "title": "Free Evaluation",
+        "description": "Complete access for 15 days.",
+        "price": "R $ 0",
+        "feature1_strong": "All resources",
+        "feature1_rest": "Available for 15 days",
+        "cta": "Start Free Test"
+      },
+      "month": {
+        "title": "Monthly",
+        "badge": "Most popular",
+        "description": "Total flexibility to grow.",
+        "price": "R $ 120",
+        "perMonth": "/month",
+        "feature1_strong": "All",
+        "feature1_rest": "of the evaluation, and more:",
+        "feature2_start": "Forms and Answers",
+        "feature2_strong": "unlimited",
+        "feature3_strong": "Webhooks",
+        "feature3_rest": "for integration with any API",
+        "feature4_strong": "Custom links",
+        "feature4_rest": "for your research",
+        "feature5": "Priority support by email and chat",
+        "cta": "Select Monthly Plan"
+      },
+      "year": {
+        "title": "Annual",
+        "badge": "Save 2 months",
+        "description": "For those who have decided to accelerate.",
+        "price": "R $ 100",
+        "perMonth": "/month",
+        "feature1": "All benefits of the monthly plan",
+        "feature2_start": "The best price:",
+        "feature2_strong": "17% discount",
+        "cta": "Select Annual Plan"
+      }
+    }
   },
-  "plans": {
-    "header": {
-      "title": "3. Choose your plan",
-      "description": "Start with a test or choose the ideal plan for your business."
-    },
-    "free": {
-      "title": "Free Evaluation",
-      "description": "Complete access for 15 days.",
-      "price": "R $ 0",
-      "feature1_strong": "All resources",
-      "feature1_rest": "Available for 15 days",
-      "cta": "Start Free Test"
-    },
-    "month": {
-      "title": "month",
-      "badge": "Most popular",
-      "description": "Total flexibility to grow.",
-      "price": "R $ 120",
-      "perMonth": "/month",
-      "feature1_strong": "All",
-      "feature1_rest": "of the evaluation, and more:",
-      "feature2_start": "Forms and Answers",
-      "feature2_strong": "unlimited",
-      "feature3_strong": "Webhooks",
-      "feature3_rest": "for integration with any API",
-      "feature4_strong": "Custom links",
-      "feature4_rest": "for your research",
-      "feature5": "Priority Support by Email and Chat",
-      "cta": "Select month Plan"
-    },
-    "year": {
-      "title": "year",
-      "badge": "Save 2 months",
-      "description": "For those who have decided to accelerate.",
-      "price": "R $ 100",
-      "perMonth": "/month",
-      "feature1": "All benefits of the month plan",
-      "feature2_start": "The best price:",
-      "feature2_strong": "17% discount",
-      "cta": "Select year Plan"
+  "selectPlanModal": {
+    "title": "Select a plan",
+    "description": "Choose the plan that best fits your needs.",
+    "buttons": {
+      "cancel": "Cancel",
+      "confirm": "Confirm"
     }
   }
 }
