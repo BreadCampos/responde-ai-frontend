@@ -1,21 +1,21 @@
 "use client";
-import { BarChart3, DollarSign, Rocket, Target } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { Trans, useTranslation } from "react-i18next";
-
-// Assumindo que estes componentes são importados do seu projeto
-// e já são compatíveis com o tema (usando variáveis CSS).
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { SelectPlanStep } from "@/feature/users/components/select-plan";
 import { DefaultAvatar } from "@/shared/components/avatar";
 import { Button } from "@/shared/components/button";
+import EmblaCarousel from "@/shared/components/carrousel";
 import { LanguageSwitcher } from "@/shared/components/language-switcber";
 import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
 import { Card, CardContent } from "@/shared/components/ui/card";
 import { Form } from "@/shared/components/ui/form";
 import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { EmblaOptionsType } from "embla-carousel";
+import { BarChart3, DollarSign, Target } from "lucide-react";
+import Image from "next/image";
 import { useCallback, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { Trans, useTranslation } from "react-i18next";
 import { FeatureCard } from "../../components/feature-card";
 import { Step } from "../../components/step";
 
@@ -36,19 +36,43 @@ export default function HomePage() {
   }, [navigate]);
 
   const { isAuthenticated } = useAuthStore();
+  const slideOptions: EmblaOptionsType = {
+    axis: "y",
+    dragFree: true,
+    loop: true,
+  };
+
+  const images = [
+    "/images/examples/custom-link.png",
+    "/images/examples/graphic.png",
+    "/images/examples/nps-result.png",
+    "/images/examples/survey-response-details.png",
+  ];
+
+  const examplesSteps = images.map((image, index) => (
+    <Image
+      src={image}
+      alt={""}
+      key={index}
+      fill={true}
+      objectFit="contain"
+      quality={100}
+    />
+  ));
   useEffect(() => {
     if (isAuthenticated) {
       navigateToDashboard();
     }
   }, [isAuthenticated, navigateToDashboard]);
 
+  const logoUrl = "/images/logo.svg";
   return (
     <div className="bg-background font-sans text-foreground">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <Rocket className="w-8 h-8 text-orange-500" />
+            <Image src={logoUrl} alt="Logo" width={30} height={30} />
             <span className="text-2xl font-bold text-foreground">
               Responde.ai
             </span>
@@ -115,13 +139,8 @@ export default function HomePage() {
               {t("hero.noCreditCard")}
             </p>
 
-            {/* Placeholder para a imagem da aplicação */}
-            <div className="mt-16 mx-auto max-w-4xl p-2 bg-secondary rounded-xl shadow-2xl">
-              <div className="w-full h-64 md:h-96 bg-muted rounded-lg flex items-center justify-center">
-                <p className="text-foreground text-xl font-semibold">
-                  {t("hero.dashboardPlaceholder")}
-                </p>
-              </div>
+            <div className="mt-10">
+              <EmblaCarousel slides={examplesSteps} options={slideOptions} />
             </div>
           </div>
         </section>

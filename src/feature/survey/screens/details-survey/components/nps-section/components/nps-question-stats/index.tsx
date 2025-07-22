@@ -1,11 +1,13 @@
 import { NpsData } from "@/feature/survey/model/survey.model";
+import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/shared/components/ui/card";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/shared/components/ui/tooltip";
 import { cn } from "@/shared/lib/utils";
+import {} from "recharts";
 
 interface Props {
   data: NpsData;
@@ -26,9 +28,16 @@ export const NpsQuestionStats = ({ data }: Props) => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="truncate">{data.questionText}</CardTitle>
-      </CardHeader>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <CardHeader className="text-center line-clamp-2">
+              {data.questionText}
+            </CardHeader>
+          </TooltipTrigger>
+          <TooltipContent>{data.questionText}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <CardContent className="space-y-4">
         <div className="text-center">
           <p className="text-sm font-medium text-muted-foreground">
