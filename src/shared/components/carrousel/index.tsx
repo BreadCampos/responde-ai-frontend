@@ -1,14 +1,14 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { ReactNode, useCallback } from "react";
-import { DotButton, useDotButton } from "./components/corrousel-dot-button";
 import {
   NextButton,
   PrevButton,
   usePrevNextButtons,
-} from "./components/corrousel-prev-next-button";
+} from "./components/carousel-prev-next-button";
+import { DotButton, useDotButton } from "./components/corrousel-dot-button";
 
 type PropType = {
   slides: ReactNode[];
