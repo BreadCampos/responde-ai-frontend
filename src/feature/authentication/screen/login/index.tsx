@@ -1,11 +1,13 @@
 import { ROUTES } from "@/core/routes/route-constants";
+import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/button";
 import { TextInput } from "@/shared/components/form";
 import { Form } from "@/shared/components/ui/form";
+import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { useToggle } from "@/shared/hooks/use-toggle";
 import { useTranslation } from "@/shared/hooks/use-translation";
-import { Eye, EyeClosed } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { ChevronLeft, Eye, EyeClosed } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -18,9 +20,10 @@ export const LoginScreen = () => {
     resolver: loginResolver,
   });
 
+  const navigate = useNavigation();
+
   const [showPassword, setShowPassword] = useToggle();
 
-  const navigate = useRouter();
   const redirectToRegister = () => {
     navigate.push(ROUTES.REGISTER);
   };
@@ -40,13 +43,30 @@ export const LoginScreen = () => {
     }
   }, [paymentSuccess, ready]);
 
+  const handleBack = () => {
+    navigate.push(ROUTES.HOME);
+  };
   return (
     <Form {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
         <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-card-foreground">
-            {t("login.title")}
-          </h1>
+          <div className="flex mr-12">
+            <Button
+              onClick={handleBack}
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "text-card-foreground",
+                "absolute left-2 top-1/2 -translate-y-1/2",
+                "md:static md:translate-y-0"
+              )}
+            >
+              <ChevronLeft />
+            </Button>
+            <h1 className="text-2xl font-bold text-center w-full stext-card-foreground">
+              {t("login.title")}
+            </h1>
+          </div>
           <p className="text-sm text-muted-foreground">{t("login.subtitle")}</p>
         </div>
         <div className="space-y-4">

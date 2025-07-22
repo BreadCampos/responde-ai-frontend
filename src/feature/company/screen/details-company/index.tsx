@@ -1,5 +1,5 @@
 import { ROUTES } from "@/core/routes/route-constants";
-import { DefaultAvatar } from "@/shared/components/avatar.index";
+import { DefaultAvatar } from "@/shared/components/avatar";
 import { BackButton } from "@/shared/components/back-button";
 import { Button } from "@/shared/components/button";
 import { CopyBadge } from "@/shared/components/copy.index";

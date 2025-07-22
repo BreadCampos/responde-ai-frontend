@@ -22,7 +22,7 @@ i18n
     fallbackLng: "pt-BR",
     debug: true,
 
-    ns: ["common", "company", "login", "translation", "surveys"],
+    ns: ["common", "company", "login", "translation", "surveys", "home"],
     defaultNS: "common",
     supportedLngs: ["pt-BR", "en-US"],
     interpolation: {
@@ -30,8 +30,8 @@ i18n
     },
 
     detection: {
-      order: ["querystring", "cookie", "localStorage", "navigator", "htmlTag"],
-      caches: [], // Desabilitar o cache para testes
+      order: ["localStorage", "cookie", "navigator", "htmlTag", "querystring"],
+      caches: ["localStorage"],
     },
   });
 

@@ -1,0 +1,92 @@
+{
+  "header": {
+    "nav": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "testimonials": "Testimonials"
+    },
+    "cta": "Login"
+  },
+  "hero": {
+    "title": "The smartest way to measure your <1>customer loyalty.</1>",
+    "subtitle": "Create NPS surveys in minutes and turn feedback into growth. Made for small businesses and marketing teams that need results, not complexity.",
+    "viewFeatures": "See features →",
+    "noCreditCard": "No credit card required.",
+    "dashboardPlaceholder": "[Your NPS Dashboard Visual Here]"
+  },
+  "features": {
+    "title": "Focus on what really matters: your customer.",
+    "subtitle": "Traditional platforms are expensive and complex. We clear the clutter so you can focus on insights.",
+    "card1": {
+      "title": "Total Focus on NPS",
+      "description": "We built our platform with a single goal: to make NPS surveys incredibly easy to create and analyze."
+    },
+    "card2": {
+      "title": "Fair and Transparent Pricing",
+      "description": "Our plans are up to 70% cheaper than competitors. Start for free and pay only for what you need."
+    },
+    "card3": {
+      "title": "Actionable Analytics",
+      "description": "We deliver a visual dashboard with your Net Promoter Score, clearly identifying promoters and detractors."
+    }
+  },
+  "howItWorks": {
+    "title": "Understand your customers in 3 simple steps",
+    "step1": {
+      "title": "Create",
+      "description": "Use our ready-made NPS template or customize questions with our intuitive editor."
+    },
+    "step2": {
+      "title": "Send",
+      "description": "Share your survey with a simple link, send it via email, or embed a webhook on your site."
+    },
+    "step3": {
+      "title": "Analyze",
+      "description": "Watch your NPS being calculated in real-time on a clean dashboard and understand the \"why\" behind the scores."
+    }
+  },
+  "pricing": {
+    "title": "Plans that fit your budget.",
+    "subtitle": "Start for free and scale as you grow. Simple and with no surprises."
+  },
+  "testimonials": {
+    "title": "Small businesses and agencies recommend us",
+    "quote1": "\"Responde.ai streamlined our feedback collection. It's fast, intuitive, and the NPS insights are much clearer than on SurveyMonkey. And the best part: for a fraction of the price.\"",
+    "author1": {
+      "name": "Joana Silva",
+      "role": "Marketing Manager, XYZ Agency"
+    },
+    "quote2": "\"I don't have time for complicated tools. In 10 minutes, I set up and sent my first survey. I finally understood what my customers really think.\"",
+    "author2": {
+      "name": "Carlos Pereira",
+      "role": "Founder, ABC Specialty Coffee"
+    }
+  },
+  "finalCta": {
+    "title": "Ready to hear what your customers have to say?",
+    "subtitle": "Start making data-driven decisions today. It's free to get started.",
+    "button": "Create your free NPS survey"
+  },
+  "footer": {
+    "slogan": "Measuring customer loyalty, made simple.",
+    "product": {
+      "title": "Product",
+      "integrations": "Integrations"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "contact": "Contact",
+      "blog": "Blog"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "copyright": "© {{year}} Responde.ai. All rights reserved."
+  },
+  "cta": {
+    "startFree": "Start for Free"
+  }
+}

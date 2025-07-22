@@ -6,10 +6,13 @@ import {
 } from "./register.schama";
 
 import { RegisterCompanyForm } from "@/feature/company/components/register-company-form";
+import { cn } from "@/lib/utils";
+import { Button } from "@/shared/components/button";
 import { Stepper } from "@/shared/components/stepper";
 import { Form } from "@/shared/components/ui/form";
 import { useNavigation } from "@/shared/hooks/use-nagivation";
 import { useRegister } from "@/shared/hooks/use-register";
+import { ChevronLeft } from "lucide-react";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SelectPlanStep } from "../../components//select-plan";
@@ -114,6 +117,10 @@ export const Register = () => {
     <SelectPlanStep key={"SelectPlan"} hasTestPlan />,
   ];
 
+  const handleBack = () => {
+    navigate.back();
+  };
+
   return (
     <Form {...methods}>
       <form
@@ -121,8 +128,20 @@ export const Register = () => {
         onKeyDown={handleKeyDown}
         className="space-y-6"
       >
-        <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-card-foreground">
+        <div className="flex mr-12">
+          <Button
+            onClick={handleBack}
+            variant="ghost"
+            size="icon"
+            className={cn(
+              "text-card-foreground",
+              "absolute left-2 top-1/2 -translate-y-1/2",
+              "md:static md:translate-y-0"
+            )}
+          >
+            <ChevronLeft />
+          </Button>
+          <h1 className="text-2xl font-bold text-center w-full stext-card-foreground">
             {t("register.title")}
           </h1>
         </div>

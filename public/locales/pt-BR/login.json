@@ -1,6 +1,6 @@
 {
   "login": {
-    "title": "Login!",
+    "title": "Entrar!",
     "subtitle": "Por favor, insira suas credenciais para fazer login.",
     "form": {
       "emailLabel": "Email",
@@ -16,7 +16,7 @@
     "successPayment": "Pagamento realizado com sucesso."
   },
   "register": {
-    "title": "Register",
+    "title": "Registar-se",
     "toast": {
       "success": "Cadastro realizado com sucesso."
     },

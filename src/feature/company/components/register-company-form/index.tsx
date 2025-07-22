@@ -1,4 +1,4 @@
-import { DefaultAvatar } from "@/shared/components/avatar.index";
+import { DefaultAvatar } from "@/shared/components/avatar";
 import { CheckboxInput, TextInput } from "@/shared/components/form";
 import { useFormatValues } from "@/shared/hooks/use-formatter-form";
 import { useTranslation } from "@/shared/hooks/use-translation";
