@@ -1,4 +1,5 @@
-// src/application/stores/use-auth-store.ts
+"use client";
+
 import { ROUTES } from "@/core/routes/route-constants";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { create } from "zustand";

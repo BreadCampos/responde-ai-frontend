@@ -2,7 +2,7 @@
 
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { BackButton } from "@/shared/components/back-button";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { GetSurveyQuery } from "../../service/get-survey.query";
 
 import { ROUTES } from "@/core/routes/route-constants";

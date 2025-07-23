@@ -1,5 +1,7 @@
+"use client";
+
 import { ROUTES } from "@/core/routes/route-constants";
-import { DefaultAvatar } from "@/shared/components/avatar.index";
+import { DefaultAvatar } from "@/shared/components/avatar";
 import { BackButton } from "@/shared/components/back-button";
 import { Button } from "@/shared/components/button";
 import { CopyBadge } from "@/shared/components/copy.index";
@@ -13,7 +15,7 @@ import {
 import { Checkbox } from "@/shared/components/ui/checkbox";
 import { Label } from "@/shared/components/ui/label";
 import { Separator } from "@/shared/components/ui/separator";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { useTranslation } from "@/shared/hooks/use-translation";
 import { emptyValue } from "@/shared/utils/empty-string";
 import { formatDocument } from "@/shared/utils/format-cpf";

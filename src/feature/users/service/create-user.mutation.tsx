@@ -1,7 +1,7 @@
 import { httpClient } from "@/core/api/fetch-api";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { useMutation } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { usersApi } from "../api";
 import type { RegisterModel } from "../model/register.model";

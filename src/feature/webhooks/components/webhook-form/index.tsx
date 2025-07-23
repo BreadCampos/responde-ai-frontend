@@ -1,5 +1,5 @@
 import { SelectMultipleInput, TextInput } from "@/shared/components/form";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { WebhookEvents } from "../../constants";
 
 export const WebhookForm = () => {

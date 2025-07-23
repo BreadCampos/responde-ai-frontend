@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { DataTable } from "@/shared/components/data-table";
 import { usePagination } from "@/shared/hooks/use-pagination";

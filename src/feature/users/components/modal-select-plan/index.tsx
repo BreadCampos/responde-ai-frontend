@@ -1,8 +1,10 @@
+"use client";
+
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import Modal from "@/shared/components/modal";
 import { Form } from "@/shared/components/ui/form";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { useSelectPlanMutation } from "../../service/select-plan.mutation";
 import { PlanID, SelectPlanStep } from "../select-plan";
 

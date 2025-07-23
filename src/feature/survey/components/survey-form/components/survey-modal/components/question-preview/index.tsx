@@ -1,7 +1,7 @@
 import { SurveyQuestion } from "@/feature/survey/model/survey.model";
 import { useDebounce } from "@/shared/hooks/use-debounce";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { useFormContext } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { IForm } from "../..";
 import { InputPreview } from "../../../input-preview";
 

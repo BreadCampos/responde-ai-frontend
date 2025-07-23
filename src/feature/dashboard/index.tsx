@@ -1,80 +1,24 @@
 "use client";
+
 import { ROUTES } from "@/core/routes/route-constants";
-import { Button } from "@/shared/components/button";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { useEffect } from "react";
-import { toast } from "sonner";
+import { useAuthStore } from "../authentication/store/use-auth.store";
 
 export const Dashboard = () => {
   const navigate = useNavigation();
+  const { isAuthenticated } = useAuthStore();
 
   useEffect(() => {
-    navigate.push(ROUTES.SURVEY_LIST);
-  });
+    if (isAuthenticated) {
+      navigate.push(ROUTES.SURVEY_LIST);
+    }
+  }, [navigate, isAuthenticated]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-2xl text-foreground">Meu Dashboard</h1>
-      <p className="text-muted-foreground">Bem-vindo de volta!</p>
-      <div className="mt-4 flex gap-2">
-        <Button
-          onClick={() => {
-            toast.success("oi");
-          }}
-          variant="default"
-        >
-          default
-        </Button>
-        <Button
-          onClick={() => {
-            toast.warning("oi");
-          }}
-          variant="destructive"
-        >
-          destructive
-        </Button>
-        <Button
-          onClick={() => {
-            toast.error("oi");
-          }}
-          variant="link"
-        >
-          {" "}
-          link
-        </Button>
-        <Button
-          onClick={() => {
-            toast.info("oi");
-          }}
-          variant="outline"
-        >
-          outline
-        </Button>
-        <Button
-          onClick={() => {
-            toast.loading("oi");
-          }}
-          variant="ghost"
-        >
-          ghost
-        </Button>
-        <Button
-          onClick={() => {
-            toast.error("oi");
-          }}
-          variant="secondary"
-        >
-          secondary
-        </Button>{" "}
-        {/* <-- Ficará ótimo aqui */}
-      </div>
-      <button
-        onClick={() => {
-          navigate.push("/");
-        }}
-      >
-        Ir para paragina existente
-      </button>
+      {/* ... */}
     </div>
   );
 };

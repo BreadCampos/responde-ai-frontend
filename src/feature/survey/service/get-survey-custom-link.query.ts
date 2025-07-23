@@ -17,7 +17,6 @@ export const GetSurveyCustomLinkQuery = ({
   surveyId: string;
   companyId?: string;
 }) => {
-  console.log("GetSurveyCustomLinkQuery", pagination?.page);
   const queryKey = ["survey-custom-link-list", surveyId, pagination?.page];
 
   return useQuery({

@@ -1,4 +1,6 @@
-import { useState, useCallback } from "react";
+"use client";
+
+import { useCallback, useState } from "react";
 
 export const useToggle = (
   initialState = false

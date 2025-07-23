@@ -8,10 +8,10 @@ import { SelectInput } from "@/shared/components/form/select-input";
 import { TextInput } from "@/shared/components/form/text-input";
 import Modal from "@/shared/components/modal";
 import { Form } from "@/shared/components/ui/form";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { SelectOption } from "@/shared/types/select-options.type";
 import { useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { ConditionalValues } from "./components/conditional-values";
 import {
   ControlledOptions,
@@ -92,12 +92,6 @@ export const ServeyModal = ({
       );
     };
 
-    console.log(
-      questionToEdit
-        ? questionToEdit.orderIndex
-        : questionByPage(data.pageIndex).length,
-      questionByPage(data.pageIndex)
-    );
     const transformedQuestionData: SurveyQuestion = {
       id: crypto.randomUUID(),
       label: data.label,

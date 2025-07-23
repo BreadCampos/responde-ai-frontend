@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { useParams } from "next/navigation";
 import { BackButton } from "../../../shared/components/back-button";
@@ -202,7 +204,6 @@ function getQuestionsAndAnswers(
       );
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { question: _question, ...rest } = answer as Answer;
-      console.log(rest);
       plain[question.id] = rest.value;
       questionAndAnswers[question.id] = {
         answer: rest,

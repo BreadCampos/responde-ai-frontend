@@ -5,8 +5,8 @@ import { Button } from "@/shared/components/button";
 import Modal from "@/shared/components/modal";
 import { Form } from "@/shared/components/ui/form";
 import { useToggle } from "@/shared/hooks/use-toggle";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import {
   CreateWebhooksSchemaType,
   resolverCreateWebhooksSchema,

@@ -1,8 +1,10 @@
+"use client";
+
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { Button } from "@/shared/components/button";
 import { DataTable } from "@/shared/components/data-table";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 import { usePagination } from "@/shared/hooks/use-pagination";
 import { useTranslation } from "@/shared/hooks/use-translation";
 import { GetListSurveysQuery } from "../../service/get-survey-list.query";

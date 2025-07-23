@@ -1,5 +1,10 @@
 {
   "wellcome": "Bem-vindo ao nosso aplicativo!",
+  "notFound": {
+    "title": "Página Não Encontrada",
+    "description": "Oops! A página que você está procurando não existe ou foi movida.",
+    "cta": "Voltar para a Home"
+  },
   "sidebar": {
     "survey": "Formulário",
     "webhooks": "Webhooks",

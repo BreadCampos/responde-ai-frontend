@@ -25,8 +25,8 @@ import {
   PopoverTrigger,
 } from "@/shared/components/ui/popover";
 import { Separator } from "@/shared/components/ui/separator";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { cn } from "@/shared/lib/utils";
-import { useTranslation } from "react-i18next";
 
 const multiSelectVariants = cva(
   "m-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",

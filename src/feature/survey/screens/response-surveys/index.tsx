@@ -24,7 +24,6 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
 
   const customLinkRef = searchParams.get("customLinkRef");
 
-  console.log({ customLinkRef });
   const methods = useForm();
 
   const { data, isLoading, isSuccess, isError, error } =

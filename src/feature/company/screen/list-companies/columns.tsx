@@ -2,7 +2,7 @@ import { formatDate } from "@/shared/utils/format-date";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { CompanyModel } from "../../model/company.model";
 
-import { DefaultAvatar } from "@/shared/components/avatar.index";
+import { DefaultAvatar } from "@/shared/components/avatar";
 import { useTranslation } from "@/shared/hooks/use-translation";
 
 export const useColumns = () => {

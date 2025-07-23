@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { Form } from "@/shared/components/ui/form";
 import { useTranslation } from "@/shared/hooks/use-translation";

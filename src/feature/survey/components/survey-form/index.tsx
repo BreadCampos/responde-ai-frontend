@@ -535,6 +535,149 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     setValue("questions", exampleQuestions); // Substitui o array de perguntas
   };
 
+  const createNpsSurvey = () => {
+    const npsSurveyQuestions: SurveyQuestion[] = [
+      // --- PÁGINA 1: A PERGUNTA PRINCIPAL DO NPS ---
+      {
+        id: "31f664b9-a690-4c4c-a0b6-0dc138315faa",
+        label:
+          "Em uma escala de 0 a 10, qual a probabilidade de você recomendar nossa empresa a um amigo ou colega?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 0,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+
+      {
+        id: "3021f2d7-cf68-4a0b-9b5a-6a780c70602d",
+        label:
+          "Considerando seu uso do [Nome do Produto], qual a probabilidade de você recomendá-lo a alguém com necessidades semelhantes?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 1,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "a69013b0-f111-4c5b-9564-f468d0ff9531",
+        label:
+          "Após seu contato com nossa equipe de suporte, qual a probabilidade de você recomendar nossos serviços?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 2,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "804b1cd9-236a-4c2f-b3a1-0d974e5dd294",
+        label:
+          "Com base na sua experiência de compra recente, qual a probabilidade de você nos recomendar?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 3,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "379c4076-800a-4c65-b0c4-e889fe442882",
+        label:
+          "Com base na sua experiência com nosso teste gratuito, qual a probabilidade de você recomendar nossa solução?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 4,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "51806e13-6c74-499c-af42-8bce41bba9cf",
+        label:
+          "Pensando no processo de implementação e onboarding, qual a probabilidade de você nos recomendar a um novo cliente?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 5,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "21973477-e45e-4af3-b5ea-914708d9748d",
+        label:
+          "Avaliando a facilidade de uso da nossa plataforma, qual a probabilidade de você recomendá-la a um colega de trabalho?",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 6,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+      {
+        id: "2df9d915-971c-42c0-ace6-35d6083260a2",
+        label: "NPS para Clientes Antigos (Lealdade a Longo Prazo)",
+        type: "rating",
+        pageIndex: 1,
+        orderIndex: 7,
+        validations: [{ type: "required" }],
+        ratingOptions: {
+          style: "nps",
+          min: 0,
+          max: 10,
+          minLabel: "Nada provável",
+          maxLabel: "Extremamente provável",
+        },
+        hint: "Sua honestidade nos ajuda a melhorar.",
+      },
+    ];
+
+    setValue("questions", npsSurveyQuestions); // Substitui o array de perguntas
+  };
   const renumberPages = (questions: SurveyQuestion[]): SurveyQuestion[] => {
     if (questions?.length === 0) {
       return [];
@@ -615,7 +758,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   };
 
   const handleOpenToEdit = (question: SurveyQuestion) => {
-    console.log({ question });
     setQuestionToEdit(question);
     toggleModal();
   };
@@ -701,7 +843,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   const { company } = useAuthStore();
 
   const submitFunction = (values: SurveyModel) => {
-    console.log("values", values);
     if (!company?.id || !onSubmit) {
       return;
     }
@@ -713,10 +854,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
     });
   };
   const disabledCreateButton = loading || surveyQuestions?.length === 0;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onPreviewSubmit = (data: any) => {
-    console.log("Preview data:", data);
+  const onPreviewSubmit = () => {
     toast.success(t("createSurvey.toasts.previewSubmit"));
   };
 
@@ -737,6 +875,14 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
           className="mb-2 md:mb-0"
         >
           Carregar Exemplo
+        </Button>
+        <Button
+          onClick={createNpsSurvey}
+          size={"sm"}
+          variant="secondary"
+          className="mb-2 md:mb-0"
+        >
+          Criar NPS
         </Button>
 
         <Button

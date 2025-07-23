@@ -2,9 +2,9 @@ import { SelectInput, TextInput } from "@/shared/components/form";
 import { useFormContext } from "react-hook-form";
 
 import { useFormatValues } from "@/shared/hooks/use-formatter-form";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { SelectOption } from "@/shared/types/select-options.type";
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { IForm } from "../..";
 
 export const RattingType = () => {

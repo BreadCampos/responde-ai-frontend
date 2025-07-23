@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/button";
 import { Badge } from "@/shared/components/ui/badge";
@@ -9,21 +11,30 @@ import {
   CardTitle,
 } from "@/shared/components/ui/card";
 import { useTranslation } from "@/shared/hooks/use-translation";
-import { CheckIcon } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 
 export type PlanID = "free" | "month" | "year";
 
-interface Prpos {
+interface Props {
   hasTestPlan?: boolean;
+  onClickButton?: () => void;
+  withOutTitle?: boolean;
 }
-export const SelectPlanStep = ({ hasTestPlan }: Prpos) => {
+export const SelectPlanStep = ({
+  hasTestPlan,
+  onClickButton,
+  withOutTitle = false,
+}: Props) => {
   const { watch, setValue, formState } = useFormContext();
   const { t } = useTranslation("login");
 
   const selectedPlan = watch("planId") as PlanID;
 
   const handleSelectPlan = (plan: PlanID) => {
+    if (onClickButton) {
+      return onClickButton();
+    }
     setValue("planId", plan, { shouldValidate: true });
   };
 
@@ -37,7 +48,7 @@ export const SelectPlanStep = ({ hasTestPlan }: Prpos) => {
   };
 
   const getButtonClasses = (plan: PlanID) => {
-    const baseClasses = "mt-auto w-full shad-btn px-6 py-3 text-base";
+    const baseClasses = "mt-4 w-full shad-btn px-6 py-3 text-base";
     if (selectedPlan === plan) {
       return `${baseClasses} shad-btn-primary`;
     }
@@ -46,14 +57,16 @@ export const SelectPlanStep = ({ hasTestPlan }: Prpos) => {
 
   return (
     <div className="space-y-4">
-      <header className="text-center mb-10">
-        <h3 className="text-xl font-semibold">
-          {t("register.plans.header.title")}
-        </h3>
-        <p className="text-muted-foreground mt-1">
-          {t("register.plans.header.description")}
-        </p>
-      </header>
+      {!withOutTitle && (
+        <header className="text-center mb-10">
+          <h3 className="text-xl font-semibold">
+            {t("register.plans.header.title")}
+          </h3>
+          <p className="text-muted-foreground mt-1">
+            {t("register.plans.header.description")}
+          </p>
+        </header>
+      )}
 
       <div
         className={cn(
@@ -79,9 +92,40 @@ export const SelectPlanStep = ({ hasTestPlan }: Prpos) => {
                     {t("register.plans.free.price")}
                   </span>
                 </div>
-                <p className="mt-8 text-sm text-card-foreground">
-                  {t("register.plans.free.feature1_strong")}
-                </p>
+
+                <ul className="mt-8 space-y-3 text-sm text-card-foreground text-left w-full">
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>
+                      Formulários e respostas{" "}
+                      <strong>
+                        {t("register.plans.month.feature2_strong")}
+                      </strong>
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>
+                      <strong>
+                        {t("register.plans.month.feature3_strong")}
+                      </strong>{" "}
+                      para integração com qualquer API
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>
+                      <strong>
+                        {t("register.plans.month.feature4_strong")}
+                      </strong>{" "}
+                      para suas pesquisas
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
+                    <span>{t("register.plans.month.feature5")}</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 type="button"
@@ -120,32 +164,28 @@ export const SelectPlanStep = ({ hasTestPlan }: Prpos) => {
               </div>
               <ul className="mt-8 space-y-3 text-sm text-card-foreground text-left w-full">
                 <li className="flex items-center">
-                  <CheckIcon className="mr-2 h-5 w-5 text-green-500" />
-                  <span>{t("register.plans.month.feature1_strong")}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckIcon className="mr-2 h-5 w-5 text-green-500" />
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>
                     Formulários e respostas{" "}
                     <strong>{t("register.plans.month.feature2_strong")}</strong>
                   </span>
                 </li>
                 <li className="flex items-center">
-                  <CheckIcon className="mr-2 h-5 w-5 text-green-500" />
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>
                     <strong>{t("register.plans.month.feature3_strong")}</strong>{" "}
                     para integração com qualquer API
                   </span>
                 </li>
                 <li className="flex items-center">
-                  <CheckIcon className="mr-2 h-5 w-5 text-green-500" />
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>
                     <strong>{t("register.plans.month.feature4_strong")}</strong>{" "}
                     para suas pesquisas
                   </span>
                 </li>
                 <li className="flex items-center">
-                  <CheckIcon className="mr-2 h-5 w-5 text-green-500" />
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>{t("register.plans.month.feature5")}</span>
                 </li>
               </ul>
@@ -190,11 +230,11 @@ export const SelectPlanStep = ({ hasTestPlan }: Prpos) => {
 
               <ul className="mt-8 space-y-3 text-sm text-card-foreground text-left w-full">
                 <li className="flex items-center">
-                  <CheckIcon className="mr-2 h-5 w-5 text-green-500" />
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>{t("register.plans.year.feature1")}</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckIcon className="mr-2 h-5 w-5 text-green-500" />
+                  <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
                   <span>
                     {t("register.plans.year.feature2_start")}{" "}
                     <strong>{t("register.plans.year.feature2_strong")}</strong>

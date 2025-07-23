@@ -4,8 +4,9 @@ import usePersistentState from "@//shared/hooks/use-persist";
 import { cn } from "@//shared/lib/utils";
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import { useNavigation } from "@/shared/hooks/use-nagivation";
+import { useNavigation } from "@/shared/hooks/use-navigation";
 
+import { useTranslation } from "@/shared/hooks/use-translation";
 import {
   ChevronsLeft,
   ChevronsRight,
@@ -16,7 +17,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useTranslation } from "react-i18next";
 
 type NavItemProps = {
   name: string;

@@ -1,8 +1,5 @@
-import dynamic from "next/dynamic";
-
-const DetailsSurvey = dynamic(
-  () => import("@/feature/survey/screens/details-survey")
-);
+import DetailsSurvey from "@/feature/survey/screens/details-survey";
+export const dynamic = "force-dynamic";
 
 export default async function DetailsSurveyPage({
   params,
