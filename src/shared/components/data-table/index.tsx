@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { useTranslation } from "@/shared/hooks/use-translation";
 import {
   flexRender,
   getCoreRowModel,
@@ -13,7 +14,6 @@ import {
 } from "@tanstack/react-table";
 import { ChevronLeft, ChevronRight, RefreshCcw } from "lucide-react";
 import * as React from "react";
-import { useTranslation } from "react-i18next";
 
 import { Input } from "@/shared/components/ui/input";
 import { Skeleton } from "@/shared/components/ui/skeleton";

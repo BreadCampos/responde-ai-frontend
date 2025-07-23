@@ -6,11 +6,11 @@ import {
 import { Button } from "@/shared/components/button";
 import { SelectInput } from "@/shared/components/form/select-input";
 import { TextInput } from "@/shared/components/form/text-input";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { SelectOption } from "@/shared/types/select-options.type";
 import { XIcon } from "lucide-react";
 import { useMemo } from "react";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 
 interface ValidationRuleRowProps {
   index: number;

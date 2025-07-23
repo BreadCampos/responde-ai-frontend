@@ -1,3 +1,5 @@
+"use client";
+
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { Button } from "@/shared/components/button";

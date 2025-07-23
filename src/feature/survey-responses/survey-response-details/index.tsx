@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { useParams } from "next/navigation";
 import { BackButton } from "../../../shared/components/back-button";

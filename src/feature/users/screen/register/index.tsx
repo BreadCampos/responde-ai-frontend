@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -12,9 +14,9 @@ import { Stepper } from "@/shared/components/stepper";
 import { Form } from "@/shared/components/ui/form";
 import { useNavigation } from "@/shared/hooks/use-navigation";
 import { useRegister } from "@/shared/hooks/use-register";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { ChevronLeft } from "lucide-react";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { SelectPlanStep } from "../../components//select-plan";
 import { RegisterUser } from "../../components/register-user";
 

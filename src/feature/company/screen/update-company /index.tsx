@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { BackButton } from "@/shared/components/back-button";
 import { Button } from "@/shared/components/button";

@@ -1,5 +1,3 @@
-"use client";
-
 import { UpdateCompany } from "@/feature/company/screen/update-company ";
 
 export default function UpdateCompanyPage() {

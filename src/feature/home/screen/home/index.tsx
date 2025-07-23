@@ -1,4 +1,5 @@
 "use client";
+
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { SelectPlanStep } from "@/feature/users/components/select-plan";
@@ -8,12 +9,13 @@ import { LanguageSwitcher } from "@/shared/components/language-switcber";
 import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
 import { Form } from "@/shared/components/ui/form";
 import { useNavigation } from "@/shared/hooks/use-navigation";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { EmblaOptionsType } from "embla-carousel";
 import { BarChart3, DollarSign, Target } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { FeatureCard } from "../../components/feature-card";
 import { Step } from "../../components/step";
 
@@ -41,9 +43,9 @@ export default function HomePage() {
   };
 
   const images = [
+    "/images/examples/nps-result.png",
     "/images/examples/custom-link.png",
     "/images/examples/graphic.png",
-    "/images/examples/nps-result.png",
     "/images/examples/survey-response-all.png",
     "/images/examples/survey-response-details.png",
   ];
@@ -54,7 +56,7 @@ export default function HomePage() {
       alt={""}
       key={index}
       fill={true}
-      objectFit="contain"
+      style={{ objectFit: "contain" }}
       quality={100}
     />
   ));

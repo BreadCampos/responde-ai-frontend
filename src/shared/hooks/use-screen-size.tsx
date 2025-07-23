@@ -1,4 +1,6 @@
-import { useState, useEffect, useMemo } from "react";
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
 
 // Define a interface para os breakpoints, tornando o hook customizável
 interface ScreenSizeBreakpoints {

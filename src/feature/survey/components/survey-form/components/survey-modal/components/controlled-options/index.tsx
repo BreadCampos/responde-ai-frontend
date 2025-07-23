@@ -1,10 +1,10 @@
 import { Button } from "@/shared/components/button";
 import { TextInput } from "@/shared/components/form";
 import { Label } from "@/shared/components/ui/label";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { XIcon } from "lucide-react";
 import { Key } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 export const typesWithOptions = [
   "select",
   "radio",

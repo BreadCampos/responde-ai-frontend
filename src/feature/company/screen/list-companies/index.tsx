@@ -1,9 +1,10 @@
+"use client";
 import { ROUTES } from "@/core/routes/route-constants";
 import { Button } from "@/shared/components/button";
 import { DataTable } from "@/shared/components/data-table";
 import { useNavigation } from "@/shared/hooks/use-navigation";
 import { usePagination } from "@/shared/hooks/use-pagination";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { GetCompaniesListQuery } from "../../service/get-companies-list.query";
 import { useColumns } from "./columns";
 

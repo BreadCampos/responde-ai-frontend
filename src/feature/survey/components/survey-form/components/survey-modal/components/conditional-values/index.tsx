@@ -12,11 +12,11 @@ import {
   type SurveyQuestion,
 } from "@/feature/survey/model/survey.model";
 import { useFormatValues } from "@/shared/hooks/use-formatter-form";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { SelectOption } from "@/shared/types/select-options.type";
 import { XIcon } from "lucide-react";
 import { useMemo } from "react";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import type { IForm } from "../../index";
 import { typesWithOptions } from "../controlled-options";
 // import { typesWithOptions } from "../controlled-options";

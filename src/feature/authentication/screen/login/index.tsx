@@ -1,3 +1,5 @@
+"use client";
+
 import { ROUTES } from "@/core/routes/route-constants";
 import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/button";

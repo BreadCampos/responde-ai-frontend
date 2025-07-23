@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/button";
 import { Badge } from "@/shared/components/ui/badge";

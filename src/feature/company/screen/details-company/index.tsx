@@ -1,3 +1,5 @@
+"use client";
+
 import { ROUTES } from "@/core/routes/route-constants";
 import { DefaultAvatar } from "@/shared/components/avatar";
 import { BackButton } from "@/shared/components/back-button";
