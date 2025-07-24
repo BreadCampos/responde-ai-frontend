@@ -1,9 +1,11 @@
+import { APP_ENV } from "@/env";
 import "@/shared/styled/embla.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { AppProviders } from "./providers";
+
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Responde aí",
@@ -23,7 +25,7 @@ export default function RootLayout({
 
       <Script
         strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=AW-16968874429`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${APP_ENV.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
       />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
@@ -31,7 +33,7 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'AW-16968874429');
+            gtag('config', '${APP_ENV.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
           `}
       </Script>
     </html>

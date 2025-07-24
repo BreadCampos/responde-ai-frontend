@@ -1,3 +1,4 @@
 export const APP_ENV = {
   APP_URL: process.env.NEXT_PUBLIC_API_URL,
+  NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
 };
