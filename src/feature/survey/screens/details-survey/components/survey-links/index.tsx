@@ -60,7 +60,6 @@ export const SurveyLinks = ({ genericLinkSlug }: Props) => {
         href="#survey-custom-links"
       >
         <Link size={18} />
-        {t()}
       </a>
     </Card>
   );

@@ -1,7 +1,7 @@
 import { CheckboxInput, TextInput } from "@/shared/components/form";
 import Modal from "@/shared/components/modal";
 import { useFormatValues } from "@/shared/hooks/use-formatter-form";
-import { useTransition } from "react";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { useFormContext } from "react-hook-form";
 import { AddCustomLinkValues } from "./add-custom-link.shema";
 
@@ -20,7 +20,7 @@ export const FormCustomLink = ({
   title,
   open,
 }: Props) => {
-  const { t } = useTransition("surveys");
+  const { t } = useTranslation("surveys");
   const methods = useFormContext<AddCustomLinkValues>();
 
   const { handleFormatMinMaxValue } = useFormatValues();

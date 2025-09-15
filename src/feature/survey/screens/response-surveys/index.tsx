@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const ResponseSurvey = ({ surveyId }: Props) => {
-  const { publicCompany, setPublicCompany, company } = useAuthStore();
+  const { setPublicCompany, company } = useAuthStore();
 
   const searchParams = useSearchParams();
 
@@ -101,11 +101,11 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
               questions={data?.survey?.questions}
               title={data?.survey?.title}
               className="max-w-full border-none h-[calc(100vh-110px)] max-h-[calc(100vh - 200px)] min-h-auto shadow-none rounded-none overflow-y-auto p-0"
-              logoUrl={publicCompany?.logoUrl || ""}
+              logoUrl={data?.company?.logoUrl || ""}
               onSubmit={onSubmit}
             />
           </div>
-        )}{" "}
+        )}
       </div>
     </FormProvider>
   );

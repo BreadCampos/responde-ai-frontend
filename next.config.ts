@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "http",
+        hostname: "sitehml.ituranmob.com.br",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

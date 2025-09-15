@@ -211,7 +211,7 @@
       "title": "Link e QR Code",
       "description": "Compartilhe seu questionário com os usuários através de um link ou QR Code.",
       "incorporate": "Incorporar o questionário",
-      "customLink": "Link personalizado",
+      "customLink": "Link personalizado"
     },
     "previewDrawer": {
       "previewButton": "Pré-visualizar",
