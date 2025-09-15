@@ -505,6 +505,12 @@ interface Resources {
       }
     },
     "surveyDetails": {
+      "links": {
+        "title": "Link e QR Code",
+        "description": "Compartilhe seu questionário com os usuários através de um link ou QR Code.",
+        "incorporate": "Incorporar o questionário",
+        "customLink": "Link personalizado"
+      },
       "previewDrawer": {
         "previewButton": "Pré-visualizar",
         "submitSuccessToast": "Dados do questionário enviados com sucesso!",
@@ -534,6 +540,29 @@ interface Resources {
         "code": {
           "label": "Código de incorporação",
           "placeholder": "<iframe src=\"https://seusite.com/survey/ID\" width=\"100%\" height=\"500px\" frameborder=\"0\"></iframe>"
+        }
+      },
+      "customLink": {
+        "button": "Criar link customizado",
+        "form": {
+          "title": "Criar link customizado",
+          "success": "Link customizado criado com sucesso!",
+          "fields": {
+            "name": {
+              "label": "Nome do link",
+              "placeholder": "Ex: meu-questionario"
+            },
+            "usageLimit": {
+              "label": "Limite de uso",
+              "placeholder": "Ex: 1000 usos"
+            },
+            "isActive": {
+              "label": "Ativo"
+            }
+          },
+          "buttons": {
+            "createLink": "Criar Link"
+          }
         }
       }
     }
