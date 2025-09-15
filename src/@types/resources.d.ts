@@ -1,6 +1,11 @@
 interface Resources {
   "common": {
     "wellcome": "Bem-vindo ao nosso aplicativo!",
+    "notFound": {
+      "title": "Página Não Encontrada",
+      "description": "Oops! A página que você está procurando não existe ou foi movida.",
+      "cta": "Voltar para a Home"
+    },
     "sidebar": {
       "survey": "Formulário",
       "webhooks": "Webhooks",
@@ -106,7 +111,7 @@ interface Resources {
         "pricing": "Preços",
         "testimonials": "Depoimentos"
       },
-      "cta": "Começar Gratuitamente"
+      "cta": "Login"
     },
     "hero": {
       "title": "A forma mais inteligente de medir a <1>lealdade dos seus clientes.</1>",
@@ -139,7 +144,7 @@ interface Resources {
       },
       "step2": {
         "title": "Envie",
-        "description": "Compartilhe sua pesquisa com um link simples, envie por e-mail ou incorpore um webhook no seu site."
+        "description": "Compartilhe sua pesquisa com um link simples, envie por e-mail ou incorpore um link no seu site."
       },
       "step3": {
         "title": "Analise",
@@ -193,7 +198,7 @@ interface Resources {
   },
   "login": {
     "login": {
-      "title": "Login!",
+      "title": "Entrar!",
       "subtitle": "Por favor, insira suas credenciais para fazer login.",
       "form": {
         "emailLabel": "Email",
@@ -209,7 +214,7 @@ interface Resources {
       "successPayment": "Pagamento realizado com sucesso."
     },
     "register": {
-      "title": "Register",
+      "title": "Registar-se",
       "toast": {
         "success": "Cadastro realizado com sucesso."
       },
@@ -496,6 +501,39 @@ interface Resources {
         },
         "buttons": {
           "add": "Adicionar Validação +"
+        }
+      }
+    },
+    "surveyDetails": {
+      "previewDrawer": {
+        "previewButton": "Pré-visualizar",
+        "submitSuccessToast": "Dados do questionário enviados com sucesso!",
+        "drawerTitle": "Questionário atual",
+        "drawerDescription": "Esta é uma pré-visualização de como seu formulário está aparecendo para os usuários.",
+        "viewPageLink": "ver pagina",
+        "fallbackTitle": "Preview"
+      },
+      "nps": {
+        "title": "NPS Results",
+        "viewAsRow": "View as row",
+        "viewAsGrid": "View as grid",
+        "description": "Visualize the results of your form's NPS questions. You can switch between grid or row view.",
+        "npsScore": "Pontuação NPS",
+        "basedOnResponses": "Baseado em {{count}} respostas",
+        "promotersTooltip": "Promotores: {{percent}}%",
+        "passivesTooltip": "Passivos: {{percent}}%",
+        "detractorsTooltip": "Detratores: {{percent}}%",
+        "promotersLabel": "Promotores",
+        "passivesLabel": "Passivos",
+        "detractorsLabel": "Detratores"
+      },
+      "embedCode": {
+        "title": "Como incorporar o questionário",
+        "description": "Copie o código abaixo e cole em seu site para incorporar o questionário.",
+        "paragraph": "A forma mais rápida de começar. Funciona em qualquer lugar, mas pode exigir ajuste manual da altura e largura.",
+        "code": {
+          "label": "Código de incorporação",
+          "placeholder": "<iframe src=\"https://seusite.com/survey/ID\" width=\"100%\" height=\"500px\" frameborder=\"0\"></iframe>"
         }
       }
     }

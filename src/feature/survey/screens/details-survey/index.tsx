@@ -9,6 +9,7 @@ import { ROUTES } from "@/core/routes/route-constants";
 import { ActionMenu, MenuOption } from "@/shared/components/action-menu";
 import { Card, CardHeader } from "@/shared/components/ui/card";
 import { cn } from "@/shared/lib/utils";
+import EmbedCode from "./components/embed-code";
 import { NpsSection } from "./components/nps-section";
 import { SurveyPreviewDrawer } from "./components/questions-drawer";
 import { SurveyCustomLinks } from "./components/survey-custom-link";
@@ -67,6 +68,7 @@ const DetailsSurvey = ({ surveyId }: Props) => {
         <SurveyResponses />
         {survey?.npsInfo && <NpsSection npsInfo={survey?.npsInfo} />}
         <SurveyCustomLinks />
+        <EmbedCode />
       </div>
     </main>
   );

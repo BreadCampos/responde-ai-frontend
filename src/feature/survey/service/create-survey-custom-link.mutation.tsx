@@ -1,13 +1,14 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { SurveyModel } from "../model/survey.model";
 import { httpClient } from "@/core/api/fetch-api";
+import { useTranslation } from "@/shared/hooks/use-translation";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { surveyApi } from "../api";
 import { CreateCustomLinkModel } from "../model/create-survey-custom-link";
-import { toast } from "sonner";
+import type { SurveyModel } from "../model/survey.model";
 
 export const CreateSurveyCustomLinkMutation = () => {
   const queryClient = useQueryClient();
-
+  const { t } = useTranslation("surveys");
   return useMutation({
     mutationFn: async ({
       surveyId,
@@ -25,7 +26,7 @@ export const CreateSurveyCustomLinkMutation = () => {
       return response.data;
     },
     onSuccess: () => {
-      toast.success("Link personalizado criado com sucesso!");
+      toast.success(t("surveyDetails.customLink.form.success"));
       queryClient.invalidateQueries({
         queryKey: ["survey-custom-link-list"],
       });

@@ -3,6 +3,7 @@ import { CreateSurveyCustomLinkMutation } from "@/feature/survey/service/create-
 import { Button } from "@/shared/components/button";
 import { Form } from "@/shared/components/ui/form";
 import { useToggle } from "@/shared/hooks/use-toggle";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { PlusCircle } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
@@ -32,6 +33,7 @@ export const ModalCreateCustomLink = () => {
     methods.reset();
     toggleOpenModal();
   };
+  const { t } = useTranslation("surveys");
   const onSubmit = (data: AddCustomLinkValues) => {
     if (!surveyId || !company?.id) {
       return;
@@ -58,10 +60,11 @@ export const ModalCreateCustomLink = () => {
   return (
     <Form {...methods}>
       <Button variant="default" size={"sm"} onClick={toggleOpenModal}>
-        <PlusCircle className="mr-2 h-5 w-5" /> Criar link customizado
+        <PlusCircle className="mr-2 h-5 w-5" />{" "}
+        {t("surveyDetails.customLink.button")}
       </Button>
       <FormCustomLink
-        title="Adicionar Link Customizados"
+        title={t("surveyDetails.customLink.form.title")}
         submit={onSubmit}
         loading={isPending}
         open={openModal}

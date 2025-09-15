@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { httpClient } from "@/core/api/fetch-api";
+import { useQuery } from "@tanstack/react-query";
 import { usersApi } from "../api";
 
 import type { UserModel } from "../model/user.model";

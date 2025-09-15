@@ -7,12 +7,14 @@ import {
   TooltipTrigger,
 } from "@/shared/components/ui/tooltip";
 import { cn } from "@/shared/lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   data: NpsData;
 }
 
 export const NpsQuestionStats = ({ data }: Props) => {
+  const { t } = useTranslation("surveys");
   const total = data.totalResponses || 1;
 
   const promoterPercent = (data.promoters / total) * 100;
@@ -40,13 +42,15 @@ export const NpsQuestionStats = ({ data }: Props) => {
       <CardContent className="space-y-4">
         <div className="text-center">
           <p className="text-sm font-medium text-muted-foreground">
-            Pontuação NPS
+            {t("surveyDetails.nps.npsScore")}
           </p>
           <p className={cn("text-5xl font-bold", getNpsScoreColor(data.nps))}>
             {data.nps}
           </p>
           <p className="text-xs text-muted-foreground">
-            Baseado em {data.totalResponses} respostas
+            {t("surveyDetails.nps.basedOnResponses", {
+              count: data.totalResponses,
+            })}
           </p>
         </div>
 
@@ -55,17 +59,23 @@ export const NpsQuestionStats = ({ data }: Props) => {
             <div
               className="bg-green-500"
               style={{ width: `${promoterPercent}%` }}
-              title={`Promotores: ${promoterPercent.toFixed(1)}%`}
+              title={t("surveyDetails.nps.promotersTooltip", {
+                percent: promoterPercent.toFixed(1),
+              })}
             />
             <div
               className="bg-yellow-500"
               style={{ width: `${passivePercent}%` }}
-              title={`Passivos: ${passivePercent.toFixed(1)}%`}
+              title={t("surveyDetails.nps.passivesTooltip", {
+                percent: passivePercent.toFixed(1),
+              })}
             />
             <div
               className="bg-red-500"
               style={{ width: `${detractorPercent}%` }}
-              title={`Detratores: ${detractorPercent.toFixed(1)}%`}
+              title={t("surveyDetails.nps.detractorsTooltip", {
+                percent: detractorPercent.toFixed(1),
+              })}
             />
           </div>
         </div>
@@ -74,7 +84,7 @@ export const NpsQuestionStats = ({ data }: Props) => {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-green-500" />
-              <span>Promotores</span>
+              <span>{t("surveyDetails.nps.promotersLabel")}</span>
             </div>
             <span className="font-medium">
               {data.promoters} ({promoterPercent.toFixed(0)}%)
@@ -83,7 +93,7 @@ export const NpsQuestionStats = ({ data }: Props) => {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-yellow-500" />
-              <span>Passivos</span>
+              <span>{t("surveyDetails.nps.passivesLabel")}</span>
             </div>
             <span className="font-medium">
               {data.passives} ({passivePercent.toFixed(0)}%)
@@ -92,7 +102,7 @@ export const NpsQuestionStats = ({ data }: Props) => {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-red-500" />
-              <span>Detratores</span>
+              <span>{t("surveyDetails.nps.detractorsLabel")}</span>
             </div>
             <span className="font-medium">
               {data.detractors} ({detractorPercent.toFixed(0)}%)

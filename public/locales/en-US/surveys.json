@@ -205,5 +205,38 @@
         "add": "Add Validation +"
       }
     }
+  },
+  "surveyDetails": {
+    "previewDrawer": {
+      "previewButton": "Preview",
+      "submitSuccessToast": "Survey data submitted successfully!",
+      "drawerTitle": "Current Survey",
+      "drawerDescription": "This is a preview of how your form is appearing to users.",
+      "viewPageLink": "view page",
+      "fallbackTitle": "Preview"
+    },
+    "nps": {
+      "title": "NPS Results",
+      "viewAsRow": "View as row",
+      "viewAsGrid": "View as grid",
+      "description": "Visualize the results of your form's NPS questions. You can switch between grid or row view.",
+      "npsScore": "NPS Score",
+      "basedOnResponses": "Based on {{count}} responses",
+      "promotersTooltip": "Promoters: {{percent}}%",
+      "passivesTooltip": "Passives: {{percent}}%",
+      "detractorsTooltip": "Detractors: {{percent}}%",
+      "promotersLabel": "Promoters",
+      "passivesLabel": "Passives",
+      "detractorsLabel": "Detractors"
+    },
+    "embedCode": {
+      "title": "Como incorporar o questionário",
+      "description": "Copie o código abaixo e cole em seu site para incorporar o questionário.",
+      "paragraph": "A forma mais rápida de começar. Funciona em qualquer lugar, mas pode exigir ajuste manual da altura e largura.",
+      "code": {
+        "label": "Código de incorporação",
+        "placeholder": "<iframe src=\"https://seusite.com/survey/ID\" width=\"100%\" height=\"500px\" frameborder=\"0\"></iframe>"
+      }
+    }
   }
 }

@@ -205,5 +205,67 @@
         "add": "Adicionar Validação +"
       }
     }
+  },
+  "surveyDetails": {
+    "links": {
+      "title": "Link e QR Code",
+      "description": "Compartilhe seu questionário com os usuários através de um link ou QR Code.",
+      "incorporate": "Incorporar o questionário",
+      "customLink": "Link personalizado",
+    },
+    "previewDrawer": {
+      "previewButton": "Pré-visualizar",
+      "submitSuccessToast": "Dados do questionário enviados com sucesso!",
+      "drawerTitle": "Questionário atual",
+      "drawerDescription": "Esta é uma pré-visualização de como seu formulário está aparecendo para os usuários.",
+      "viewPageLink": "ver pagina",
+      "fallbackTitle": "Preview"
+    },
+    "nps": {
+      "title": "NPS Results",
+      "viewAsRow": "View as row",
+      "viewAsGrid": "View as grid",
+      "description": "Visualize the results of your form's NPS questions. You can switch between grid or row view.",
+      "npsScore": "Pontuação NPS",
+      "basedOnResponses": "Baseado em {{count}} respostas",
+      "promotersTooltip": "Promotores: {{percent}}%",
+      "passivesTooltip": "Passivos: {{percent}}%",
+      "detractorsTooltip": "Detratores: {{percent}}%",
+      "promotersLabel": "Promotores",
+      "passivesLabel": "Passivos",
+      "detractorsLabel": "Detratores"
+    },
+    "embedCode": {
+      "title": "Como incorporar o questionário",
+      "description": "Copie o código abaixo e cole em seu site para incorporar o questionário.",
+      "paragraph": "A forma mais rápida de começar. Funciona em qualquer lugar, mas pode exigir ajuste manual da altura e largura.",
+      "code": {
+        "label": "Código de incorporação",
+        "placeholder": "<iframe src=\"https://seusite.com/survey/ID\" width=\"100%\" height=\"500px\" frameborder=\"0\"></iframe>"
+      }
+    },
+    "customLink": {
+      "button": "Criar link customizado",
+      "form": {
+        "title": "Criar link customizado",
+        "success": "Link customizado criado com sucesso!",
+        "fields": {
+          "name": {
+            "label": "Nome do link",
+            "placeholder": "Ex: meu-questionario"
+          },
+          "usageLimit": {
+            "label": "Limite de uso",
+            "placeholder": "Ex: 1000 usos"
+          },
+          "isActive": {
+            "label": "Ativo"
+          }
+        },
+        "buttons": {
+          "createLink": "Criar Link"
+        }
+      }
+    }
   }
 }
