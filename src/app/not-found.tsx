@@ -1,14 +1,11 @@
-// Em app/not-found.tsx
-
-"use client"; // Passo 1: Transformar em um Client Component
+"use client";
 
 import { Button } from "@/shared/components/button";
-import { useTranslation } from "@/shared/hooks/use-translation"; // Passo 2: Importar seu hook
+import { useTranslation } from "@/shared/hooks/use-translation";
 import Link from "next/link";
 
 export default function NotFound() {
-  // Passo 3: Usar o hook para carregar as traduções
-  const { t } = useTranslation("common"); // Use o namespace onde estão seus textos de 404
+  const { t } = useTranslation("common");
 
   return (
     <div className="flex flex-col items-center justify-center h-screen text-center">

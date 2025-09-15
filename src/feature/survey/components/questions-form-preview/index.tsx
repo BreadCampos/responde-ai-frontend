@@ -99,6 +99,7 @@ export const QuestionsForm = ({
                 width={64}
                 height={64}
                 className="object-cover rounded-lg"
+                unoptimized
                 loading="lazy"
               />
             </div>

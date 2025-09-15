@@ -1,7 +1,7 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { CopyBadge } from "@/shared/components/copy.index";
 import { Card, CardDescription, CardTitle } from "@/shared/components/ui/card";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Link } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 interface Props {
   genericLinkSlug?: string;
@@ -54,6 +54,12 @@ export const SurveyLinks = ({ genericLinkSlug }: Props) => {
       >
         <ArrowDown size={18} />
         Criar link customizado
+      </a>
+      <a
+        className="text-[12px] flex gap-2 items-center"
+        href="#survey-custom-links"
+      >
+        <Link size={18} />
       </a>
     </Card>
   );

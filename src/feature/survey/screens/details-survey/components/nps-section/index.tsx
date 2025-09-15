@@ -1,23 +1,25 @@
 // src/app/modules/surveys/view/details-survey/components/nps-results.tsx
 
 import { NpsData } from "@/feature/survey/model/survey.model";
-import { NpsQuestionStats } from "./components/nps-question-stats";
 import { Button } from "@/shared/components/button";
-import { ArrowRight, LayoutGrid } from "lucide-react";
-import { useState } from "react";
-import { cn } from "@/shared/lib/utils";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
+import { cn } from "@/shared/lib/utils";
+import { ArrowRight, LayoutGrid } from "lucide-react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { NpsQuestionStats } from "./components/nps-question-stats";
 
 interface Props {
   npsInfo?: NpsData[];
 }
 
 export const NpsSection = ({ npsInfo }: Props) => {
+  const { t } = useTranslation("surveys");
   const [isGridView, setIsGridView] = useState(false);
   if (!npsInfo || npsInfo.length === 0) {
     return null;
@@ -27,7 +29,7 @@ export const NpsSection = ({ npsInfo }: Props) => {
     <Card className="p-4">
       <CardHeader>
         <CardTitle className="flex flex-col gap-2 items-center justify-between md:flex-row">
-          Resultados NPS{" "}
+          {t("surveyDetails.nps.title")}{" "}
           <Button
             variant="ghost"
             size="sm"
@@ -36,19 +38,18 @@ export const NpsSection = ({ npsInfo }: Props) => {
           >
             {isGridView ? (
               <>
-                <ArrowRight className="h-4 w-4" /> Ver em linha
+                <ArrowRight className="h-4 w-4" />{" "}
+                {t("surveyDetails.nps.viewAsRow")}
               </>
             ) : (
               <>
-                <LayoutGrid className="h-4 w-4" /> Ver em grade
+                <LayoutGrid className="h-4 w-4" />{" "}
+                {t("surveyDetails.nps.viewAsGrid")}
               </>
             )}
           </Button>
         </CardTitle>
-        <CardDescription>
-          Visualize os resultados das perguntas NPS do seu formulário. Você pode
-          alternar entre visualização em grade ou em linha.
-        </CardDescription>
+        <CardDescription>{t("surveyDetails.nps.description")}</CardDescription>
       </CardHeader>
 
       <div

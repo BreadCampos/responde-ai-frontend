@@ -113,6 +113,7 @@ export const SidebarHeader = ({
               height={64}
               className="object-cover rounded-lg"
               loading="lazy"
+              unoptimized
             />
           )}
 

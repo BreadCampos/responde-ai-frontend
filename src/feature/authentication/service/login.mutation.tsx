@@ -32,7 +32,7 @@ export const useLoginMutation = () => {
       return res.data;
     },
     onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ["companies"] });
+      queryClient.invalidateQueries({ queryKey: ["companies", "user-me"] });
       if (response?.token) {
         setTokens({ accessToken: response.token, refreshToken: "" });
         setUser({ user: response?.user });

@@ -9,7 +9,7 @@ import {
 } from "./types";
 
 class HttpClient {
-  private readonly baseUrl?: string = APP_ENV.APP_URL;
+  private readonly baseUrl?: string = APP_ENV.API_URL;
 
   private readonly refreshTokenKey: string = "REFRESH_TOKEN";
   private readonly tokenKey: string = "AUTH_TOKEN";
