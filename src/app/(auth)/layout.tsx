@@ -8,11 +8,12 @@ export default function AuthFormLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex  items-center justify-center min-h-screen bg-background">
+    <div className="flex items-center justify-center min-h-screen bg-background max-h-[100vh] max-w-[100vw] overflow-hidden">
       <div
         className={cn(
-          "relative min-w-md p-6 bg-card text-card-foreground rounded-lg border border-border",
-          "max-h-[90vh] overflow-y-auto overflow-x-none"
+          "relative p-6 bg-card text-card-foreground rounded-lg border border-border",
+          "max-h-[90vh] overflow-y-auto overflow-x-none",
+          "min-w-[90%] sm:min-w-md"
         )}
       >
         <div className="absolute top-4 right-4 flex items-center gap-2 ">
