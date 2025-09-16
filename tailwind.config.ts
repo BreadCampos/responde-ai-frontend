@@ -1,14 +1,13 @@
 import tailwindcssAnimate from "tailwindcss-animate";
 
 module.exports = {
-  // Adapte o `content` para os caminhos corretos do seu projeto
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "class", // Habilita o modo escuro baseado em classe
+  darkMode: "class",
   theme: {
     extend: {
       screens: {
