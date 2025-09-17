@@ -583,7 +583,7 @@ interface Resources {
         url: "URL";
         maxRetries: "Tentativas Máximas";
         isActive: "Status";
-        retryPolicy: "Política de Retentativa";
+        secretKey: "Chave de Assinatura";
         createdAt: "Criado em";
         actions: {
           label: "Ações";
@@ -606,7 +606,7 @@ interface Resources {
       };
       url: "URL do Webhook";
       maxRetries: "Tentativas Máximas";
-      retryPolicy: "Política de Retentativa";
+      secretKey: "Política de Retentativa";
       save: "Salvar";
     };
   };

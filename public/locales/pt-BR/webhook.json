@@ -7,7 +7,7 @@
       "url": "URL",
       "maxRetries": "Tentativas Máximas",
       "isActive": "Status",
-      "retryPolicy": "Política de Retentativa",
+      "secretKey": "Chave de assinatura",
       "createdAt": "Criado em",
       "actions": {
         "label": "Ações",
@@ -30,7 +30,6 @@
     },
     "url": "URL do Webhook",
     "maxRetries": "Tentativas Máximas",
-    "retryPolicy": "Política de Retentativa",
     "save": "Salvar"
   }
 }

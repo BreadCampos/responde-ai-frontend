@@ -7,7 +7,7 @@
       "url": "URL",
       "maxRetries": "Maximum attempts",
       "isActive": "Status",
-      "retryPolicy": "Retaining policy",
+      "secretKey": "Signature key",
       "createdAt": "Created in",
       "actions": {
         "label": "Actions",
@@ -30,7 +30,6 @@
     },
     "url": "Webhok Url",
     "maxRetries": "Maximum attempts",
-    "retryPolicy": "Retaining policy",
     "save": "Save"
   }
 }

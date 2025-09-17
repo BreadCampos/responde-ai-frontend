@@ -53,7 +53,7 @@ export interface IForm {
   };
   conditional?: QuestionConditionOptions | undefined;
 }
-export const ServeyModal = ({
+export const SurveyModal = ({
   onAddQuestion,
   onUpdateQuestion,
   isOpen,
@@ -92,6 +92,7 @@ export const ServeyModal = ({
       );
     };
 
+    console.log({ data: data.ratingOptions });
     const transformedQuestionData: SurveyQuestion = {
       id: crypto.randomUUID(),
       label: data.label,

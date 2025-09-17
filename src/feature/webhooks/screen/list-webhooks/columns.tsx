@@ -67,13 +67,18 @@ export const useColumns = ({ setWebhookToEdit }: Props) => {
         );
       },
     },
+
     {
-      accessorKey: "retryPolicy",
-      size: 150,
+      accessorKey: "secretKey",
+      size: 250,
       enableResizing: true,
       header: () => (
-        <div className="text-left">{t("webhooks.columns.retryPolicy")}</div>
+        <div className="text-left">{t("webhooks.columns.secretKey")}</div>
       ),
+      cell: ({ row }) => {
+        const secretKey = row.original.secretKey;
+        return <CopyBadge textToCopy={secretKey} className={"max-w-[200px]"} />;
+      },
     },
     {
       accessorKey: "createdAt",

@@ -24,7 +24,7 @@ import { useFieldArray, useForm, useFormContext } from "react-hook-form";
 import { toast } from "sonner";
 import { QuestionsForm } from "../questions-form-preview";
 import { SortableQuestionItem } from "./components/sortable-question-item";
-import { ServeyModal } from "./components/survey-modal";
+import { SurveyModal } from "./components/survey-modal";
 
 interface Props {
   onSubmit?: (
@@ -149,14 +149,12 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
 
     if (activeIndex === -1 || overIndex === -1) return;
 
-    // 1. Mova o item no array para a nova posição
     const questionsWithMovedItem = arrayMove(
       currentQuestions,
       activeIndex,
       overIndex
     );
 
-    // 2. Atualize o pageIndex se o item mudou de página (Sua lógica aqui está ok)
     const activeContainerId = active.data.current?.sortable.containerId;
     const overContainerId = over.data.current?.sortable.containerId || over.id;
     if (activeContainerId !== overContainerId) {
@@ -169,7 +167,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       }
     }
 
-    // 3. Recalcule o 'orderIndex' para todas as questões com base na nova ordem
     const questionsWithUpdatedOrder = questionsWithMovedItem.map((question) => {
       const questionsOnSamePage = questionsWithMovedItem.filter(
         (q) => q.pageIndex === question.pageIndex
@@ -180,7 +177,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       return { ...question, orderIndex };
     });
 
-    // 4. Verifique a dependência (Sua lógica de validação aqui)
     const movedItem = questionsWithUpdatedOrder.find((q) => q.id === active.id);
     if (movedItem?.conditional) {
       const dependencyItem = questionsWithUpdatedOrder.find(
@@ -197,10 +193,8 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       }
     }
 
-    // 5. Renumere as páginas usando o array JÁ ATUALIZADO
     const finalQuestions = renumberPages(questionsWithUpdatedOrder);
 
-    // 6. Atualize o formulário
     setValue("questions", finalQuestions, { shouldDirty: true });
   }
 
@@ -326,7 +320,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
           </Form>
         )}{" "}
       </div>
-      <ServeyModal
+      <SurveyModal
         isOpen={isModalOpen}
         onClose={toggleModal}
         onAddQuestion={addNewQuestion}
