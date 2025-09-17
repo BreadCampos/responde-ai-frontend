@@ -92,7 +92,6 @@ export const SurveyModal = ({
       );
     };
 
-    console.log({ data: data.ratingOptions });
     const transformedQuestionData: SurveyQuestion = {
       id: crypto.randomUUID(),
       label: data.label,
@@ -152,6 +151,7 @@ export const SurveyModal = ({
     setValue("conditional", undefined);
     setValue("enableConditional", false);
   }, [setValue]);
+
   const maxPossibilitPage = useMemo(() => {
     const pages = existingQuestions.map((question) => question.pageIndex);
 
@@ -270,8 +270,8 @@ export const SurveyModal = ({
                   helperText={t("surveyModal.form.fields.inputMask.helperText")}
                 />
               </div>
-              <RattingType />
               <ControlledOptions />
+              <RattingType />
               <ConditionalValues existingQuestions={existingQuestions} />
               <ValidationRules />
             </div>
