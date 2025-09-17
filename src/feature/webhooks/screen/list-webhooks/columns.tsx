@@ -43,13 +43,24 @@ export const useColumns = ({ setWebhookToEdit }: Props) => {
         return <CopyBadge textToCopy={url} className={"max-w-[200px]"} />;
       },
     },
+
     {
-      accessorKey: "maxRetries",
+      accessorKey: "secretKey",
       size: 250,
       enableResizing: true,
       header: () => (
-        <div className="text-left">{t("webhooks.columns.maxRetries")}</div>
+        <div className="text-left">{t("webhooks.columns.secretKey")}</div>
       ),
+      cell: ({ row }) => {
+        const secretKey = row.original.secretKey;
+        return (
+          <CopyBadge
+            textToCopy={secretKey}
+            className={"max-w-[200px]"}
+            secret
+          />
+        );
+      },
     },
     {
       accessorKey: "isActive",
@@ -67,18 +78,22 @@ export const useColumns = ({ setWebhookToEdit }: Props) => {
         );
       },
     },
-
     {
-      accessorKey: "secretKey",
+      accessorKey: "maxRetries",
       size: 250,
       enableResizing: true,
       header: () => (
-        <div className="text-left">{t("webhooks.columns.secretKey")}</div>
+        <div className="text-left">{t("webhooks.columns.maxRetries")}</div>
       ),
-      cell: ({ row }) => {
-        const secretKey = row.original.secretKey;
-        return <CopyBadge textToCopy={secretKey} className={"max-w-[200px]"} />;
-      },
+    },
+
+    {
+      accessorKey: "retryPolicy",
+      size: 250,
+      enableResizing: true,
+      header: () => (
+        <div className="text-left">{t("webhooks.columns.retryPolicy")}</div>
+      ),
     },
     {
       accessorKey: "createdAt",

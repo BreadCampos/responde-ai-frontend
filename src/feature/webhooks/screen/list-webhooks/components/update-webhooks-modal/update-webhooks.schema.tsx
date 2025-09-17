@@ -9,6 +9,7 @@ export const updateWebhooksSchema = z.object({
   subscribedEvents: z.array(z.string()).min(1, {
     message: "Pelo menos um evento deve ser selecionado",
   }),
+  isActive: z.boolean(),
 });
 
 export type UpdateWebhooksSchemaType = z.infer<typeof updateWebhooksSchema>;

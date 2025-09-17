@@ -1,3 +1,4 @@
+import { cn } from "@/shared/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface Props {
@@ -37,7 +38,7 @@ export const DefaultAvatar = ({ name, src, className }: Props) => {
     return firstInitial.toUpperCase();
   };
   return (
-    <Avatar className={className}>
+    <Avatar className={cn("h-10 w-10", className)}>
       <AvatarImage src={src} />
       <AvatarFallback>{calculateInitials(name)}</AvatarFallback>
     </Avatar>

@@ -60,6 +60,7 @@ export const DetailsCompany = () => {
               </BackButton>
               <div className="flex items-center justify-between w-full md:w-auto">
                 <CopyBadge textToCopy={id} className="max-w-[80%] truncate " />
+
                 <Button
                   variant="ghost"
                   className="ml-2"
@@ -80,11 +81,23 @@ export const DetailsCompany = () => {
                 {t("details.generalInfo.title")}
               </h3>
               <div className="space-y-1 text-sm text-muted-foreground">
-                <p>
+                <p className="flex items-center gap-2">
                   <strong className="text-card-foreground">
                     {t("details.generalInfo.document")}
                   </strong>{" "}
                   {company?.document ? formatDocument(company?.document) : "-"}
+                </p>
+
+                <p className="flex items-center gap-2">
+                  {" "}
+                  <strong className="text-card-foreground">
+                    {t("details.generalInfo.publicKey")}
+                  </strong>{" "}
+                  <CopyBadge
+                    secret={true}
+                    textToCopy={company?.publicKey}
+                    className="max-w-[80%] truncate"
+                  />
                 </p>
               </div>
             </div>

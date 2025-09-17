@@ -76,7 +76,8 @@ interface Resources {
     "details": {
       "generalInfo": {
         "title": "Informações Gerais",
-        "document": "Documento:"
+        "document": "Documento:",
+        "publicKey": "Chave de API:"
       },
       "addresses": {
         "title": "Endereços",
@@ -583,6 +584,7 @@ interface Resources {
         "id": "ID",
         "url": "URL",
         "maxRetries": "Tentativas Máximas",
+        "retryPolicy": "Política de Tentativas",
         "isActive": "Status",
         "secretKey": "Chave de assinatura",
         "createdAt": "Criado em",
@@ -603,6 +605,9 @@ interface Resources {
         "subscribedEvents": {
           "label": "Eventos Inscritos",
           "placeholder": "Selecione os eventos para os quais deseja receber notificações"
+        },
+        "isActive": {
+          "label": "Ativo"
         }
       },
       "url": "URL do Webhook",

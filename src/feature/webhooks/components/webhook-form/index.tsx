@@ -1,4 +1,8 @@
-import { SelectMultipleInput, TextInput } from "@/shared/components/form";
+import {
+  CheckboxInput,
+  SelectMultipleInput,
+  TextInput,
+} from "@/shared/components/form";
 import { useTranslation } from "@/shared/hooks/use-translation";
 import { WebhookEvents } from "../../constants";
 
@@ -22,6 +26,10 @@ export const WebhookForm = () => {
         name={"subscribedEvents"}
         label={t("createWebhook.fields.subscribedEvents.label")}
         placeholder={t("createWebhook.fields.subscribedEvents.placeholder")}
+      />
+      <CheckboxInput
+        name={"isActive"}
+        label={t("createWebhook.fields.isActive.label")}
       />
     </div>
   );

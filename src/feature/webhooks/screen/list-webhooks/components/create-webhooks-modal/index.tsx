@@ -20,6 +20,7 @@ export const CreateWebhooksModal = () => {
     resolver: resolverCreateWebhooksSchema,
     defaultValues: {
       url: "",
+      isActive: true,
       subscribedEvents: [],
     },
   });

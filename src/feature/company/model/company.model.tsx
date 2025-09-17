@@ -12,6 +12,7 @@ export type CompanyModel = {
   settings: {
     always_display_logo: boolean;
   };
+  publicKey: string;
   theme: {
     primary: string;
   };

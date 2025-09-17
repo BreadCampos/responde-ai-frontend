@@ -6,6 +6,7 @@
       "id": "ID",
       "url": "URL",
       "maxRetries": "Tentativas Máximas",
+      "retryPolicy": "Política de Tentativas",
       "isActive": "Status",
       "secretKey": "Chave de assinatura",
       "createdAt": "Criado em",
@@ -26,6 +27,9 @@
       "subscribedEvents": {
         "label": "Eventos Inscritos",
         "placeholder": "Selecione os eventos para os quais deseja receber notificações"
+      },
+      "isActive": {
+        "label": "Ativo"
       }
     },
     "url": "URL do Webhook",
