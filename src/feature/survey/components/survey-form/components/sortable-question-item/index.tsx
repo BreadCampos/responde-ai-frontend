@@ -2,12 +2,13 @@ import type { SurveyQuestion } from "@/feature/survey/model/survey.model";
 import { Button } from "@/shared/components/button";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { ChevronsUpDown, Edit, Trash2 } from "lucide-react";
+import { ChevronsUpDown, Copy, Edit, Trash2 } from "lucide-react";
 
 interface Props {
   question: SurveyQuestion;
   onDelete: (questionId: string) => void;
   onEdit: (question: SurveyQuestion) => void;
+  onDuplicate: (question: SurveyQuestion) => void;
   index: number;
 }
 
@@ -16,6 +17,7 @@ export function SortableQuestionItem({
   index,
   question,
   onEdit,
+  onDuplicate,
 }: Props) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: question.id });
@@ -48,6 +50,16 @@ export function SortableQuestionItem({
             title="Editar pergunta"
           >
             <Edit className="h-4 w-4" />
+          </Button>
+          <Button
+            type="button"
+            variant={"ghost"}
+            size={"icon"}
+            onClick={() => onDuplicate(question)}
+            className="p-2 text-green-600 hover:text-green-800 hover:bg-green-50 rounded-full transition-colors"
+            title="Duplicar pergunta"
+          >
+            <Copy className="h-4 w-4" />
           </Button>
           <Button
             onClick={() => onDelete(question.id)}

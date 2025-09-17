@@ -30,7 +30,8 @@
       "previewSubmit": "Questionnaire data sent successfully!",
       "dragError": "Error by dragging the question. ",
       "deleteQuestion": "Successful deleted question",
-      "confirm": "This question has'{{dependencyQuestion}}'As a dependent. "
+      "confirm": "This question has'{{dependencyQuestion}}'As a dependent.",
+      "duplicateQuestionSuccess": "Question successfully duplicated!"
     },
     "editController": {
       "title": "Questions",

@@ -88,8 +88,9 @@ export const RattingType = () => {
               type="number"
               disabled={formValues?.ratingOptions?.style === "nps"}
               onKeyPress={(e) => {
-                handleFormatMinMaxValue(e, 0, maxValue());
+                handleFormatMinMaxValue(e, 1, maxValue());
               }}
+              min={1}
               required
             />
             <TextInput
@@ -99,11 +100,11 @@ export const RattingType = () => {
               disabled={formValues?.ratingOptions?.style === "nps"}
               max={maxValue()}
               required
-              min={formValues?.ratingOptions?.min || 0}
+              min={formValues?.ratingOptions?.min || 1}
               onKeyPress={(e) => {
                 handleFormatMinMaxValue(
                   e,
-                  formValues?.ratingOptions?.min || 0,
+                  formValues?.ratingOptions?.min || 1,
                   maxValue()
                 );
               }}

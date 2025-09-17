@@ -227,6 +227,42 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   const onPreviewSubmit = () => {
     toast.success(t("createSurvey.toasts.previewSubmit"));
   };
+  const onDuplicate = (question: SurveyQuestion) => {
+    const currentQuestions = getValues("questions");
+    const index = currentQuestions.findIndex((q) => q.id === question.id);
+
+    if (index === -1) return;
+
+    const newId = crypto.randomUUID();
+    const duplicatedQuestion: SurveyQuestion = {
+      ...question,
+      id: newId,
+      label: `${question.label} (copy)`,
+      conditional: undefined,
+    };
+
+    const updatedQuestions = [
+      ...currentQuestions.slice(0, index + 1),
+      duplicatedQuestion,
+      ...currentQuestions.slice(index + 1),
+    ];
+
+    const questionsWithUpdatedOrder = updatedQuestions.map((q) => {
+      const questionsOnSamePage = updatedQuestions.filter(
+        (item) => item.pageIndex === q.pageIndex
+      );
+      const orderIndex = questionsOnSamePage.findIndex(
+        (item) => item.id === q.id
+      );
+      return { ...q, orderIndex };
+    });
+
+    const finalQuestions = renumberPages(questionsWithUpdatedOrder);
+
+    setValue("questions", finalQuestions, { shouldDirty: true });
+    setNewQuestionIds((state) => [...state, newId]);
+    toast.success(t("createSurvey.toasts.duplicateQuestionSuccess"));
+  };
 
   return (
     <div className="flex flex-col items-center justify-center p-2 ">
@@ -273,6 +309,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
                 const page = t("createSurvey.editController.page", {
                   page: String(pageIndex),
                 });
+
                 return (
                   <div
                     key={`page-${pageIndex}`}
@@ -292,6 +329,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
                       <div className="flex flex-col gap-2">
                         {questionsInPage.map((q, index) => (
                           <SortableQuestionItem
+                            onDuplicate={onDuplicate}
                             key={q.id}
                             index={index}
                             question={q}
