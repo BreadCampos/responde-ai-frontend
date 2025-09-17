@@ -48,19 +48,22 @@ export const SurveyLinks = ({ genericLinkSlug }: Props) => {
           />
         </div>
       )}
-      <a
-        className="text-[12px] flex gap-2 items-center"
-        href="#survey-custom-links"
-      >
-        <ArrowDown size={18} />
-        Criar link customizado
-      </a>
-      <a
-        className="text-[12px] flex gap-2 items-center"
-        href="#survey-custom-links"
-      >
-        <Link size={18} />
-      </a>
+      <div>
+        <a
+          className="text-[12px] flex gap-2 items-center"
+          href="#survey-custom-links"
+        >
+          <ArrowDown size={18} />
+          Criar link customizado
+        </a>
+        <a
+          className="text-[12px] flex gap-2 items-center"
+          href="#survey-custom-links"
+        >
+          <Link size={18} />
+          Ancorar Formulários
+        </a>
+      </div>
     </Card>
   );
 };

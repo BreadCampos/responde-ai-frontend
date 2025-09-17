@@ -5,4 +5,5 @@ export type Ansewers = Array<{
 
 export type CreateSurveyResponse = {
   answers: Ansewers;
+  timeToSubmitSeconds: number;
 };

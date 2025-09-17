@@ -116,6 +116,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       toast.success(t("createSurvey.toasts.deleteQuestion"));
     }
     setDeletesQuestionIds((state) => [...state, questionId]);
+    setNewQuestionIds((state) => state.filter((id) => id !== questionId));
   };
 
   const handleTitleChange = (newTitle: string) => {
