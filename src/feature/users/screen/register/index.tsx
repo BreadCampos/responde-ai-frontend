@@ -114,7 +114,7 @@ export const Register = () => {
         onKeyDown={handleKeyDown}
         className="space-y-6"
       >
-        <div className="flex mr-12">
+        <div className="flex sm:mr-12 relative">
           <Button
             onClick={handleBack}
             variant="ghost"

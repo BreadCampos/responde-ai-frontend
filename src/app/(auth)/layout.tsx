@@ -13,10 +13,10 @@ export default function AuthFormLayout({
         className={cn(
           "relative p-6 bg-card text-card-foreground rounded-lg border border-border",
           "max-h-[90vh] overflow-y-auto overflow-x-none",
-          "min-w-[90%] sm:min-w-md"
+          "max-w-[90%] min:w:[300px] sm:min-w-[400px] md:min-w-[500px] lg:min-w-[600px]"
         )}
       >
-        <div className="absolute top-4 right-4 flex items-center gap-2 ">
+        <div className="sm:absolute top-4 right-4 flex items-center gap-2 w-full sm:w-auto justify-center mb-4">
           <ThemeToggleButton />
           <LanguageSwitcher />
         </div>
