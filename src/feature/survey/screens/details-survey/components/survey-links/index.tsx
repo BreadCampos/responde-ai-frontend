@@ -1,6 +1,7 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { CopyBadge } from "@/shared/components/copy.index";
 import { Card, CardDescription, CardTitle } from "@/shared/components/ui/card";
+import { useTranslation } from "@/shared/hooks/use-translation";
 import { ArrowDown, Link } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 interface Props {
@@ -12,15 +13,15 @@ export const SurveyLinks = ({ genericLinkSlug }: Props) => {
     backgroundColor: "#FFFFFF", // Cor de fundo
   };
 
+  const { t } = useTranslation();
   const { company } = useAuthStore();
 
-  // Tamanho do QR Code e do logo
   const qrCodeSize = 256;
-  const logoSize = qrCodeSize / 4; // Logo ocupa 25% do QR Code
+  const logoSize = qrCodeSize / 4;
   return (
     <Card className="p-4 flex flex-col items-center justify-center text-center h-full lg:col-span-3 space-y-4">
-      <CardTitle className="mb-2">Link e QR Code</CardTitle>
-      <CardDescription>Compartilhe seu formulário</CardDescription>
+      <CardTitle className="mb-2">{t("surveyDetails.links.title")}</CardTitle>
+      <CardDescription>{t("surveyDetails.links.description")}</CardDescription>
       {genericLinkSlug && <CopyBadge textToCopy={genericLinkSlug} />}
       {genericLinkSlug && (
         <div className="inline-block rounded-lg border-2 p-4">
@@ -48,20 +49,21 @@ export const SurveyLinks = ({ genericLinkSlug }: Props) => {
           />
         </div>
       )}
+
       <div>
         <a
           className="text-[12px] flex gap-2 items-center"
           href="#survey-custom-links"
         >
           <ArrowDown size={18} />
-          Criar link customizado
+          {t("surveyDetails.links.customLink")}
         </a>
         <a
           className="text-[12px] flex gap-2 items-center"
           href="#survey-custom-links"
         >
           <Link size={18} />
-          Ancorar Formulários
+          {t("surveyDetails.links.incorporate")}
         </a>
       </div>
     </Card>

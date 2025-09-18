@@ -244,13 +244,7 @@ interface Resources {
         "about": "Sobre Nós",
         "contact": "Contato",
         "blog": "Blog"
-      },
-      "legal": {
-        "title": "Legal",
-        "privacy": "Política de Privacidade",
-        "terms": "Termos de Serviço"
-      },
-      "copyright": "© {{year}} Responde.ai. Todos os direitos reservados."
+      }
     },
     "cta": {
       "startFree": "Começar Gratuitamente"
