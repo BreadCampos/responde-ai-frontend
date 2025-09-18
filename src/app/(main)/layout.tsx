@@ -2,6 +2,7 @@
 
 import { useScreenSize } from "@/shared/hooks/use-screen-size";
 import { useGetUserAndCompany } from "@/shared/hooks/user-get-user-and-company";
+import { Footer } from "@/shared/layout/footer";
 import { Header } from "@/shared/layout/header";
 import { Sidebar } from "@/shared/layout/sidebar";
 
@@ -20,6 +21,7 @@ export default function LayoutClient({
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
         <main className="flex-1 overflow-y-auto p-4 ">{children}</main>
+        <Footer />
       </div>
     </div>
   );

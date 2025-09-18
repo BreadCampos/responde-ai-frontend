@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "@/shared/components/language-switcber";
 import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
+import { Footer } from "@/shared/layout/footer";
 
 export default function AuthFormLayout({
   children,
@@ -21,6 +22,7 @@ export default function AuthFormLayout({
           <LanguageSwitcher />
         </div>
         <div className="">{children}</div>
+        <Footer direction="column" />
       </div>
     </div>
   );

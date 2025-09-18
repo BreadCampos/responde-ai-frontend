@@ -1,4 +1,4 @@
-import { Dashboard } from "@/feature/dashboard";
+import { Dashboard } from "@/feature/general/screen/dashboard";
 export const dynamic = "force-dynamic";
 
 export default function DashboardPage() {

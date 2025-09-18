@@ -14,6 +14,10 @@
   "header": {
     "freePlan": "Faltam {{time}} para o fim do seu plano gratuito"
   },
+  "footer": {
+    "copyRight": "{{company}} © {{year}}. Todos os direitos reservados.",
+    "termOfUse": "Termos de Uso"
+  },
   "button": {
     "add": "Adicionar",
     "edit": "Editar",
@@ -57,5 +61,60 @@
     "selectAll": "(Selecionar tudo)",
     "clear": "Limpar",
     "close": "Fechar"
+  },
+  "termsOfUsePage": {
+    "title": "Termos de Uso do Responde Aí",
+    "lastUpdate": "Última atualização: 15 de Setembro de 2025",
+    "introduction": {
+      "heading": "1. Introdução e Aceitação dos Termos",
+      "p1": "Bem-vindo(a) ao Responde Aí! Estes Termos de Uso ('Termos') regem o seu acesso e uso da nossa plataforma de criação de formulários, pesquisas e questionários ('Serviço').",
+      "p2": "O Serviço é propriedade e operado por Responde Aí, atualmente sem endereço ou registro formal de empresa.",
+      "p3": "Ao criar uma conta, aceder ou utilizar qualquer parte do Serviço, você concorda em vincular-se a estes Termos e à nossa Política de Privacidade. Caso não concorde com estes Termos, por favor, não utilize o Serviço."
+    },
+    "serviceDescription": {
+      "heading": "2. Descrição do Serviço",
+      "p1": "O Responde Aí é uma plataforma online (Software as a Service - SaaS) que permite aos utilizadores criar, distribuir, recolher respostas e analisar dados através de formulários, pesquisas e questionários personalizáveis. Oferecemos ferramentas para lógica condicional, validação de inputs, integração via webhooks, entre outras funcionalidades para otimizar a sua coleta de dados."
+    },
+    "userAccountsResponsibilities": {
+      "heading": "3. Contas e Responsabilidades do Utilizador",
+      "p1": "3.1. Elegibilidade: Ao utilizar o Serviço, você declara que tem idade legal para celebrar um contrato vinculativo na sua jurisdição (geralmente 18 anos ou mais).",
+      "p2": "3.2. Segurança da Conta: Você é responsável por manter a confidencialidade da sua palavra-passe e por todas as atividades que ocorrem na sua conta. Notifique-nos imediatamente sobre qualquer uso não autorizado.",
+      "p3": "3.3. Conteúdo: Você é o único responsável pelo conteúdo dos formulários que cria e pelos dados que recolhe através do Serviço. Você concorda em não criar, partilhar ou promover conteúdo ilegal, ofensivo, difamatório ou que viole direitos de terceiros.",
+      "p4": "3.4. Uso Proibido: É proibido utilizar o Serviço para atividades como envio de spam, phishing, distribuição de malware, violação de leis de privacidade, tentativa de engenharia reversa ou qualquer conduta que possa prejudicar o Serviço ou outros utilizadores."
+    },
+    "intellectualProperty": {
+      "heading": "4. Propriedade Intelectual",
+      "p1": "4.1. Propriedade do Responde Aí: A marca 'Responde Aí', o logótipo, o software, o código, o design e toda a tecnologia subjacente são propriedade exclusiva de Responde Aí e estão protegidos por leis de direitos de autor e propriedade intelectual. Estes Termos não lhe concedem nenhum direito sobre a nossa propriedade intelectual, exceto o direito de utilizar o Serviço de acordo com estes Termos.",
+      "p2": "4.2. Propriedade do Utilizador (Seus Dados): Você retém todos os direitos de propriedade intelectual sobre o conteúdo dos formulários que cria e, crucialmente, sobre todos os dados e respostas que recolhe dos seus respondentes através do Serviço. Não reivindicamos nenhuma propriedade sobre os seus dados. Você concede-nos uma licença limitada para utilizar os seus dados apenas para fornecer e melhorar o Serviço para si."
+    },
+    "plansPaymentsCancellation": {
+      "heading": "5. Planos, Pagamentos e Cancelamento",
+      "p1": "5.1. Planos: Oferecemos diferentes planos de serviço (incluindo planos gratuitos e pagos, 'Pro', 'Empresarial', etc.) com funcionalidades e limites específicos, conforme detalhado na nossa página de preços.",
+      "p2": "5.2. Faturação: Os pagamentos para planos pagos serão efetuados numa base recorrente (mensal ou anual), conforme a sua escolha. Ao optar por um plano pago, você autoriza-nos a cobrar o valor correspondente utilizando o método de pagamento fornecido.",
+      "p3": "5.3. Alterações de Preço: Os preços dos nossos serviços podem ser alterados mediante aviso prévio de 30 dias. As alterações entrarão em vigor no início do seu próximo ciclo de faturação.",
+      "p4": "5.4. Cancelamento: Você pode cancelar a sua subscrição a qualquer momento através das definições da sua conta. O cancelamento entrará em vigor no final do seu ciclo de faturação atual.",
+      "p5": "5.5. Reembolsos: Os pagamentos não são reembolsáveis, exceto quando exigido por lei. Em caso de cancelamento, você terá acesso ao Serviço pago até ao final do seu período de faturação."
+    },
+    "privacyDataProtection": {
+      "heading": "6. Privacidade e Proteção de Dados",
+      "p1": "A sua privacidade e a privacidade dos seus respondentes são extremamente importantes para nós. A nossa Política de Privacidade detalha como recolhemos, utilizamos e protegemos os seus dados (dados do utilizador).",
+      "p2": "Em relação aos dados que você recolhe dos seus respondentes através dos seus formulários, você é o 'Controlador de Dados' e nós somos o 'Processador de Dados'. Você é responsável por garantir que a recolha e o tratamento desses dados cumprem todas as leis de proteção de dados aplicáveis (como GDPR, LGPD, etc.), incluindo a obtenção dos consentimentos necessários dos seus respondentes."
+    },
+    "limitationOfLiability": {
+      "heading": "7. Limitação de Responsabilidade",
+      "p1": "O Serviço é fornecido 'no estado em que se encontra' e 'conforme disponível', sem garantias de qualquer tipo, expressas ou implícitas. Não garantimos que o Serviço será ininterrupto, seguro ou livre de erros.",
+      "p2": "Em nenhuma circunstância, Responde Aí será responsável por quaisquer danos indiretos, incidentais, especiais, consequenciais ou punitivos, incluindo, sem limitação, perda de lucros, dados, uso, boa vontade ou outras perdas intangíveis, resultantes do seu acesso ou uso, ou incapacidade de aceder ou usar o Serviço."
+    },
+    "termination": {
+      "heading": "8. Rescisão",
+      "p1": "8.1. Pelo Utilizador: Você pode encerrar a sua conta a qualquer momento, seguindo as instruções na sua área de utilizador.",
+      "p2": "8.2. Pela Empresa: Reservamo-nos o direito de suspender ou encerrar a sua conta e o acesso ao Serviço, com ou sem aviso prévio, caso viole qualquer um destes Termos."
+    },
+    "generalProvisions": {
+      "heading": "9. Disposições Gerais",
+      "p1": "9.1. Lei Aplicável: Estes Termos serão regidos e interpretados de acordo com as leis de Portugal, sem considerar os seus conflitos de disposições legais.",
+      "p2": "9.2. Alterações aos Termos: Podemos revisar e atualizar estes Termos periodicamente. Iremos notificá-lo sobre quaisquer alterações significativas através do Serviço ou por e-mail. O seu uso continuado do Serviço após a publicação das alterações constitui a sua aceitação dos novos Termos.",
+      "p3": "9.3. Contacto: Se tiver alguma dúvida sobre estes Termos, por favor, entre em contacto connosco através de suporte@respondeai.com."
+    }
   }
 }
