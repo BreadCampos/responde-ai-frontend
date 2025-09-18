@@ -1,9 +1,9 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { CopyBadge } from "@/shared/components/copy.index";
 import { Card, CardDescription, CardTitle } from "@/shared/components/ui/card";
-import { useTranslation } from "@/shared/hooks/use-translation";
 import { ArrowDown, Link } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
+import { useTranslation } from "react-i18next";
 interface Props {
   genericLinkSlug?: string;
 }
@@ -13,7 +13,7 @@ export const SurveyLinks = ({ genericLinkSlug }: Props) => {
     backgroundColor: "#FFFFFF", // Cor de fundo
   };
 
-  const { t } = useTranslation();
+  const { t } = useTranslation("surveys");
   const { company } = useAuthStore();
 
   const qrCodeSize = 256;

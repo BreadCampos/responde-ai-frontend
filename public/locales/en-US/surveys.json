@@ -209,7 +209,7 @@
   },
   "surveyDetails": {
     "links": {
-      "title": "LINK AND QR CODE",
+      "title": "Link And Qr Code",
       "description": "Share your questionnaire with users through a link or QR Code.",
       "incorporate": "Incorporate the questionnaire",
       "customLink": "Personalized Link"
