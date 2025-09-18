@@ -30,7 +30,8 @@
       "previewSubmit": "Questionnaire data sent successfully!",
       "dragError": "Error by dragging the question. ",
       "deleteQuestion": "Successful deleted question",
-      "confirm": "This question has'{{dependencyQuestion}}'As a dependent. "
+      "confirm": "This question has'{{dependencyQuestion}}'As a dependent. ",
+      "duplicateQuestionSuccess": "Successfully duplicate question!"
     },
     "editController": {
       "title": "Questions",
@@ -185,21 +186,21 @@
           "textPlaceholder": "Regex"
         },
         "errorMessage": {
-          "placeholder": "Error message (opcional)"
+          "placeholder": "Error message (optional)"
         }
       },
       "labels": {
-        "required": "Required",
+        "required": "Mandatory",
         "email": "Valid email",
         "url": "Valid URL",
-        "number_only": "Numbers only",
-        "min_length": "Minimum length (characters)",
-        "max_length": "Maximum length (characters)",
+        "number_only": "Only numbers",
+        "min_length": "Minimum size (characters)",
+        "max_length": "Maximum size (characters)",
         "cnpj": "Valid CNPJ",
         "cpf": "Valid CPF",
         "min": "Minimum value",
         "max": "Maximum value",
-        "custom": "Custom rule"
+        "custom": "Personalized rule"
       },
       "buttons": {
         "add": "Add Validation +"
@@ -207,35 +208,64 @@
     }
   },
   "surveyDetails": {
+    "links": {
+      "title": "Link And Qr Code",
+      "description": "Share your questionnaire with users through a link or QR Code.",
+      "incorporate": "Incorporate the questionnaire",
+      "customLink": "Personalized Link"
+    },
     "previewDrawer": {
       "previewButton": "Preview",
-      "submitSuccessToast": "Survey data submitted successfully!",
-      "drawerTitle": "Current Survey",
+      "submitSuccessToast": "Questionnaire data sent successfully!",
+      "drawerTitle": "Current questionnaire",
       "drawerDescription": "This is a preview of how your form is appearing to users.",
-      "viewPageLink": "view page",
+      "viewPageLink": "see page",
       "fallbackTitle": "Preview"
     },
     "nps": {
       "title": "NPS Results",
-      "viewAsRow": "View as row",
-      "viewAsGrid": "View as grid",
-      "description": "Visualize the results of your form's NPS questions. You can switch between grid or row view.",
+      "viewAsRow": "View As Row",
+      "viewAsGrid": "View the grid",
+      "description": "Visualize The Results of Your Form's NPS Questions. ",
       "npsScore": "NPS Score",
-      "basedOnResponses": "Based on {{count}} responses",
-      "promotersTooltip": "Promoters: {{percent}}%",
-      "passivesTooltip": "Passives: {{percent}}%",
+      "basedOnResponses": "Based on {{count}} answers",
+      "promotersTooltip": "Prosecutors: {{percent}}%",
+      "passivesTooltip": "Liabilities: {{percent}}%",
       "detractorsTooltip": "Detractors: {{percent}}%",
-      "promotersLabel": "Promoters",
-      "passivesLabel": "Passives",
+      "promotersLabel": "Prosecutors",
+      "passivesLabel": "Passive",
       "detractorsLabel": "Detractors"
     },
     "embedCode": {
-      "title": "Como incorporar o questionário",
-      "description": "Copie o código abaixo e cole em seu site para incorporar o questionário.",
-      "paragraph": "A forma mais rápida de começar. Funciona em qualquer lugar, mas pode exigir ajuste manual da altura e largura.",
+      "title": "How to incorporate the questionnaire",
+      "description": "Copy the code below and paste it to your site to incorporate the questionnaire.",
+      "paragraph": "The fastest way to start. ",
       "code": {
-        "label": "Código de incorporação",
+        "label": "Incorporation code",
         "placeholder": "<iframe src=\"https://seusite.com/survey/ID\" width=\"100%\" height=\"500px\" frameborder=\"0\"></iframe>"
+      }
+    },
+    "customLink": {
+      "button": "Create custom link",
+      "form": {
+        "title": "Create custom link",
+        "success": "Customized link created successfully!",
+        "fields": {
+          "name": {
+            "label": "LINK NAME",
+            "placeholder": "Ex: My-Questionary"
+          },
+          "usageLimit": {
+            "label": "Use limit",
+            "placeholder": "Ex: 1000 uses"
+          },
+          "isActive": {
+            "label": "Active"
+          }
+        },
+        "buttons": {
+          "createLink": "Create Link"
+        }
       }
     }
   }

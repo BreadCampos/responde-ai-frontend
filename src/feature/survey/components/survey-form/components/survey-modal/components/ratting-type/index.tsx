@@ -33,6 +33,17 @@ export const RattingType = () => {
         t("surveyModal.rating.nps.maxLabelDefault")
       );
     }
+    if (formValues.ratingOptions?.style === "stars") {
+      setValue("ratingOptions.min", 1);
+      setValue("ratingOptions.max", 5);
+      setValue("ratingOptions.minLabel", "");
+      setValue("ratingOptions.maxLabel", "");
+    }
+    if (formValues.ratingOptions?.style === "slider") {
+      setValue("ratingOptions.min", 1);
+      setValue("ratingOptions.max", 5);
+      setValue("ratingOptions.minLabel", "");
+    }
   }, [formValues.ratingOptions?.style, setValue, t]);
 
   const maxValue = () => {
@@ -53,6 +64,7 @@ export const RattingType = () => {
             {t("surveyModal.rating.title")}
           </h4>
           <SelectInput
+            required
             name="ratingOptions.style"
             label={t("surveyModal.rating.fields.style.label")}
             options={rattingOptions}
@@ -74,11 +86,12 @@ export const RattingType = () => {
               name="ratingOptions.min"
               label={t("surveyModal.rating.fields.min.label")}
               type="number"
-              defaultValue={1}
               disabled={formValues?.ratingOptions?.style === "nps"}
               onKeyPress={(e) => {
-                handleFormatMinMaxValue(e, 0, maxValue());
+                handleFormatMinMaxValue(e, 1, maxValue());
               }}
+              min={1}
+              required
             />
             <TextInput
               name="ratingOptions.max"
@@ -86,15 +99,15 @@ export const RattingType = () => {
               type="number"
               disabled={formValues?.ratingOptions?.style === "nps"}
               max={maxValue()}
-              min={formValues?.ratingOptions?.min || 0}
+              required
+              min={formValues?.ratingOptions?.min || 1}
               onKeyPress={(e) => {
                 handleFormatMinMaxValue(
                   e,
-                  formValues?.ratingOptions?.min || 0,
+                  formValues?.ratingOptions?.min || 1,
                   maxValue()
                 );
               }}
-              defaultValue={5}
             />
           </div>
         </div>

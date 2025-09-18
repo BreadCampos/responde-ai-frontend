@@ -10,6 +10,7 @@ import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
 import { Form } from "@/shared/components/ui/form";
 import { useNavigation } from "@/shared/hooks/use-navigation";
 import { useTranslation } from "@/shared/hooks/use-translation";
+import { Footer } from "@/shared/layout/footer";
 import { EmblaOptionsType } from "embla-carousel";
 import { BarChart3, DollarSign, Target } from "lucide-react";
 import Image from "next/image";
@@ -298,7 +299,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="bg-card text-card-foreground border-t">
         <div className="container mx-auto px-6 py-12">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
                 <span className="text-2xl font-bold text-foreground">
@@ -328,14 +329,6 @@ export default function HomePage() {
                     {t("header.nav.pricing")}
                   </a>
                 </li>
-                {/* <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    {t("footer.product.integrations")}
-                  </a>
-                </li> */}
               </ul>
             </div>
             <div>
@@ -361,45 +354,11 @@ export default function HomePage() {
                     {t("footer.company.contact")}
                   </a>
                 </li>
-                {/* <li>
-                  <a
-                    target="_blank"
-                    href="https://wa.link/2jc0ug"
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    {t("footer.company.blog")}
-                  </a>
-                </li> */}
               </ul>
             </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-foreground">
-                {t("footer.legal.title")}
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    {t("footer.legal.privacy")}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    {t("footer.legal.terms")}
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-12 border-t border-border pt-6 text-center text-muted-foreground/80">
-            <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
           </div>
         </div>
+        <Footer />
       </footer>
     </div>
   );

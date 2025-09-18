@@ -53,7 +53,7 @@ export interface IForm {
   };
   conditional?: QuestionConditionOptions | undefined;
 }
-export const ServeyModal = ({
+export const SurveyModal = ({
   onAddQuestion,
   onUpdateQuestion,
   isOpen,
@@ -151,6 +151,7 @@ export const ServeyModal = ({
     setValue("conditional", undefined);
     setValue("enableConditional", false);
   }, [setValue]);
+
   const maxPossibilitPage = useMemo(() => {
     const pages = existingQuestions.map((question) => question.pageIndex);
 
@@ -269,8 +270,8 @@ export const ServeyModal = ({
                   helperText={t("surveyModal.form.fields.inputMask.helperText")}
                 />
               </div>
-              <RattingType />
               <ControlledOptions />
+              <RattingType />
               <ConditionalValues existingQuestions={existingQuestions} />
               <ValidationRules />
             </div>

@@ -9,6 +9,7 @@ export const createWebhooksSchema = z.object({
   subscribedEvents: z.array(z.string()).min(1, {
     message: "Pelo menos um evento deve ser selecionado",
   }),
+  isActive: z.boolean(),
 });
 
 export type CreateWebhooksSchemaType = z.infer<typeof createWebhooksSchema>;

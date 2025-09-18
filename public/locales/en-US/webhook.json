@@ -7,7 +7,8 @@
       "url": "URL",
       "maxRetries": "Maximum attempts",
       "isActive": "Status",
-      "retryPolicy": "Retaining policy",
+      "retryPolicy": "Retry policy",
+      "secretKey": "Signature key",
       "createdAt": "Created in",
       "actions": {
         "label": "Actions",
@@ -26,11 +27,13 @@
       "subscribedEvents": {
         "label": "Registered Events",
         "placeholder": "Select the events for which you want to receive notifications"
+      },
+      "isActive": {
+        "label": "Active"
       }
     },
     "url": "Webhok Url",
     "maxRetries": "Maximum attempts",
-    "retryPolicy": "Retaining policy",
     "save": "Save"
   }
 }

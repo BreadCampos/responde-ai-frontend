@@ -52,9 +52,8 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
 
-  /* [ALTERADO] Tema Primário Azul para o modo claro */
-  --primary: oklch(54.687% 0.20742 277.994); /* Azul principal */
-  --primary-foreground: oklch(0.985 0 0); /* Texto claro para usar sobre o azul */
+  --primary: oklch(54.687% 0.20742 277.994);
+  --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -84,10 +83,10 @@
   --scrollbar-track: hsl(var(--secondary));
   --scrollbar-thumb: hsl(var(--primary));
 
-  --success: hsl(145 63.4% 59.2%) /* Corresponde exatamente a #4ade80 */
-  --success-foreground: hsl(145 80% 15%);;
+  --success: hsl(145 63.4% 59.2%);
+  --success-foreground: hsl(145 80% 15%);
 
-  --warning: hsl(47.9 95.8% 53.1%) ;
+  --warning: hsl(47.9 95.8% 53.1%);
   --warning-foreground: hsl(47.9 95.8% 15%);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

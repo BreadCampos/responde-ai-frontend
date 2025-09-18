@@ -1,29 +1,34 @@
 "use client";
 
-import * as React from "react";
 import { Badge, type BadgeProps } from "@/shared/components/ui/badge";
-import { cn } from "@/shared/lib/utils";
-import { Copy, Check } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/shared/components/ui/tooltip";
+import { cn } from "@/shared/lib/utils";
+import { Check, Copy, Eye, EyeOff } from "lucide-react"; // Import Eye and EyeOff icons
+import * as React from "react";
 
+// Add the optional 'secret' prop to the interface
 interface CopyBadgeProps extends BadgeProps {
   textToCopy?: string;
   startText?: string;
   className?: string;
+  secret?: boolean;
 }
 
 export const CopyBadge = ({
   textToCopy,
   startText,
   className,
+  secret = false,
   ...props
 }: CopyBadgeProps) => {
   const [hasCopied, setHasCopied] = React.useState(false);
+
+  const [isSecretVisible, setIsSecretVisible] = React.useState(false);
 
   React.useEffect(() => {
     if (hasCopied) {
@@ -42,6 +47,11 @@ export const CopyBadge = ({
     }
   }, [textToCopy]);
 
+  const toggleVisibility = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsSecretVisible((prev) => !prev);
+  };
+
   return (
     <TooltipProvider>
       <Tooltip>
@@ -58,8 +68,22 @@ export const CopyBadge = ({
             {startText && <span className="font-semibold">{startText}</span>}
 
             <span className="flex-1 truncate min-w-0 font-mono text-xs text-muted-foreground">
-              {textToCopy}
+              {secret && !isSecretVisible ? "••••••••••••••••" : textToCopy}
             </span>
+
+            {secret && (
+              <span
+                onClick={toggleVisibility}
+                className="flex-shrink-0"
+                aria-label={isSecretVisible ? "Hide value" : "Show value"}
+              >
+                {isSecretVisible ? (
+                  <EyeOff className="h-3 w-3" />
+                ) : (
+                  <Eye className="h-3 w-3" />
+                )}
+              </span>
+            )}
 
             {hasCopied ? (
               <Check className="h-3 w-3 text-green-500 flex-shrink-0" />

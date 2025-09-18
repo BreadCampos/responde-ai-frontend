@@ -4,7 +4,7 @@ import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import ErrorAnimation from "@/shared/components/lotties/error.lotties";
 import SuccessAnimation from "@/shared/components/lotties/success.lotties";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { QuestionsForm } from "../../components/questions-form-preview";
@@ -19,6 +19,8 @@ interface Props {
 
 export const ResponseSurvey = ({ surveyId }: Props) => {
   const { setPublicCompany, company } = useAuthStore();
+
+  const startDate = useMemo(() => new Date(), []);
 
   const searchParams = useSearchParams();
 
@@ -47,6 +49,9 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
         questionId: key,
         value: data[key],
       })),
+      timeToSubmitSeconds: Math.floor(
+        (new Date().getTime() - startDate.getTime()) / 1000
+      ),
     };
 
     createReponse({
@@ -100,7 +105,7 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
             <QuestionsForm
               questions={data?.survey?.questions}
               title={data?.survey?.title}
-              className="max-w-full border-none h-[calc(100vh-110px)] max-h-[calc(100vh - 200px)] min-h-auto shadow-none rounded-none overflow-y-auto p-0"
+              className="max-w-full border-none h-[calc(100vh-150px)] max-h-[calc(100vh - 200px)] min-h-auto shadow-none rounded-none overflow-y-auto p-0"
               logoUrl={data?.company?.logoUrl || ""}
               onSubmit={onSubmit}
             />

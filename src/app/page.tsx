@@ -1,4 +1,4 @@
-import HomePage from "@/feature/home/screen/home";
+import HomePage from "@/feature/landing-page/screen/home";
 
 export default async function Page() {
   return <HomePage />;

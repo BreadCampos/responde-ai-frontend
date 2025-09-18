@@ -37,7 +37,7 @@ export const LoginScreen = () => {
   };
 
   const searchParams = useSearchParams();
-  const paymentSuccess = searchParams.get("payment_success"); // Retorna a string "true" ou null
+  const paymentSuccess = searchParams.get("payment_success");
 
   useEffect(() => {
     if (paymentSuccess === "true" && ready) {
@@ -52,7 +52,7 @@ export const LoginScreen = () => {
     <Form {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
         <div className="mb-6 text-center">
-          <div className="flex mr-12">
+          <div className="flex sm:mr-12 relative">
             <Button
               onClick={handleBack}
               variant="ghost"

@@ -14,6 +14,7 @@
   "details": {
     "generalInfo": {
       "title": "General information",
+      "publicKey": "API key:",
       "document": "Document:"
     },
     "addresses": {

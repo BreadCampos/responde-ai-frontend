@@ -30,7 +30,8 @@
       "previewSubmit": "Dados do questionário enviados com sucesso!",
       "dragError": "Erro ao arrastar a pergunta. Por favor, tente novamente.",
       "deleteQuestion": "Pergunta deletada com sucesso",
-      "confirm": "Essa pergunta tem '{{dependencyQuestion}}' como dependente. Se você deletar, a pergunta dependente também será deletada. Você tem certeza que deseja continuar?"
+      "confirm": "Essa pergunta tem '{{dependencyQuestion}}' como dependente. Se você deletar, a pergunta dependente também será deletada. Você tem certeza que deseja continuar?",
+      "duplicateQuestionSuccess": "Pergunta duplicada com sucesso!"
     },
     "editController": {
       "title": "Perguntas",

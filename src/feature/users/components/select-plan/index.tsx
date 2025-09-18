@@ -56,7 +56,7 @@ export const SelectPlanStep = ({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 w-full ">
       {!withOutTitle && (
         <header className="text-center mb-10">
           <h3 className="text-xl font-semibold">
@@ -74,7 +74,6 @@ export const SelectPlanStep = ({
           hasTestPlan && "lg:grid-cols-3"
         )}
       >
-        {/* Card 1: Avaliação Gratuita */}
         {hasTestPlan && (
           <Card className={cn(getCardClasses("free"))}>
             <CardHeader className="text-center">
@@ -137,7 +136,6 @@ export const SelectPlanStep = ({
             </CardContent>
           </Card>
         )}
-        {/* Card 2: Mensal */}
         <Card className={cn(getCardClasses("month"))}>
           <CardHeader className="text-center items-center">
             <CardTitle className="text-center text-xl font-semibold">
@@ -201,7 +199,6 @@ export const SelectPlanStep = ({
           </CardContent>
         </Card>
 
-        {/* Card 3: Anual */}
         <Card className={cn(getCardClasses("year"))}>
           <CardHeader className="text-center items-center">
             <CardTitle className="text-center text-xl font-semibold">

@@ -24,7 +24,7 @@ import { useFieldArray, useForm, useFormContext } from "react-hook-form";
 import { toast } from "sonner";
 import { QuestionsForm } from "../questions-form-preview";
 import { SortableQuestionItem } from "./components/sortable-question-item";
-import { ServeyModal } from "./components/survey-modal";
+import { SurveyModal } from "./components/survey-modal";
 
 interface Props {
   onSubmit?: (
@@ -116,6 +116,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       toast.success(t("createSurvey.toasts.deleteQuestion"));
     }
     setDeletesQuestionIds((state) => [...state, questionId]);
+    setNewQuestionIds((state) => state.filter((id) => id !== questionId));
   };
 
   const handleTitleChange = (newTitle: string) => {
@@ -149,14 +150,12 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
 
     if (activeIndex === -1 || overIndex === -1) return;
 
-    // 1. Mova o item no array para a nova posição
     const questionsWithMovedItem = arrayMove(
       currentQuestions,
       activeIndex,
       overIndex
     );
 
-    // 2. Atualize o pageIndex se o item mudou de página (Sua lógica aqui está ok)
     const activeContainerId = active.data.current?.sortable.containerId;
     const overContainerId = over.data.current?.sortable.containerId || over.id;
     if (activeContainerId !== overContainerId) {
@@ -169,7 +168,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       }
     }
 
-    // 3. Recalcule o 'orderIndex' para todas as questões com base na nova ordem
     const questionsWithUpdatedOrder = questionsWithMovedItem.map((question) => {
       const questionsOnSamePage = questionsWithMovedItem.filter(
         (q) => q.pageIndex === question.pageIndex
@@ -180,7 +178,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       return { ...question, orderIndex };
     });
 
-    // 4. Verifique a dependência (Sua lógica de validação aqui)
     const movedItem = questionsWithUpdatedOrder.find((q) => q.id === active.id);
     if (movedItem?.conditional) {
       const dependencyItem = questionsWithUpdatedOrder.find(
@@ -197,10 +194,8 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
       }
     }
 
-    // 5. Renumere as páginas usando o array JÁ ATUALIZADO
     const finalQuestions = renumberPages(questionsWithUpdatedOrder);
 
-    // 6. Atualize o formulário
     setValue("questions", finalQuestions, { shouldDirty: true });
   }
 
@@ -232,6 +227,42 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
   const disabledCreateButton = loading || surveyQuestions?.length === 0;
   const onPreviewSubmit = () => {
     toast.success(t("createSurvey.toasts.previewSubmit"));
+  };
+  const onDuplicate = (question: SurveyQuestion) => {
+    const currentQuestions = getValues("questions");
+    const index = currentQuestions.findIndex((q) => q.id === question.id);
+
+    if (index === -1) return;
+
+    const newId = crypto.randomUUID();
+    const duplicatedQuestion: SurveyQuestion = {
+      ...question,
+      id: newId,
+      label: `${question.label} (copy)`,
+      conditional: undefined,
+    };
+
+    const updatedQuestions = [
+      ...currentQuestions.slice(0, index + 1),
+      duplicatedQuestion,
+      ...currentQuestions.slice(index + 1),
+    ];
+
+    const questionsWithUpdatedOrder = updatedQuestions.map((q) => {
+      const questionsOnSamePage = updatedQuestions.filter(
+        (item) => item.pageIndex === q.pageIndex
+      );
+      const orderIndex = questionsOnSamePage.findIndex(
+        (item) => item.id === q.id
+      );
+      return { ...q, orderIndex };
+    });
+
+    const finalQuestions = renumberPages(questionsWithUpdatedOrder);
+
+    setValue("questions", finalQuestions, { shouldDirty: true });
+    setNewQuestionIds((state) => [...state, newId]);
+    toast.success(t("createSurvey.toasts.duplicateQuestionSuccess"));
   };
 
   return (
@@ -279,6 +310,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
                 const page = t("createSurvey.editController.page", {
                   page: String(pageIndex),
                 });
+
                 return (
                   <div
                     key={`page-${pageIndex}`}
@@ -298,6 +330,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
                       <div className="flex flex-col gap-2">
                         {questionsInPage.map((q, index) => (
                           <SortableQuestionItem
+                            onDuplicate={onDuplicate}
                             key={q.id}
                             index={index}
                             question={q}
@@ -326,7 +359,7 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
           </Form>
         )}{" "}
       </div>
-      <ServeyModal
+      <SurveyModal
         isOpen={isModalOpen}
         onClose={toggleModal}
         onAddQuestion={addNewQuestion}

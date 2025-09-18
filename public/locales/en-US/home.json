@@ -78,13 +78,7 @@
       "about": "About Us",
       "contact": "Contact",
       "blog": "Blog"
-    },
-    "legal": {
-      "title": "Legal",
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service"
-    },
-    "copyright": "© {{year}} Responde.ai. All rights reserved."
+    }
   },
   "cta": {
     "startFree": "Start for Free"

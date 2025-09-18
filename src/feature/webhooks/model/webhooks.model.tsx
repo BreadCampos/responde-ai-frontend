@@ -6,4 +6,5 @@ export type WebhooksModel = {
   createdAt: string;
   isActive: boolean;
   maxRetries: number;
+  secretKey: string;
 };

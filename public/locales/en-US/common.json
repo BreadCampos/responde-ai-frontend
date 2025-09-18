@@ -1,8 +1,8 @@
 {
   "wellcome": "Welcome to our app!",
   "notFound": {
-    "title": "Page Not Found",
-    "description": "Oops! The page you're looking for doesn't exist or has been moved.",
+    "title": "Page not found",
+    "description": "Oops! ",
     "cta": "Back to Home"
   },
   "sidebar": {
@@ -14,11 +14,15 @@
   "header": {
     "freePlan": "Missing {{time}} to the end of your free plan"
   },
+  "footer": {
+    "copyRight": "{{company}} © {{year}}. All rights reserved.",
+    "termOfUse": "Terms of Use"
+  },
   "button": {
     "add": "To add",
     "edit": "Edit",
+    "back": "To go back",
     "delete": "Delete",
-    "back": "Back",
     "save": "Save",
     "cancel": "Cancel",
     "submit": "To send",
@@ -32,30 +36,85 @@
     "send": "To send"
   },
   "validations": {
-    "required": "This field is required.",
-    "email": "Please enter a valid email address.",
-    "min_length": "Must be at least {{number}} characters long.",
-    "max_length": "Cannot be more than {{number}} characters long.",
-    "cnpj": "The provided CNPJ is invalid.",
-    "cpf": "The provided CPF is invalid.",
-    "min": "The minimum value is {{number}}.",
-    "max": "The maximum value is {{number}}.",
-    "custom": "Invalid value."
+    "required": "This field is mandatory.",
+    "email": "Please enter a valid email.",
+    "min_length": "The field must have at least {{number}} characters.",
+    "max_length": "The field must have at most {{number}} characters.",
+    "cnpj": "The informed CNPJ is invalid.",
+    "cpf": "The informed CPF is invalid.",
+    "min": "The minimum allowed value is {{number}}.",
+    "max": "The maximum allowed value is {{number}}.",
+    "custom": "The informed amount is invalid."
   },
   "datatable": {
     "notFound": "No results found.",
-    "searchPlaceholder": "Search...",
-    "selectedRows": "{{count}} of {{total}} row(s) selected.",
+    "searchPlaceholder": "To look for...",
+    "selectedRows": "{{count}} of {{total}} selected line (s).",
     "previous": "Previous",
     "pageInfo": "Page {{currentPage}} of {{totalPages}}",
     "next": "Next"
   },
   "multiselect": {
-    "placeholder": "Select options",
-    "searchPlaceholder": "Search...",
+    "placeholder": "Select Options",
+    "searchPlaceholder": "To look for...",
     "notFound": "No results found.",
-    "selectAll": "(Select all)",
-    "clear": "Clear",
-    "close": "Close"
+    "selectAll": "(Select everything)",
+    "clear": "To clean",
+    "close": "To close"
+  },
+  "termsOfUsePage": {
+    "title": "Terms of Use of Response There",
+    "lastUpdate": "Last Update: September 15, 2025",
+    "introduction": {
+      "heading": "1. Introduction and acceptance of the terms",
+      "p1": "Welcome to answer there! ",
+      "p2": "The service is owned and operated by responds there, currently without address or formal registration of a company.",
+      "p3": "By creating an account, accessing or using any part of the service, you agree to bind to these terms and our privacy policy. "
+    },
+    "serviceDescription": {
+      "heading": "2. Service Description",
+      "p1": "Response there is an online platform (Software as A Service - SaaS) that allows users to create, distribute, collect answers and analyze data through customizable forms, research and questionnaires. "
+    },
+    "userAccountsResponsibilities": {
+      "heading": "3. Accounts and responsibilities of the user",
+      "p1": "3.1. ",
+      "p2": "3.2. ",
+      "p3": "3.3. ",
+      "p4": "3.4. "
+    },
+    "intellectualProperty": {
+      "heading": "4. Intellectual property",
+      "p1": "4.1. ",
+      "p2": "4.2. "
+    },
+    "plansPaymentsCancellation": {
+      "heading": "5. Plans, Payments and Cancellation",
+      "p1": "5.1. ",
+      "p2": "5.2. ",
+      "p3": "5.3. ",
+      "p4": "5.4. ",
+      "p5": "5.5. "
+    },
+    "privacyDataProtection": {
+      "heading": "6. Privacy and data protection",
+      "p1": "Your privacy and privacy of your respondents are extremely important to us. ",
+      "p2": "Regarding the data you collect from your respondents through your forms, you are the 'data controller' and we are the 'data processor'. "
+    },
+    "limitationOfLiability": {
+      "heading": "7. Limitation of liability",
+      "p1": "The service is provided 'in the state where it is' and 'as available', without guarantees of any kind, expressed or implicit. ",
+      "p2": "Under no circumstances, it will be responsible for any indirect, incidental, special, consequential or punitive damages, including, without limitation, loss of profits, data, use, goodwill or other intangible losses, resulting from your access or use, or inability to access or use the service."
+    },
+    "termination": {
+      "heading": "8. Termination",
+      "p1": "8.1. ",
+      "p2": "8.2. "
+    },
+    "generalProvisions": {
+      "heading": "9. General provisions",
+      "p1": "9.1. ",
+      "p2": "9.2. ",
+      "p3": "9.3. "
+    }
   }
 }

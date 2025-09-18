@@ -43,6 +43,7 @@ export const UpdateWebhooksModal = ({ webhook, toggleModal, open }: Props) => {
       methods.reset({
         url: webhook.url,
         subscribedEvents: webhook.subscribedEvents,
+        isActive: webhook.isActive,
       });
     }
   }, [open, webhook, methods]);
