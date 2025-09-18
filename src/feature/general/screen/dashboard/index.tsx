@@ -1,9 +1,9 @@
 "use client";
 
 import { ROUTES } from "@/core/routes/route-constants";
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { useNavigation } from "@/shared/hooks/use-navigation";
 import { useEffect } from "react";
-import { useAuthStore } from "../authentication/store/use-auth.store";
 
 export const Dashboard = () => {
   const navigate = useNavigation();
