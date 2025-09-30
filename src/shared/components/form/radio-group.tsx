@@ -1,7 +1,3 @@
-import React from "react";
-import { useFormContext, type RegisterOptions } from "react-hook-form";
-import { cn } from "@/shared/lib/utils";
-import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
 import {
   FormControl,
   FormDescription,
@@ -11,7 +7,11 @@ import {
   FormMessage,
 } from "@/shared/components/ui/form";
 import { Label } from "@/shared/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
+import { cn } from "@/shared/lib/utils";
 import { SelectOption } from "@/shared/types/select-options.type";
+import React from "react";
+import { useFormContext, type RegisterOptions } from "react-hook-form";
 
 export interface RadioGroupInputProps
   extends Omit<

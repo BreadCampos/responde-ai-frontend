@@ -18,20 +18,36 @@ class HttpClient {
     const token = useAuthStore.getState().accessToken;
 
     const headers: Record<string, string> = {
-      "Content-Type": "application/json",
       "accept-language": "pt-BR",
-      ...data.headers,
     };
 
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
 
-    const response = await fetch(`${this.baseUrl}${data.url}`, {
+    const config: RequestInit = {
       method: data.method,
-      headers,
-      body: data.body ? JSON.stringify(data.body) : undefined,
-    });
+      headers: { ...headers, ...data.headers },
+    };
+
+    if (data.body) {
+      if (data.body instanceof FormData) {
+        config.body = data.body;
+
+        const finalHeaders = new Headers(config.headers);
+        finalHeaders.delete("Content-Type");
+        config.headers = finalHeaders;
+      } else {
+        config.body = JSON.stringify(data.body);
+        const finalHeaders = new Headers(config.headers);
+        if (!finalHeaders.has("Content-Type")) {
+          finalHeaders.set("Content-Type", "application/json");
+        }
+        config.headers = finalHeaders;
+      }
+    }
+
+    const response = await fetch(`${this.baseUrl}${data.url}`, config);
 
     if (response.status === 204) {
       return { status: response.status, data: undefined };
@@ -57,7 +73,7 @@ class HttpClient {
         : responseData?.message;
 
       toast.error(message || "Ocorreu um erro na requisição");
-      throw new Error(message || "Ocorreu um erro na requisição");
+      // throw new Error(message || "Ocorreu um erro na requisição");
     }
 
     return { status: response.status, data: responseData };

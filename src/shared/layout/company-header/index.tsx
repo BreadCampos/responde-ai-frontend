@@ -3,26 +3,47 @@ import { BackButton } from "@/shared/components/back-button";
 import { LanguageSwitcher } from "@/shared/components/language-switcber";
 import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
 import { cn } from "@/shared/lib/utils";
+import Image from "next/image";
 
 export const CompanyHeader = () => {
-  const { company, publicCompany } = useAuthStore();
+  const { company, publicCompany, isAuthenticated } = useAuthStore();
 
+  const renderImage = (image?: string) => {
+    if (!image) return null;
+    return (
+      <Image
+        src={image}
+        alt="Logo"
+        width={54}
+        height={54}
+        className="object-cover rounded-lg"
+        unoptimized
+        loading="lazy"
+      />
+    );
+  };
   return (
     <header
       className={cn(
-        "flex items-center  justify-between bg-card text-foreground shadow-md px-4 py-2 transition-all w-full h-[50px]",
+        "flex items-center  justify-between bg-card text-foreground shadow-md px-4 py-2 transition-all w-full h-[64px] ",
         company && "border-b-2 border-b-red-500"
       )}
     >
-      {company?.fantasyName ? (
+      {isAuthenticated ? (
         <BackButton>
-          <h3 className="text-card-foreground"> {company?.legalName}</h3>
+          <h3 className="text-card-foreground">
+            {" "}
+            {renderImage(company?.logoUrl)}
+          </h3>{" "}
         </BackButton>
       ) : (
-        <h3 className="text-card-foreground"> {publicCompany?.legalName}</h3>
+        <h3 className="text-card-foreground">
+          {" "}
+          {renderImage(publicCompany?.logoUrl)}
+        </h3>
       )}
 
-      <div className="flex items-center justify-end gap-2">
+      <div className="flex items-center   justify-end gap-2">
         <ThemeToggleButton />
         <LanguageSwitcher />
       </div>
