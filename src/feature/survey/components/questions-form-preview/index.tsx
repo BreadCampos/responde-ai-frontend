@@ -22,7 +22,6 @@ export const QuestionsForm = ({
   questions,
   title = "Preview",
   className,
-  logoUrl,
   isPreview,
   onSubmit,
 }: Props) => {
@@ -53,8 +52,6 @@ export const QuestionsForm = ({
       onSubmit(data);
     }
   };
-
-  const logoSrc = logoUrl || "/favicon.svg";
 
   const handleNextPage = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isNavigating) return;
@@ -90,19 +87,6 @@ export const QuestionsForm = ({
           {title && (
             <h4 className="text-card-foreground text-xl mb-4"> {title}</h4>
           )}
-          {/* {logoSrc && (
-            <div className="mb-4">
-              <Image
-                src={logoSrc}
-                alt="Logo"
-                width={64}
-                height={64}
-                className="object-cover rounded-lg"
-                unoptimized
-                loading="lazy"
-              />
-            </div>
-          )} */}
         </div>
         <div className="flex flex-col gap-4 bg-background p-4 rounded-lg">
           {questionsOnCurrentPage.map((q) => {
