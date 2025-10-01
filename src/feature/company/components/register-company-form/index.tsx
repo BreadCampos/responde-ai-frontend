@@ -35,7 +35,6 @@ export const RegisterCompanyForm = ({ title }: Props) => {
   const { theme } = useTheme();
 
   useEffect(() => {
-    console.log({ theme });
     const fileForPreview = theme === "dark" ? logoDarkFile : logoLightFile;
 
     console.log({ fileForPreview });

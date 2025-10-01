@@ -73,7 +73,6 @@ class HttpClient {
         : responseData?.message;
 
       toast.error(message || "Ocorreu um erro na requisição");
-      // throw new Error(message || "Ocorreu um erro na requisição");
     }
 
     return { status: response.status, data: responseData };
