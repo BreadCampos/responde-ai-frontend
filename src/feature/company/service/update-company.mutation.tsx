@@ -1,15 +1,13 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { httpClient } from "@/core/api/fetch-api";
-import { ROUTES } from "@/core/routes/route-constants";
-import { useTranslation } from "@/shared/hooks/use-translation";
-import { toast } from "sonner";
 import { companyApi } from "../api";
 import type { CompanyModel } from "../model/company.model";
 import type { UpdateCompanyModel } from "../model/update-company.model";
 
 export const useUpdateCompanyMutation = () => {
-  const { t } = useTranslation("company");
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async ({
       company,
@@ -26,13 +24,8 @@ export const useUpdateCompanyMutation = () => {
       });
       return response.data;
     },
-    onSuccess: async (response) => {
-      if (response) {
-        toast.success(t("update.successMessage"));
-        window.location.replace(
-          ROUTES.COMPANY_DETAILS.replace(":id", response.id)
-        );
-      }
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["company-list"] });
     },
   });
 };

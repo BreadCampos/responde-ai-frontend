@@ -57,6 +57,7 @@ export const LoginScreen = () => {
               onClick={handleBack}
               variant="ghost"
               size="icon"
+              type="button"
               className={cn(
                 "text-card-foreground",
                 "absolute left-2 top-1/2 -translate-y-1/2",

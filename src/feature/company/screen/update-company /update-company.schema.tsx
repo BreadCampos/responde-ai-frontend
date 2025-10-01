@@ -1,6 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+  "image/svg+xml",
+];
 export const updateCompanySchema = z.object({
   company: z.object({
     legalName: z.string({ message: "A razão social é obrigatória." }),
@@ -39,6 +46,32 @@ export const updateCompanySchema = z.object({
         always_display_logo: z.boolean().default(true).optional(),
       })
       .optional(),
+    logoLightUrl: z.string().url().optional().nullable(),
+    darkLogoUrl: z.string().url().optional().nullable(),
+    logoLightFile: z
+      .any()
+      .optional()
+      .refine((file) => !file || file instanceof File, "Deve ser um arquivo.")
+      .refine(
+        (file) => !file || file.size <= MAX_FILE_SIZE,
+        `O tamanho máximo é 5MB.`
+      )
+      .refine(
+        (file) => !file || ACCEPTED_IMAGE_TYPES.includes(file.type),
+        "Formato de imagem inválido."
+      ),
+    logoDarkFile: z
+      .any()
+      .optional()
+      .refine((file) => !file || file instanceof File, "Deve ser um arquivo.")
+      .refine(
+        (file) => !file || file.size <= MAX_FILE_SIZE,
+        `O tamanho máximo é 5MB.`
+      )
+      .refine(
+        (file) => !file || ACCEPTED_IMAGE_TYPES.includes(file.type),
+        "Formato de imagem inválido."
+      ),
   }),
 });
 

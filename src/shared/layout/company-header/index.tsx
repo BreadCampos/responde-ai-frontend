@@ -1,26 +1,15 @@
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { BackButton } from "@/shared/components/back-button";
+import { CompanyLogo } from "@/shared/components/company-logo";
 import { LanguageSwitcher } from "@/shared/components/language-switcber";
 import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
 import { cn } from "@/shared/lib/utils";
-import Image from "next/image";
 
 export const CompanyHeader = () => {
-  const { company, publicCompany, isAuthenticated } = useAuthStore();
+  const { company, isAuthenticated } = useAuthStore();
 
-  const renderImage = (image?: string) => {
-    if (!image) return null;
-    return (
-      <Image
-        src={image}
-        alt="Logo"
-        width={54}
-        height={54}
-        className="object-cover rounded-lg"
-        unoptimized
-        loading="lazy"
-      />
-    );
+  const renderImage = () => {
+    return <CompanyLogo className="min-h-[65px] max-h-[65px]" />;
   };
   return (
     <header
@@ -30,17 +19,9 @@ export const CompanyHeader = () => {
       )}
     >
       {isAuthenticated ? (
-        <BackButton>
-          <h3 className="text-card-foreground">
-            {" "}
-            {renderImage(company?.logoUrl)}
-          </h3>{" "}
-        </BackButton>
+        <BackButton>{renderImage()}</BackButton>
       ) : (
-        <h3 className="text-card-foreground">
-          {" "}
-          {renderImage(publicCompany?.logoUrl)}
-        </h3>
+        renderImage()
       )}
 
       <div className="flex items-center   justify-end gap-2">

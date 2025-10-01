@@ -58,23 +58,9 @@ export const Register = () => {
   const methods = useForm({
     resolver: signupWithCompanyResolver,
     defaultValues: {
-      user: {
-        firstName: "asd",
-        lastName: "asda",
-        email: "asdad@asd.com",
-        password: "qwe123QWE",
-        passwordConfirmation: "qwe123QWE",
-      },
       company: {
-        addressLine: "asdasd asdasd asdasd",
-        document: "12345678901",
-        fantasyName: "asdasd",
-        legalName: "asdasd asdasd",
-        logoLightFile: undefined,
-        logoDarkFile: undefined,
-
         theme: {
-          primary: "#387cec",
+          primary: "#2b7fff",
         },
       },
     },

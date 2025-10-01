@@ -1,9 +1,10 @@
 "use client";
 
 import { ROUTES } from "@/core/routes/route-constants";
-import { DefaultAvatar } from "@/shared/components/avatar";
+import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { BackButton } from "@/shared/components/back-button";
 import { Button } from "@/shared/components/button";
+import { CompanyLogo } from "@/shared/components/company-logo";
 import { CopyBadge } from "@/shared/components/copy.index";
 import {
   Card,
@@ -22,15 +23,13 @@ import { formatDocument } from "@/shared/utils/format-cpf";
 import { formatDate } from "@/shared/utils/format-date";
 import { Edit } from "lucide-react";
 import { useParams } from "next/navigation";
-import { GetCompanyQuery } from "../../service/get-company.query";
 
 export const DetailsCompany = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: companies } = GetCompanyQuery({ id });
+  const { company } = useAuthStore();
   const { t } = useTranslation("company");
 
-  const company = companies;
-
+  console.log({ company });
   const navigate = useNavigation();
 
   const goToEditCompany = () => {
@@ -42,23 +41,19 @@ export const DetailsCompany = () => {
       <div className="max-w-4xl mx-auto space-y-6">
         <Card>
           <CardHeader className="flex flex-row items-center gap-4">
-            <div className="flex flex-col gap-15 md:flex-row justify-between items-center gap-2 p-4 rounded-lg w-full">
-              <BackButton className="w-full ">
-                <div className="flex flex-col items-center  sm:flex-row sm:items-center gap-2 w-full">
-                  <DefaultAvatar
-                    src={company?.logoUrl}
-                    name={company?.fantasyName}
-                  />
-
-                  <div className="flex-1">
-                    <CardTitle className="text-2xl">
-                      {company?.fantasyName}
-                    </CardTitle>
-                    <CardDescription>{company?.legalName}</CardDescription>
-                  </div>
+            <div className="flex flex-col justify-between items-center lg:flex-row sm:justify-center gap-1 p-4 rounded-lg w-full">
+              <div className="flex flex-col flex-start md:flex-row items-center gap-4 w-full">
+                <BackButton>
+                  <CompanyLogo />
+                </BackButton>
+                <div className="flex-1 w-full">
+                  <CardTitle className="text-2xl">
+                    {company?.fantasyName}
+                  </CardTitle>
+                  <CardDescription>{company?.legalName}</CardDescription>
                 </div>
-              </BackButton>
-              <div className="flex items-center justify-between w-full md:w-auto">
+              </div>
+              <div className="flex flex-col items-center justify-between md:flex-row md:items-center w-full lg:w-auto ">
                 <CopyBadge textToCopy={id} className="max-w-[80%] truncate " />
 
                 <Button
@@ -88,17 +83,19 @@ export const DetailsCompany = () => {
                   {company?.document ? formatDocument(company?.document) : "-"}
                 </p>
 
-                <p className="flex items-center gap-2">
-                  {" "}
-                  <strong className="text-card-foreground">
-                    {t("details.generalInfo.publicKey")}
-                  </strong>{" "}
-                  <CopyBadge
-                    secret={true}
-                    textToCopy={company?.publicKey}
-                    className="max-w-[80%] truncate"
-                  />
-                </p>
+                {company?.publicKey && (
+                  <p className="flex items-center gap-2">
+                    {" "}
+                    <strong className="text-card-foreground">
+                      {t("details.generalInfo.publicKey")}
+                    </strong>{" "}
+                    <CopyBadge
+                      secret={true}
+                      textToCopy={company?.publicKey}
+                      className="max-w-[80%] truncate"
+                    />
+                  </p>
+                )}
               </div>
             </div>
 

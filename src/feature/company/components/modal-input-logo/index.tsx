@@ -1,6 +1,6 @@
 // components/logo-upload-modal.tsx
 
-import { DefaultAvatar } from "@/shared/components/avatar";
+import { CompanyLogo } from "@/shared/components/company-logo";
 import Modal from "@/shared/components/modal";
 import { useTranslation } from "@/shared/hooks/use-translation";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -18,12 +18,11 @@ export const LogoUploadModal = ({ open, onClose, companyName }: Props) => {
   const { setValue, watch } = useFormContext();
   const { t } = useTranslation("login");
 
-  console.log({ sda: watch("company.logoDarkFile") });
-
   const logoLightFile = watch("company.logoLightFile");
   const logoDarkFile = watch("company.logoDarkFile");
-  const initialLightLogoUrl = watch("company.logoLightUrl");
-  const initialDarkLogoUrl = watch("company.logoDarkUrl");
+
+  const initialLightLogoUrl = watch("company.logoUrl");
+  const initialDarkLogoUrl = watch("company.darkLogoUrl");
 
   const [lightPreview, setLightPreview] = useState<string>("");
   const [darkPreview, setDarkPreview] = useState<string>("");
@@ -50,28 +49,26 @@ export const LogoUploadModal = ({ open, onClose, companyName }: Props) => {
   };
 
   useEffect(() => {
-    onClose();
-  }, []);
-
-  useEffect(() => {
     if (open) {
       if (logoLightFile instanceof File) {
         setLightPreview(URL.createObjectURL(logoLightFile));
-      } else if (typeof logoLightFile === "string") {
-        setLightPreview(logoLightFile);
       } else {
         setLightPreview(initialLightLogoUrl || null);
       }
 
       if (logoDarkFile instanceof File) {
         setDarkPreview(URL.createObjectURL(logoDarkFile));
-      } else if (typeof logoDarkFile === "string") {
-        setDarkPreview(logoDarkFile);
       } else {
         setDarkPreview(initialDarkLogoUrl || null);
       }
     }
-  }, [initialDarkLogoUrl]);
+  }, [
+    open,
+    logoLightFile,
+    logoDarkFile,
+    initialLightLogoUrl,
+    initialDarkLogoUrl,
+  ]);
 
   useEffect(() => {
     return () => {
@@ -93,19 +90,19 @@ export const LogoUploadModal = ({ open, onClose, companyName }: Props) => {
       }}
       className="w-full max-w-4xl"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-2">
         <div className="flex flex-col items-center space-y-4">
           <h4 className="font-semibold">
             {t("register.company.logoModal.lightTheme")}
           </h4>
           <div className="w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center border">
-            <DefaultAvatar
+            <CompanyLogo
               src={lightPreview}
               name={companyName}
-              className="size-24"
+              // className="min-w-[200px]"
             />
           </div>
-          <label className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">
+          <label className="cursor-pointer bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/40 transition-colors">
             {t("register.company.logoModal.buttons.selectImage")}
             <input
               type="file"
@@ -116,19 +113,15 @@ export const LogoUploadModal = ({ open, onClose, companyName }: Props) => {
           </label>
         </div>
 
-        {/* Lado do Tema Escuro */}
         <div className="flex flex-col items-center space-y-4">
           <h4 className="font-semibold">
             {t("register.company.logoModal.darkTheme")}
           </h4>
           <div className="w-full h-48 bg-gray-800 rounded-lg flex items-center justify-center border border-gray-700">
-            <DefaultAvatar
-              src={darkPreview}
-              name={companyName}
-              className="size-24"
-            />
+            <CompanyLogo src={darkPreview} name={companyName} />
           </div>
-          <label className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">
+
+          <label className="cursor-pointer bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/40 transition-colors">
             {t("register.company.logoModal.buttons.selectImage")}
             <input
               type="file"

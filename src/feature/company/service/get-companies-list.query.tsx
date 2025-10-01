@@ -9,7 +9,7 @@ import type {
 import { mountQuery } from "@/shared/utils/mount-query";
 import type { CompanyModel } from "../model/company.model";
 
-type ReponseType = PaginatedResponse<CompanyModel> | undefined;
+type ResponseType = PaginatedResponse<CompanyModel> | undefined;
 
 export const GetCompaniesListQuery = ({
   pagination,
@@ -27,12 +27,14 @@ export const GetCompaniesListQuery = ({
 
       const makeUrl = `${url}?${mountQuery(pagination)}`;
 
-      const response = await httpClient.request<ReponseType>({
+      const response = await httpClient.request<ResponseType>({
         method: "GET",
         url: makeUrl,
       });
+
       return response.data;
     },
+
     enabled,
   });
 };

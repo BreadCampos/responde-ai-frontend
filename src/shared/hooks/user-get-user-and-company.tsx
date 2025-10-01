@@ -1,13 +1,12 @@
 "use client";
 
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
-import type { CompanyModel } from "@/feature/company/model/company.model";
 import { GetCompaniesListQuery } from "@/feature/company/service/get-companies-list.query";
 import { GetUserMeServiceQuery } from "@/feature/users/service/get-user-me.query";
 import { useNavigation } from "@/shared/hooks/use-navigation";
-import { oklch } from "culori";
 import { useEffect } from "react";
-import { convertToOklchValues } from "../utils/convert-to-oklch-values";
+import { deepCompare } from "../utils/deep-compare";
+import { useTheme } from "./use-theme";
 
 export const useGetUserAndCompany = () => {
   const {
@@ -17,49 +16,19 @@ export const useGetUserAndCompany = () => {
     setUser,
     logout,
   } = useAuthStore();
-  const navigate = useNavigation();
 
+  const { setCompanyTheme } = useTheme();
+  const navigate = useNavigation();
   const { data: user, isLoading, isError } = GetUserMeServiceQuery();
 
-  const { data: company } = GetCompaniesListQuery({
-    pagination: {
-      ignorePagination: true,
-    },
+  const { data: companiesResult } = GetCompaniesListQuery({
     enabled: !!user,
+    pagination: { ignorePagination: true },
   });
 
-  const setCompanyTheme = (currentCompany: CompanyModel) => {
-    if (currentCompany.theme && currentCompany.theme.primary) {
-      const primaryOklch = convertToOklchValues(currentCompany.theme.primary);
-
-      document.documentElement.style.setProperty(
-        "--primary",
-        `oklch(${primaryOklch})`
-      );
-
-      const oklchColor = oklch(currentCompany.theme.primary);
-      const foregroundColor =
-        oklchColor && oklchColor.l < 0.6
-          ? "oklch(0.98 0.02 260)"
-          : "oklch(0.2 0.03 265)";
-
-      document.documentElement.style.setProperty(
-        "--primary-foreground",
-        foregroundColor
-      );
-    }
-  };
   useEffect(() => {
-    if (!isLoading && isError) {
-      console.error(
-        "Sessão inválida ou expirada. Redirecionando para o login."
-      );
-
-      const handleLogout = async () => {
-        logout(navigate);
-      };
-
-      handleLogout();
+    if (isError && !isLoading) {
+      logout();
       return;
     }
 
@@ -67,13 +36,27 @@ export const useGetUserAndCompany = () => {
       setUser({ user });
     }
 
-    if (company && company.data?.length > 0) {
-      const currentCompany = company.data[0];
-      if (currentCompany.id !== companyFromStore?.id) {
-        setCompany({ company: currentCompany });
-        setCompanyTheme(currentCompany);
-      }
+    const firstCompany = companiesResult?.data?.[0] || null;
+    setCompanyTheme(
+      firstCompany?.theme.primary || companyFromStore?.theme.primary
+    );
+    if (!firstCompany || deepCompare(firstCompany, companyFromStore)) {
+      return;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, company, isLoading, isError, userFromStore, companyFromStore]);
+
+    console.log(firstCompany);
+    setCompany({ company: firstCompany });
+  }, [
+    user,
+    setCompanyTheme,
+    isLoading,
+    companiesResult,
+    isError,
+    userFromStore,
+    companyFromStore,
+    logout,
+    navigate,
+    setCompany,
+    setUser,
+  ]);
 };

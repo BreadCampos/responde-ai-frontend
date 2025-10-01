@@ -61,13 +61,14 @@ export default function HomePage() {
       quality={100}
     />
   ));
+
+  const logoUrl = "/images/logo.svg";
+
   useEffect(() => {
     if (isAuthenticated) {
       navigateToDashboard();
     }
   }, [isAuthenticated, navigateToDashboard]);
-
-  const logoUrl = "/images/logo.svg";
   return (
     <div className="bg-background font-sans text-foreground">
       {/* Header */}

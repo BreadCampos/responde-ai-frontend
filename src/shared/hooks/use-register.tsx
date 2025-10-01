@@ -49,7 +49,6 @@ export const useRegister = ({ onChangeStep }: Props) => {
     const { user: userPayload, company: companyPayload } = finalValidation.data;
     const { logoLightFile, logoDarkFile, ...companyData } = companyPayload;
 
-    console.log({ logoLightFile, logoDarkFile });
     try {
       const registerResponse = await registerMutation.mutateAsync(userPayload);
 

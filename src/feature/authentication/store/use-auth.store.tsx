@@ -1,7 +1,6 @@
 "use client";
 
 import { ROUTES } from "@/core/routes/route-constants";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { CompanyModel } from "../../company/model/company.model";
@@ -19,9 +18,10 @@ interface AuthState {
 interface AuthActions {
   setUser: (data: { user: UserModel }) => void;
   setCompany: (data: { company: CompanyModel }) => void;
-  logout: (navigate: AppRouterInstance) => void;
+  logout: () => void;
   setTokens: (tokens: { accessToken: string; refreshToken?: string }) => void;
   setPublicCompany: (data: { company: CompanyModel }) => void;
+  clear: () => void;
 }
 
 export const useAuthStore = create<AuthState & AuthActions>()(
@@ -41,23 +41,24 @@ export const useAuthStore = create<AuthState & AuthActions>()(
       },
 
       setCompany: (data) => {
+        console.log("SETTING COMPANY IN STORE:", data.company);
         set({
           company: data.company,
         });
       },
 
-      logout: async (navigate) => {
-        await fetch("/api/auth/logout", { method: "POST" });
-
+      logout: async () => {
         set({
           user: null,
           company: null,
           accessToken: null,
           refreshToken: null,
           isAuthenticated: false,
+          publicCompany: null,
         });
 
-        navigate.push(ROUTES.LOGIN);
+        await fetch("/api/auth/logout", { method: "POST" });
+        window.location.href = ROUTES.LOGIN;
       },
 
       setTokens: (tokens) => {
@@ -71,6 +72,17 @@ export const useAuthStore = create<AuthState & AuthActions>()(
       setPublicCompany: (data) => {
         set({
           publicCompany: data.company,
+        });
+      },
+
+      clear: () => {
+        set({
+          user: null,
+          company: null,
+          accessToken: null,
+          refreshToken: null,
+          isAuthenticated: false,
+          publicCompany: null,
         });
       },
     }),

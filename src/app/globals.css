@@ -52,7 +52,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
 
-  --primary: oklch(54.687% 0.20742 277.994);
+  --primary: oklch(70.5% 0.213 47.604);
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0);
@@ -103,7 +103,7 @@
   --popover-foreground: oklch(0.985 0 0);
 
   /* [ALTERADO] Azul primário menos vibrante e mais elegante */
-  --primary: oklch(54.687% 0.20742 277.994);
+  --primary: oklch(70.5% 0.213 47.604);
   /* Foreground do primário um pouco mais escuro para combinar */
   --primary-foreground: oklch(0.205 0 0);
 
