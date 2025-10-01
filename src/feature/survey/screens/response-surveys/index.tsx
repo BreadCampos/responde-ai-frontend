@@ -107,7 +107,6 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
               questions={data?.survey?.questions}
               title={data?.survey?.title}
               className="max-w-full border-none h-[calc(100vh-180px)] max-h-[calc(100vh-180px)] min-h-auto shadow-none rounded-none overflow-y-auto p-0"
-              logoUrl={data?.company?.logoUrl || ""}
               onSubmit={onSubmit}
             />
           </div>
