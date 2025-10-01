@@ -1,5 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+  "image/svg+xml",
+];
 
 export const signupWithCompanySchema = z
   .object({
@@ -35,11 +43,28 @@ export const signupWithCompanySchema = z
           const replacedDoc = doc.replace(/\D/g, "");
           return !!Number(replacedDoc);
         }, "CPF/CNPJ deve conter apenas números."),
-      logoUrl: z
-        .string({ message: "A URL do logo é obrigatória." })
-        .url({ message: "Insira uma URL válida para o logo." })
-        .optional()
-        .or(z.literal("")),
+      logoLightFile: z
+        .any()
+        .refine((file) => !!file, "O logo para o tema claro é obrigatório.") // Garante que o arquivo não seja nulo/undefined
+        .refine(
+          (file) => file && file.size <= MAX_FILE_SIZE,
+          `O tamanho máximo é 5MB.`
+        ) // Adiciona a verificação aqui
+        .refine(
+          (file) => file && ACCEPTED_IMAGE_TYPES.includes(file.type), // E aqui
+          "Formato de imagem inválido."
+        ),
+      logoDarkFile: z
+        .any()
+        .refine((file) => !!file, "O logo para o tema escuro é obrigatório.") // Garante que o arquivo não seja nulo/undefined
+        .refine(
+          (file) => file && file.size <= MAX_FILE_SIZE,
+          `O tamanho máximo é 5MB.`
+        ) // Adiciona a verificação aqui
+        .refine(
+          (file) => file && ACCEPTED_IMAGE_TYPES.includes(file.type), // E aqui
+          "Formato de imagem inválido."
+        ),
       addressLine: z
         .string({ message: "O endereço é obrigatório" })
         .min(10, { message: "O endereço muito curto." }),

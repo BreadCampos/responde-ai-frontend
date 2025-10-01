@@ -3,7 +3,6 @@
 import { Button } from "@/shared/components/button";
 import { useTranslation } from "@/shared/hooks/use-translation";
 import { cn } from "@/shared/lib/utils";
-import Image from "next/image";
 import { useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import type { SurveyQuestion } from "../../model/survey.model";
@@ -91,7 +90,7 @@ export const QuestionsForm = ({
           {title && (
             <h4 className="text-card-foreground text-xl mb-4"> {title}</h4>
           )}
-          {logoSrc && (
+          {/* {logoSrc && (
             <div className="mb-4">
               <Image
                 src={logoSrc}
@@ -103,7 +102,7 @@ export const QuestionsForm = ({
                 loading="lazy"
               />
             </div>
-          )}
+          )} */}
         </div>
         <div className="flex flex-col gap-4 bg-background p-4 rounded-lg">
           {questionsOnCurrentPage.map((q) => {

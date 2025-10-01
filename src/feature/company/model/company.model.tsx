@@ -8,6 +8,7 @@ export type CompanyModel = {
   id: string;
   legalName: string;
   logoUrl: string;
+  darkLogoUrl: string;
   ownerId: string;
   settings: {
     always_display_logo: boolean;
