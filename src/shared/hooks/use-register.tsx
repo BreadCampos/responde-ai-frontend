@@ -2,6 +2,7 @@
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
 import { useCreateCompanyMutation } from "@/feature/company/service/create-company.mutation";
+import { useUploadCompanyLogoMutation } from "@/feature/company/service/upload-logo.mutation";
 import { PlanID } from "@/feature/users/components/select-plan";
 import {
   SignupWithCompanyFormValues,
@@ -11,13 +12,16 @@ import { CreateUserMutation } from "@/feature/users/service/create-user.mutation
 import { useSelectPlanMutation } from "@/feature/users/service/select-plan.mutation";
 import { useEffect, useState } from "react";
 import { UseFormSetError } from "react-hook-form";
-import { toast } from "sonner";
 import { useNavigation } from "./use-navigation";
 
-export const useRegister = () => {
+interface Props {
+  onChangeStep: (step: number) => void;
+}
+export const useRegister = ({ onChangeStep }: Props) => {
   const registerMutation = CreateUserMutation();
   const createCompanyMutation = useCreateCompanyMutation();
   const selectPlan = useSelectPlanMutation();
+  const uploadLogoMutation = useUploadCompanyLogoMutation();
 
   const navigate = useNavigation();
 
@@ -43,6 +47,7 @@ export const useRegister = () => {
     }
 
     const { user: userPayload, company: companyPayload } = finalValidation.data;
+    const { logoLightFile, logoDarkFile, ...companyData } = companyPayload;
 
     try {
       const registerResponse = await registerMutation.mutateAsync(userPayload);
@@ -52,19 +57,49 @@ export const useRegister = () => {
       setAccessToken(accessToken);
 
       if (!accessToken) {
-        toast.error("Não foi possível obter o token de autenticação.");
+        onChangeStep(0);
         return;
       }
 
       const formatDocument = {
-        ...companyPayload,
-        document: companyPayload.document.replace(/\D/g, ""),
+        ...companyData,
+        document: companyData.document.replace(/\D/g, ""),
       };
 
-      await createCompanyMutation.mutateAsync({
+      const companyCreationResponse = await createCompanyMutation.mutateAsync({
         company: formatDocument,
         accessToken,
       });
+
+      const companyId = companyCreationResponse?.id;
+
+      if (companyId) {
+        const uploadPromises = [];
+
+        if (logoLightFile instanceof File) {
+          uploadPromises.push(
+            uploadLogoMutation.mutateAsync({
+              companyId,
+              variant: "light",
+              logo: logoLightFile,
+            })
+          );
+        }
+
+        if (logoDarkFile instanceof File) {
+          uploadPromises.push(
+            uploadLogoMutation.mutateAsync({
+              companyId,
+              variant: "dark",
+              logo: logoDarkFile,
+            })
+          );
+        }
+
+        if (uploadPromises.length > 0) {
+          await Promise.all(uploadPromises);
+        }
+      }
     } catch (error: any) {
       console.error("Falha no processo de cadastro:", error);
     }

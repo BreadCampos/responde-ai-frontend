@@ -4,7 +4,7 @@ import { usersApi } from "../api";
 
 import type { UserModel } from "../model/user.model";
 
-type ReponseType = UserModel | undefined;
+type ResponseType = UserModel | undefined;
 
 export const GetUserMeServiceQuery = () => {
   const queryKey = ["user-me"];
@@ -12,13 +12,14 @@ export const GetUserMeServiceQuery = () => {
   return useQuery({
     queryKey,
     queryFn: async () => {
-      const response = await httpClient.request<ReponseType>({
+      const response = await httpClient.request<ResponseType>({
         method: "GET",
         url: usersApi.ME,
       });
       return response.data;
     },
     refetchInterval: 1000 * 60 * 5, // 5 minutes
-    retry: 0,
+    retry: 1,
+    refetchOnWindowFocus: true,
   });
 };

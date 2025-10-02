@@ -34,7 +34,7 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
       customLinkRef: customLinkRef || "",
     });
 
-  const { mutate: createReponse, isSuccess: isCreationSuccess } =
+  const { mutate: createResponse, isSuccess: isCreationSuccess } =
     CreatePublicSurveyResponseMutation();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -54,14 +54,15 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
       ),
     };
 
-    createReponse({
+    createResponse({
       surveyId: surveyId || "",
       responses: formattedData,
       customLinkRef,
     });
   };
+
   useEffect(() => {
-    if (isSuccess && data?.company && !company) {
+    if (isSuccess && data?.company) {
       setPublicCompany({
         company: data?.company,
       });
@@ -101,12 +102,11 @@ export const ResponseSurvey = ({ surveyId }: Props) => {
     <FormProvider {...methods}>
       <div className="flex flex-col items-center justify-center h-full">
         {data?.survey?.questions?.[0] && (
-          <div className="w-full max-w-[800px] h-[calc(100vh-100px)]  flex-1 p-4 bg-card rounded-lg space-y-4 border">
+          <div className="w-full max-w-[800px] h-[calc(100vh-150px)]  flex-1 p-4 bg-card rounded-lg space-y-4 border">
             <QuestionsForm
               questions={data?.survey?.questions}
               title={data?.survey?.title}
-              className="max-w-full border-none h-[calc(100vh-150px)] max-h-[calc(100vh - 200px)] min-h-auto shadow-none rounded-none overflow-y-auto p-0"
-              logoUrl={data?.company?.logoUrl || ""}
+              className="max-w-full border-none h-[calc(100vh-180px)] max-h-[calc(100vh-180px)] min-h-auto shadow-none rounded-none overflow-y-auto p-0"
               onSubmit={onSubmit}
             />
           </div>

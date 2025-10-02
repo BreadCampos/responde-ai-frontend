@@ -296,6 +296,23 @@ interface Resources {
           "settings": {
             "always_display_logo": "Sempre Mostrar logo"
           }
+        },
+        "toast": {
+          "logoSuccess": "Logo enviado com sucesso!",
+          "logoError": "Falha ao enviar o logo. Tente novamente."
+        },
+        "buttons": {
+          "uploadLogo": "Enviar ou Alterar Logo"
+        },
+        "logoModal": {
+          "title": "Gerenciar Logo da Empresa",
+          "lightTheme": "Preview no Tema Claro",
+          "darkTheme": "Preview no Tema Escuro",
+          "buttons": {
+            "selectImage": "Selecionar Imagem",
+            "confirm": "Confirmar"
+          },
+          "helperText": "Para uma melhor visualização, envie um logo com fundo transparente (PNG ou SVG)."
         }
       },
       "plans": {

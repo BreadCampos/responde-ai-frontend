@@ -4,16 +4,17 @@ import { companyApi } from "../api";
 
 import type { CompanyModel } from "../model/company.model";
 
-type ReponseType = CompanyModel | undefined;
+type ResponseType = CompanyModel | undefined;
 
-export const GetCompanyQuery = ({ id }: { id: string }) => {
+export const GetCompanyQuery = ({ id }: { id?: string }) => {
   const queryKey = ["company-by-id", id];
 
   return useQuery({
     queryKey,
     queryFn: async () => {
+      if (!id) return undefined;
       const url = companyApi.GET_COMPANY.replace(":id", id);
-      const response = await httpClient.request<ReponseType>({
+      const response = await httpClient.request<ResponseType>({
         method: "GET",
         url: url,
       });

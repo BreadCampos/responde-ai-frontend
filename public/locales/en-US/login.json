@@ -44,6 +44,23 @@
         "settings": {
           "always_display_logo": "Always show soon"
         }
+      },
+      "toast": {
+        "logoSuccess": "Logo uploaded successfully!",
+        "logoError": "Failed to upload logo. Please try again."
+      },
+      "buttons": {
+        "uploadLogo": "Upload or Change Logo"
+      },
+      "logoModal": {
+        "title": "Manage Company Logo",
+        "lightTheme": "Preview in Light Theme",
+        "darkTheme": "Preview in Dark Theme",
+        "buttons": {
+          "selectImage": "Select Image",
+          "confirm": "Confirm"
+        },
+        "helperText": "We want your brand to stand out. A logo with a transparent background (PNG or SVG) ensures it will look sharp and professional in both light and dark themes."
       }
     },
     "plans": {

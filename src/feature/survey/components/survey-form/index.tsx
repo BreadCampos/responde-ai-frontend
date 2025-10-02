@@ -351,7 +351,6 @@ export const SurveyForm = ({ loading, onSubmit, buttonSubmitText }: Props) => {
             <div className="w-full max-w-[600px] flex-1 h-[calc(100vh-160px)]">
               <QuestionsForm
                 isPreview
-                logoUrl={company?.logoUrl}
                 questions={surveyQuestions}
                 onSubmit={onPreviewSubmit}
               />

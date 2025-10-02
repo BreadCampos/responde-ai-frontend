@@ -20,26 +20,35 @@ import React from "react";
 import { SelectPlanStep } from "../../components//select-plan";
 import { RegisterUser } from "../../components/register-user";
 
-const stepFields = [
-  [
+export enum REGISTER_STEPPER_ENUM {
+  USER = 0,
+  COMPANY = 1,
+  PLAN = 2,
+}
+
+const stepFields = {
+  [0]: [
     "user.firstName",
     "user.lastName",
     "user.email",
     "user.password",
     "user.passwordConfirmation",
   ],
-  [
+  [1]: [
     "company.legalName",
     "company.fantasyName",
     "company.document",
-    "company.logoUrl",
     "company.addressLine",
     "company.theme.primary",
+    "company.logoLightFile",
+    "company.logoDarkFile",
   ],
-] as const;
+} as const;
 
 export const Register = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState<REGISTER_STEPPER_ENUM>(
+    REGISTER_STEPPER_ENUM.USER
+  );
   const navigate = useNavigation();
 
   const onBack = () => {
@@ -51,17 +60,22 @@ export const Register = () => {
     defaultValues: {
       company: {
         theme: {
-          primary: "#387cec",
+          primary: "#2b7fff",
         },
       },
     },
   });
 
   const handleNextStep = async () => {
-    const fieldsToValidate = stepFields[currentStep];
-    const isValid = await methods.trigger(fieldsToValidate);
+    if (currentStep in stepFields) {
+      const fieldsToValidate =
+        stepFields[currentStep as keyof typeof stepFields];
+      const isValid = await methods.trigger(fieldsToValidate);
 
-    if (isValid) {
+      if (isValid) {
+        setCurrentStep((prev) => prev + 1);
+      }
+    } else {
       setCurrentStep((prev) => prev + 1);
     }
   };
@@ -78,7 +92,7 @@ export const Register = () => {
     if (event.key === "Enter") {
       event.preventDefault();
 
-      const isLastStep = currentStep === stepFields.length - 1;
+      const isLastStep = currentStep === REGISTER_STEPPER_ENUM.PLAN;
 
       if (isLastStep) {
         methods.handleSubmit(onSubmit)();
@@ -88,7 +102,11 @@ export const Register = () => {
     }
   };
 
-  const { onRegister } = useRegister();
+  const onChangeStep = (step: number) => {
+    setCurrentStep(step);
+  };
+
+  const { onRegister } = useRegister({ onChangeStep });
   const onSubmit = async (data: SignupWithCompanyFormValues) => {
     onRegister(data, methods.setError);
   };

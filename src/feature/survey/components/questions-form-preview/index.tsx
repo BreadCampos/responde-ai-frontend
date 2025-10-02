@@ -3,7 +3,6 @@
 import { Button } from "@/shared/components/button";
 import { useTranslation } from "@/shared/hooks/use-translation";
 import { cn } from "@/shared/lib/utils";
-import Image from "next/image";
 import { useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import type { SurveyQuestion } from "../../model/survey.model";
@@ -23,7 +22,6 @@ export const QuestionsForm = ({
   questions,
   title = "Preview",
   className,
-  logoUrl,
   isPreview,
   onSubmit,
 }: Props) => {
@@ -54,8 +52,6 @@ export const QuestionsForm = ({
       onSubmit(data);
     }
   };
-
-  const logoSrc = logoUrl || "/favicon.svg";
 
   const handleNextPage = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isNavigating) return;
@@ -91,19 +87,6 @@ export const QuestionsForm = ({
           {title && (
             <h4 className="text-card-foreground text-xl mb-4"> {title}</h4>
           )}
-          {logoSrc && (
-            <div className="mb-4">
-              <Image
-                src={logoSrc}
-                alt="Logo"
-                width={64}
-                height={64}
-                className="object-cover rounded-lg"
-                unoptimized
-                loading="lazy"
-              />
-            </div>
-          )}
         </div>
         <div className="flex flex-col gap-4 bg-background p-4 rounded-lg">
           {questionsOnCurrentPage.map((q) => {
@@ -130,49 +113,59 @@ export const QuestionsForm = ({
           })}
         </div>
       </div>
-      {questions?.length > 0 && (
-        <div className="flex items-center bg-card justify-between sticky bottom-0  pt-2 border-t-2 mt-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}
-          >
-            {t("button.previous")}
-          </Button>
-
-          <div className="flex items-center gap-2">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
+      {totalPages > 1 ? (
+        <>
+          {questions?.length > 0 && (
+            <div className="flex items-center bg-card justify-between sticky bottom-0  pt-2 border-t-2 mt-4">
+              <Button
                 type="button"
-                className={`w-4 h-4 rounded-full text-sm text-[11px] font-bold transition-all ${
-                  currentPage === page
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card hover:bg-card/30"
-                }`}
+                variant="outline"
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}
               >
-                {page}
-              </button>
-            ))}
-          </div>
-          {currentPage < totalPages ? (
-            <Button
-              type="button"
-              onClick={(e) => handleNextPage(e)}
-              disabled={isNavigating}
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-            >
-              {isNavigating ? t("button.validating") : t("button.next")}
-            </Button>
-          ) : (
-            <Button type="submit" disabled={formState.isSubmitting}>
-              {formState.isSubmitting
-                ? t("button.submiting")
-                : t("button.send")}
-            </Button>
+                {t("button.previous")}
+              </Button>
+
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (page) => (
+                    <button
+                      key={page}
+                      type="button"
+                      className={`w-4 h-4 rounded-full text-sm text-[11px] font-bold transition-all ${
+                        currentPage === page
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-card hover:bg-card/30"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  )
+                )}
+              </div>
+              {currentPage < totalPages ? (
+                <Button
+                  type="button"
+                  onClick={(e) => handleNextPage(e)}
+                  disabled={isNavigating}
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+                >
+                  {isNavigating ? t("button.validating") : t("button.next")}
+                </Button>
+              ) : (
+                <Button type="submit" disabled={formState.isSubmitting}>
+                  {formState.isSubmitting
+                    ? t("button.submiting")
+                    : t("button.send")}
+                </Button>
+              )}
+            </div>
           )}
-        </div>
+        </>
+      ) : (
+        <Button type="submit" disabled={formState.isSubmitting}>
+          {formState.isSubmitting ? t("button.submiting") : t("button.send")}
+        </Button>
       )}
     </form>
   );

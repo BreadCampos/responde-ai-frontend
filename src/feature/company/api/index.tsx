@@ -3,4 +3,5 @@ export const companyApi = {
   LIST_COMPANY: "/companies",
   GET_COMPANY: "/companies/:id",
   UPDATE_COMPANY: "/companies/:id",
+  UPLOAD_LOGO: "/companies/:id/logo",
 };

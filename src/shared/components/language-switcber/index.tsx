@@ -8,18 +8,16 @@ import { useCallback, useMemo } from "react";
 import { ActionMenu, MenuOption } from "../action-menu";
 import { Button } from "../button";
 
-// Componente auxiliar para a imagem da bandeira (sem alterações)
 const FlagImage = ({ lang, alt }: { lang: string; alt: string }) => {
   return (
     <div className="relative w-6 h-6">
       {" "}
-      {/* Definindo tamanho fixo para a imagem */}
       <Image
-        className="rounded-full" // Usei rounded-full para um visual melhor
         src={`https://flagcdn.com/w1280/${lang}.png`}
         alt={alt}
         layout="fill"
         objectFit="cover"
+        className="rounded-full"
       />
     </div>
   );

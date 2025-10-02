@@ -4,7 +4,9 @@ import usePersistentState from "@//shared/hooks/use-persist";
 import { cn } from "@//shared/lib/utils";
 import { ROUTES } from "@/core/routes/route-constants";
 import { useAuthStore } from "@/feature/authentication/store/use-auth.store";
+import { CompanyLogo } from "@/shared/components/company-logo";
 import { useNavigation } from "@/shared/hooks/use-navigation";
+import { useTheme } from "@/shared/hooks/use-theme";
 
 import { useTranslation } from "@/shared/hooks/use-translation";
 import {
@@ -15,7 +17,6 @@ import {
   LogOut,
   Webhook,
 } from "lucide-react";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 type NavItemProps = {
@@ -39,13 +40,15 @@ const NavItem = ({
 }: NavItemProps) => {
   const navigate = useNavigation();
   const { logout } = useAuthStore();
+  const { setCompanyTheme } = useTheme();
 
   const { t } = useTranslation("common");
 
   const handleClick = () => {
     if (onSelect) onSelect(href);
     if (isLogout) {
-      logout(navigate);
+      setCompanyTheme();
+      logout();
       return;
     }
     navigate.push(href);
@@ -85,7 +88,6 @@ export const SidebarHeader = ({
   const pathname = usePathname();
 
   const { company } = useAuthStore();
-  const logoSrc = company?.logoUrl || "/favicon.svg";
 
   const mainLinks = [
     { name: "sidebar.survey", href: ROUTES.SURVEY_LIST, icon: FileText },
@@ -105,17 +107,7 @@ export const SidebarHeader = ({
             isCollapsed ? "justify-center" : "justify-between"
           }`}
         >
-          {!isCollapsed && !!logoSrc && (
-            <Image
-              src={logoSrc}
-              alt="Logo"
-              width={64}
-              height={64}
-              className="object-cover rounded-lg"
-              loading="lazy"
-              unoptimized
-            />
-          )}
+          {!isCollapsed && <CompanyLogo />}
 
           {onClose && (
             <Button
