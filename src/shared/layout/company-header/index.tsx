@@ -9,7 +9,7 @@ export const CompanyHeader = () => {
   const { company, isAuthenticated } = useAuthStore();
 
   const renderImage = () => {
-    return <CompanyLogo className="min-h-[65px] max-h-[65px]" />;
+    return <CompanyLogo className="min-h-[64px] max-h-[64px] max-w-[200px]" />;
   };
   return (
     <header

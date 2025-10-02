@@ -21,7 +21,7 @@ export const CompanyLogo = ({ src, name, className }: Props) => {
       <Image
         src={src || logoSrc}
         alt={name ? `Logo de ${name}` : "Logo da empresa"}
-        className="h-full w-full max-w-[100px] object-contain"
+        className="h-full w-full  object-contain"
       />
       <ImageFallback className="rounded-lg">
         {calculateInitials(name || companyName)}
