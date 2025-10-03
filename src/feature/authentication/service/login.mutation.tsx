@@ -20,7 +20,7 @@ export const useLoginMutation = () => {
   const queryClient = useQueryClient();
 
   const navigate = useNavigation();
-  const { setTokens, setPublicCompany, setUser } = useAuthStore();
+  const { setTokens, setCompany, setPublicCompany, setUser } = useAuthStore();
 
   return useMutation({
     mutationFn: async (data: LoginEntity): Promise<ResponseType> => {
@@ -31,11 +31,15 @@ export const useLoginMutation = () => {
       });
       return res.data;
     },
-    onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ["companies", "user-me"] });
+    onSuccess: async (response) => {
+      await queryClient.invalidateQueries({ queryKey: ["company-list"] });
+      await queryClient.invalidateQueries({ queryKey: ["user-me"] });
+      await queryClient.invalidateQueries({ queryKey: ["survey-list"] });
+
       if (response?.token) {
         setTokens({ accessToken: response.token, refreshToken: "" });
         setPublicCompany({ company: null });
+        setCompany({ company: null });
         setUser({ user: response?.user });
         navigate?.push(ROUTES.DASHBOARD);
         toast.success(`Bem-vindo, ${response?.user?.firstName || "usuário"}!`);
@@ -43,3 +47,5 @@ export const useLoginMutation = () => {
     },
   });
 };
+// jg -> a7d8b6e9-00a5-4aa8-ac93-0c8642d79a3a
+// logo -> f3e752ca-dd5e-489f-ac8a-f7405a37d349

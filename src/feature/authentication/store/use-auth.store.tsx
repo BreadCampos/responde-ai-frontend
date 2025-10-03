@@ -17,7 +17,7 @@ interface AuthState {
 
 interface AuthActions {
   setUser: (data: { user: UserModel }) => void;
-  setCompany: (data: { company: CompanyModel }) => void;
+  setCompany: (data: { company: CompanyModel | null }) => void;
   logout: () => void;
   setTokens: (tokens: { accessToken: string; refreshToken?: string }) => void;
   setPublicCompany: (data: { company: CompanyModel | null }) => void;

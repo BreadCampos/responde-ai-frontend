@@ -8,19 +8,22 @@ interface Props {
 }
 export const Footer = ({ direction = "row" }: Props) => {
   const { t } = useTranslation();
+
   return (
     <footer
       className={cn(
-        "w-full p-4 bg-card border-t border-border text-center text-sm text-muted-foreground relative",
+        "w-full sm:max-h-[15px] p-4  border-t border-border text-center text-sm text-muted-foreground ",
         direction === "column"
           ? "flex flex-col"
-          : "flex flex-col sm:flex sm:flex-row justify-center items-center"
+          : "hidden sm:flex sm:flex-col  justify-center items-center"
       )}
     >
-      {t("footer.copyRight", {
-        year: new Date().getFullYear(),
-        company: "Responde Aí",
-      })}
+      <p className="text-xs text-muted-foreground">
+        {t("footer.copyRight", {
+          year: new Date().getFullYear(),
+          company: "Responde Aí",
+        })}
+      </p>
 
       <a
         href="/terms"
@@ -30,7 +33,7 @@ export const Footer = ({ direction = "row" }: Props) => {
           "text-xs text-muted-foreground hover:underline",
           direction === "column"
             ? ""
-            : "sm:absolute sm:right-4 sm:top-5 flex items-center justify-center mt-2 sm:mt-0"
+            : "sm:absolute sm:right-4 sm:top-2 flex items-center justify-center mt-2 sm:mt-0"
         )}
       >
         {t("footer.termOfUse")}
