@@ -20,7 +20,7 @@ interface AuthActions {
   setCompany: (data: { company: CompanyModel }) => void;
   logout: () => void;
   setTokens: (tokens: { accessToken: string; refreshToken?: string }) => void;
-  setPublicCompany: (data: { company: CompanyModel }) => void;
+  setPublicCompany: (data: { company: CompanyModel | null }) => void;
   clear: () => void;
 }
 
@@ -41,7 +41,6 @@ export const useAuthStore = create<AuthState & AuthActions>()(
       },
 
       setCompany: (data) => {
-        console.log("SETTING COMPANY IN STORE:", data.company);
         set({
           company: data.company,
         });

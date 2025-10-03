@@ -16,6 +16,7 @@ export const CompanyLogo = ({ src, name, className }: Props) => {
   const { company, publicCompany } = useAuthStore();
 
   const companyName = publicCompany?.fantasyName || company?.fantasyName || "";
+
   return (
     <ImageRoot className={cn("w-fit min-w-[100px]", className)}>
       <Image

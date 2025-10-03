@@ -61,12 +61,12 @@ export const RegisterCompanyForm = ({ title }: Props) => {
     <div className="space-y-4">
       {title && <h3 className="text-xl font-semibold">{title}</h3>}
       <TextInput
-        name="company.legalName"
-        label={t("register.company.fields.legalName")}
-      />
-      <TextInput
         name="company.fantasyName"
         label={t("register.company.fields.fantasyName")}
+      />
+      <TextInput
+        name="company.legalName"
+        label={t("register.company.fields.legalName")}
       />
       <TextInput
         name="company.document"

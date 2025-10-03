@@ -20,7 +20,7 @@ export const useLoginMutation = () => {
   const queryClient = useQueryClient();
 
   const navigate = useNavigation();
-  const { setTokens, setUser } = useAuthStore();
+  const { setTokens, setPublicCompany, setUser } = useAuthStore();
 
   return useMutation({
     mutationFn: async (data: LoginEntity): Promise<ResponseType> => {
@@ -35,6 +35,7 @@ export const useLoginMutation = () => {
       queryClient.invalidateQueries({ queryKey: ["companies", "user-me"] });
       if (response?.token) {
         setTokens({ accessToken: response.token, refreshToken: "" });
+        setPublicCompany({ company: null });
         setUser({ user: response?.user });
         navigate?.push(ROUTES.DASHBOARD);
         toast.success(`Bem-vindo, ${response?.user?.firstName || "usuário"}!`);

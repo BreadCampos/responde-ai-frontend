@@ -107,7 +107,7 @@ export const SidebarHeader = ({
             isCollapsed ? "justify-center" : "justify-between"
           }`}
         >
-          {!isCollapsed && <CompanyLogo />}
+          {!isCollapsed && <CompanyLogo className="min-w-auto max-w-[200px]" />}
 
           {onClose && (
             <Button
