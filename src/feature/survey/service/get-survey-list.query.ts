@@ -12,7 +12,7 @@ export const GetListSurveysQuery = ({
   companyId,
   pagination,
 }: {
-  companyId: string;
+  companyId?: string;
   pagination: DefaultPagination;
 }) => {
   const queryKey = ["survey-list", companyId, pagination];
@@ -20,6 +20,7 @@ export const GetListSurveysQuery = ({
   return useQuery({
     queryKey,
     queryFn: async () => {
+      if (!companyId) return undefined;
       const url = surveyApi.LIST_SURVEYS.replace(":companyId", companyId);
       const makeUrl = `${url}?${mountQuery(pagination)}`;
 

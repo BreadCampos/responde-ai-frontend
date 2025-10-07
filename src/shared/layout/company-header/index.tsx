@@ -3,13 +3,20 @@ import { BackButton } from "@/shared/components/back-button";
 import { CompanyLogo } from "@/shared/components/company-logo";
 import { LanguageSwitcher } from "@/shared/components/language-switcber";
 import { ThemeToggleButton } from "@/shared/components/theme-toggle-button";
+import { useTheme } from "@/shared/hooks/use-theme";
 import { cn } from "@/shared/lib/utils";
 
 export const CompanyHeader = () => {
   const { company, isAuthenticated } = useAuthStore();
 
+  const { publicLogoSrc } = useTheme();
   const renderImage = () => {
-    return <CompanyLogo className="min-h-[64px] max-h-[64px] max-w-[200px]" />;
+    return (
+      <CompanyLogo
+        className="min-h-[64px] max-h-[64px] max-w-[200px]"
+        src={publicLogoSrc}
+      />
+    );
   };
   return (
     <header

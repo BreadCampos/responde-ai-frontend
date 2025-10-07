@@ -8,25 +8,35 @@ export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
   const { company, publicCompany } = useAuthStore();
 
-  const logoSrc = useMemo(() => {
-    let lightLogo = company?.logoUrl;
-    let darkLogo = company?.darkLogoUrl;
-
-    if (publicCompany?.id) {
-      lightLogo = publicCompany?.logoUrl;
-      darkLogo = publicCompany?.darkLogoUrl;
-    }
+  const getLogoSrc = (
+    companyData: {
+      logoUrl?: string | null;
+      darkLogoUrl?: string | null;
+    } | null,
+    theme: string | undefined
+  ): string | undefined => {
+    const lightLogo = companyData?.logoUrl;
+    const darkLogo = companyData?.darkLogoUrl;
 
     if (!lightLogo && !darkLogo) {
       return "/favicon.svg";
     }
 
-    if (context?.theme === "light") {
-      return lightLogo || darkLogo;
-    } else {
-      return darkLogo || lightLogo;
+    if (theme === "light") {
+      return lightLogo || darkLogo || undefined;
     }
-  }, [context?.theme, company, publicCompany]);
+    return darkLogo || lightLogo || undefined;
+  };
+
+  const logoSrc = useMemo(
+    () => getLogoSrc(company, context?.theme),
+    [context?.theme, company]
+  );
+
+  const publicLogoSrc = useMemo(
+    () => getLogoSrc(publicCompany, context?.theme),
+    [context?.theme, publicCompany]
+  );
 
   const setCompanyTheme = (primaryColor = "2b7fff") => {
     const primaryOklch = convertToOklchValues(primaryColor);
@@ -51,5 +61,5 @@ export const useTheme = () => {
   if (context === undefined) {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
-  return { ...context, logoSrc, setCompanyTheme };
+  return { ...context, logoSrc, publicLogoSrc, setCompanyTheme };
 };

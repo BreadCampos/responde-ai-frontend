@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import type { SurveyPublicInfoModel } from "../model/public-survey-info.tsx";
 import { httpClient } from "@/core/api/fetch-api";
+import { useQuery } from "@tanstack/react-query";
 import { surveyApi } from "../api";
+import type { SurveyPublicInfoModel } from "../model/public-survey-info.tsx";
 
 export const GetPublicSurveyInfoQuery = ({
   surveyId,

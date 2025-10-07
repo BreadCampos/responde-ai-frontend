@@ -29,7 +29,6 @@ export const DetailsCompany = () => {
   const { company } = useAuthStore();
   const { t } = useTranslation("company");
 
-  console.log({ company });
   const navigate = useNavigation();
 
   const goToEditCompany = () => {
@@ -41,29 +40,31 @@ export const DetailsCompany = () => {
       <div className="max-w-4xl mx-auto space-y-6">
         <Card>
           <CardHeader className="flex flex-row items-center gap-4">
-            <div className="flex flex-col justify-between items-center lg:flex-row sm:justify-center gap-1 p-4 rounded-lg w-full">
-              <div className="flex flex-col flex-start md:flex-row items-center gap-4 w-full">
+            <div className="flex flex-col justify-between items-start sm:justify-center gap-1 p-4 rounded-lg w-full">
+              <div className="flex flex-col flex-start items-start gap-4 w-full">
                 <BackButton>
-                  <CompanyLogo />
+                  <div className="flex items-center">
+                    <CompanyLogo className="min-w-auto max-w-[200px]" />
+                    <Button
+                      variant="ghost"
+                      className="ml-2"
+                      size="icon"
+                      onClick={goToEditCompany}
+                    >
+                      <Edit />
+                    </Button>
+                  </div>
                 </BackButton>
                 <div className="flex-1 w-full">
                   <CardTitle className="text-2xl">
                     {company?.fantasyName}
                   </CardTitle>
                   <CardDescription>{company?.legalName}</CardDescription>
+                  <CopyBadge
+                    textToCopy={id}
+                    className="max-w-[80%] truncate mt-5 "
+                  />
                 </div>
-              </div>
-              <div className="flex flex-col items-center justify-between md:flex-row md:items-center w-full lg:w-auto ">
-                <CopyBadge textToCopy={id} className="max-w-[80%] truncate " />
-
-                <Button
-                  variant="ghost"
-                  className="ml-2"
-                  size="icon"
-                  onClick={goToEditCompany}
-                >
-                  <Edit />
-                </Button>
               </div>
             </div>
           </CardHeader>

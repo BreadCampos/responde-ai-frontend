@@ -24,7 +24,7 @@ export const ListSurveys = () => {
   const { company } = useAuthStore();
 
   const { data, isFetching, refetch } = GetListSurveysQuery({
-    companyId: company?.id || "",
+    companyId: company?.id,
     pagination: pagination,
   });
 
