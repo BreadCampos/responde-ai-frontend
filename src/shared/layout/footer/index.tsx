@@ -12,7 +12,7 @@ export const Footer = ({ direction = "row" }: Props) => {
   return (
     <footer
       className={cn(
-        "w-full sm:max-h-[15px] p-4  border-t border-border text-center text-sm text-muted-foreground ",
+        "w-full sm:max-h-[15px] p-4 border-t border-border text-center text-sm text-muted-foreground ",
         direction === "column"
           ? "flex flex-col"
           : "hidden sm:flex sm:flex-col  justify-center items-center"

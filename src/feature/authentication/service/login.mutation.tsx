@@ -47,5 +47,3 @@ export const useLoginMutation = () => {
     },
   });
 };
-// jg -> a7d8b6e9-00a5-4aa8-ac93-0c8642d79a3a
-// logo -> f3e752ca-dd5e-489f-ac8a-f7405a37d349
